@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: 'Worthbites';
+        src: url(./assets/Fonts/Worthbites.ttf);
+    }
+
+    @font-face {
+        font-family: 'Worthbites-rough';
+        src: url(./assets/Fonts/worthbites-rough-EID.ttf);
+    }
+
+    @font-face {
+        font-family: 'Satoshi';
+        src: url(./assets/Fonts/Satoshi-Variable.ttf);
+    }
+}
+
+h1{
+    font-family: "Worthbites";
+}
+p{
+    font-family: "Satoshi";
+}
