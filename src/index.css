@@ -17,11 +17,11 @@
         font-family: 'Satoshi';
         src: url(./assets/Fonts/Satoshi-Variable.ttf);
     }
+
+
 }
 
-h1{
-    font-family: "Worthbites";
-}
-p{
-    font-family: "Satoshi";
+::selection {
+    background-color: #3d6642;
+    color: white;
 }
