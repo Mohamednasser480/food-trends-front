@@ -1,9 +1,10 @@
 import React from "react";
-import { Footer } from "./";
+import { Footer, Header } from "./";
+
 const Layout = (props) => {
   return (
     <div>
-      {/*Navbar*/}
+      <Header />
       <main>
         <h1>Hello Layout Component!</h1>
         {props.children}
