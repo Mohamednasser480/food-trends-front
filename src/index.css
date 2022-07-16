@@ -19,9 +19,9 @@
     }
 }
 
-h1{
-    font-family: "Worthbites";
-}
-p{
-    font-family: "Satoshi";
+
+::selection {
+    background-color: #3d6642;
+    color: white;
+
 }
