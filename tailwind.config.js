@@ -27,7 +27,7 @@ module.exports = {
       {
         base: {
           "primary-100": "#eef4ed",
-          primary: "#3d6642",
+          "primary-500": "#3d6642",
           "primary-focus": "#fff",
           "primary-content": "#fff",
           "secondary-100": "#faf5e9",
