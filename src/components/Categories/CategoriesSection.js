@@ -1,41 +1,37 @@
 import React from "react";
-import { Typography } from "../../UI";
-import Category from "./Category";
+import { Typography } from "../UI";
+import {Category} from "./";
 
 const categories = [
   {
-    image: require("../../../assets/CategoryItem1.jpeg"),
+    image: require("../../assets/CategoryItem1.jpeg"),
     title: "Weekly Purchase",
     itemsNumber: 1,
-    link:"/"
+    link: "/",
   },
   {
-    image: require("../../../assets/CategoryItem2.jpeg"),
+    image: require("../../assets/CategoryItem2.jpeg"),
     title: "Juices",
     itemsNumber: 2,
-    link:"/"
-
+    link: "/",
   },
   {
-    image: require("../../../assets/CategoryItem3.jpeg"),
+    image: require("../../assets/CategoryItem3.jpeg"),
     title: "Fruits and Veggies",
     itemsNumber: 3,
-    link:"/"
-
+    link: "/",
   },
   {
-    image: require("../../../assets/CategoryItem4.jpeg"),
+    image: require("../../assets/CategoryItem4.jpeg"),
     title: "Butter and Eggs",
     itemsNumber: 4,
-    link:"/"
-
+    link: "/",
   },
   {
-    image: require("../../../assets/CategoryItem5.jpeg"),
+    image: require("../../assets/CategoryItem5.jpeg"),
     title: "Fresh Meat",
     itemsNumber: 5,
-    link:"/"
-
+    link: "/",
   },
 ];
 
@@ -52,10 +48,11 @@ export default function CategoriesSection() {
         SURPRISE, IT’S ALL ORGANIC
       </Typography>
 
-      <div className="flex justify-center gap-5 md:gap-14 py-10 flex-wrap">
+      <div className="flex flex-wrap justify-center gap-5 py-10 md:gap-14">
         {categories.map((cat) => {
           return (
             <Category
+              key={cat.title}
               imageSrc={cat.image}
               title={cat.title}
               itemsNumber={cat.itemsNumber}

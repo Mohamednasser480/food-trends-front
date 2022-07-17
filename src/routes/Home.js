@@ -1,11 +1,11 @@
 import React from "react";
-import { CategoriesSection, Slider } from "../components/Layout";
+import {Categories,Slider} from "../components"
 
 const Home = () => {
   return (
     <div>
       <Slider />
-      <CategoriesSection />
+      <Categories />
     </div>
   );
 };
