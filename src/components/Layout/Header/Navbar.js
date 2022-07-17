@@ -3,6 +3,7 @@ import { UserArea, SocialIcons } from "./";
 
 import { AiOutlineMenu } from "react-icons/ai";
 import Logo from "../../../assets/Logo.png";
+import { Modal } from "../../UI";
 
 export default function Navbar() {
   const [showModal, setShowModal] = useState(false);
@@ -29,6 +30,8 @@ export default function Navbar() {
           <img src={Logo} alt="Logo " className="w-[200px] max-w-full" />
         </a>
       </div>
+
+      {showModal && <Modal toggleModal={toggleModal}>Hey</Modal>}
 
       <UserArea />
     </nav>

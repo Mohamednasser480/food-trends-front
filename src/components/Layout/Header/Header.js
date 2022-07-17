@@ -18,8 +18,6 @@ export default function Header() {
       <Navbar />
 
       <Navigation />
-
-      {showModal && <Modal toggleModal={toggleModal}>Hey</Modal>}
     </header>
   );
 }
