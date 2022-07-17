@@ -1,7 +1,7 @@
 import React from "react";
 import { ContactInfo, ContactNav, Info, Map } from "../components/ContactUs";
 
-export const ContactUs = () => {
+const ContactUs = () => {
   return (
     <>
       <ContactNav />
@@ -11,3 +11,5 @@ export const ContactUs = () => {
     </>
   );
 };
+
+export default ContactUs;
