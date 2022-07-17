@@ -11,10 +11,10 @@ const ContactInfo = () => {
           <GrLocation size={40} className="m-3" />
           <div>
             <p className="mb-3 text-3xl">Address</p>
-            <p className="mb-3 text-primary">
-              3245 Abbot Kinney BLVD - PH Venice, CA 124
+            <p className="mb-3 text-primary">ITI Menofia Branch</p>
+            <p className="text-accent">
+              شبين الكوم, مركز شبين الكوم، Menofia Governorate
             </p>
-            <p className="text-accent">76 East Houston Street New York City</p>
           </div>
         </div>
 
