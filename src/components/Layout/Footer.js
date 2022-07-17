@@ -4,66 +4,82 @@ import { SiVisa, SiMastercard } from 'react-icons/si';
 import { BsPaypal } from 'react-icons/bs';
 
 import { Link } from 'react-router-dom';
+import Typography from '../UI/Typography';
 
 const Footer = () => {
   return (
     <footer className="bg-[#f0efea]">
       <div className="container py-14 ">
-        <div className="text-base-400 grid gap-4 text-sm font-bold sm:grid-cols-2 lg:grid-cols-4">
-          <div className="text-center sm:text-left ">
-            <h1 className="font-worthbites-rough text-4xl font-medium tracking-wider text-primary">
-              INFORMATION
-            </h1>
-            <p className="py-1">test@gmail.com</p>
-            <p className="py-1">(+2) 01112405807</p>
-            <p className="py-1">14 Jamal Abd-Nasser St. 6th Octber city</p>
+        <div className="grid gap-4 text-sm font-medium text-base-400  sm:grid-cols-2 lg:grid-cols-4">
+          <div className="flex flex-col text-center sm:text-left  ">
+            <Typography component={'h4'} className={'text-primary'}>
+              information
+            </Typography>
+
+            <a href="mailto:test@gmail.com" className="py-2 transition-colors hover:text-black">
+              test@gmail.com
+            </a>
+            <a href="telto:00201112405807" className="py-2 transition-colors hover:text-black">
+              (+2) 01112405807
+            </a>
+            <p className="py-2 transition-colors hover:text-black">
+              14 Jamal Abd-Nasser St. 6th Octber city
+            </p>
             {/* <SoicalIcons /> */}
           </div>
           <div className="grid gap-1 text-center sm:text-left">
-            <h1 className="font-worthbites-rough text-4xl font-medium text-primary">ABOUT</h1>
-            <Link to={'/about'} className="py-1">
+            <Typography component={'h4'} className={'text-primary'}>
+              about
+            </Typography>
+            <Link to={'/about'} className="py-1 transition-colors hover:text-black">
               About Food Trends
             </Link>
-            <Link to={'/'} className="py-1">
+            <Link to={'/'} className="py-1 transition-colors hover:text-black">
               Careers
             </Link>
-            <Link to={'/contact'} className="py-1">
+            <Link to={'/contact'} className="py-1 transition-colors hover:text-black">
               Our location
             </Link>
-            <Link to={'/'} className="py-1">
+            <Link to={'/'} className="py-1 transition-colors hover:text-black">
               Reviews
             </Link>
-            <Link to={'/'} className="py-1">
+            <Link to={'/'} className="py-1 transition-colors hover:text-black">
               Our Blog
             </Link>
           </div>
           <div className="grid gap-1 text-center sm:text-left">
-            <h1 className="text-4xl font-medium text-primary">SUPPORT</h1>
-            <Link to={'/'} className="py-1">
+            <Typography component={'h4'} className={'text-primary'}>
+              support
+            </Typography>
+
+            <Link to={'/'} className="py-1 hover:text-black transition-colors">
               FAQ
             </Link>
-            <Link to={'/'} className="py-1">
+            <Link to={'/'} className="py-1 hover:text-black transition-colors">
               Look up Product
             </Link>
-            <Link to={'/'} className="py-1">
+            <Link to={'/'} className="py-1 hover:text-black transition-colors">
               Become a vendor
             </Link>
-            <Link to={'/'} className="py-1">
+            <Link to={'/'} className="py-1 hover:text-black transition-colors">
               Returns
             </Link>
-            <Link to={'/'} className="py-1">
+            <Link to={'/'} className="py-1 hover:text-black transition-colors">
               Shipping & Delivery
             </Link>
           </div>
           <div className="grid gap-1 text-center sm:text-left ">
-            <h1 className="text-4xl font-medium text-primary">NEWSLETTER</h1>
+            <Typography component={'h4'} className={'text-primary'}>
+              newsletter
+            </Typography>
+
             <p className="py-2">Give your inbox some love with new products, tips, & more.</p>
-            <form action="" className="mt-4">
-              <div className="flex rounded-md bg-[#f2cf79] p-2">
+            <form action="" className="mt-4 text-black">
+              <div className="flex rounded-md bg-secondary-400 p-3">
                 <input
                   type="text"
                   placeholder="Email"
-                  className="w-11/12 bg-transparent font-medium placeholder:text-black "
+                  className="w-11/12 bg-transparent px-4 font-medium placeholder:text-black focus:outline-none"
                 />
                 <button className="flex-end">
                   <HiOutlineArrowRight />
