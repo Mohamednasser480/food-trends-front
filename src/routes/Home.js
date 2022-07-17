@@ -1,13 +1,13 @@
 import React from "react";
-import Slider from "../components/Layout/Slider";
+import { CategoriesSection, Slider } from "../components/Layout";
 
 const Home = () => {
   return (
     <div>
       <Slider />
+      <CategoriesSection />
     </div>
   );
-
 };
 
 export default Home;
