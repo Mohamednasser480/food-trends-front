@@ -3,7 +3,7 @@ import React from "react";
 const links = [
   { name: "Home", href: "#" },
   { name: "Shop", href: "#" },
-  { name: "About", href: "#" },
+  { name: "About", href: "/about" },
   { name: "Contact", href: "/contact-us" },
   { name: "Find A Store", href: "#" },
 ];

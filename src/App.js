@@ -1,5 +1,5 @@
 import Layout from "./components/Layout";
-import { Home, ContactUs } from "./routes";
+import { Home, ContactUs, AboutUs } from "./routes";
 import { Routes, Route } from "react-router-dom";
 function App() {
   return (
@@ -8,6 +8,7 @@ function App() {
         <Routes>
           <Route path={"/"} element={<Home />} />
           <Route path={"/contact-us"} element={<ContactUs />} />
+          <Route path={"/about"} element={<AboutUs />} />
         </Routes>
       </Layout>
     </div>
