@@ -17,11 +17,11 @@
         font-family: 'Satoshi';
         src: url(./assets/Fonts/Satoshi-Variable.ttf);
     }
-
-
 }
+
 
 ::selection {
     background-color: #3d6642;
     color: white;
+
 }
