@@ -19,20 +19,24 @@ module.exports = {
       "worthbites-rough": ["Worthbites-rough", "sans-serif"],
       satoshi: ["Satoshi", "sans-serif"],
     },
-    extend: {},
+    extend: {
+      colors: {
+        "primary-100": "#F0EFEA",
+        "secondary-100": "#faf5e9",
+        "secondary-400": "#F2CF79",
+        "base-400": "#7e7e7e",
+      }
+    },
   },
   plugins: [require("@tailwindcss/typography"),require("daisyui")],
   daisyui: {
     themes: [
       {
         base: {
-          "primary-100": "#eef4ed",
           primary: "#3d6642",
           "primary-focus": "#fff",
           "primary-content": "#fff",
-          "secondary-100": "#faf5e9",
-          "secondary-400": "#F2CF79",
-          "secondary-500": "#E47340",
+          secondary: "#E47340",
           "secondary-focus": "#fff",
           "secondary-content": "#fff",
           accent: "#3d6642",
@@ -43,7 +47,6 @@ module.exports = {
           "neutral-content": "#fff",
           "base-100": "#fff",
           "base-200": "#fff",
-          "base-400": "#7e7e7e",
           "base-content": "#000",
           info: "#3ABFF8",
           success: "#36D399",
