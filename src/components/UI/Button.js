@@ -2,9 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Button = (props) => {
-  // const variant=props.variant==primary?;
+  let variantClasses;
+
+  if (props.variant === "primary") variantClasses = "bg-primary text-white hover:bg-black hover:text-white";
+  if (props.variant === "secondary") variantClasses = "bg-secondary-400 text-primary hover:bg-black hover:text-white";
+
   const btnClasses =
-    `btn px-7 text-base tracking-widest text-white no-underline hover:bg-black ${
+    `btn px-7 text-base tracking-widest border-0 no-underline ${variantClasses || ""} ${
       props.className || ""
     }`.trim();
   if (props.to)

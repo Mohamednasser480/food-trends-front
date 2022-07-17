@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { UserArea, SocialIcons } from "./";
 
 import { AiOutlineMenu } from "react-icons/ai";
+import Logo from "../../../assets/Logo.png";
 
 export default function Navbar() {
   const [showModal, setShowModal] = useState(false);
@@ -25,11 +26,7 @@ export default function Navbar() {
 
       <div className="flex flex-1 justify-center">
         <a href="#">
-          <img
-            src={process.env.PUBLIC_URL + "/logo.png"}
-            alt="Logo "
-            className="w-[200px] max-w-full"
-          />
+          <img src={Logo} alt="Logo " className="w-[200px] max-w-full" />
         </a>
       </div>
 
