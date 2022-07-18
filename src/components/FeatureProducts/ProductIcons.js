@@ -18,7 +18,7 @@ export default function ProductIcons(props) {
       </ProductIcon>
 
       {/* Iniliaze Tooltip */}
-      <ReactTooltip effect="solid" className="!font-satoshi !px-2 !py-1 !font-medium " />
+      <ReactTooltip effect="solid" className="!font-satoshi !px-2 !py-1 !font-medium !w-fit" />
 
     </div>
   );

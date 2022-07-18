@@ -5,7 +5,7 @@ import { ProductIcons } from "./";
 export default function Proudct(props) {
   let route=`/${props.id}`;
   return (
-    <div className="group flex w-[250px] flex-col gap-3">
+    <div className="group flex  flex-col gap-3 ">
       <div className="relative overflow-hidden">
         <Link to={route} className=" bg-black">
           <img
