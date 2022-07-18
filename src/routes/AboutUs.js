@@ -5,7 +5,7 @@ import OurTeam from '../components/AboutUs/OurTeam';
 
 export default function AboutUs() {
   return (
-    <div className='container'>
+    <div className='max-w-[1200px] container'>
       <AboutUsIntro />
       <OurMission />
       <OurTeam />
