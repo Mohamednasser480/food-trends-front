@@ -8,7 +8,7 @@ import "swiper/css/navigation";
 
 // import required modules
 import { EffectCreative, Autoplay, EffectFade } from "swiper";
-import Button from "../UI/Button";
+import Button from "./UI/Button";
 
 export default function Slider() {
   return (
