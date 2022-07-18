@@ -14,7 +14,7 @@ export default function SectionTitle({text,navigateTo}) {
       </Typography>
 
       <Link to={navigateTo}
-      className="flex items-center gap-2 uppercase font-semibold tracking-wide text-primary hover:text-secondary group">
+      className="flex items-center gap-2 uppercase font-semibold tracking-wide text-primary hover:text-secondary group font-satoshi">
         View All
         <BsArrowRight className="group-hover:-ml-1 transition-all duration-300" size={20} />
       </Link>
