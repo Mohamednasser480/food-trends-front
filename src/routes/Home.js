@@ -1,5 +1,11 @@
 import React from "react";
-import { Categories, Slider, Offers, SpecialOffer } from "../components";
+import {
+  Categories,
+  Slider,
+  Offers,
+  SpecialOffer,
+  FeatureProducts,
+} from "../components";
 
 const Home = () => {
   return (
@@ -8,6 +14,7 @@ const Home = () => {
       <Categories />
       <Offers />
       <SpecialOffer />
+      <FeatureProducts />
     </div>
   );
 };
