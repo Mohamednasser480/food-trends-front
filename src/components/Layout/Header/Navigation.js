@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const links = [
   { name: "Home", href: "/" },
@@ -9,12 +9,18 @@ const links = [
   { name: "Find A Store", href: "/find-store" },
 ];
 export default function Navigation() {
+  const getLinksClasses = ({ isActive }) => {
+    const defClasses = "hover:text-black transition-colors ";
+    return defClasses + (isActive ? "text-black" : "text-gray-600");
+  };
   return (
-    <ul className="contaienr mx-auto hidden justify-center gap-8 pb-3 text-sm font-bold uppercase text-gray-600 sm:flex ">
+    <ul className="container mx-auto hidden justify-center gap-8 pb-3 text-sm font-bold uppercase sm:flex ">
       {links.map((el) => {
         return (
-          <li className="hover:text-black" key={el.name}>
-            <Link to={el.href}>{el.name}</Link>
+          <li key={el.name}>
+            <NavLink to={el.href} className={getLinksClasses}>
+              {el.name}
+            </NavLink>
           </li>
         );
       })}
