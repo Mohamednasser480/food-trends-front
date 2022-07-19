@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const links = [
-  { name: "Home", href: "#" },
-  { name: "Shop", href: "#" },
-  { name: "About", href: "#" },
+  { name: "Home", href: "/" },
+  { name: "Shop", href: "/shop" },
+  { name: "About", href: "/about" },
   { name: "Contact", href: "/contact-us" },
-  { name: "Find A Store", href: "#" },
+  { name: "Find A Store", href: "/find-store" },
 ];
 export default function Navigation() {
   return (
@@ -13,7 +14,7 @@ export default function Navigation() {
       {links.map((el) => {
         return (
           <li className="hover:text-black" key={el.name}>
-            <a href={el.href}>{el.name}</a>
+            <Link to={el.href}>{el.name}</Link>
           </li>
         );
       })}
