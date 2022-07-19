@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { FaShoppingBag } from 'react-icons/fa';
+import { BsCart3 } from 'react-icons/bs';
 
 const userType = 'vendor';
 
@@ -17,7 +18,7 @@ export default function AcountNav({ onNavClick, content }) {
   };
   const icons = {
     Products: <FaShoppingBag className="mx-1" />,
-    Orders: <FaShoppingBag />,
+    Orders: <BsCart3 />,
     Reviews: <FaShoppingBag />,
     'Add product': <FaShoppingBag />,
     wishlist: <FaShoppingBag />,
