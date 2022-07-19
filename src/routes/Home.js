@@ -1,14 +1,20 @@
 import React from "react";
-import {Categories,Slider,Offers,FeatureProducts} from "../components"
+import {
+  Categories,
+  Slider,
+  Offers,
+  SpecialOffer,
+  FeatureProducts,
+} from "../components";
 
 const Home = () => {
   return (
     <div>
       <Slider />
       <Categories />
-      <Offers/>
-      
-      <FeatureProducts/>
+      <Offers />
+      <SpecialOffer />
+      <FeatureProducts />
     </div>
   );
 };

@@ -10,7 +10,7 @@ const Map = () => {
       <MapContainer
         className="mx-auto mt-5"
         center={position}
-        zoom={15}
+        zoom={16}
         scrollWheelZoom={false}
         style={{ width: "80vw", height: "70vh" }}
       >
