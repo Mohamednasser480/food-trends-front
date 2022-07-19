@@ -1,12 +1,13 @@
 import React from "react";
-import {Categories,Slider,Offers} from "../components"
+import { Categories, Slider, Offers, SpecialOffer } from "../components";
 
 const Home = () => {
   return (
     <div>
       <Slider />
       <Categories />
-      <Offers/>
+      <Offers />
+      <SpecialOffer />
     </div>
   );
 };
