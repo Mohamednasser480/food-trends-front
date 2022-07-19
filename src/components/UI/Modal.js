@@ -23,7 +23,11 @@ export default function Modal(props) {
           onClick={props.toggleModal}
           data-aos="fade"
         >
-          {props.children}
+          <div className={props.className} data-aos={props.modalEffect}>
+            <div className="flex flex-col">
+              <span className="text-base-400 cursor-pointer w-fit self-end text-xl mr-4" onClick={props.toggleModal} >X</span>
+              {props.children}</div>
+          </div>
         </div>,
         document.getElementById("modals")
       )}
