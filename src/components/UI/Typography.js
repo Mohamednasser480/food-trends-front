@@ -2,12 +2,12 @@ import React from "react";
 
 const Typography = (props) => {
   const variants = {
-    h1: "text-8xl font-worthbites-rough tracking-wider uppercase",
-    h2: "text-6xl font-worthbites-rough tracking-wider uppercase",
-    h3: "text-5xl font-worthbites-rough tracking-wider uppercase",
-    h4: "text-4xl font-worthbites-rough tracking-wider uppercase",
-    h5: "text-3xl font-worthbites-rough tracking-wider uppercase",
-    h6: "text-2xl font-worthbites-rough tracking-wider uppercase",
+    h1: "text-8xl font-worthbites-rough tracking-wide uppercase",
+    h2: "text-6xl font-worthbites-rough tracking-wide uppercase",
+    h3: "text-5xl font-worthbites-rough tracking-wide uppercase",
+    h4: "text-4xl font-worthbites-rough tracking-wide uppercase",
+    h5: "text-3xl font-worthbites-rough tracking-wide uppercase",
+    h6: "text-2xl font-worthbites-rough tracking-wide uppercase",
     subtitle1: "text-xl text-secondary capitalize",
     subtitle2: "",
     body1: "text-base",
