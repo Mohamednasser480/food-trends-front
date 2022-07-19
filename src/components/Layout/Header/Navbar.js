@@ -32,13 +32,13 @@ export default function Navbar() {
       </div>
 
       {showModal && (
-        <Modal toggleModal={toggleModal} direction="left">
-          <div
-            className="h-full w-[410px] max-w-[90%] cursor-default bg-white  p-5"
-            data-aos="slide-right"
-          >
-            Mobile Sidebar
-          </div>
+        <Modal
+          toggleModal={toggleModal}
+          direction="left"
+          className="h-full w-[410px] max-w-[90%] cursor-default bg-white  p-5"
+          effect="slide-right"
+        >
+          <div>Mobile Sidebar</div>
         </Modal>
       )}
 
