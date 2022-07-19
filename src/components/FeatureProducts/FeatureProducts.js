@@ -19,6 +19,7 @@ let products = [
     price: 30,
     image:
       "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_05.6-450x450.jpg",
+    rating: 2.5,
   },
   {
     id: 2,
@@ -26,6 +27,7 @@ let products = [
     price: 30,
     image:
       "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_01.2-450x450.jpg",
+    rating: 1,
   },
   {
     id: 3,
@@ -33,6 +35,7 @@ let products = [
     price: 30,
     image:
       "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_05.7-450x450.jpg",
+    rating: 4,
   },
   {
     id: 4,
@@ -40,6 +43,7 @@ let products = [
     price: 30,
     image:
       "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_05.6-450x450.jpg",
+    rating: 5,
   },
   {
     id: 5,
@@ -47,6 +51,7 @@ let products = [
     price: 30,
     image:
       "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_01.2-450x450.jpg",
+    rating: 3.5,
   },
   {
     id: 6,
@@ -54,6 +59,7 @@ let products = [
     price: 30,
     image:
       "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_05.7-450x450.jpg",
+    rating: 3,
   },
 ];
 
@@ -95,6 +101,7 @@ export default function FeatureProducts() {
                   name={prod.title}
                   price={prod.price.toFixed(2)}
                   image={prod.image}
+                  rating={prod.rating}
                 />
               </SwiperSlide>
             );

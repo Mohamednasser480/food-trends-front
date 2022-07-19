@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ProductIcons } from "./";
+import { ProductRating } from "../UI";
 
 export default function Proudct(props) {
-  let route=`/${props.id}`;
+  let route = `/${props.id}`;
   return (
     <div className="group flex  flex-col gap-3 ">
       <div className="relative overflow-hidden">
@@ -28,7 +29,10 @@ export default function Proudct(props) {
         <h4 className="font-satoshi text-lg font-extrabold text-primary">
           ${props.price}
         </h4>
-        <div>Rating</div>
+
+        <div>
+          <ProductRating rating={props.rating}/>
+        </div>
       </div>
     </div>
   );
