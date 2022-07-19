@@ -2,11 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AcountNav, AccountContent } from '../components/UserAcount';
 
 export default function UserAcount() {
-  const [content, setContent] = useState(null);
-
-  useEffect(() => {
-    setContent(localStorage.getItem('clicked') || 'Products');
-  }, []);
+  const [content, setContent] = useState(localStorage.getItem('clicked') || 'Products');
 
   useEffect(() => {
     localStorage.setItem('clicked', content);
@@ -14,13 +10,12 @@ export default function UserAcount() {
 
   const handleNavClick = (btn) => {
     setContent(btn);
-    console.log(btn);
   };
 
   return (
-    <>
+    <div className="grid grid-cols-2">
       <AcountNav onNavClick={handleNavClick} content={content} />
       <AccountContent content={content} />
-    </>
+    </div>
   );
 }

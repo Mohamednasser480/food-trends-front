@@ -5,6 +5,7 @@ import { BsCart3 } from 'react-icons/bs';
 const userType = 'vendor';
 
 export default function AcountNav({ onNavClick, content }) {
+  console.log(content);
   const [activeButton, setActiveButton] = useState(content);
 
   const handleClick = (btn) => {
@@ -26,14 +27,16 @@ export default function AcountNav({ onNavClick, content }) {
   };
 
   return (
-    <div>
+    <div className="container">
       <div className="mr-10 w-2/12 py-5">
         {buttons[userType]
           ? buttons[userType].map((btn, index) => (
               <button
                 onClick={() => handleClick(btn)}
                 key={index}
-                className="flex w-full items-center rounded px-4 py-1 text-left hover:bg-slate-200"
+                className={`flex w-full items-center rounded px-4 py-1 text-left hover:bg-slate-200 ${
+                  activeButton === btn ? 'bg-black text-white' : ''
+                }`}
               >
                 {icons[btn]}
                 {btn}
