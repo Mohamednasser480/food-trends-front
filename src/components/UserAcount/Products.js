@@ -26,8 +26,8 @@ export default function Products() {
 
   // get table comp from daisy ui
   return (
-    <div class=" overflow-x-auto">
-      <table class="table-compact table w-full">
+    <div className=" overflow-x-auto">
+      <table className="table-compact table w-full">
         <thead>
           <tr>
             <th>
@@ -49,9 +49,9 @@ export default function Products() {
               </label>
             </th>
             <td>
-              <div class="flex items-center space-x-3">
-                <div class="avatar">
-                  <div class="mask mask-squircle h-12 w-12">
+              <div className="flex items-center space-x-3">
+                <div className="avatar">
+                  <div className="mask mask-squircle h-12 w-12">
                     <img
                       src="https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_05.6-540x540.jpg"
                       alt="Avatar Tailwind CSS Component"
@@ -59,22 +59,22 @@ export default function Products() {
                   </div>
                 </div>
                 <div>
-                  <div class="font-bold">Hart Hagerty</div>
-                  <div class="text-sm opacity-50">United States</div>
+                  <div className="font-bold">Hart Hagerty</div>
+                  <div className="text-sm opacity-50">United States</div>
                 </div>
               </div>
             </td>
             <td>
               Zemlak, Daniel and Leannon
-              <span class="badge badge-sm badge-ghost">Desktop Support Technician</span>
+              <span className="badge badge-sm badge-ghost">Desktop Support Technician</span>
             </td>
             <td>Purple</td>
             <td>Purple</td>
             <td>Purple</td>
 
             <th>
-              <button class="btn btn-ghost btn-xs">Edit</button>
-              <button class="btn btn-ghost btn-xs">Delete</button>
+              <button className="btn btn-ghost btn-xs">Edit</button>
+              <button className="btn btn-ghost btn-xs">Delete</button>
             </th>
           </tr>
         </tbody>
