@@ -9,5 +9,5 @@ export default function AccountContent(props) {
     'Add product': <AddProduct />,
   };
 
-  return <div className="flex-1">{content[props.content] ? content[props.content] : null}</div>;
+  return <div className="w-10/12">{content[props.content] ? content[props.content] : null}</div>;
 }

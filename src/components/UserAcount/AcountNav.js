@@ -27,14 +27,14 @@ export default function AcountNav({ onNavClick, content }) {
   };
 
   return (
-    <div className="container">
-      <div className="mr-10 w-2/12 py-5">
+    <div className="mr-5 w-2/12">
+      <div className="mr-10 w-full py-5">
         {buttons[userType]
           ? buttons[userType].map((btn, index) => (
               <button
                 onClick={() => handleClick(btn)}
                 key={index}
-                className={`flex w-full items-center rounded px-4 py-1 text-left hover:bg-slate-200 ${
+                className={`flex w-full items-center px-4 py-1 text-left hover:bg-black hover:text-white ${
                   activeButton === btn ? 'bg-black text-white' : ''
                 }`}
               >

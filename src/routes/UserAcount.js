@@ -13,7 +13,7 @@ export default function UserAcount() {
   };
 
   return (
-    <div className="grid grid-cols-2">
+    <div className="flex">
       <AcountNav onNavClick={handleNavClick} content={content} />
       <AccountContent content={content} />
     </div>
