@@ -51,7 +51,7 @@ export default function OffersSection() {
                 offer={el.offer}
                 image={el.image}
                 navigateTo={el.navigateTo}
-                // bgColor={`${bgColors[index]}`}
+                index={index}
               />
             </SwiperSlide>
           );

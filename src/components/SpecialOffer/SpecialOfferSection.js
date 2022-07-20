@@ -14,9 +14,12 @@ const SpecialOfferSection = () => {
   const [days, hours, mins, secs] = useCountdown(item.offerExpier);
 
   return (
-    <div className="flex min-h-[600px] flex-wrap bg-[#F0EBD8] px-20">
-      <div className="container relative m-auto flex max-w-screen-xl flex-wrap">
-        <div className="w-full flex-col lg:w-6/12">
+    <div
+      className="flex min-h-[600px] flex-wrap bg-[#F0EBD8] px-20"
+      data-aos="fade-up"
+    >
+      <div className="container relative m-auto flex max-w-screen-xl flex-wrap" >
+        <div className="w-full flex-col lg:w-6/12" data-aos="fade-up" data-aos-delay="300">
           <img src={item.img} alt="..." />
           <img
             className=" absolute top-14 m-2 w-32"
@@ -24,7 +27,7 @@ const SpecialOfferSection = () => {
             src={item.offerImg}
           />
         </div>
-        <div className="my-auto w-full flex-col text-center lg:w-6/12">
+        <div className="my-auto w-full flex-col text-center lg:w-6/12"  data-aos="fade-up" data-aos-delay="350">
           <div className=" container my-4 px-5">
             <h3 className="text-md mb-4 font-satoshi text-secondary">
               Fresh and Organic
