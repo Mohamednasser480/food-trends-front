@@ -52,7 +52,16 @@ export default function UserArea(props) {
         </div>
       </div>
 
-      {showModal && <Modal direction="right" toggleModal={toggleModal}></Modal>}
+      {showModal && (
+        <Modal
+          direction="right"
+          toggleModal={toggleModal}
+          className="h-full w-[410px] max-w-[90%] cursor-default bg-white  p-5"
+          effect="slide-left"
+        >
+          <div>Cart Sidebar</div>
+        </Modal>
+      )}
     </>
   );
 }
