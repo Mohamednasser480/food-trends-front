@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactTooltip from "react-tooltip";
 import { AiOutlineShopping, AiOutlineStar, AiOutlineEye } from "react-icons/ai";
-import ProductIcon from "./ProductIcon";
+import { ProductIcon, QuickviewProduct } from "./";
 import "./ProductIcons.css";
 import { Modal } from "../UI";
 
@@ -26,15 +26,17 @@ export default function ProductIcons(props) {
           className={"text-black transition-all"}
           onClick={toggleModal}
         />
+        
         {showModal && (
           <Modal
             toggleModal={toggleModal}
             className="h-1/2 min-w-[970px]   cursor-default bg-white  p-5"
-            effect="fade"
+            effect="flip-down"
           >
-            <h4>Hey</h4>
+            <QuickviewProduct />
           </Modal>
         )}
+
       </ProductIcon>
 
       <ProductIcon tooltip="Add to Cart">
