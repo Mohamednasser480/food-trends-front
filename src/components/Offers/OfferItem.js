@@ -1,12 +1,14 @@
 import React from "react";
 import { Button, Typography } from "../UI";
-export default function OfferItem({ title, offer, image,navigateTo }) {
+export default function OfferItem({ title, offer, image, navigateTo, index }) {
   return (
     <div
       className={`group  relative min-h-[600px]  w-full`}
+      data-aos="fade-up"
+      data-aos-delay={index * 300}
     >
-      <div className="flex flex-col items-center absolute z-10 left-1/2 -translate-x-1/2 w-full py-14">
-        <h3 className="text-md mb-4 font-satoshi font-bold text-secondary group-hover:text-xl transition-all duration-500">
+      <div className="absolute left-1/2 z-10 flex w-full -translate-x-1/2 flex-col items-center py-14">
+        <h3 className="text-md mb-4 font-satoshi font-bold text-secondary transition-all duration-500 group-hover:text-xl">
           {offer}
         </h3>
 
@@ -18,14 +20,17 @@ export default function OfferItem({ title, offer, image,navigateTo }) {
         </Typography>
         <Button
           variant="secondary"
-          className="mt-5 !px-3 !tracking-normal !min-h-6 !h-10 text-white transition-all duration-700 group-hover:bg-black"
+          className="!min-h-6 mt-5 !h-10 !px-3 !tracking-normal text-white transition-all duration-700 group-hover:bg-black"
           to={navigateTo}
         >
           Shop now
         </Button>
       </div>
       <div className="absolute -top-0 left-0  h-full w-full overflow-hidden">
-        <img src={image} className="object-cover h-full w-full group-hover:scale-110 object-center transition-all duration-700 	"/>
+        <img
+          src={image}
+          className="h-full w-full object-cover object-center transition-all duration-700 group-hover:scale-110 	"
+        />
       </div>
     </div>
   );

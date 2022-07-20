@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 const AdsItem = ({ img, title, to }) => {
   return (
-    <div className="group relative min-h-[300px] w-[600px]">
+    <div className="group relative min-h-[300px] w-[600px]" data-aos="fade-up">
       <NavLink to={to}>
         <div className=" absolute left-10 z-10 flex h-full w-1/4 max-w-[160px] flex-wrap py-6">
           <div className="my-auto flex flex-col gap-4">

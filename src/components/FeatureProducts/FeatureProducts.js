@@ -65,7 +65,7 @@ let products = [
 
 export default function FeatureProducts() {
   return (
-    <div className="container py-14">
+    <div className="container py-14" data-aos="fade-down">
       <SectionTitle text={"Feature Products"} navigateTo={"/"} />
 
       <div className="relative  py-6">
