@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Typography = (props) => {
   const variants = {
@@ -8,12 +8,12 @@ const Typography = (props) => {
     h4: "text-4xl font-worthbites-rough tracking-wide uppercase",
     h5: "text-3xl font-worthbites-rough tracking-wide uppercase",
     h6: "text-2xl font-worthbites-rough tracking-wide uppercase",
-    subtitle1: "text-xl text-secondary capitalize",
-    subtitle2: " text-lg leading-loose",
+    subtitle1: 'text-xl text-secondary capitalize',
+    subtitle2: 'text-lg capitalize font-satoshi',
     title: "text-base font-bold",
     title2: "text-base text-slate-500",
-    body1: "text-base",
-    body2: "text-sm text-base-400",
+    body1: 'text-base font-satoshi',
+    body2: 'text-sm text-base-400 font-satoshi',
   };
 
   const classes = `${variants[props.variant] || variants[props.component]} ${
