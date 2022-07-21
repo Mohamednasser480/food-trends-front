@@ -5,9 +5,7 @@ import { Typography } from "../UI";
 
 const RatingItem = ({ name, desc, rating, city, img }) => {
   return (
-    <div
-      className=" felx-wrap container m-4 flex min-h-[400px] flex-col bg-[#FAF5E9] p-9"
-    >
+    <div className=" felx-wrap container m-4 flex min-h-[400px] flex-col bg-[#FAF5E9] p-9">
       <Rating
         readonly
         className="pb-4"
@@ -24,7 +22,7 @@ const RatingItem = ({ name, desc, rating, city, img }) => {
       </Typography>
 
       <div className="flex h-full items-end gap-4">
-        <img className="h-16 w-16 object-cover" src={img} />
+        <img className="h-16 w-16 object-cover" src={img} alt={name} />
         <div className="flex h-16 w-fit flex-col">
           <Typography component={"title"} className={" uppercase"}>
             {name}
