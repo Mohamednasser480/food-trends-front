@@ -6,6 +6,7 @@ import {
   SpecialOffer,
   FeatureProducts,
   Ads,
+  Ratings,
 } from "../components";
 
 const Home = () => {
@@ -17,6 +18,7 @@ const Home = () => {
       <SpecialOffer />
       <FeatureProducts />
       <Ads />
+      <Ratings />
     </div>
   );
 };
