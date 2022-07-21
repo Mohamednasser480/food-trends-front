@@ -9,9 +9,9 @@ const Typography = (props) => {
     h5: 'text-3xl font-worthbites-rough tracking-wide uppercase',
     h6: 'text-2xl font-worthbites-rough tracking-wide uppercase',
     subtitle1: 'text-xl text-secondary capitalize',
-    subtitle2: 'text-2xl capitalize font-satoshi',
-    body1: 'text-base',
-    body2: 'text-sm text-base-400',
+    subtitle2: 'text-lg capitalize font-satoshi',
+    body1: 'text-base font-satoshi',
+    body2: 'text-sm text-base-400 font-satoshi',
   };
 
   const classes = `${variants[props.variant] || variants[props.component]} ${
