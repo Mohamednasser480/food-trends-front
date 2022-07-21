@@ -4,6 +4,7 @@ const initialState = {
   items: [
     // {
     //   id: 0,
+    //   productId: 20,
     //   name: "product",
     //   image:
     //     "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_05.8-90x90.jpg",
@@ -13,6 +14,7 @@ const initialState = {
     // },
     // {
     //   id: 1,
+    //   productId: 21,
     //   name: "product",
     //   image:
     //     "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_05.8-90x90.jpg",
@@ -22,6 +24,7 @@ const initialState = {
     // },
     // {
     //   id: 2,
+    //   productId: 55,
     //   name: "product",
     //   image:
     //     "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_05.8-90x90.jpg",
@@ -45,7 +48,7 @@ const cart = createSlice({
         (item) => item.id === updatedItem.id
       );
       const existingCartItem = state.items[existingCartItemIndex];
-      if (updatedItem.quantity === -1) {
+      if (updatedItem.quantity === 0) {
         state.items.splice(existingCartItemIndex, 1);
         state.totalPrice -= updatedItem.price * existingCartItem.quantity;
       } else if (!existingCartItem) {
@@ -67,7 +70,6 @@ const fetchCartItems = () => (dispatch) => {
 };
 
 const saveCartItems = (items) => () => {
-  console.log(items);
   localStorage.setItem("cartItems", JSON.stringify(items));
 };
 
