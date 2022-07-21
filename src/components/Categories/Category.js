@@ -15,6 +15,7 @@ export default function Category({ title, itemsNumber, imageSrc, navigateTo ,ind
       >
         <img
           src={imageSrc}
+          alt={title}
           className="transition-all duration-500 group-hover:-rotate-2  group-hover:scale-110"
         />
       </Link>

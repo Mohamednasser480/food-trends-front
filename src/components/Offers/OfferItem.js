@@ -29,6 +29,7 @@ export default function OfferItem({ title, offer, image, navigateTo, index }) {
       <div className="absolute -top-0 left-0  h-full w-full overflow-hidden">
         <img
           src={image}
+          alt={`Offer: ${offer}`}
           className="h-full w-full object-cover object-center transition-all duration-700 group-hover:scale-110 	"
         />
       </div>
