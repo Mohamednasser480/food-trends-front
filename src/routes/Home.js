@@ -6,6 +6,7 @@ import {
   SpecialOffer,
   FeatureProducts,
   Ads,
+  FreshSection,
   Ratings,
 } from "../components";
 
@@ -18,6 +19,7 @@ const Home = () => {
       <SpecialOffer />
       <FeatureProducts />
       <Ads />
+      <FreshSection />
       <Ratings />
     </div>
   );
