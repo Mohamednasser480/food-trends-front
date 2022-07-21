@@ -24,11 +24,12 @@ module.exports = {
         "primary-100": "#F0EFEA",
         "secondary-100": "#faf5e9",
         "secondary-400": "#F2CF79",
+        "base-200": "#f8f8f8",
         "base-400": "#7e7e7e",
-      }
+      },
     },
   },
-  plugins: [require("@tailwindcss/typography"),require("daisyui")],
+  plugins: [require("@tailwindcss/typography"), require("daisyui")],
   daisyui: {
     themes: [
       {
@@ -46,7 +47,7 @@ module.exports = {
           "neutral-focus": "#fff",
           "neutral-content": "#fff",
           "base-100": "#fff",
-          "base-200": "#fff",
+          "base-200": "#f8f8f8",
           "base-content": "#000",
           info: "#3ABFF8",
           success: "#36D399",
