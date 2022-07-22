@@ -18,11 +18,11 @@ export default function ProductIcons(props) {
 
   return (
     <div className={props.className}>
-      <ProductIcon tooltip="Add to Wishlist">
+      <ProductIcon tooltip="Add to Wishlist" border>
         <AiOutlineStar size={25} className={"text-black transition-all"} />
       </ProductIcon>
 
-      <ProductIcon tooltip="Quick view" onClickHandler={toggleModal}>
+      <ProductIcon tooltip="Quick view" onClickHandler={toggleModal} border>
         <AiOutlineEye
           size={25}
           className={"text-black transition-all"}
@@ -42,7 +42,7 @@ export default function ProductIcons(props) {
         )}
       </ProductIcon>
 
-      <ProductIcon tooltip="Add to Cart">
+      <ProductIcon tooltip="Add to Cart" border>
         <AiOutlineShopping size={25} className={"text-black transition-all"} />
       </ProductIcon>
 
