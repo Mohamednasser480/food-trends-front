@@ -14,7 +14,7 @@ export default function Header() {
   }
 
   return (
-    <header className="bg-white sticky z-50 top-0 shadow-sm">
+    <header className="bg-white sticky z-10 top-0 shadow-sm">
       <Navbar />
 
       <Navigation />
