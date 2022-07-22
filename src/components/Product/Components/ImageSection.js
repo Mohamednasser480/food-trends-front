@@ -7,7 +7,7 @@ export default function ImageSection() {
   return (
     <div className="w-full lg:w-1/2 relative">
       <Slider />
-      <div className="absolute top-24 right-12 z-10">
+      <div className="absolute top-10 right-10 z-10">
         <ProductIcon tooltip="Add to Wishlist">
           <AiOutlineStar size={25} className={"text-black transition-all"} />
         </ProductIcon>
