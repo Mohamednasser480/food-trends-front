@@ -1,12 +1,11 @@
 import React from 'react';
 import {useParams}    from "react-router"
+import Product from "../components/Product"
 
 export default function ProductPage() {
   let {id}=useParams();
 
   return (
-    <div className='container'>
-      Product Page {id}
-    </div>
+    <Product id={id}/>
   )
 }
