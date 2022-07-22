@@ -11,14 +11,7 @@ export default function UserArea(props) {
   // Counter
   let counter = 1;
 
-  const [showModal, setShowModal] = useState(false);
-
-  function toggleModal(e) {
-    // To stop clicking on Children
-    if (e.target !== e.currentTarget) return;
-
-    setShowModal(!showModal);
-  }
+  const [modalExists, setModalExists] = useState(false);
 
   return (
     <>
@@ -44,7 +37,9 @@ export default function UserArea(props) {
             size={25}
             cursor={"pointer"}
             className={"transition-all hover:text-green-800"}
-            onClick={toggleModal}
+            onClick={() => {
+              setModalExists(true);
+            }}
           />
           <span className="absolute -top-1.5 -right-2 flex h-5  w-5 items-center justify-center rounded-full bg-green-800 text-xs font-bold text-white">
             {counter}
@@ -52,10 +47,10 @@ export default function UserArea(props) {
         </div>
       </div>
 
-      {showModal && (
+      {modalExists && (
         <Modal
           direction="right"
-          toggleModal={toggleModal}
+          setModalExists={setModalExists}
           className="h-full w-[410px] max-w-[90%] cursor-default bg-white  p-5"
           effect="slide-left"
         >
