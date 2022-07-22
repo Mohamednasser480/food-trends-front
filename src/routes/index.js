@@ -4,4 +4,4 @@ import ContactUs from './ContactUs';
 import Cart from './Cart';
 import AboutUs from './AboutUs';
 
-export { Home, ContactUs, /*Shop*/ Cart, AboutUs };
+export { Home, ContactUs, Cart, AboutUs };
