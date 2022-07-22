@@ -22,7 +22,7 @@ export default function UserArea(props) {
 
   return (
     <>
-      <div className="hidden gap-3 md:flex">
+      <div className="flex gap-3">
         <AiOutlineSearch
           size={25}
           cursor={"pointer"}
