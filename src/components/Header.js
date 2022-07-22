@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import { Modal } from "../../UI";
-import { Navbar, Navigation } from "./";
+import { Modal } from "./UI";
+import { Navbar, Navigation } from "./Layout/Header";
 
 export default function Header() {
   const [showModal, setShowModal] = useState(false);
@@ -14,7 +14,7 @@ export default function Header() {
   }
 
   return (
-    <header className="bg-white sticky z-50 top-0 shadow-sm">
+    <header className="sticky top-0 z-50 bg-white shadow-sm">
       <Navbar />
 
       <Navigation />
