@@ -2,20 +2,22 @@ import React from 'react';
 
 const Typography = (props) => {
   const variants = {
-    h1: 'text-8xl font-worthbites-rough tracking-wide uppercase',
-    h2: 'text-6xl font-worthbites-rough tracking-wide uppercase',
-    h3: 'text-5xl font-worthbites-rough tracking-wide uppercase',
-    h4: 'text-4xl font-worthbites-rough tracking-wide uppercase',
-    h5: 'text-3xl font-worthbites-rough tracking-wide uppercase',
-    h6: 'text-2xl font-worthbites-rough tracking-wide uppercase',
+    h1: "text-8xl font-worthbites-rough tracking-wide uppercase",
+    h2: "text-6xl font-worthbites-rough tracking-wide uppercase",
+    h3: "text-5xl font-worthbites-rough tracking-wide uppercase",
+    h4: "text-4xl font-worthbites-rough tracking-wide uppercase",
+    h5: "text-3xl font-worthbites-rough tracking-wide uppercase",
+    h6: "text-2xl font-worthbites-rough tracking-wide uppercase",
     subtitle1: 'text-xl text-secondary capitalize',
     subtitle2: 'text-lg capitalize font-satoshi',
+    title: "text-base font-bold",
+    title2: "text-base text-slate-500",
     body1: 'text-base font-satoshi',
     body2: 'text-sm text-base-400 font-satoshi',
   };
 
   const classes = `${variants[props.variant] || variants[props.component]} ${
-    props.className || ''
+    props.className || ""
   }`.trim();
 
   const components = {
@@ -27,6 +29,8 @@ const Typography = (props) => {
     h6: () => <h6 className={classes}>{props.children}</h6>,
     subtitle1: () => components.h3(),
     subtitle2: () => components.h3(),
+    title: () => <span className={classes}>{props.children}</span>,
+    title2: () => <span className={classes}>{props.children}</span>,
     body1: () => <p className={classes}>{props.children}</p>,
     body2: () => <p className={classes}>{props.children}</p>,
   };
