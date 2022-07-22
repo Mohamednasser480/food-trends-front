@@ -8,9 +8,7 @@ export default function FreshItem({ title, image, desc }) {
       <Typography component={'subtitle2'} className="my-5 font-semibold">
         {title}
       </Typography>
-      <Typography component={'body2'} className="text-[15px]">
-        {desc}
-      </Typography>
+      <Typography component={'body2'}>{desc}</Typography>
     </div>
   );
 }
