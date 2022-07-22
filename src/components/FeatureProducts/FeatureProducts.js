@@ -10,7 +10,7 @@ import {
 } from "react-icons/md";
 
 import { SectionTitle } from "../UI";
-import { Product } from "./";
+import { ProductItem } from "./";
 
 let products = [
   {
@@ -96,7 +96,7 @@ export default function FeatureProducts() {
           {products.map((prod) => {
             return (
               <SwiperSlide key={prod.id}>
-                <Product
+                <ProductItem
                   id={prod.id}
                   name={prod.title}
                   price={prod.price.toFixed(2)}

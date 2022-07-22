@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ProductIcons } from "./";
+import { ProductIcons } from ".";
 import { ProductRating } from "../UI";
 
 export default function Proudct(props) {
-  let route = `/${props.id}`;
+  let route = `products/${props.id}`;
   return (
     <div className="group flex  flex-col gap-3 ">
       <div className="relative overflow-hidden">
