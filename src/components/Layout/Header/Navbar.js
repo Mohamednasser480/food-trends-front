@@ -6,21 +6,16 @@ import Logo from "../../../assets/Logo.png";
 import { Modal } from "../../UI";
 
 export default function Navbar() {
-  const [showModal, setShowModal] = useState(false);
-
-  function toggleModal(e) {
-    // To stop clicking on Children
-    if (e.target !== e.currentTarget) return;
-
-    setShowModal(!showModal);
-  }
+  const [modalExists, setModalExists] = useState(true);
 
   return (
     <nav className="container flex h-16  items-center justify-between px-4 md:py-12">
       <AiOutlineMenu
         size={25}
-        className="-p-1 cursor-pointer hover:text-green-800 md:hidden"
-        onClick={toggleModal}
+        className=" cursor-pointer hover:text-green-800 md:hidden"
+        onClick={() => {
+          setModalExists(true);
+        }}
       />
 
       <SocialIcons />
@@ -31,9 +26,9 @@ export default function Navbar() {
         </a>
       </div>
 
-      {showModal && (
+      {modalExists && (
         <Modal
-          toggleModal={toggleModal}
+          setModalExists={setModalExists}
           direction="left"
           className="h-full w-[410px] max-w-[90%] cursor-default bg-white  p-5"
           effect="slide-right"
