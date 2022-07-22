@@ -8,7 +8,7 @@ import Typography from '../UI/Typography';
 
 const Footer = () => {
   return (
-    <footer className="bg-[#f0efea]">
+    <footer className="bg-[#f0efea]"  data-aos="fade" >
       <div className="container py-14 ">
         <div className="grid gap-4 text-sm font-medium text-base-400  sm:grid-cols-2 lg:grid-cols-4">
           <div className="flex flex-col text-center sm:text-left  ">

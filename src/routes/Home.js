@@ -1,11 +1,13 @@
-import React from "react";
+import React from 'react';
 import {
   Categories,
   Slider,
   Offers,
   SpecialOffer,
   FeatureProducts,
-} from "../components";
+  Ads,
+  FreshSection,
+} from '../components';
 
 const Home = () => {
   return (
@@ -15,6 +17,8 @@ const Home = () => {
       <Offers />
       <SpecialOffer />
       <FeatureProducts />
+      <Ads />
+      <FreshSection />
     </div>
   );
 };

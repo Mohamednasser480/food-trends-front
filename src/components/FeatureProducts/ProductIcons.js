@@ -10,7 +10,9 @@ export default function ProductIcons(props) {
 
   function toggleModal(e) {
     // To stop clicking on Children
-    if (e.target !== e.currentTarget) return;
+    if (e) {
+      if (e.target !== e.currentTarget) return;
+    }
     setShowModal(!showModal);
   }
 
@@ -24,9 +26,11 @@ export default function ProductIcons(props) {
         <AiOutlineEye
           size={25}
           className={"text-black transition-all"}
-          onClick={toggleModal}
+          onClick={() => {
+            toggleModal();
+          }}
         />
-        
+
         {showModal && (
           <Modal
             toggleModal={toggleModal}
@@ -36,7 +40,6 @@ export default function ProductIcons(props) {
             <QuickviewProduct />
           </Modal>
         )}
-
       </ProductIcon>
 
       <ProductIcon tooltip="Add to Cart">
