@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { cartService } from "../../services/api";
 
 const initialState = {
   items: [
@@ -65,7 +66,7 @@ const cart = createSlice({
 });
 
 const fetchCartItems = () => (dispatch) => {
-  const items = JSON.parse(localStorage.getItem("cartItems")) || [];
+  const items = cartService.getItems();
   dispatch(cartActions.replaceItems(items));
 };
 
