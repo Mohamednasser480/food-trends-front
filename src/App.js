@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import Layout from "./components/Layout";
-import { Home, ContactUs, AboutUs, Cart } from "./routes";
+import { Home, ContactUs, AboutUs, Cart, ProductPage } from "./routes";
 import { Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "./store";
@@ -30,6 +30,7 @@ function App() {
           <Route path={"/contact-us"} element={<ContactUs />} />
           <Route path={"/about"} element={<AboutUs />} />
           <Route path={"/cart"} element={<Cart />} />
+          <Route path={"/products/:id"} element={<ProductPage />} />
         </Routes>
       </Layout>
     </div>
