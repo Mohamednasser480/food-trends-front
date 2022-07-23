@@ -3,7 +3,7 @@ import { Typography } from '../UI';
 
 export default function AboutUsIntro() {
   return (
-    <div className="container mb-40 max-w-7xl px-12">
+    <div className="container mb-28 max-w-7xl px-12">
       <Typography component={'h3'} className="py-10 text-center text-primary">
         {' '}
         SURPRISE, IT’S ALL ORGANIC
@@ -16,7 +16,7 @@ export default function AboutUsIntro() {
           <Typography component={'subtitle1'} className="mt-12">
             Real food – Real Health
           </Typography>
-          <Typography component={'h2'} className="py-8 tracking-normal text-primary xl:text-7xl">
+          <Typography component={'h2'} className="py-8 !tracking-normal text-primary xl:text-7.5xl">
             HEALTHIER YOU EAT, HEALTHIER YOU LIVE
           </Typography>
           <Typography
