@@ -32,7 +32,7 @@ const RatingSection = () => {
         <SectionTitle text={"CUSTOMERS LOVE"} />
       </div>
 
-      <div className="flex">
+      <div className="flex flex-wrap justify-center">
         {React.Children.toArray(
           test.map((item) => {
             return <RatingItem {...item} />;
