@@ -16,7 +16,7 @@ const SpecialOfferSection = () => {
   return (
     <div
       className="flex min-h-[600px] flex-wrap bg-[#F0EBD8] py-4 px-0 lg:px-20"
-      // data-aos="fade-up"
+      data-aos="fade-up"
     >
       <div className="container m-auto flex flex-wrap">
         <div
