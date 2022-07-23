@@ -1,7 +1,5 @@
-import React from 'react'
+import React from 'react';
 
 export default function OurTeam() {
-  return (
-    <div>OurTeam</div>
-  )
+  return <div className="">OurTeam</div>;
 }
