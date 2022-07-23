@@ -4,7 +4,7 @@ const CountDownNumber = (props) => {
   return (
     <>
       <div className="flex flex-col">
-        <span className="font-Satoshi text-6xl font-bold tracking-wider text-primary ">
+        <span className="font-Satoshi text-5xl font-bold tracking-wider text-primary lg:text-6xl ">
           {props.numbers}
         </span>
         <span className="font-bold uppercase text-primary">{props.date}</span>

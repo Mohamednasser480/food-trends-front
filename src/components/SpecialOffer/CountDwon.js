@@ -3,7 +3,7 @@ import CountDownNumber from "./CountDownNumber";
 
 const CountDwon = ({ days, hours, mins, secs }) => {
   return (
-    <div className="flex max-w-full justify-center space-x-4 ">
+    <div className="flex max-w-full justify-center gap-2">
       
       {/* Days */}
       <CountDownNumber numbers={days} date={"Days"} isCol={true} />
