@@ -3,7 +3,7 @@ import { Typography } from '../UI';
 
 export default function OurMission() {
   return (
-    <div className="container mb-40 flex max-w-7xl justify-between px-12">
+    <div className="container mb-44 flex max-w-7xl justify-between px-12">
       <div className="w-1/2 pr-10">
         <div>
           <Typography component={'subtitle1'} className="mt-12">
