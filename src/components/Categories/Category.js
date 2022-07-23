@@ -1,13 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Category({ title, itemsNumber, imageSrc, navigateTo ,index}) {
-  console.log(index)
+export default function Category({
+  title,
+  itemsNumber,
+  imageSrc,
+  navigateTo,
+  index,
+}) {
   return (
     <div
       className="bg-infos group flex w-fit flex-col gap-4"
       data-aos="zoom-in-up"
-      data-aos-delay={index*100}
+      data-aos-delay={index * 100}
     >
       <Link
         to={navigateTo}
