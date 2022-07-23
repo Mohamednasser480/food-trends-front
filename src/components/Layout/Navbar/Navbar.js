@@ -8,14 +8,6 @@ import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const [showModal, setShowModal] = useState(false);
-
-  function toggleModal(e) {
-    // To stop clicking on Children
-    if (e.target !== e.currentTarget) return;
-
-    setShowModal(!showModal);
-  }
-
   return (
     <nav className="sticky top-0 z-40 bg-white shadow-sm">
       <div className="container flex flex-col gap-y-10 py-6 xl:pt-8">
@@ -25,7 +17,9 @@ export default function Navbar() {
             <AiOutlineMenu
               size={25}
               className="cursor-pointer hover:text-green-800 xl:hidden"
-              onClick={toggleModal}
+              onClick={()=>{
+                setShowModal(true)
+              }}
             />
             <SocialIcons />
           </div>
@@ -50,7 +44,7 @@ export default function Navbar() {
 
         {showModal && (
           <Modal
-            toggleModal={toggleModal}
+            setModalExists={setShowModal}
             direction="left"
             className="h-full w-[410px] max-w-[90%] cursor-default bg-white  p-5"
             effect="slide-right"
