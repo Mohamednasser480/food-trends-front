@@ -4,7 +4,7 @@ import { ProductIcons } from ".";
 import { ProductRating } from "../UI";
 
 export default function Proudct(props) {
-  let route = `products/${props.id}`;
+  let route = `shop/${props.id}`;
   return (
     <div className="group flex  flex-col gap-3 ">
       <div className="relative overflow-hidden">
@@ -31,7 +31,7 @@ export default function Proudct(props) {
         </h4>
 
         <div>
-          <ProductRating rating={props.rating}/>
+          <ProductRating rating={props.rating} />
         </div>
       </div>
     </div>
