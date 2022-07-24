@@ -6,15 +6,7 @@ import "./ProductIcons.css";
 import { Modal } from "../UI";
 
 export default function ProductIcons(props) {
-  const [showModal, setShowModal] = useState(false);
-
-  function toggleModal(e) {
-    // To stop clicking on Children
-    if (e) {
-      if (e.target !== e.currentTarget) return;
-    }
-    setShowModal(!showModal);
-  }
+  const [modalExists, setModalExists] = useState(false);
 
   return (
     <div className={props.className}>
@@ -22,34 +14,33 @@ export default function ProductIcons(props) {
         <AiOutlineStar size={25} className={"text-black transition-all"} />
       </ProductIcon>
 
-      <ProductIcon tooltip="Quick view" onClickHandler={toggleModal} border>
-        <AiOutlineEye
-          size={25}
-          className={"text-black transition-all"}
-          onClick={() => {
-            toggleModal();
-          }}
-        />
-
-        {showModal && (
-          <Modal
-            toggleModal={toggleModal}
-            className="h-1/2 min-w-[970px]   cursor-default bg-white  p-5"
-            effect="flip-down"
-          >
-            <QuickviewProduct />
-          </Modal>
-        )}
+      <ProductIcon
+        tooltip="Quick view"
+        onClickHandler={() => {
+          setModalExists(true);
+        }}
+      >
+        <AiOutlineEye size={25} className={"text-black transition-all"} />
       </ProductIcon>
 
-      <ProductIcon tooltip="Add to Cart" border>
+      {modalExists && (
+        <Modal
+          setModalExists={setModalExists}
+          className="h-1/2 min-w-[970px]   cursor-default bg-white  p-5"
+          effect="flip-down"
+        >
+          <QuickviewProduct />
+        </Modal>
+      )}
+
+      <ProductIcon tooltip="Add to Cart">
         <AiOutlineShopping size={25} className={"text-black transition-all"} />
       </ProductIcon>
 
       {/* Iniliaze Tooltip */}
       <ReactTooltip
         effect="solid"
-        className="!w-fit !px-2 !py-1 !font-satoshi !font-medium"
+        className="!font-satoshi !w-fit !px-2 !py-1 !font-medium"
       />
     </div>
   );

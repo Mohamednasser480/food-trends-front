@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Categories,
   Slider,
@@ -7,7 +7,8 @@ import {
   FeatureProducts,
   Ads,
   FreshSection,
-} from '../components';
+  Ratings,
+} from "../components";
 
 const Home = () => {
   return (
@@ -19,6 +20,7 @@ const Home = () => {
       <FeatureProducts />
       <Ads />
       <FreshSection />
+      <Ratings />
     </div>
   );
 };

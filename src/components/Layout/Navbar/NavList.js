@@ -8,18 +8,21 @@ const links = [
   { name: "Contact", href: "/contact-us" },
   { name: "Find A Store", href: "/find-store" },
 ];
-export default function Navigation() {
+
+export default function NavList() {
   const getLinksClasses = ({ isActive }) => {
-    const defClasses = "hover:text-black transition-colors ";
+    const defClasses =
+      "hover:text-black transition-colors group relative pb-0.5 ";
     return defClasses + (isActive ? "text-black" : "text-gray-600");
   };
   return (
-    <ul className="container mx-auto hidden justify-center gap-8 pb-3 text-sm font-bold uppercase sm:flex ">
+    <ul className="flex justify-center gap-8 text-base font-bold uppercase">
       {links.map((el) => {
         return (
           <li key={el.name}>
             <NavLink to={el.href} className={getLinksClasses}>
               {el.name}
+              <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-black transition-all duration-500 group-hover:w-full"></span>
             </NavLink>
           </li>
         );

@@ -12,12 +12,12 @@ const AdsItem = ({ img, title, to }) => {
             <Typography
               component={"h1"}
               className={
-                "h-fit !text-5xl uppercase !tracking-normal text-primary"
+                "h-fit !text-3xl uppercase !tracking-normal text-primary sm:!text-5xl"
               }
             >
               {title}
             </Typography>
-            <div className="flex h-fit w-full font-medium tracking-widest text-primary duration-500 group-hover:text-secondary">
+            <div className="flex h-fit w-full text-xs font-medium tracking-widest text-primary duration-500 group-hover:text-secondary sm:text-lg">
               <span>Shop now</span>
               <FiArrowRight className="my-auto mx-1" />
             </div>

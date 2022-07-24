@@ -3,7 +3,7 @@ import { AdsItem } from "./";
 
 const Ads = () => {
   return (
-    <div className="container flex flex-wrap justify-center gap-6 py-3">
+    <div className="container mb-8 flex flex-wrap justify-center gap-6 py-3">
       <AdsItem
         img={require("../../assets/ads-1.jpeg")}
         title="Juices are full of fruits"
