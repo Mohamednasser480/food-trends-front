@@ -36,12 +36,18 @@ const team = [
 export default function OurTeam() {
   return (
     <div className="container">
-      <Typography component={'h3'}>Our Team</Typography>
-      <div className=" mb-40 grid grid-cols-5 gap-2 py-10">
+      <Typography component={'h2'} className="text-center text-primary xl:text-7.5xl">
+        Our Team
+      </Typography>
+      <div className=" mb-40 grid gap-4 py-10 sm:grid-cols-2 md:grid-cols-5">
         {team.map((member) => {
           return (
             <div key={member.id} className="text-center">
-              <img src={require('../../assets' + member.image)} alt="" className="h-2/3" />
+              <img
+                src={require('../../assets' + member.image)}
+                alt=""
+                className="w-full px-5 md:h-3/4 md:p-0"
+              />
               <Typography component={'h6'} className="pt-8">
                 {member.name}
               </Typography>
