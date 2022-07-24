@@ -4,6 +4,7 @@ import { Home, ContactUs, AboutUs, Cart, ProductPage } from "./routes";
 import { Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "./store";
+import Aos from "aos";
 
 let isInitial = true;
 
@@ -21,6 +22,11 @@ function App() {
     }
     isInitial = false;
   }, [cartItems]);
+
+  // Iniate Animation
+  Aos.init({
+    once: "true",
+  });
 
   return (
     <div className="App">
