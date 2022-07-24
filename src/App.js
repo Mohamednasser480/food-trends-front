@@ -1,9 +1,27 @@
+import { useEffect } from 'react';
 import Layout from './components/Layout';
-import { Home, ContactUs, UserAcount } from './routes';
+import { Home, ContactUs, AboutUs, Cart, UserAcount } from './routes';
 import { Routes, Route } from 'react-router-dom';
-import AboutUs from './routes/AboutUs';
+import { useDispatch, useSelector } from 'react-redux';
+import { cartActions } from './store';
+
+let isInitial = true;
 
 function App() {
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
+
+  useEffect(() => {
+    dispatch(cartActions.fetchCartItems());
+  }, []);
+
+  useEffect(() => {
+    if (!isInitial) {
+      dispatch(cartActions.saveCartItems(cartItems));
+    }
+    isInitial = false;
+  }, [cartItems]);
+
   return (
     <div className="App">
       <Layout>
@@ -11,6 +29,7 @@ function App() {
           <Route path={'/'} element={<Home />} />
           <Route path={'/contact-us'} element={<ContactUs />} />
           <Route path={'/about'} element={<AboutUs />} />
+          <Route path={'/cart'} element={<Cart />} />
           <Route path={'/user-account'} element={<UserAcount />} />
         </Routes>
       </Layout>

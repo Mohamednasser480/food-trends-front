@@ -37,8 +37,8 @@ const categories = [
 
 export default function CategoriesSection() {
   return (
-    <div className="container py-14 text-center">
-      <h3 className="text-md md:text-md mb-4 font-satoshi font-bold text-secondary">
+    <div className="container py-14 text-center" data-aos="fade-up">
+      <h3 className="text-md md:text-md mb-4 font-satoshi font-bold text-secondary" >
         Fresh and Organic
       </h3>
       <Typography
@@ -49,14 +49,15 @@ export default function CategoriesSection() {
       </Typography>
 
       <div className="flex flex-wrap justify-center gap-5 py-10 md:gap-14">
-        {categories.map((cat) => {
+        {categories.map((cat,index) => {
           return (
             <Category
-              key={cat.title}
+              key={index}
               imageSrc={cat.image}
               title={cat.title}
               itemsNumber={cat.itemsNumber}
               navigateTo={cat.link}
+              index={index}
             />
           );
         })}

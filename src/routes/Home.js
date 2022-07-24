@@ -5,6 +5,9 @@ import {
   Offers,
   SpecialOffer,
   FeatureProducts,
+  Ads,
+  FreshSection,
+  Ratings,
 } from "../components";
 
 const Home = () => {
@@ -15,6 +18,9 @@ const Home = () => {
       <Offers />
       <SpecialOffer />
       <FeatureProducts />
+      <Ads />
+      <FreshSection />
+      <Ratings />
     </div>
   );
 };

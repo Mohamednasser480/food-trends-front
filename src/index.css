@@ -3,25 +3,69 @@
 @tailwind utilities;
 
 @layer base {
-    @font-face {
-        font-family: 'Worthbites';
-        src: url(./assets/Fonts/Worthbites.ttf);
-    }
+  @font-face {
+    font-family: "Worthbites";
+    src: url(./assets/Fonts/Worthbites.ttf);
+  }
 
-    @font-face {
-        font-family: 'Worthbites-rough';
-        src: url(./assets/Fonts/worthbites-rough-EID.ttf);
-    }
+  @font-face {
+    font-family: "Worthbites-rough";
+    src: url(./assets/Fonts/Worthbites-Rough.otf);
+  }
 
-    @font-face {
-        font-family: 'Satoshi';
-        src: url(./assets/Fonts/Satoshi-Variable.ttf);
-    }
+  @font-face {
+    font-family: "Satoshi";
+    src: url("./assets/Fonts/Satoshi-Regular.woff2");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Satoshi";
+    src: url("./assets/Fonts/Satoshi-Regular.woff2");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Satoshi";
+    src: url("./assets/Fonts/Satoshi-Medium.woff2");
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Satoshi";
+    src: url("./assets/Fonts/Satoshi-MediumItalic.woff2");
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: "Satoshi";
+    src: url("./assets/Fonts/Satoshi-Bold.woff2");
+    font-weight: 700;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: "Phosphate";
+    src: url("./assets/Fonts/Phosphor.ttf");
+  }
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
 
 ::selection {
-    background-color: #3d6642;
-    color: white;
-
+  background-color: #3d6642;
+  color: white;
 }

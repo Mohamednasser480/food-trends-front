@@ -12,7 +12,7 @@ import Button from "./UI/Button";
 
 export default function Slider() {
   return (
-    <div className="overflow-hidden ">
+    <div className="overflow-hidden " data-aos="fade-up">
       <Swiper
         grabCursor={true}
         effect={"creative"}

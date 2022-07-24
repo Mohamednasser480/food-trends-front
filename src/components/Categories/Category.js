@@ -1,15 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Category({ title, itemsNumber, imageSrc,navigateTo }) {
-
-  
-
+export default function Category({
+  title,
+  itemsNumber,
+  imageSrc,
+  navigateTo,
+  index,
+}) {
   return (
-    <div className="bg-infos group flex w-fit flex-col gap-4">
-      <Link to={navigateTo} className="cursor-pointer overflow-hidden rounded-full border-8 border-white  ring-secondary-400  transition-all group-hover:ring-[3px]">
+    <div
+      className="bg-infos group flex w-fit flex-col gap-4"
+      data-aos="zoom-in-up"
+      data-aos-delay={index * 100}
+    >
+      <Link
+        to={navigateTo}
+        className="cursor-pointer overflow-hidden rounded-full border-8 border-white  ring-secondary-400  transition-all group-hover:ring-[3px]"
+      >
         <img
           src={imageSrc}
+          alt={title}
           className="transition-all duration-500 group-hover:-rotate-2  group-hover:scale-110"
         />
       </Link>
