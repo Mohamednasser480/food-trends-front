@@ -5,7 +5,7 @@ import Slider from "./Slider";
 
 export default function ImageSection() {
   return (
-    <div className="w-full lg:w-1/2 relative">
+    <div className="relative w-full lg:w-5/12">
       <Slider />
       <div className="absolute top-10 right-10 z-10">
         <ProductIcon tooltip="Add to Wishlist">
