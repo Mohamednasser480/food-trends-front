@@ -5,6 +5,7 @@ import SectionTitle from "./SectionTitle";
 import ProductRating from "./ProductRating";
 import Breadcrumb from "./Breadcrumb";
 import Page from "./Page";
+import QauntityBox from "./QauntityBox";
 
 export {
   Button,
@@ -14,4 +15,5 @@ export {
   ProductRating,
   Breadcrumb,
   Page,
+  QauntityBox,
 };
