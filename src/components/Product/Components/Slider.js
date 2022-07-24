@@ -22,7 +22,7 @@ export default function Slider() {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   return (
-    <div className="p-4">
+    <div className="">
       <Swiper
         style={{
           "--swiper-navigation-color": "#fff",
