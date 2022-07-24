@@ -37,9 +37,12 @@ const SpecialOfferSection = () => {
           data-aos-delay="350"
         >
           <div className=" container my-4 px-5">
-            <h3 className="text-md mb-4 font-satoshi text-secondary">
+            <Typography
+              component={"subtitle1"}
+              className={" font-satoshi mb-4 text-secondary"}
+            >
               Fresh and Organic
-            </h3>
+            </Typography>
             <Typography
               component={"h1"}
               className={"!text-6xl text-primary md:text-7xl"}
