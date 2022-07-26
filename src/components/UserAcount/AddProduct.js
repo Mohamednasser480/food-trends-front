@@ -5,6 +5,8 @@ import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import * as Joi from 'joi';
 
+import { ReactComponent as IconMenu } from '../../assets/uploadImage.svg';
+
 const schema = Joi.object({
   productName: Joi.string()
     .regex(/^[A-Za-z]+$/)
@@ -20,6 +22,10 @@ const schema = Joi.object({
   }),
   regularPrice: Joi.number().required().min(2).messages({
     'number.base': `Please provide a price`,
+    'any.required': `Price is required`,
+  }),
+  inStock: Joi.number().required().min(2).messages({
+    'number.base': `Please provide how much is your stock`,
     'any.required': `Summary is required`,
   }),
 });
@@ -33,7 +39,7 @@ export default function AddProduct() {
     resolver: joiResolver(schema),
   });
 
-  console.log(errors);
+  // console.log(errors);
 
   return (
     <>
@@ -91,7 +97,6 @@ export default function AddProduct() {
                     name="description"
                     class="textarea textarea-bordered h-24"
                     placeholder="Full description"
-                    // ref={register}
                   ></textarea>
                 </div>
               </div>
@@ -122,7 +127,7 @@ export default function AddProduct() {
                 </div>
                 <div class="form-control w-full max-w-xs">
                   <label class="label">
-                    <Typography component="body1">In Stock?</Typography>
+                    <Typography component="body1">Stock</Typography>
                   </label>
                   <input
                     type="number"
@@ -138,12 +143,46 @@ export default function AddProduct() {
             </div>
             <div className="mt-10 w-1/4 rounded-xl bg-white p-10 md:mt-0">
               <Typography component="h5">Media</Typography>
-              <div className="h-1/2 w-full">Image here</div>
-              <div class="form-control w-full max-w-xs">
+              <div className="flex w-full flex-col">
+                {/* <IconMenu className="h-24 w-24 self-center" /> */}
+
+                <div class="mt-10 flex items-center justify-center font-sans">
+                  <label
+                    for="dropzone-file"
+                    class="mx-auto flex w-full max-w-lg cursor-pointer flex-col items-center rounded-xl border-2 border-dashed border-blue-400 bg-slate-50 p-6 text-center"
+                  >
+                    <svg
+                      // xmlns="http://www.w3.org/2000/svg"
+                      class="h-10 w-10 text-blue-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                      />
+                    </svg>
+
+                    <h2 class="mt-4 text-xl font-medium tracking-wide text-gray-700">
+                      Product Images
+                    </h2>
+
+                    <p class="mt-2 tracking-wide text-gray-500">
+                      Upload or darg & drop your file SVG, PNG, JPG or GIF.
+                    </p>
+
+                    <input id="dropzone-file" type="file" class="hidden" />
+                  </label>
+                </div>
+              </div>
+              <div class="form-control mt-5 w-full">
                 <label class="label">
                   <Typography component="body1">Category</Typography>
                 </label>
-                <select class="select select-bordered">
+                <select class="select select-bordered w-full">
                   <option disabled selected>
                     Pick one
                   </option>
@@ -177,7 +216,7 @@ export default function AddProduct() {
           <div className="my-10 w-2/3 rounded-xl bg-white p-10">
             <Typography component="h5">Shipping</Typography>
           </div>
-          {/* <button type="submit">submit</button> */}
+
           <Button variant="secondary" type="submit" className="my-10">
             Add
           </Button>
