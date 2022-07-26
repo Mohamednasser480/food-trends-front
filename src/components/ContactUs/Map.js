@@ -3,12 +3,12 @@ import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 const Map = () => {
-  const position = [30.550398651280837, 31.010643673993595];
+  const position = [30.55792175930095, 31.018984611032206];
 
   return (
     <>
       <MapContainer
-        className="mx-auto mt-5"
+        className="-z-10 mx-auto mt-5"
         center={position}
         zoom={16}
         scrollWheelZoom={false}
