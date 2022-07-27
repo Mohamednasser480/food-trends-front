@@ -4,7 +4,7 @@ import { ProductIcons } from ".";
 import { ProductRating } from "../UI";
 
 export default function Proudct(props) {
-  let route = `shop/${props.id}`;
+  let route = `${props.relative ? "/shop" : "shop"}/${props.id}`;
   return (
     <div className="group flex  flex-col gap-3 ">
       <div className="relative overflow-hidden">

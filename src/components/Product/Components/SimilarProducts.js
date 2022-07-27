@@ -105,6 +105,7 @@ export default function SimilarProducts() {
                   price={prod.price.toFixed(2)}
                   image={prod.image}
                   rating={prod.rating}
+                  relative={true}
                 />
               </SwiperSlide>
             );
