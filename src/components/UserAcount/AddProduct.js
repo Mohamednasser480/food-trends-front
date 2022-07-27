@@ -48,9 +48,13 @@ export default function AddProduct() {
           Add New Product
         </Typography>
 
-        <form action="" className="pb-10" onSubmit={handleSubmit((d) => console.log(d))}>
-          <div className="flex flex-col md:flex-row">
-            <div className="mr-9 w-full rounded-xl bg-white p-10 md:w-2/3">
+        <form
+          action=""
+          className="flex flex-col pb-10"
+          onSubmit={handleSubmit((d) => console.log(d))}
+        >
+          <div className="flex flex-col lg:flex-row">
+            <div className="mr-9 w-full rounded-xl bg-white p-10 lg:w-2/3">
               <Typography component="h5">Basic</Typography>
               <div>
                 <label htmlFor="" className="label">
@@ -100,7 +104,7 @@ export default function AddProduct() {
                   ></textarea>
                 </div>
               </div>
-              <div className="grid grid-cols-3 gap-4">
+              <div className="md:grid md:grid-cols-3 md:gap-4">
                 <div class="form-control w-full max-w-xs">
                   <label class="label">
                     <Typography component="body1">Regular price</Typography>
@@ -141,7 +145,7 @@ export default function AddProduct() {
                 </div>
               </div>
             </div>
-            <div className="mt-10 w-1/4 rounded-xl bg-white p-10 md:mt-0">
+            <div className="mt-10 w-full rounded-xl bg-white p-10 lg:mt-0 lg:w-1/4">
               <Typography component="h5">Media</Typography>
               <div className="flex w-full flex-col">
                 {/* <IconMenu className="h-24 w-24 self-center" /> */}
@@ -213,11 +217,47 @@ export default function AddProduct() {
               </div>
             </div>
           </div>
-          <div className="my-10 w-2/3 rounded-xl bg-white p-10">
+          <div className="my-10 w-full rounded-xl bg-white p-10 lg:w-2/3">
             <Typography component="h5">Shipping</Typography>
+            <div className="flex flex-col justify-between md:flex-row">
+              <div class="form-control md:w-[30%]">
+                <label class="label">
+                  <Typography component="body1">Width</Typography>
+                </label>
+                <input
+                  type="number"
+                  placeholder="cm"
+                  class="input input-bordered w-full max-w-xs"
+                />
+              </div>
+              <div class="form-control md:w-[30%]">
+                <label class="label">
+                  <Typography component="body1">Height</Typography>
+                </label>
+                <input
+                  type="number"
+                  placeholder="cm"
+                  class="input input-bordered w-full max-w-xs"
+                />
+              </div>
+              <div class="form-control md:w-[30%]">
+                <label class="label">
+                  <Typography component="body1">Weight</Typography>
+                </label>
+                <input
+                  type="number"
+                  placeholder="Kg"
+                  class="input input-bordered w-full max-w-xs"
+                />
+              </div>
+            </div>
           </div>
 
-          <Button variant="secondary" type="submit" className="my-10">
+          <Button
+            variant="secondary"
+            type="submit"
+            className="w-1/2 self-center lg:w-2/12 lg:self-start"
+          >
             Add
           </Button>
         </form>
