@@ -2,6 +2,7 @@ import React from "react";
 import { Typography, ProductRating, Button, QauntityBox } from "../../UI";
 import { CgStopwatch } from "react-icons/cg";
 import { AiOutlineCalendar, AiFillCheckCircle } from "react-icons/ai";
+import { Info } from "../";
 
 export default function ProductDetails({ id }) {
   const item = {
@@ -64,7 +65,10 @@ export default function ProductDetails({ id }) {
           </span>
         </div>
       </div>
-      <Button variant="primary">Add to Cart</Button>
+      <Button variant="primary" className="my-5">
+        Add to Cart
+      </Button>
+      <Info />
     </div>
   );
 }
