@@ -10,7 +10,10 @@ export default function QauntityBox({ max }) {
   }, []);
 
   let inc = () => {
-    // if (count.current.value >= max) return;
+    if (count.current.value < 0) {
+      count.current.value = 1;
+      return;
+    }
     if (count.current.value >= max) {
       count.current.value = max;
       return;
@@ -18,7 +21,11 @@ export default function QauntityBox({ max }) {
     count.current.value++;
   };
   let dec = () => {
-    if (count.current.value <= 1) return;
+    if (count.current.value == 1) return;
+    if (count.current.value < 0) {
+      count.current.value = 1;
+      return;
+    }
     if (count.current.value > max) {
       count.current.value = max;
       return;
@@ -34,7 +41,7 @@ export default function QauntityBox({ max }) {
         type={"number"}
         min={1}
         max={max}
-        className="w-32 rounded-md border-2 border-transparent bg-[#f5f5f5] py-2 text-center font-satoshi focus:border-primary"
+        className="font-satoshi w-32 rounded-md border-2 border-transparent bg-[#f5f5f5] py-2 text-center focus:border-primary"
         ref={count}
       />
       <button className={`${btnClass} right-0`} onClick={inc}>
