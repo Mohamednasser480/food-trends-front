@@ -6,7 +6,7 @@ const Typography = (props) => {
     h2: 'text-6xl font-worthbites-rough tracking-wide uppercase',
     h3: 'text-5xl font-worthbites-rough tracking-wide uppercase' /** Page Title */,
     h4: 'text-4xl font-worthbites-rough tracking-wide uppercase' /**Footer Section Titles */,
-    h5: 'text-2xl font-worthbites-rough tracking-wide uppercase' /**Black title font-size 24px (CART, DASHBAORD, CONTACT US) */,
+    h5: 'text-2xl tracking-wide uppercase font-medium' /**Black title font-size 24px (CART, DASHBAORD, CONTACT US) */,
     h6: 'text-base tracking-wide uppercase font-medium' /** Tables Headers ONLY */,
     subtitle1: 'text-lg text-secondary capitalize font-medium' /** Orange color small title*/,
     subtitle2: 'text-lg capitalize font-medium' /*Product Name -- DO NOT USE ANOTHER*/,

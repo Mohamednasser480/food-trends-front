@@ -1,14 +1,14 @@
 import React from "react";
-import { ContactInfo, ContactNav, Info, Map } from "../components/ContactUs";
+import { ContactInfo, Info, Map } from "../components/ContactUs";
 
 const ContactUs = () => {
   return (
-    <>
-      <ContactNav />
+    <div className=" container py-8">
+      {/* <ContactNav /> */}
       <Info />
       <ContactInfo />
       <Map />
-    </>
+    </div>
   );
 };
 
