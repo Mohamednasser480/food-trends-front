@@ -5,15 +5,13 @@ import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import * as Joi from 'joi';
 
-import { ReactComponent as IconMenu } from '../../assets/uploadImage.svg';
-
 const schema = Joi.object({
   productName: Joi.string()
     .regex(/^[A-Za-z]+$/)
     .required()
     .messages({
       'string.pattern.base': 'Product name must be letters only',
-      'string.empty': `Product name cannot be an empty field`,
+      'string.empty': `Product name is required`,
       'any.required': `Product name is required`,
     }),
   summary: Joi.string().required().messages({
@@ -26,7 +24,19 @@ const schema = Joi.object({
   }),
   inStock: Joi.number().required().min(2).messages({
     'number.base': `Please provide how much is your stock`,
-    'any.required': `Summary is required`,
+    'any.required': `Stock is required`,
+  }),
+  width: Joi.number().required().min(2).messages({
+    'number.base': `Please provide your shipment width`,
+    'any.required': `Stock is required`,
+  }),
+  height: Joi.number().required().min(2).messages({
+    'number.base': `Please provide your shipment height`,
+    'any.required': `Stock is required`,
+  }),
+  weight: Joi.number().required().min(2).messages({
+    'number.base': `Please provide your shipment weight`,
+    'any.required': `Stock is required`,
   }),
 });
 
@@ -38,8 +48,6 @@ export default function AddProduct() {
   } = useForm({
     resolver: joiResolver(schema),
   });
-
-  // console.log(errors);
 
   return (
     <>
@@ -148,15 +156,13 @@ export default function AddProduct() {
             <div className="mt-10 w-full rounded-xl bg-white p-10 lg:mt-0 lg:w-1/4">
               <Typography component="h5">Media</Typography>
               <div className="flex w-full flex-col">
-                {/* <IconMenu className="h-24 w-24 self-center" /> */}
-
                 <div class="mt-10 flex items-center justify-center font-sans">
                   <label
                     for="dropzone-file"
                     class="mx-auto flex w-full max-w-lg cursor-pointer flex-col items-center rounded-xl border-2 border-dashed border-blue-400 bg-slate-50 p-6 text-center"
                   >
                     <svg
-                      // xmlns="http://www.w3.org/2000/svg"
+                      xmlns="http://www.w3.org/2000/svg"
                       class="h-10 w-10 text-blue-500"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -190,29 +196,10 @@ export default function AddProduct() {
                   <option disabled selected>
                     Pick one
                   </option>
-                  <option>
-                    <Typography component="subtitle2">Dairy</Typography>
-                  </option>
-                  <option>
-                    <Typography component="subtitle2" className="flex-1">
-                      Fruits
-                    </Typography>
-                  </option>
-                  <option>
-                    <Typography component="subtitle2" className="flex-1">
-                      Bakery
-                    </Typography>
-                  </option>
-                  <option>
-                    <Typography component="subtitle2" className="flex-1">
-                      Meat
-                    </Typography>
-                  </option>
-                  <option>
-                    <Typography component="subtitle2" className="flex-1">
-                      Dairy
-                    </Typography>
-                  </option>
+                  <option>Dairy</option>
+                  <option>Fruits</option>
+                  <option>Bakery</option>
+                  <option>Meat</option>
                 </select>
               </div>
             </div>
@@ -228,7 +215,11 @@ export default function AddProduct() {
                   type="number"
                   placeholder="cm"
                   class="input input-bordered w-full max-w-xs"
+                  {...register('width')}
                 />
+                <Typography component="body2" className="text-red-500">
+                  {errors.width?.message}
+                </Typography>
               </div>
               <div class="form-control md:w-[30%]">
                 <label class="label">
@@ -238,7 +229,11 @@ export default function AddProduct() {
                   type="number"
                   placeholder="cm"
                   class="input input-bordered w-full max-w-xs"
+                  {...register('height')}
                 />
+                <Typography component="body2" className="text-red-500">
+                  {errors.height?.message}
+                </Typography>
               </div>
               <div class="form-control md:w-[30%]">
                 <label class="label">
@@ -248,7 +243,11 @@ export default function AddProduct() {
                   type="number"
                   placeholder="Kg"
                   class="input input-bordered w-full max-w-xs"
+                  {...register('weight')}
                 />
+                <Typography component="body2" className="text-red-500">
+                  {errors.weight?.message}
+                </Typography>
               </div>
             </div>
           </div>
