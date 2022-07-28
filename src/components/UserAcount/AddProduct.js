@@ -22,7 +22,7 @@ const schema = Joi.object({
   description: Joi.string().messages({
     'string.empty': `Summary cannot be an empty field`,
   }),
-  price: Joi.number().required().min(2).messages({
+  price: Joi.number().required().messages({
     'number.base': `Please provide a price`,
     'any.required': `Price is required`,
   }),
@@ -49,9 +49,9 @@ const addProduct = async (UserToken, data) => {
       method: 'post',
       url: 'http://localhost:3000/api/v1/products',
       headers: { Authorization: 'Bearer ' + UserToken },
-      data: { name: 'user13' },
+      data: data,
     });
-    console.log(product.data);
+    console.log('hfhs');
   } catch (e) {
     console.log(e);
   }
@@ -66,6 +66,9 @@ export default function AddProduct() {
     resolver: joiResolver(schema),
   });
 
+  const token =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmUyOGJiNWUwMTQ4YzllODkzNGRkODMiLCJpYXQiOjE2NTkwMjA3MzR9.KQgiF99gJ2AchNZKMIZVkJKn2jFqMWCQTDumgoDw3y0';
+
   return (
     <>
       <div className="bg-[#f8f9fa] p-10">
@@ -76,12 +79,7 @@ export default function AddProduct() {
         <form
           action=""
           className="flex flex-col pb-10"
-          onSubmit={handleSubmit((d) =>
-            addProduct(
-              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmUyOGJiNWUwMTQ4YzllODkzNGRkODMiLCJpYXQiOjE2NTkwMTQwNjl9.SY8LT0LDdpN_pp7EYwiwLC0PF8rPB6GRJLaNcEO_QOo',
-              d
-            )
-          )}
+          onSubmit={handleSubmit((d) => addProduct(token, d))}
         >
           <div className="flex flex-col lg:flex-row">
             <div className="mr-9 flex w-full flex-col rounded-xl bg-white p-10 lg:w-2/3">
@@ -149,7 +147,7 @@ export default function AddProduct() {
                     {...register('price')}
                   />
                   <Typography component="body2" className="text-red-500">
-                    {errors.regularPrice?.message}
+                    {errors.price?.message}
                   </Typography>
                 </div>
                 <div class="form-control">
@@ -244,40 +242,6 @@ export default function AddProduct() {
               </div>
             </div>
           </div>
-          {/* <div className="my-10 w-full rounded-xl bg-white p-10 lg:w-2/3">
-            <Typography component="h5">Shipping</Typography>
-            <div className="flex flex-col justify-between md:flex-row">
-              <div class="form-control md:w-[30%]">
-                <label class="label">
-                  <Typography component="body1">Width</Typography>
-                </label>
-                <input
-                  type="number"
-                  placeholder="cm"
-                  class="input input-bordered w-full max-w-xs"
-                  {...register('width')}
-                />
-                <Typography component="body2" className="text-red-500">
-                  {errors.width?.message}
-                </Typography>
-              </div>
-              <div class="form-control md:w-[30%]">
-                <label class="label">
-                  <Typography component="body1">Height</Typography>
-                </label>
-                <input
-                  type="number"
-                  placeholder="cm"
-                  class="input input-bordered w-full max-w-xs"
-                  {...register('height')}
-                />
-                <Typography component="body2" className="text-red-500">
-                  {errors.height?.message}
-                </Typography>
-              </div>
-            </div>
-          </div> */}
-
           <Button
             variant="secondary"
             type="submit"
