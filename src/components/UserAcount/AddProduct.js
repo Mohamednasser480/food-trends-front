@@ -3,6 +3,7 @@ import { Button } from '../UI';
 import Typography from '../UI/Typography';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
+import axios from 'axios';
 import * as Joi from 'joi';
 
 const schema = Joi.object({
@@ -18,20 +19,21 @@ const schema = Joi.object({
     'string.empty': `Summary cannot be an empty field`,
     'any.required': `Summary is required`,
   }),
-  regularPrice: Joi.number().required().min(2).messages({
+  description: Joi.string().messages({
+    'string.empty': `Summary cannot be an empty field`,
+  }),
+  price: Joi.number().required().min(2).messages({
     'number.base': `Please provide a price`,
     'any.required': `Price is required`,
   }),
+  category: Joi.string().messages({
+    'string.empty': `Summary cannot be an empty field`,
+  }),
+  discount: Joi.number().messages({
+    'string.empty': `Summary cannot be an empty field`,
+  }),
   inStock: Joi.number().required().min(2).messages({
     'number.base': `Please provide how much is your stock`,
-    'any.required': `Stock is required`,
-  }),
-  width: Joi.number().required().min(2).messages({
-    'number.base': `Please provide your shipment width`,
-    'any.required': `Stock is required`,
-  }),
-  height: Joi.number().required().min(2).messages({
-    'number.base': `Please provide your shipment height`,
     'any.required': `Stock is required`,
   }),
   weight: Joi.number().required().min(2).messages({
@@ -39,6 +41,21 @@ const schema = Joi.object({
     'any.required': `Stock is required`,
   }),
 });
+
+const addProduct = async (UserToken, data) => {
+  try {
+    console.log(data);
+    let product = await axios({
+      method: 'post',
+      url: 'http://localhost:3000/api/v1/products',
+      headers: { Authorization: 'Bearer ' + UserToken },
+      data: { name: 'user13' },
+    });
+    console.log(product.data);
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 export default function AddProduct() {
   const {
@@ -59,43 +76,51 @@ export default function AddProduct() {
         <form
           action=""
           className="flex flex-col pb-10"
-          onSubmit={handleSubmit((d) => console.log(d))}
+          onSubmit={handleSubmit((d) =>
+            addProduct(
+              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmUyOGJiNWUwMTQ4YzllODkzNGRkODMiLCJpYXQiOjE2NTkwMTQwNjl9.SY8LT0LDdpN_pp7EYwiwLC0PF8rPB6GRJLaNcEO_QOo',
+              d
+            )
+          )}
         >
           <div className="flex flex-col lg:flex-row">
-            <div className="mr-9 w-full rounded-xl bg-white p-10 lg:w-2/3">
+            <div className="mr-9 flex w-full flex-col rounded-xl bg-white p-10 lg:w-2/3">
               <Typography component="h5">Basic</Typography>
               <div>
-                <label htmlFor="" className="label">
-                  <Typography component={'body1'} className="capitalize">
-                    Product Name
-                  </Typography>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  class="input input-bordered w-full max-w-xs"
-                  {...register('productName')}
-                />
-                <Typography component="body2" className="text-red-500">
-                  {errors.productName?.message}
-                </Typography>
-              </div>
-
-              <div>
-                <label htmlFor="" className="label">
-                  <Typography component={'body1'} className="capitalize">
-                    Summary
-                  </Typography>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  className="input input-bordered w-full max-w-xs"
-                  {...register('summary')}
-                />
-                <Typography component="body2" className="text-red-500">
-                  {errors.summary?.message}
-                </Typography>
+                <div className="flex w-1/2 justify-between">
+                  <div>
+                    <label htmlFor="" className="label">
+                      <Typography component={'body1'} className="capitalize">
+                        Product Name
+                      </Typography>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Type here"
+                      class="input input-bordered w-full max-w-xs"
+                      {...register('productName')}
+                    />
+                    <Typography component="body2" className="text-red-500">
+                      {errors.productName?.message}
+                    </Typography>
+                  </div>
+                  <div className="w-1/2">
+                    <label htmlFor="" className="label">
+                      <Typography component={'body1'} className="capitalize">
+                        Summary
+                      </Typography>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Type here"
+                      className="input input-bordered w-full"
+                      {...register('summary')}
+                    />
+                    <Typography component="body2" className="text-red-500">
+                      {errors.summary?.message}
+                    </Typography>
+                  </div>
+                </div>
               </div>
 
               <div className="max-w-lg">
@@ -106,10 +131,10 @@ export default function AddProduct() {
                     </Typography>
                   </label>
                   <textarea
-                    name="description"
                     class="textarea textarea-bordered h-24"
                     placeholder="Full description"
-                  ></textarea>
+                    {...register('description')}
+                  />
                 </div>
               </div>
               <div className="md:grid md:grid-cols-3 md:gap-4">
@@ -121,10 +146,24 @@ export default function AddProduct() {
                     type="number"
                     placeholder="Type here"
                     class="input input-bordered w-full max-w-xs"
-                    {...register('regularPrice')}
+                    {...register('price')}
                   />
                   <Typography component="body2" className="text-red-500">
                     {errors.regularPrice?.message}
+                  </Typography>
+                </div>
+                <div class="form-control">
+                  <label class="label">
+                    <Typography component="body1">Weight</Typography>
+                  </label>
+                  <input
+                    type="number"
+                    placeholder="Kg"
+                    class="input input-bordered w-full max-w-xs"
+                    {...register('weight')}
+                  />
+                  <Typography component="body2" className="text-red-500">
+                    {errors.weight?.message}
                   </Typography>
                 </div>
                 <div class="form-control w-full max-w-xs">
@@ -135,6 +174,7 @@ export default function AddProduct() {
                     type="number"
                     placeholder="Type here"
                     class="input input-bordered w-full max-w-xs"
+                    {...register('discount')}
                   />
                 </div>
                 <div class="form-control w-full max-w-xs">
@@ -204,7 +244,7 @@ export default function AddProduct() {
               </div>
             </div>
           </div>
-          <div className="my-10 w-full rounded-xl bg-white p-10 lg:w-2/3">
+          {/* <div className="my-10 w-full rounded-xl bg-white p-10 lg:w-2/3">
             <Typography component="h5">Shipping</Typography>
             <div className="flex flex-col justify-between md:flex-row">
               <div class="form-control md:w-[30%]">
@@ -235,27 +275,13 @@ export default function AddProduct() {
                   {errors.height?.message}
                 </Typography>
               </div>
-              <div class="form-control md:w-[30%]">
-                <label class="label">
-                  <Typography component="body1">Weight</Typography>
-                </label>
-                <input
-                  type="number"
-                  placeholder="Kg"
-                  class="input input-bordered w-full max-w-xs"
-                  {...register('weight')}
-                />
-                <Typography component="body2" className="text-red-500">
-                  {errors.weight?.message}
-                </Typography>
-              </div>
             </div>
-          </div>
+          </div> */}
 
           <Button
             variant="secondary"
             type="submit"
-            className="w-1/2 self-center lg:w-2/12 lg:self-start"
+            className="mt-20 w-1/2 self-center lg:w-2/12 lg:self-start"
           >
             Add
           </Button>
