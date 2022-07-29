@@ -6,7 +6,7 @@ import ProductRating from "./ProductRating";
 import Breadcrumb from "./Breadcrumb";
 import Page from "./Page";
 import QauntityBox from "./QauntityBox";
-
+import Accordion from "./Accordion";
 export {
   Button,
   Modal,
@@ -16,4 +16,5 @@ export {
   Breadcrumb,
   Page,
   QauntityBox,
+  Accordion,
 };
