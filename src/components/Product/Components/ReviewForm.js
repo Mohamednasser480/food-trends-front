@@ -1,8 +1,9 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { ProductRating } from "../../UI";
 
+let ratingValue;
+
 export default function ReviewForm() {
-  let ratingValue = 0;
   const getRatingValue = (value) => {
     ratingValue = value;
   };
@@ -13,10 +14,29 @@ export default function ReviewForm() {
 
   // Submit Button ==> Call API Service Here.
   let submitReview = () => {
+    if (ratingValue == 0) {
+      setValidError("Please Choose your Rating");
+      return;
+    }
+    if (reviewTitleRef.current.value.length < 5) {
+      setValidError("Review title should be 5 letters at least");
+      return;
+    }
+    if (reviewBodyRef.current.value.length < 5) {
+      setValidError("Review body should be 5 letters at least");
+      return;
+    }
+    // If No errors
+    setValidError(false);
+
+    // Function to Send Data to Server Below
     console.log(ratingValue);
     console.log(reviewTitleRef.current.value);
     console.log(reviewBodyRef.current.value);
   };
+
+  // Hide Button If No data.
+  let [validError, setValidError] = useState(false);
 
   return (
     <div className="mt-5 flex flex-col gap-5">
@@ -26,6 +46,7 @@ export default function ReviewForm() {
           editable={true}
           className="-ml-1 text-3xl"
           onClick={getRatingValue}
+          rating={ratingValue}
         />
       </div>
       <div className="flex flex-col gap-3">
@@ -34,6 +55,7 @@ export default function ReviewForm() {
           type={"text"}
           className="h-10 rounded-md bg-[#F5F5F5] px-5 "
           ref={reviewTitleRef}
+          placeholder="Title"
         />
       </div>
       <div className="flex flex-col gap-3">
@@ -42,14 +64,20 @@ export default function ReviewForm() {
           className=" min-h-16 max-h-64 resize-y rounded-md bg-[#F5F5F5] p-5"
           rows={5}
           ref={reviewBodyRef}
+          placeholder="Review Body"
         />
       </div>
-      <button
-        className="text-md btn btn-primary w-fit self-end px-8  font-semibold tracking-wider hover:bg-secondary"
-        onClick={submitReview}
-      >
-        Submit Now
-      </button>
+      <div className="flex flex-wrap items-center justify-between px-2 ">
+        <span className="mr-2 text-lg font-medium text-red-500">
+          {validError}
+        </span>
+        <button
+          className="text-md btn btn-primary w-fit px-8  font-semibold tracking-wider hover:bg-secondary"
+          onClick={submitReview}
+        >
+          Submit Now
+        </button>
+      </div>
     </div>
   );
 }
