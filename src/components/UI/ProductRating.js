@@ -10,6 +10,9 @@ export default function ProductRating(props) {
       emptySymbol={<AiFillStar color="#b7b7b7" />}
       fullSymbol={<AiFillStar color="#EEB31A" />}
       className={`!flex items-center ${props.className}`}
+      onClick={(value) => {
+        props.onClick(value);
+      }}
     />
   );
 }
