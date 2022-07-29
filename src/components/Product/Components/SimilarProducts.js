@@ -65,9 +65,9 @@ export default function SimilarProducts() {
   ];
 
   return (
-    <div className="border-2 py-12" data-aos="fade-down">
+    <div className="max-w-full border-2 py-12" data-aos="fade-down">
       <div className="container">
-        <Typography component={"h2"} className="text-center text-primary">
+        <Typography component={"h2"} className="text-center  text-primary">
           Similar Products
         </Typography>
       </div>
