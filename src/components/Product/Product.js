@@ -1,5 +1,11 @@
 import React from "react";
-import { ImageSection, ProductDetails, SimilarProducts } from "./index";
+import {
+  ImageSection,
+  ProductDetails,
+  SimilarProducts,
+  CustomerReviews,
+} from "./index";
+
 export default function Product({ id }) {
   // Fetch Item Here and send each Details to Components
   return (
@@ -10,6 +16,8 @@ export default function Product({ id }) {
       </div>
 
       <SimilarProducts />
+
+      <CustomerReviews />
     </div>
   );
 }

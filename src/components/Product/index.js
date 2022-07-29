@@ -4,5 +4,17 @@ import ProductDetails from "./Components/ProductDetails";
 import Info from "./Components/Info";
 import ShareIcon from "./Components/ShareIcon";
 import SimilarProducts from "./Components/SimilarProducts";
+import CustomerReviews from "./Components/CustomerReviews";
+import WriteAReview from "./Components/WriteAReview";
+import ReviewForm from "./Components/ReviewForm";
 export default Product;
-export { ImageSection, ProductDetails, Info, ShareIcon, SimilarProducts };
+export {
+  ImageSection,
+  ProductDetails,
+  Info,
+  ShareIcon,
+  SimilarProducts,
+  CustomerReviews,
+  WriteAReview,
+  ReviewForm,
+};
