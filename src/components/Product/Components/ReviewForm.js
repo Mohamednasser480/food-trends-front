@@ -25,7 +25,7 @@ export default function ReviewForm() {
         <ProductRating
           editable={true}
           className="-ml-1 text-3xl"
-          getRatingValue={getRatingValue}
+          onClick={getRatingValue}
         />
       </div>
       <div className="flex flex-col gap-3">
