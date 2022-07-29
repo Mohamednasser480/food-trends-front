@@ -5,7 +5,9 @@ export default function Accordion(props) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div
-      class={`collapse ${isOpen ? "collapse-open" : "collapse-close"} group`}
+      className={`collapse ${
+        isOpen ? "collapse-open" : "collapse-close"
+      } group`}
     >
       <input
         type="checkbox"
@@ -14,7 +16,7 @@ export default function Accordion(props) {
           setIsOpen(!isOpen);
         }}
       />
-      <div class="collapse-title  !min-h-fit !p-0">
+      <div className="collapse-title  !min-h-fit !p-0">
         <Typography
           component="h4"
           className={`transition-colors duration-300 group-hover:text-primary ${
@@ -32,7 +34,7 @@ export default function Accordion(props) {
           {isOpen ? "-" : "+"}
         </span>
       </div>
-      <div class="collapse-content p-0  ">
+      <div className="collapse-content p-0  ">
         <p>{props.description}</p>
       </div>
     </div>
