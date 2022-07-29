@@ -5,7 +5,7 @@ import { AiFillStar } from "react-icons/ai";
 export default function ProductRating(props) {
   return (
     <Rating
-      readonly
+      readonly={!props.editable}
       initialRating={props.rating}
       emptySymbol={<AiFillStar color="#b7b7b7" />}
       fullSymbol={<AiFillStar color="#EEB31A" />}
