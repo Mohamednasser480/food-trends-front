@@ -11,6 +11,7 @@ import {
 import { Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "./store";
+import Aos from "aos";
 
 let isInitial = true;
 
