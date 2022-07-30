@@ -26,10 +26,10 @@ export default function ProductIcons(props) {
       {modalExists && (
         <Modal
           setModalExists={setModalExists}
-          className="h-1/2 min-w-[970px]   cursor-default bg-white  p-5"
+          className="flex  h-fit w-full cursor-default items-center justify-center  bg-white p-5 md:h-[600px] lg:w-[970px] lg:p-0  "
           effect="flip-down"
         >
-          <QuickviewProduct />
+          <QuickviewProduct productInfo={props.productInfo} />
         </Modal>
       )}
 

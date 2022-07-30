@@ -16,7 +16,10 @@ export default function Proudct(props) {
           />
         </Link>
 
-        <ProductIcons className="absolute -bottom-16 flex w-full justify-center gap-3 py-4  px-8 transition-all  duration-300 group-hover:bottom-0 " />
+        <ProductIcons
+          className="absolute -bottom-16 flex w-full justify-center gap-3 py-4  px-8 transition-all  duration-300 group-hover:bottom-0 "
+          productInfo={props}
+        />
       </div>
 
       <div className="flex flex-col items-center gap-1">
