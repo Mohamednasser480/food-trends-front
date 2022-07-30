@@ -10,7 +10,7 @@ import { CgStopwatch } from "react-icons/cg";
 import { AiOutlineCalendar, AiFillCheckCircle } from "react-icons/ai";
 import { Info } from "../";
 
-export default function ProductDetails({ id }) {
+export default function ProductDetails({ id, className, miny = false }) {
   const item = {
     id: { id },
     title: "Lemon (1kg)",
@@ -23,7 +23,7 @@ export default function ProductDetails({ id }) {
   };
 
   return (
-    <div className="flex  w-full flex-col gap-4 p-6 lg:w-1/2">
+    <div className={`flex  w-full flex-col gap-4 p-6 lg:w-1/2 ${className}`}>
       <Typography
         component="subtitle2"
         className="font-satoshi text-3xl font-extrabold text-primary"
@@ -75,10 +75,12 @@ export default function ProductDetails({ id }) {
         Add to Cart
       </Button>
       <Info />
-      <Accordion
-        title="SHIPPING AND RETURN"
-        description="We understand that you are often looking for the most cost-effective solution to get your purchase to your home. For online purchases around the area, we offer in-home delivery for $50. Please contact our store if you would like more information on local delivery. The estimated shipping time is between 4-21 working days. Returned items must be new and in unused condition. A few of our vendors may be excluded from our return policy. Any exceptions are noted on the page of the item."
-      />
+      {!miny && (
+        <Accordion
+          title="SHIPPING AND RETURN"
+          description="We understand that you are often looking for the most cost-effective solution to get your purchase to your home. For online purchases around the area, we offer in-home delivery for $50. Please contact our store if you would like more information on local delivery. The estimated shipping time is between 4-21 working days. Returned items must be new and in unused condition. A few of our vendors may be excluded from our return policy. Any exceptions are noted on the page of the item."
+        />
+      )}
     </div>
   );
 }

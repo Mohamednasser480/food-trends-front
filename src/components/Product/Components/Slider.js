@@ -18,11 +18,11 @@ let images = [
   "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04_detail-690x690.jpg",
 ];
 
-export default function Slider() {
+export default function Slider(props) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   return (
-    <div className="">
+    <div className={props.className}>
       <Swiper
         style={{
           "--swiper-navigation-color": "#fff",
