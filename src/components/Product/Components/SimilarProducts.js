@@ -1,4 +1,5 @@
 import React from "react";
+import { Typography } from "../../UI";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Scrollbar } from "swiper";
 import "swiper/css";
@@ -8,67 +9,69 @@ import {
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
+import { ProductItem } from "../../FeatureProducts";
 
-import { SectionTitle } from "../UI";
-import { ProductItem } from "./";
+export default function SimilarProducts() {
+  // Get Similar Products From API
+  let products = [
+    {
+      id: 1,
+      title: "Name 1",
+      price: 30,
+      image:
+        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_05.6-450x450.jpg",
+      rating: 2.5,
+    },
+    {
+      id: 2,
+      title: "Name 2",
+      price: 30,
+      image:
+        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_01.2-450x450.jpg",
+      rating: 1,
+    },
+    {
+      id: 3,
+      title: "Name 3",
+      price: 30,
+      image:
+        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_05.7-450x450.jpg",
+      rating: 4,
+    },
+    {
+      id: 4,
+      title: "Name 4",
+      price: 30,
+      image:
+        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_05.6-450x450.jpg",
+      rating: 5,
+    },
+    {
+      id: 5,
+      title: "Name 5",
+      price: 30,
+      image:
+        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_01.2-450x450.jpg",
+      rating: 3.5,
+    },
+    {
+      id: 6,
+      title: "Name 6",
+      price: 30,
+      image:
+        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_05.7-450x450.jpg",
+      rating: 3,
+    },
+  ];
 
-let products = [
-  {
-    id: 1,
-    title: "Name 1",
-    price: 30,
-    image:
-      "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_05.6-450x450.jpg",
-    rating: 2.5,
-  },
-  {
-    id: 2,
-    title: "Name 2",
-    price: 30,
-    image:
-      "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_01.2-450x450.jpg",
-    rating: 1,
-  },
-  {
-    id: 3,
-    title: "Name 3",
-    price: 30,
-    image:
-      "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_05.7-450x450.jpg",
-    rating: 4,
-  },
-  {
-    id: 4,
-    title: "Name 4",
-    price: 30,
-    image:
-      "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_05.6-450x450.jpg",
-    rating: 5,
-  },
-  {
-    id: 5,
-    title: "Name 5",
-    price: 30,
-    image:
-      "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_01.2-450x450.jpg",
-    rating: 3.5,
-  },
-  {
-    id: 6,
-    title: "Name 6",
-    price: 30,
-    image:
-      "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_05.7-450x450.jpg",
-    rating: 3,
-  },
-];
-
-export default function FeatureProducts() {
   return (
-    <div className="container py-14" data-aos="fade-down">
-      <SectionTitle text={"Feature Products"} navigateTo={"/"} />
-
-      <div className="relative  py-6">
+    <div className="max-w-full border-2 py-12" data-aos="fade-down">
+      <div className="container">
+        <Typography component={"h2"} className="text-center  text-primary">
+          Similar Products
+        </Typography>
+      </div>
+      <div className="container relative w-full py-6">
         <Swiper
           spaceBetween={20}
           slidesPerView={2}
@@ -77,7 +80,7 @@ export default function FeatureProducts() {
             nextEl: ".swiper-next ",
             prevEl: ".swiper-prev",
           }}
-          loop
+          // loop
           scrollbar={{ draggable: true }}
           breakpoints={{
             // when window width is >= 640px
@@ -102,6 +105,7 @@ export default function FeatureProducts() {
                   price={prod.price.toFixed(2)}
                   image={prod.image}
                   rating={prod.rating}
+                  relative={true}
                 />
               </SwiperSlide>
             );

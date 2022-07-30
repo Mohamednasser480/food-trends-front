@@ -10,7 +10,7 @@ export default function ProductIcons(props) {
 
   return (
     <div className={props.className}>
-      <ProductIcon tooltip="Add to Wishlist">
+      <ProductIcon tooltip="Add to Wishlist" border>
         <AiOutlineStar size={25} className={"text-black transition-all"} />
       </ProductIcon>
 
@@ -23,7 +23,6 @@ export default function ProductIcons(props) {
         <AiOutlineEye size={25} className={"text-black transition-all"} />
       </ProductIcon>
 
-      
       {modalExists && (
         <Modal
           setModalExists={setModalExists}
@@ -41,7 +40,7 @@ export default function ProductIcons(props) {
       {/* Iniliaze Tooltip */}
       <ReactTooltip
         effect="solid"
-        className="!w-fit !px-2 !py-1 !font-satoshi !font-medium"
+        className="!font-satoshi !w-fit !px-2 !py-1 !font-medium"
       />
     </div>
   );
