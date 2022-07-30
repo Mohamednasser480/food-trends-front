@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ProductIcons } from "./";
+import { ProductIcons } from ".";
 import { ProductRating } from "../UI";
 
 export default function Proudct(props) {
-  let route = `/${props.id}`;
+  let route = `${props.relative ? "/shop" : "shop"}/${props.id}`;
   return (
     <div className="group flex  flex-col gap-3 ">
       <div className="relative overflow-hidden">
@@ -31,7 +31,7 @@ export default function Proudct(props) {
         </h4>
 
         <div>
-          <ProductRating rating={props.rating}/>
+          <ProductRating rating={props.rating} />
         </div>
       </div>
     </div>

@@ -1,9 +1,9 @@
 import FeatureProducts from "./FeatureProducts";
-import Product from "./Product"
+import ProductItem from "./ProductItem"
 import ProductIcons from "./ProductIcons";
 import ProductIcon from "./ProductIcon"
 import QuickviewProduct from "./QuickviewProduct";
 
 export default FeatureProducts
 
-export {Product,ProductIcons,ProductIcon,QuickviewProduct}
+export {ProductItem,ProductIcons,ProductIcon,QuickviewProduct}
