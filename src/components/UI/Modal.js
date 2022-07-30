@@ -26,9 +26,9 @@ export default function Modal(props) {
           onClick={hideModal}
         >
           <div className={props.className} data-aos={props.effect}>
-            <div className="flex flex-col">
+            <div className="flex h-full w-full flex-col">
               <span
-                className="mr-4 w-fit cursor-pointer self-end text-xl text-base-400 hover:font-bold hover:text-red-400"
+                className="relative right-4 top-4 w-fit cursor-pointer self-end text-xl text-base-400 hover:font-bold hover:text-red-400"
                 onClick={hideModal}
               >
                 X
