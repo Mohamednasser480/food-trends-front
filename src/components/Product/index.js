@@ -7,6 +7,8 @@ import SimilarProducts from "./Components/SimilarProducts";
 import CustomerReviews from "./Components/CustomerReviews";
 import WriteAReview from "./Components/WriteAReview";
 import ReviewForm from "./Components/ReviewForm";
+import ReviewItem from "./Components/ReviewItem";
+import Reviews from "./Components/Reviews";
 export default Product;
 export {
   ImageSection,
@@ -17,4 +19,6 @@ export {
   CustomerReviews,
   WriteAReview,
   ReviewForm,
+  ReviewItem,
+  Reviews,
 };

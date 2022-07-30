@@ -1,6 +1,6 @@
 import React from "react";
 import { SectionTitle } from "../../UI";
-import { WriteAReview } from "../";
+import { Reviews, WriteAReview } from "../";
 
 export default function SimilarProducts() {
   return (
@@ -8,6 +8,7 @@ export default function SimilarProducts() {
       <div className="container">
         <SectionTitle text={"Customer Reviews"} />
         <WriteAReview />
+        <Reviews />
       </div>
     </div>
   );
