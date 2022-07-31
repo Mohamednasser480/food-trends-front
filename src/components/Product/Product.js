@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { Breadcrumb } from "../UI";
 import {
   ImageSection,
   ProductDetails,
@@ -44,15 +45,16 @@ export default function Product() {
   }, [id]);
 
   return (
-    <div className=" flex flex-col  flex-wrap justify-center gap-2 ">
-      <div className="container flex   flex-wrap justify-center gap-2 pb-10">
-        <ImageSection productImages={product.images} />
-        <ProductDetails product={product} />
+    <>
+      <Breadcrumb />;
+      <div className=" flex flex-col  flex-wrap justify-center gap-2 ">
+        <div className="container flex  flex-wrap justify-center gap-2 pb-10">
+          <ImageSection productImages={product.images} />
+          <ProductDetails product={product} />
+        </div>
+        <SimilarProducts />
+        <CustomerReviews />
       </div>
-
-      <SimilarProducts />
-
-      <CustomerReviews />
-    </div>
+    </>
   );
 }
