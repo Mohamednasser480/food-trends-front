@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import {
   ImageSection,
   ProductDetails,
@@ -6,9 +7,13 @@ import {
   CustomerReviews,
 } from "./index";
 
-export default function Product({ id }) {
+export default function Product() {
+  const { id } = useParams();
+
   // Fetch Item Here and send each Details to Components
+  // Placeholder Product
   let product = {
+    id: 1,
     name: "Lemon (1kg)",
     summary:
       "Lots of juice and a bright, clear, tart flavor that is suprisingly low in acid. The rind has lots of tang with a bitter note thrown in.",
@@ -25,16 +30,18 @@ export default function Product({ id }) {
     inStock: 337,
     discount: "0.00",
     vendor: "Mahmoud Meky",
+    rating: 3,
   };
 
   // Scroll to Top on Page Load
   function ScrollToTop() {
-    console.log("Scrooled");
+    // console.log("Scrooled");
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
-
-  ScrollToTop();
+  useEffect(() => {
+    ScrollToTop();
+  }, [id]);
 
   return (
     <div className=" flex flex-col  flex-wrap justify-center gap-2 ">
