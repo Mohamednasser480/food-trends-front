@@ -53,7 +53,7 @@ export default function Product() {
           <ProductDetails product={product} />
         </div>
         <SimilarProducts />
-        <CustomerReviews />
+        <CustomerReviews productId={product.id} />
       </div>
     </>
   );
