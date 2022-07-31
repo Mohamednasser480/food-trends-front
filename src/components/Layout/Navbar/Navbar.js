@@ -3,11 +3,11 @@ import { UserArea, SocialIcons, NavList } from "./";
 
 import { AiOutlineMenu } from "react-icons/ai";
 import Logo from "../../../assets/Logo.png";
-import { Modal } from "../../UI";
+import { Sidebar } from "../../UI";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
-  const [showModal, setShowModal] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false);
   return (
     <nav className="sticky top-0 z-40 bg-white shadow-sm">
       <div className="container flex flex-col gap-y-10 py-6 xl:pt-8">
@@ -17,8 +17,8 @@ export default function Navbar() {
             <AiOutlineMenu
               size={25}
               className="cursor-pointer hover:text-green-800 xl:hidden"
-              onClick={()=>{
-                setShowModal(true)
+              onClick={() => {
+                setShowSidebar(true);
               }}
             />
             <SocialIcons />
@@ -42,16 +42,9 @@ export default function Navbar() {
           <NavList />
         </div>
 
-        {showModal && (
-          <Modal
-            setModalExists={setShowModal}
-            direction="left"
-            className="h-full w-[410px] max-w-[90%] cursor-default bg-white  p-5"
-            effect="slide-right"
-          >
-            <div>Mobile Sidebar</div>
-          </Modal>
-        )}
+        <Sidebar show={showSidebar} setShow={setShowSidebar}>
+          <div>Mobile Sidebar</div>
+        </Sidebar>
       </div>
     </nav>
   );
