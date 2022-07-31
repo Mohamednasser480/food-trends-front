@@ -2,8 +2,8 @@ import React from "react";
 import ShareIcon from "./ShareIcon";
 import { FaFacebookF, FaTwitter, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
-export default function Info() {
-  let category = "Fruits and Veggies";
+export default function Info({ category }) {
+  // let category = "Fruits and Veggies";
 
   let shareIcons = [
     { icon: <FaFacebookF />, href: "#facebook", tooltip: "Facebook" },

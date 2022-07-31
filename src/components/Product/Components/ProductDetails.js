@@ -10,18 +10,8 @@ import { CgStopwatch } from "react-icons/cg";
 import { AiOutlineCalendar, AiFillCheckCircle } from "react-icons/ai";
 import { Info } from "../";
 
-export default function ProductDetails({ id, className, miny = false }) {
-  const item = {
-    id: { id },
-    title: "Lemon (1kg)",
-    rating: 5,
-    reviews: 5,
-    description:
-      "Lots of juice and a bright, clear, tart flavor that is suprisingly low in acid. The rind has lots of tang with a bitter note thrown in.",
-    inStock: 337,
-    price: 30.22,
-  };
-
+export default function ProductDetails({ product, className, miny = false }) {
+  const item = product;
   return (
     <div className={`flex  w-full flex-col gap-4 p-6 lg:w-1/2 ${className}`}>
       <Typography
@@ -34,7 +24,7 @@ export default function ProductDetails({ id, className, miny = false }) {
         component="subtitle2"
         className="font-satoshi text-3xl font-extrabold"
       >
-        {item.title}
+        {item.name}
       </Typography>
       <div className="flex flex-wrap items-center gap-3">
         <div className="flex flex-wrap items-center gap-2">
@@ -74,7 +64,7 @@ export default function ProductDetails({ id, className, miny = false }) {
       <Button variant="primary" className="my-5">
         Add to Cart
       </Button>
-      <Info />
+      <Info category={product.category} />
       {!miny && (
         <Accordion
           title="SHIPPING AND RETURN"

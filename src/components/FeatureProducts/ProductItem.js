@@ -3,22 +3,22 @@ import { Link } from "react-router-dom";
 import { ProductIcons } from ".";
 import { ProductRating } from "../UI";
 
-export default function Proudct(props) {
-  let route = `${props.relative ? "/shop" : "shop"}/${props.id}`;
+export default function Product({ productDetails, relative }) {
+  let route = `${relative ? "/shop" : "shop"}/${productDetails.id}`;
   return (
     <div className="group flex  flex-col gap-3 ">
       <div className="relative overflow-hidden">
         <Link to={route} className=" bg-black">
           <img
-            src={props.image}
-            alt={props.name}
+            src={productDetails.images[0]}
+            alt={productDetails.name}
             className="transition-all duration-1000 ease-out hover:scale-110"
           />
         </Link>
 
         <ProductIcons
           className="absolute -bottom-16 flex w-full justify-center gap-3 py-4  px-8 transition-all  duration-300 group-hover:bottom-0 "
-          productInfo={props}
+          productInfo={productDetails}
         />
       </div>
 
@@ -27,14 +27,14 @@ export default function Proudct(props) {
           to={route}
           className="font-satoshi text-lg font-semibold hover:text-primary"
         >
-          {props.name}
+          {productDetails.name}
         </Link>
         <h4 className="font-satoshi text-lg font-extrabold text-primary">
-          ${props.price}
+          ${productDetails.price.toFixed(2)}
         </h4>
 
         <div>
-          <ProductRating rating={props.rating} />
+          <ProductRating rating={productDetails.rating} />
         </div>
       </div>
     </div>
