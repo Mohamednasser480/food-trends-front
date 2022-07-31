@@ -1,5 +1,6 @@
 import React from 'react';
-import { AddProduct, Orders, Products, Reviews } from './';
+import { Orders, Products, Reviews } from './';
+import AddProduct from './Vendor/AddProduct';
 
 export default function AccountContent(props) {
   const content = {
