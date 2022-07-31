@@ -21,7 +21,7 @@ const Breadcrumbs = () => {
     );
   });
   return (
-    <div className="breadcrumbs max-w-full overflow-x-auto bg-base-300 py-4 text-sm">
+    <div className="breadcrumbs max-w-full overflow-x-auto bg-base-200 py-2 text-sm">
       <ul className="flex flex-wrap justify-center text-base">{breadcrumbs}</ul>
     </div>
   );
