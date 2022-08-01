@@ -18,6 +18,7 @@ export default function Reviews() {
 
     fetchData();
   }, []);
+
   const reviews = {
     vendor: () => {
       return (

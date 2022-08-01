@@ -6,8 +6,6 @@ import { FaPlusSquare } from 'react-icons/fa';
 import { FaStar } from 'react-icons/fa';
 import { IoPerson } from 'react-icons/io5';
 
-import { Button } from '../UI';
-
 const userType = 'vendor';
 
 export default function AcountNav({ onNavClick, content }) {
@@ -19,7 +17,7 @@ export default function AcountNav({ onNavClick, content }) {
     onNavClick(btn);
   };
   const buttons = {
-    vendor: ['Products', 'Orders', 'Reviews', 'Add product'],
+    vendor: ['Products', 'Orders', 'Reviews', 'Add product', 'Transactions'],
     customer: ['Profile', 'Products', 'Orders', 'Reviews', 'wishlist'],
     delivery: ['Orders'],
   };
