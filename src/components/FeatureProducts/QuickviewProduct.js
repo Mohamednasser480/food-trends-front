@@ -1,7 +1,7 @@
 import React from "react";
 import { Slider, ProductDetails } from "../Product/index";
 export default function QuickviewProduct({ productInfo }) {
-  // console.log(productInfo);
+  console.log(productInfo);
   return (
     <div className=" flex flex-wrap items-center justify-center">
       <Slider
