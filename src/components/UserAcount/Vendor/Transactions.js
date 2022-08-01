@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default function Transactions() {
-  return <div>money Transactionsof vendor</div>;
+  return <div>money Transactions of vendor</div>;
 }
