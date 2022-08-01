@@ -16,7 +16,9 @@ export default function Sidebar(props) {
           className="flex items-center justify-center"
         >
           <div
-            className={`h-1/2 w-1/2 cursor-default bg-white p-5`}
+            className={`bg-white p-5 ${
+              props.className || "h-1/2 w-1/2 cursor-default"
+            }`}
             data-aos={`${"fade-up"}`}
             onClick={(e) => e.stopPropagation()}
           >
