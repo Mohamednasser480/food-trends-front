@@ -7,6 +7,8 @@ import Breadcrumb from "./Breadcrumb";
 import Page from "./Page";
 import QauntityBox from "./QauntityBox";
 import Accordion from "./Accordion";
+import Backdrop from "./Backdrop";
+import Sidebar from "./Sidebar";
 export {
   Button,
   Modal,
@@ -17,4 +19,6 @@ export {
   Page,
   QauntityBox,
   Accordion,
+  Backdrop,
+  Sidebar,
 };

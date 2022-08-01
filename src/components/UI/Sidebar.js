@@ -8,18 +8,23 @@ export default function Sidebar(props) {
     return;
   }
 
+  let direction;
+  let effect;
+
+  if (props.right) {
+    direction = "right-2";
+    effect = "slide-left";
+  }
+
   return (
     <>
       {createPortal(
-        <Backdrop
-          setShow={props.setShow}
-          className="flex items-center justify-center"
-        >
- <div
-            className={`bg-white p-5 ${
-              props.className || "h-1/2 w-1/2 cursor-default"
+        <Backdrop setShow={props.setShow}>
+          <div
+            className={`fixed h-full w-[410px] max-w-[90%] cursor-default bg-white p-5 ${
+              direction || "left-0"
             }`}
-            data-aos={`${"fade-up"}`}
+            data-aos={`${effect || "slide-right"}`}
             onClick={(e) => e.stopPropagation()}
           >
             <span
