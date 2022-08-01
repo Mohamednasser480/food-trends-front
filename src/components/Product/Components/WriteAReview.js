@@ -3,9 +3,9 @@ import { ProductRating, Typography } from "../../UI";
 import { TiPencil } from "react-icons/ti";
 import ReviewForm from "./ReviewForm";
 
-export default function WriteAReview() {
-  let reviewValue = 4.5;
-  let reviews = 3;
+export default function WriteAReview({ rating, numberOfReviews }) {
+  let reviewValue = rating;
+  let reviews = numberOfReviews;
 
   // TO Be Edited => Control The Review Form To show only If User logged and have purchased the item before.
   const [isLogged, setIsLogged] = useState(true);
