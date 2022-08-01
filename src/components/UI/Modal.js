@@ -15,7 +15,7 @@ export default function Sidebar(props) {
           setShow={props.setShow}
           className="flex items-center justify-center"
         >
-          <div
+ <div
             className={`bg-white p-5 ${
               props.className || "h-1/2 w-1/2 cursor-default"
             }`}

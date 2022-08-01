@@ -10,6 +10,7 @@ export default function ShareIcon(props) {
         href={props.href}
         className="text-base-400 transition-colors duration-300  hover:text-black"
         data-tip={props.tooltip}
+        target={"_blank"}
       >
         {props.icon}
       </a>

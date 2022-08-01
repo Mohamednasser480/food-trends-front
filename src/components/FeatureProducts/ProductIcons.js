@@ -23,7 +23,7 @@ export default function ProductIcons(props) {
         <AiOutlineEye size={25} className={"text-black transition-all"} />
       </ProductIcon>
 
-      <Modal show={isShown} setShow={setIsShown}>
+<Modal show={isShown} setShow={setIsShown}>
         <QuickviewProduct />
       </Modal>
 

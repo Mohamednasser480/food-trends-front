@@ -14,7 +14,7 @@ export default function ReviewForm() {
 
   // Submit Button ==> Call API Service Here.
   let submitReview = () => {
-    if (ratingValue == 0) {
+    if (ratingValue == 0 || ratingValue == undefined) {
       setValidError("Please Choose your Rating");
       return;
     }

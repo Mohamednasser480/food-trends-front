@@ -11,18 +11,12 @@ import "swiper/css/thumbs";
 // import required modules
 import { FreeMode, Navigation, Thumbs } from "swiper";
 
-let images = [
-  "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04.1-690x690.jpg",
-  "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04.2-690x690.jpg",
-  "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04.3-690x690.jpg",
-  "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04_detail-690x690.jpg",
-];
-
-export default function Slider() {
+export default function Slider(props) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  // console.log(props);
 
   return (
-    <div className="">
+    <div className={props.className}>
       <Swiper
         style={{
           "--swiper-navigation-color": "#fff",
@@ -35,7 +29,7 @@ export default function Slider() {
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper2"
       >
-        {images.map((img, index) => {
+        {props.images.map((img, index) => {
           return (
             <SwiperSlide key={index}>
               <img src={img} />
@@ -47,12 +41,12 @@ export default function Slider() {
         onSwiper={setThumbsSwiper}
         loop={true}
         spaceBetween={10}
-        slidesPerView={images.length}
+        slidesPerView={props.images.length}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper mt-3 "
       >
-        {images.map((img, index) => {
+        {props.images.map((img, index) => {
           return (
             <SwiperSlide key={index}>
               <img src={img} className={`cursor-pointer border-2`} />
