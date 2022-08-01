@@ -13,54 +13,120 @@ import { ProductItem } from "../../FeatureProducts";
 
 export default function SimilarProducts() {
   // Get Similar Products From API
-  let products = [
+  let similarProducts = [
+    {
+      id: 0,
+      name: "Lemon (1kg)",
+      summary:
+        "Lots of juice and a bright, clear, tart flavor that is suprisingly low in acid. The rind has lots of tang with a bitter note thrown in.",
+      description:
+        "Lots of juice and a bright, clear, tart flavor that is suprisingly low in acid. The rind has lots of tang with a bitter note thrown in.",
+      images: [
+        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04.1-690x690.jpg",
+        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04.2-690x690.jpg",
+        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04.3-690x690.jpg",
+        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04_detail-690x690.jpg",
+      ],
+      category: "Vegetables",
+      price: 30.59,
+      inStock: 337,
+      discount: "0.00",
+      vendor: "Mahmoud Meky",
+    },
     {
       id: 1,
-      title: "Name 1",
-      price: 30,
-      image:
+      name: "Lemon (1kg)",
+      summary:
+        "Lots of juice and a bright, clear, tart flavor that is suprisingly low in acid. The rind has lots of tang with a bitter note thrown in.",
+      description:
+        "Lots of juice and a bright, clear, tart flavor that is suprisingly low in acid. The rind has lots of tang with a bitter note thrown in.",
+      images: [
         "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_05.6-450x450.jpg",
-      rating: 2.5,
+        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04.2-690x690.jpg",
+        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04.3-690x690.jpg",
+        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04_detail-690x690.jpg",
+      ],
+      category: "Vegetables",
+      price: 30.59,
+      inStock: 337,
+      discount: "0.00",
+      vendor: "Mahmoud Meky",
     },
     {
       id: 2,
-      title: "Name 2",
-      price: 30,
-      image:
+      name: "Lemon (1kg)",
+      summary:
+        "Lots of juice and a bright, clear, tart flavor that is suprisingly low in acid. The rind has lots of tang with a bitter note thrown in.",
+      description:
+        "Lots of juice and a bright, clear, tart flavor that is suprisingly low in acid. The rind has lots of tang with a bitter note thrown in.",
+      images: [
         "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_01.2-450x450.jpg",
-      rating: 1,
+        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04.2-690x690.jpg",
+        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04.3-690x690.jpg",
+        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04_detail-690x690.jpg",
+      ],
+      category: "Vegetables",
+      price: 30.59,
+      inStock: 337,
+      discount: "0.00",
+      vendor: "Mahmoud Meky",
     },
     {
       id: 3,
-      title: "Name 3",
-      price: 30,
-      image:
+      name: "Lemon (1kg)",
+      summary:
+        "Lots of juice and a bright, clear, tart flavor that is suprisingly low in acid. The rind has lots of tang with a bitter note thrown in.",
+      description:
+        "Lots of juice and a bright, clear, tart flavor that is suprisingly low in acid. The rind has lots of tang with a bitter note thrown in.",
+      images: [
         "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_05.7-450x450.jpg",
-      rating: 4,
+        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04.2-690x690.jpg",
+        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04.3-690x690.jpg",
+        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04_detail-690x690.jpg",
+      ],
+      category: "Vegetables",
+      price: 30.59,
+      inStock: 337,
+      discount: "0.00",
+      vendor: "Mahmoud Meky",
     },
     {
       id: 4,
-      title: "Name 4",
-      price: 30,
-      image:
-        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_05.6-450x450.jpg",
-      rating: 5,
+      name: "Lemon (1kg)",
+      summary:
+        "Lots of juice and a bright, clear, tart flavor that is suprisingly low in acid. The rind has lots of tang with a bitter note thrown in.",
+      description:
+        "Lots of juice and a bright, clear, tart flavor that is suprisingly low in acid. The rind has lots of tang with a bitter note thrown in.",
+      images: [
+        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/07/organic_butter-_-eggs_02.1-450x450.jpg",
+        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04.2-690x690.jpg",
+        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04.3-690x690.jpg",
+        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04_detail-690x690.jpg",
+      ],
+      category: "Vegetables",
+      price: 30.59,
+      inStock: 337,
+      discount: "0.00",
+      vendor: "Mahmoud Meky",
     },
     {
       id: 5,
-      title: "Name 5",
-      price: 30,
-      image:
-        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_01.2-450x450.jpg",
-      rating: 3.5,
-    },
-    {
-      id: 6,
-      title: "Name 6",
-      price: 30,
-      image:
-        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_05.7-450x450.jpg",
-      rating: 3,
+      name: "Lemon (1kg)",
+      summary:
+        "Lots of juice and a bright, clear, tart flavor that is suprisingly low in acid. The rind has lots of tang with a bitter note thrown in.",
+      description:
+        "Lots of juice and a bright, clear, tart flavor that is suprisingly low in acid. The rind has lots of tang with a bitter note thrown in.",
+      images: [
+        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_freshmeat_05.1-450x450.jpg",
+        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04.2-690x690.jpg",
+        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04.3-690x690.jpg",
+        "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04_detail-690x690.jpg",
+      ],
+      category: "Vegetables",
+      price: 30.59,
+      inStock: 337,
+      discount: "0.00",
+      vendor: "Mahmoud Meky",
     },
   ];
 
@@ -96,17 +162,10 @@ export default function SimilarProducts() {
             },
           }}
         >
-          {products.map((prod) => {
+          {similarProducts.map((prod) => {
             return (
               <SwiperSlide key={prod.id}>
-                <ProductItem
-                  id={prod.id}
-                  name={prod.title}
-                  price={prod.price.toFixed(2)}
-                  image={prod.image}
-                  rating={prod.rating}
-                  relative={true}
-                />
+                <ProductItem productDetails={prod} relative={true} />
               </SwiperSlide>
             );
           })}
