@@ -1,21 +1,18 @@
 import React from 'react';
+import Typography from '../Typography';
 
-export default function TextArea() {
+export default function TextArea({ errors, id, placeholder, label, ...options }) {
   return (
-    <div>
-      {' '}
-      {/* <div class="form-control">
-                  <label class="label">
-                    <Typography component={'body1'} className="capitalize">
-                      Full description
-                    </Typography>
-                  </label>
-                  <textarea
-                    class="textarea textarea-bordered h-24"
-                    placeholder="Full description"
-                    {...register('description')}
-                  />
-                </div> */}
+    <div class="form-control">
+      <label class="label">
+        <Typography component={'body1'} className="capitalize">
+          {label}
+        </Typography>
+      </label>
+      <textarea {...options} class="textarea textarea-bordered h-24" placeholder={placeholder} />
+      <Typography component="body2" className="text-red-500">
+        {errors[id]?.message}
+      </Typography>
     </div>
   );
 }
