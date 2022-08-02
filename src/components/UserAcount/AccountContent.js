@@ -1,5 +1,5 @@
 import React from 'react';
-import { Orders, Products, Reviews, Wishlist } from './';
+import { Orders, Products, Reviews, Wishlist, Profile } from './';
 import AddProduct from './Vendor/AddProduct';
 
 export default function AccountContent(props) {
@@ -9,8 +9,10 @@ export default function AccountContent(props) {
     Reviews: <Reviews />,
     'Add product': <AddProduct />,
     wishlist: <Wishlist />,
-    Profile: '',
+    Profile: <Profile />,
   };
 
-  return <div className="w-10/12">{content[props.content] ? content[props.content] : null}</div>;
+  return (
+    <div className="w-10/12 flex-1">{content[props.content] ? content[props.content] : null}</div>
+  );
 }

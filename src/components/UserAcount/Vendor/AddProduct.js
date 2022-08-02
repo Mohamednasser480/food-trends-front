@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography, Button } from '../../UI';
 import { addProductSchema } from '../../../services/form-schemes';
-import Form, { Input } from '../../UI/Form';
+import Form, { DragAndDrop, Input, TextArea } from '../../UI/Form';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
@@ -14,6 +14,21 @@ export default function AddProduct() {
     resolver: joiResolver(addProductSchema),
   });
 
+  const handleSheck = (e) => {
+    e.preventDefault();
+    console.log('submitted');
+  };
+  // console.log(register('productName'));
+
+  const addProductRegister = {
+    productName: { ...register('productName') },
+    price: { ...register('price') },
+    // productName: { ...register('productName') },
+    // productName: { ...register('productName') },
+    // productName: { ...register('productName') },
+    // productName: { ...register('productName') },
+  };
+
   return (
     <>
       <div className="bg-[#f8f9fa] p-10">
@@ -21,15 +36,20 @@ export default function AddProduct() {
           Add New Product
         </Typography>
 
-        <Form schema={addProductSchema} onSubmit={handleSubmit((d) => console.log(d))}>
+        <Form
+          schema={addProductSchema}
+          onSubmit={handleSubmit((d) => {
+            console.log(d);
+          })}
+        >
           <div className="flex flex-col lg:flex-row">
             <div className="mr-9 flex w-full flex-col rounded-xl bg-white p-10 lg:w-2/3">
               <Typography component="h5">Basic</Typography>
 
-              <div className="flex w-1/2 justify-between">
+              <div className="flex w-2/3 justify-between">
                 <div>
                   <Input
-                    {...register('productName')}
+                    register={addProductRegister.productName}
                     errors={errors}
                     type="text"
                     placeholder="Type here"
@@ -49,6 +69,14 @@ export default function AddProduct() {
                   />
                 </div>
               </div>
+              <TextArea
+                label="Full description"
+                {...register('description')}
+                errors={errors}
+                placeholder="Full description"
+                id="description"
+              />
+
               <div className="md:grid md:grid-cols-3 md:gap-4">
                 <div class="form-control w-full max-w-xs">
                   <Input
@@ -94,39 +122,7 @@ export default function AddProduct() {
             </div>
             <div className="mt-10 w-full rounded-xl bg-white p-10 lg:mt-0 lg:w-1/4">
               <Typography component="h5">Media</Typography>
-              <div className="flex w-full flex-col">
-                <div class="mt-10 flex items-center justify-center font-sans">
-                  <label
-                    for="dropzone-file"
-                    class="mx-auto flex w-full max-w-lg cursor-pointer flex-col items-center rounded-xl border-2 border-dashed border-blue-400 bg-slate-50 p-6 text-center"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-10 w-10 text-blue-500"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                      />
-                    </svg>
-
-                    <h2 class="mt-4 text-xl font-medium tracking-wide text-gray-700">
-                      Product Images
-                    </h2>
-
-                    <p class="mt-2 tracking-wide text-gray-500">
-                      Upload or darg & drop your file SVG, PNG, JPG or GIF.
-                    </p>
-
-                    <input id="dropzone-file" type="file" class="hidden" />
-                  </label>
-                </div>
-              </div>
+              <DragAndDrop label="Product Images" />
               <div class="form-control mt-5 w-full">
                 <label class="label">
                   <Typography component="body1">Category</Typography>
