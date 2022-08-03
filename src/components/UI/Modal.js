@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import "aos/dist/aos.css";
-import { createPortal } from "react-dom";
-import Backdrop from "./Backdrop";
+import React, { useState } from 'react';
+import 'aos/dist/aos.css';
+import { createPortal } from 'react-dom';
+import Backdrop from './Backdrop';
 
-export default function Sidebar(props) {
+export default function Modal(props) {
   if (!props.show) {
     return;
   }
@@ -11,15 +11,12 @@ export default function Sidebar(props) {
   return (
     <>
       {createPortal(
-        <Backdrop
-          setShow={props.setShow}
-          className="flex items-center justify-center"
-        >
+        <Backdrop setShow={props.setShow} className="flex items-center justify-center">
           <div
             className={`cursor-default bg-white p-5 ${
-              props.className || "h-1/2 w-1/2 cursor-default"
+              props.className || 'h-1/2 w-1/2 cursor-default'
             }`}
-            data-aos={`${"fade-up"}`}
+            data-aos={`${'fade-up'}`}
             onClick={(e) => e.stopPropagation()}
           >
             <span
@@ -33,7 +30,7 @@ export default function Sidebar(props) {
             {props.children}
           </div>
         </Backdrop>,
-        document.getElementById("modals")
+        document.getElementById('modals')
       )}
     </>
   );

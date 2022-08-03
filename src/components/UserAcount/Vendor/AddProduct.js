@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography, Button } from '../../UI';
-import { addProductSchema } from '../../../services/form-schemes';
+import addProductSchema from '../../../services/form-schemes/add-product';
 import Form, { DragAndDrop, Input, TextArea } from '../../UI/Form';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
@@ -11,7 +11,7 @@ export default function AddProduct() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: joiResolver(addProductSchema),
+    // resolver: joiResolver(addProductSchema),
   });
 
   const handleSheck = (e) => {
@@ -23,10 +23,11 @@ export default function AddProduct() {
   const addProductRegister = {
     productName: { ...register('productName') },
     price: { ...register('price') },
-    // productName: { ...register('productName') },
-    // productName: { ...register('productName') },
-    // productName: { ...register('productName') },
-    // productName: { ...register('productName') },
+    summary: { ...register('summary') },
+    description: { ...register('description') },
+    inStock: { ...register('inStock') },
+    weight: { ...register('weight') },
+    discount: { ...register('discount') },
   };
 
   return (
@@ -35,18 +36,24 @@ export default function AddProduct() {
         <Typography component={'h2'} className="mb-10 tracking-tight text-primary">
           Add New Product
         </Typography>
+        <form onSubmit={handleSubmit((d) => console.log(d))}>
+          <input {...register('firstName')} />
+          <select {...register('gender')}>
+            <option value="female">female</option>
+            <option value="male">male</option>
+            <option value="other">other</option>
+          </select>
+          <input type="submit" value="Submit" />
+        </form>
 
-        <Form
-          schema={addProductSchema}
-          onSubmit={handleSubmit((d) => {
-            console.log(d);
-          })}
-        >
+        {/* <Form onSubmit={handleSubmit((d) => console.log(d))}>
           <div className="flex flex-col lg:flex-row">
             <div className="mr-9 flex w-full flex-col rounded-xl bg-white p-10 lg:w-2/3">
               <Typography component="h5">Basic</Typography>
 
-              <div className="flex w-2/3 justify-between">
+              <input {...register('firstName')} />
+
+              {/* <div className="flex w-2/3 justify-between">
                 <div>
                   <Input
                     register={addProductRegister.productName}
@@ -60,7 +67,7 @@ export default function AddProduct() {
 
                 <div className="w-1/2">
                   <Input
-                    {...register('summary')}
+                    register={addProductRegister.summary}
                     errors={errors}
                     type="text"
                     placeholder="Type here"
@@ -68,19 +75,19 @@ export default function AddProduct() {
                     id="summary"
                   />
                 </div>
-              </div>
-              <TextArea
+              </div> */}
+        {/* <TextArea
+                register={addProductRegister.description}
                 label="Full description"
-                {...register('description')}
                 errors={errors}
                 placeholder="Full description"
                 id="description"
-              />
-
+              /> */}
+        {/* 
               <div className="md:grid md:grid-cols-3 md:gap-4">
                 <div class="form-control w-full max-w-xs">
                   <Input
-                    {...register('price')}
+                    register={addProductRegister.price}
                     errors={errors}
                     type="number"
                     placeholder="LE"
@@ -90,7 +97,7 @@ export default function AddProduct() {
                 </div>
                 <div class="form-control">
                   <Input
-                    {...register('weight')}
+                    register={addProductRegister.weight}
                     errors={errors}
                     type="number"
                     placeholder="Kg"
@@ -100,7 +107,7 @@ export default function AddProduct() {
                 </div>
                 <div class="form-control w-full max-w-xs">
                   <Input
-                    {...register('discount')}
+                    register={addProductRegister.discount}
                     errors={errors}
                     type="number"
                     placeholder="LE"
@@ -110,7 +117,7 @@ export default function AddProduct() {
                 </div>
                 <div class="form-control w-full max-w-xs">
                   <Input
-                    {...register('inStock')}
+                    register={addProductRegister.inStock}
                     errors={errors}
                     type="number"
                     placeholder="items"
@@ -118,7 +125,7 @@ export default function AddProduct() {
                     id="inStock"
                   />
                 </div>
-              </div>
+              </div> 
             </div>
             <div className="mt-10 w-full rounded-xl bg-white p-10 lg:mt-0 lg:w-1/4">
               <Typography component="h5">Media</Typography>
@@ -137,16 +144,17 @@ export default function AddProduct() {
                   <option>Meat</option>
                 </select>
               </div>
-            </div>
+            </div> 
           </div>
-          <Button
+          {/* <Button
             variant="secondary"
             type="submit"
             className="mt-20 w-1/2 self-center lg:w-2/12 lg:self-start"
           >
             Add
-          </Button>
-        </Form>
+          </Button> 
+          <input type="submit" value="Submit" />
+        </Form> */}
       </div>
     </>
   );

@@ -14,9 +14,9 @@ export default function Input({ register, errors, className, label, id, ...optio
         id={id}
         {...register}
         {...options}
-        className={`input input-bordered w-full max-w-xs ${className || ''}`}
+        className={`input input-bordered w-full ${className || ''}`}
       />
-      <Typography component="body2" className="text-red-500">
+      <Typography component="body2" className="h-4 text-red-500">
         {errors[id]?.message}
       </Typography>
     </>
