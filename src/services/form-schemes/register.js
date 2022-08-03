@@ -1,6 +1,6 @@
 import * as Joi from 'joi';
 
-const loginSchema = Joi.object({
+const registerSchema = Joi.object({
   email: Joi.string().required().messages({
     'string.empty': `Please enter your email`,
     'any.required': `Please enter your email`,
@@ -10,6 +10,8 @@ const loginSchema = Joi.object({
     'string.min': 'Password must be at least 6 characters',
     'any.required': `Please enter your password`,
   }),
+  name: Joi.string().required(),
+  storeName: Joi.string().required(),
 });
 
-export default loginSchema;
+export default registerSchema;
