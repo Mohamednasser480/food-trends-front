@@ -1,5 +1,6 @@
-import React from "react";
-import { ContactInfo, Info, Map } from "../components/ContactUs";
+import React from 'react';
+import { ContactInfo, Info, Map } from '../components/ContactUs';
+import ContactForm from '../components/ContactUs/ContactForm';
 
 const ContactUs = () => {
   return (
@@ -8,6 +9,7 @@ const ContactUs = () => {
       <Info />
       <ContactInfo />
       <Map />
+      <ContactForm />
     </div>
   );
 };

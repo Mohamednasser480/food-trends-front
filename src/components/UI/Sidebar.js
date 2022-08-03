@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import "aos/dist/aos.css";
-import { createPortal } from "react-dom";
-import Backdrop from "./Backdrop";
+import React, { useState } from 'react';
+import 'aos/dist/aos.css';
+import { createPortal } from 'react-dom';
+import Backdrop from './Backdrop';
 
 export default function Sidebar(props) {
   if (!props.show) {
@@ -12,8 +12,8 @@ export default function Sidebar(props) {
   let effect;
 
   if (props.right) {
-    direction = "right-2";
-    effect = "slide-left";
+    direction = 'right-2';
+    effect = 'slide-left';
   }
 
   return (
@@ -22,9 +22,9 @@ export default function Sidebar(props) {
         <Backdrop setShow={props.setShow}>
           <div
             className={`fixed h-full w-[410px] max-w-[90%] cursor-default bg-white p-5 ${
-              direction || "left-0"
-            }`}
-            data-aos={`${effect || "slide-right"}`}
+              props.className
+            } ${direction || 'left-0'}`}
+            data-aos={`${effect || 'slide-right'}`}
             onClick={(e) => e.stopPropagation()}
           >
             <span
@@ -38,7 +38,7 @@ export default function Sidebar(props) {
             {props.children}
           </div>
         </Backdrop>,
-        document.getElementById("modals")
+        document.getElementById('modals')
       )}
     </>
   );
