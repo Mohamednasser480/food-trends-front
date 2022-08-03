@@ -21,43 +21,42 @@ export default function Login({ setShowRegister }) {
   };
 
   return (
-    <>
+    <Form onSubmit={handleSubmit((d) => console.log(d))} className="p-10">
       <Typography component="h1" className="text-center text-primary">
-        Login
+        Sign in
       </Typography>
       <Typography component="body2" className="mt-5 text-center">
-        Don't have an account yet?{' '}
-        <button className="text-black" onClick={() => setShowRegister(true)}>
+        Don't have an account yet?
+        <button type="button" className="mx-1 text-black" onClick={() => setShowRegister(true)}>
           Sign up
-        </button>{' '}
+        </button>
         for free
       </Typography>
+      <div className="flex flex-col">
+        <Input
+          type="text"
+          register={loginRegister.email}
+          errors={errors}
+          placeholder="Your email"
+          id="email"
+        />
+        <Input
+          type="password"
+          register={loginRegister.password}
+          errors={errors}
+          placeholder="Password"
+          id="password"
+        />
 
-      <Form onSubmit={handleSubmit((d) => console.log(d))}>
-        <div>
-          <Input
-            type="text"
-            register={loginRegister.email}
-            errors={errors}
-            placeholder="Your email"
-            id="email"
-          />
-          <Input
-            type="password"
-            register={loginRegister.password}
-            errors={errors}
-            placeholder="Password"
-            id="password"
-          />
-          <Typography component="body2" className="mt-10 !text-black">
-            Forgot password?
-          </Typography>
-        </div>
+        <button type="button" className="mt-10 self-end font-medium text-black hover:text-primary">
+          Forgot password?
+        </button>
+        <Typography component="body2"></Typography>
+      </div>
 
-        <Button variant={'secondary'} type="submit" className="mt-10">
-          Login
-        </Button>
-      </Form>
-    </>
+      <Button variant={'secondary'} type="submit" className="mt-10">
+        Login
+      </Button>
+    </Form>
   );
 }
