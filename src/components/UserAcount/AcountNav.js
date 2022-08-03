@@ -1,16 +1,21 @@
 import { useState } from 'react';
-import { FaShoppingBag } from 'react-icons/fa';
-import { FaShoppingCart } from 'react-icons/fa';
-import { FaCommentAlt } from 'react-icons/fa';
-import { FaPlusSquare } from 'react-icons/fa';
-import { FaStar } from 'react-icons/fa';
+import {
+  FaShoppingBag,
+  FaAngleRight,
+  FaShoppingCart,
+  FaCommentAlt,
+  FaPlusSquare,
+  FaStar,
+} from 'react-icons/fa';
 import { IoPerson } from 'react-icons/io5';
+import { AiOutlineTransaction } from 'react-icons/ai';
 
 const userType = 'vendor';
 
 export default function AcountNav({ onNavClick, content }) {
-  // console.log(content);
   const [activeButton, setActiveButton] = useState(content);
+
+  const [showSidebar, setShowSidebar] = useState(true);
 
   const handleClick = (btn) => {
     setActiveButton(btn);
@@ -18,7 +23,7 @@ export default function AcountNav({ onNavClick, content }) {
   };
   const buttons = {
     vendor: ['Products', 'Orders', 'Reviews', 'Add product', 'Transactions'],
-    customer: ['Profile', 'Products', 'Orders', 'Reviews', 'wishlist'],
+    customer: ['Profile', 'Orders', 'Reviews', 'wishlist'],
     delivery: ['Orders'],
   };
   const icons = {
@@ -29,24 +34,36 @@ export default function AcountNav({ onNavClick, content }) {
     wishlist: <FaStar className="mx-3" />,
     'Live Orders': <FaShoppingCart className="mx-3 " />,
     Profile: <IoPerson className="mx-3 " />,
+    Transactions: <AiOutlineTransaction className="mx-3 " />,
   };
 
   return (
-    <div className="mr-5 w-2/12 py-5">
-      {buttons[userType]
-        ? buttons[userType].map((btn, index) => (
-            <button
-              onClick={() => handleClick(btn)}
-              key={index}
-              className={`flex w-full items-center px-4 py-2 text-left hover:bg-primary hover:text-white ${
-                activeButton === btn ? 'bg-primary text-white' : ''
-              }`}
-            >
-              {icons[btn]}
-              {btn}
-            </button>
-          ))
-        : null}
-    </div>
+    <>
+      <button
+        className="hover:bg-primary hover:text-white"
+        onClick={() => {
+          setShowSidebar((showSidebar) => !showSidebar);
+        }}
+      >
+        <FaAngleRight size={25} className="cursor-pointer hover:text-green-800" />
+      </button>
+
+      <div className={showSidebar ? 'w-2/12 py-10' : 'hidden'}>
+        {buttons[userType]
+          ? buttons[userType].map((btn, index) => (
+              <button
+                onClick={() => handleClick(btn)}
+                key={index}
+                className={`flex w-full items-center px-4 py-2 text-left hover:bg-primary hover:text-white ${
+                  activeButton === btn ? 'bg-primary text-white' : ''
+                }`}
+              >
+                {icons[btn]}
+                {btn}
+              </button>
+            ))
+          : null}
+      </div>
+    </>
   );
 }

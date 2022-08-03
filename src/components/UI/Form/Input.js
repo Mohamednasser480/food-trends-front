@@ -2,6 +2,7 @@ import React from 'react';
 import { Typography } from '../../UI';
 
 export default function Input({ register, errors, className, label, id, ...options }) {
+  // console.log(options);
   return (
     <>
       <label htmlFor={id} className="label">
@@ -11,10 +12,11 @@ export default function Input({ register, errors, className, label, id, ...optio
       </label>
       <input
         id={id}
+        {...register}
         {...options}
-        className={`input input-bordered w-full max-w-xs ${className || ''}`}
+        className={`input input-bordered w-full ${className || ''}`}
       />
-      <Typography component="body2" className="text-red-500">
+      <Typography component="body2" className="h-4 text-red-500">
         {errors[id]?.message}
       </Typography>
     </>
