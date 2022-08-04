@@ -11,20 +11,18 @@ export default function CustomerReviews({ productId }) {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchReviews());
+    dispatch(fetchReviews(productId));
   }, []);
 
   function getOverALlRating() {
     if (reviews.length == 0) {return};
     let totalRatingSum = reviews.reduce((acc, current) => acc + current.rating,0);
-    console.log(totalRatingSum)
     return totalRatingSum/reviews.length;
   }
   useEffect(() => {
   setOverallRating(getOverALlRating())
   }, [reviews]);
 
-  // console.log(getOverALlRating())
   let [overallRating, setOverallRating] = useState(0);
 
   return (
