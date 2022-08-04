@@ -5,14 +5,14 @@ export default function Reviews({ reviews }) {
     <section className="py-5">
       <h6 className="mb-8 text-xl font-medium">{reviews.length} Reviews</h6>
       <div>
-        {reviews?.map((item, index) => {
+        {reviews.map((item, index) => {
           return (
             <ReviewItem
               key={index}
               userName={item.customer.name}
               image={item.customer.image}
               rating={item.rating}
-              date={item.createdAt}
+              date={new Date(item.createdAt)}
               reviewTitle={item.comment}
               reviewBody={item.comment}
             />
