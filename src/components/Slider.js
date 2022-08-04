@@ -70,7 +70,7 @@ export default function Slider() {
               <h4 className="font-worthbites-rough text-5xl uppercase text-green-900 sm:text-6xl md:text-7xl lg:text-8xl">
                 With Organic Food
               </h4>
-              <Button variant="secondary" className="mt-5">
+              <Button variant="secondary" className="mt-5" to="/shop">
                 Shop Now
               </Button>
             </div>

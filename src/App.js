@@ -1,9 +1,17 @@
-import { useEffect } from 'react';
-import Layout from './components/Layout';
-import { Home, ContactUs, AboutUs, Cart, UserAcount } from './routes';
-import { Routes, Route } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { cartActions } from './store';
+import { useEffect } from "react";
+import Layout from "./components/Layout";
+import {
+  Home,
+  ContactUs,
+  AboutUs,
+  Cart,
+  UserAcount,
+  ProductPage,
+} from "./routes";
+import { Routes, Route } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { cartActions } from "./store";
+import Aos from "aos";
 
 let isInitial = true;
 
@@ -22,15 +30,21 @@ function App() {
     isInitial = false;
   }, [cartItems]);
 
+  // Iniate Animation
+  Aos.init({
+    once: "true",
+  });
+
   return (
     <div className="App">
       <Layout>
         <Routes>
-          <Route path={'/'} element={<Home />} />
-          <Route path={'/contact-us'} element={<ContactUs />} />
-          <Route path={'/about'} element={<AboutUs />} />
-          <Route path={'/cart'} element={<Cart />} />
-          <Route path={'/user-account'} element={<UserAcount />} />
+          <Route path={"/"} element={<Home />} />
+          <Route path={"/contact-us"} element={<ContactUs />} />
+          <Route path={"/about"} element={<AboutUs />} />
+          <Route path={"/cart"} element={<Cart />} />
+          <Route path={"/user-account"} element={<UserAcount />} />
+          <Route path={"/shop/:id"} element={<ProductPage />} />
         </Routes>
       </Layout>
     </div>
