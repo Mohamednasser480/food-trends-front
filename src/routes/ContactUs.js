@@ -4,7 +4,7 @@ import ContactForm from '../components/ContactUs/ContactForm';
 
 const ContactUs = () => {
   return (
-    <div className=" container py-8">
+    <div className="container flex flex-col py-8">
       {/* <ContactNav /> */}
       <Info />
       <ContactInfo />
