@@ -18,7 +18,7 @@ const team = [
     id: 3,
     name: 'Eslam Ali',
     job: 'Team Lead',
-    image: '/sisi.jpg',
+    image: '/Eslam.jpeg',
   },
   {
     id: 4,
