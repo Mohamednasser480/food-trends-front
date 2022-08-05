@@ -14,10 +14,6 @@ export default function ContactForm() {
     resolver: joiResolver(contactUsSchema),
   });
 
-  const handleCheck = (e) => {
-    e.preventDefault();
-    console.log('clicked');
-  };
   const contactRegister = {
     name: { ...register('name') },
     email: { ...register('email') },
