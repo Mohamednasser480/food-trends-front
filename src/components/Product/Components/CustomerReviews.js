@@ -6,7 +6,6 @@ import { fetchReviews, reviewsSelector } from "../../../store/slices/reviews";
 
 export default function CustomerReviews({ productId }) {
   // Fetch Reviews Here to send Them to both Write a Review and Reviews ( Use Product ID )
-
   let { reviews, isLoading, error } = useSelector(reviewsSelector);
 
   const dispatch = useDispatch();
