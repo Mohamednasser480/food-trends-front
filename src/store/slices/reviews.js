@@ -22,15 +22,13 @@ export const fetchReviews = createAsyncThunk(
 export const addReview = createAsyncThunk(
   "reviews/addReview",
   async (args, thunkAPI) => {
-    const accessToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmVjMjBiMmQyMTY5NWQwYzc2MjdhZDgiLCJpYXQiOjE2NTk2NDIwMzQsImV4cCI6MTY1OTkwMTIzNH0.2F5vmwPMnZQDmOMedQJPCS22XrE5LjqjLCXcgNWNOW4";
     try {
-      return await reviewService.addReview(args, accessToken);
+      return await reviewService.addReview(args);
     } catch (error) {
       console.log(error);
       thunkAPI.rejectWithValue(error);
     } finally {
-      thunkAPI.dispatch(fetchReviews());
+      thunkAPI.dispatch(fetchReviews(args.product));
     }
   }
 );
