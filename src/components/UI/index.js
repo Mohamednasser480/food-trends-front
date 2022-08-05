@@ -1,14 +1,17 @@
-import Button from "./Button";
-import Modal from "./Modal";
-import Typography from "./Typography";
-import SectionTitle from "./SectionTitle";
-import ProductRating from "./ProductRating";
-import Breadcrumb from "./Breadcrumb";
-import Page from "./Page";
-import QauntityBox from "./QauntityBox";
-import Accordion from "./Accordion";
-import Backdrop from "./Backdrop";
-import Sidebar from "./Sidebar";
+import Button from './Button';
+import Modal from './Modal';
+import Typography from './Typography';
+import SectionTitle from './SectionTitle';
+import ProductRating from './ProductRating';
+import Breadcrumb from './Breadcrumb';
+import Page from './Page';
+import QauntityBox from './QauntityBox';
+import Accordion from './Accordion';
+import Backdrop from './Backdrop';
+import Sidebar from './Sidebar';
+import CompactTable from './CompactTable';
+import SearchBar from './SearchBar';
+
 export {
   Button,
   Modal,
@@ -21,4 +24,6 @@ export {
   Accordion,
   Backdrop,
   Sidebar,
+  CompactTable,
+  SearchBar,
 };
