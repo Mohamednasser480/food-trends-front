@@ -1,10 +1,9 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchProducts,
   getAllProducts,
-} from "../../../store/Products/ProductSlice";
+} from "../../../store/slices/Vendor/VendorSlice";
 import TabelComponent from "./TabelComponent";
 
 export default function Products() {
@@ -34,6 +33,7 @@ export default function Products() {
         </thead>
         {React.Children.toArray(
           productsData.map((pro) => {
+            console.log(pro);
             return <TabelComponent {...pro} />;
           })
         )}
