@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import Form from "../UI/Form/Form";
-import { Input } from "../UI/Form";
-import { useForm } from "react-hook-form";
-import { Button, Typography } from "../UI";
-import { joiResolver } from "@hookform/resolvers/joi";
-import registerSchema from "../../services/form-schemes/register";
-import { useDispatch } from "react-redux";
-import { registerUser } from "../../store/slices/auth";
+import React, { useState } from 'react';
+import Form from '../UI/Form/Form';
+import { Input } from '../UI/Form';
+import { useForm } from 'react-hook-form';
+import { Button, Typography } from '../UI';
+import { joiResolver } from '@hookform/resolvers/joi';
+import registerSchema from '../../services/form-schemes/register';
+import { useDispatch } from 'react-redux';
+// import { registerUser } from "../../store/slices/auth";
 
 export default function Register({ setShowRegister }) {
   const dispatch = useDispatch();
@@ -23,17 +23,17 @@ export default function Register({ setShowRegister }) {
   });
 
   const loginRegister = {
-    name: { ...register("name") },
-    email: { ...register("email") },
-    password: { ...register("password") },
-    storeName: { ...register("storeName") },
+    name: { ...register('name') },
+    email: { ...register('email') },
+    password: { ...register('password') },
+    storeName: { ...register('storeName') },
   };
 
   return (
     <Form
       onSubmit={handleSubmit((user) => {
-        console.log("submitted");
-        dispatch(registerUser({ email: user.email, password: user.password }));
+        console.log('submitted');
+        // dispatch(registerUser({ email: user.email, password: user.password }));
       })}
       className="p-10"
     >
@@ -42,11 +42,7 @@ export default function Register({ setShowRegister }) {
       </Typography>
       <Typography component="body2" className="mt-5 text-center">
         Already have an account?
-        <button
-          type="button"
-          className="mx-1 text-black"
-          onClick={() => setShowRegister(false)}
-        >
+        <button type="button" className="mx-1 text-black" onClick={() => setShowRegister(false)}>
           Sign in
         </button>
         instead
@@ -83,11 +79,11 @@ export default function Register({ setShowRegister }) {
             id="storeName"
           />
         ) : (
-          ""
+          ''
         )}
       </div>
 
-      <Button variant={"secondary"} type="submit" className="mt-10">
+      <Button variant={'secondary'} type="submit" className="mt-10">
         sign up
       </Button>
       <button type="button" onClick={handleVendorLogin}>
