@@ -4,7 +4,7 @@ import { CartList, EmptyCart } from "../components/Cart";
 import { Button } from "../components/UI";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
-import { cartActions } from "../store";
+import { cartActions } from "../store/slices/cart";
 
 const Cart = () => {
   const items = useSelector((state) => state.cart.items);

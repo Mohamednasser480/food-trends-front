@@ -1,6 +1,6 @@
 import React from "react";
 import { CartTableRow } from "./";
-import { cartActions } from "../../store";
+import { cartActions } from "../../store/slices/cart";
 import { useDispatch } from "react-redux";
 
 const CartItem = (props) => {
