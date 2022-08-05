@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 // Leaflet
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 const Map = () => {
   const position = [30.55792175930095, 31.018984611032206];
@@ -12,7 +12,7 @@ const Map = () => {
         center={position}
         zoom={16}
         scrollWheelZoom={false}
-        style={{ width: "80vw", height: "70vh" }}
+        style={{ width: '70vw', height: '70vh' }}
       >
         <TileLayer
           attribution="© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>"
@@ -22,7 +22,6 @@ const Map = () => {
           <Popup>ITI Menofia</Popup>
         </Marker>
       </MapContainer>
-      ,
     </>
   );
 };

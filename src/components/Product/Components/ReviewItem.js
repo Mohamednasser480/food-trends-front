@@ -1,5 +1,13 @@
 import React from "react";
 import { ProductRating } from "../../UI";
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en.json'
+import ru from 'javascript-time-ago/locale/ru.json'
+import ReactTimeAgo from 'react-time-ago'
+
+TimeAgo.addDefaultLocale(en)
+TimeAgo.addLocale(ru)
+
 export default function ReviewItem(props) {
   return (
     <div className="flex flex-col flex-wrap justify-between gap-4 border-b-[1px] py-3 md:flex-row md:gap-2">
@@ -18,12 +26,15 @@ export default function ReviewItem(props) {
       </div>
       <div className="ml-2 flex  flex-col gap-1 lg:ml-0 lg:w-10/12 ">
         <div className="text-md flex flex-wrap items-center justify-between font-semibold uppercase tracking-wider">
+          <span className="w-10/12 break-all">
           {props.reviewTitle}
+          </span>
           <span className="text-sm font-medium text-base-400">
-            {props.date}
+            {/* {props.date} */}
+            <ReactTimeAgo date={props.date} locale="en-US" timeStyle="round-minute"/>
           </span>
         </div>
-        <p className="text-base-400">{props.reviewBody}</p>
+        <p className="text-base-400 w-full break-all">{props.reviewBody}</p>
       </div>
     </div>
   );

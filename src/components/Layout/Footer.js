@@ -8,8 +8,8 @@ import Typography from '../UI/Typography';
 
 const Footer = () => {
   return (
-    <footer className="bg-[#f0efea]"  data-aos="fade" >
-      <div className="container py-14 ">
+    <footer className="bg-[#f0efea]" data-aos="fade">
+      <div className="container max-w-screen-xl py-14">
         <div className="grid gap-4 text-sm font-medium text-base-400  sm:grid-cols-2 lg:grid-cols-4">
           <div className="flex flex-col text-center sm:text-left  ">
             <Typography component={'h4'} className={'text-primary'}>
@@ -52,19 +52,19 @@ const Footer = () => {
               support
             </Typography>
 
-            <Link to={'/'} className="py-1 hover:text-black transition-colors">
+            <Link to={'/'} className="py-1 transition-colors hover:text-black">
               FAQ
             </Link>
-            <Link to={'/'} className="py-1 hover:text-black transition-colors">
+            <Link to={'/'} className="py-1 transition-colors hover:text-black">
               Look up Product
             </Link>
-            <Link to={'/'} className="py-1 hover:text-black transition-colors">
+            <Link to={'/'} className="py-1 transition-colors hover:text-black">
               Become a vendor
             </Link>
-            <Link to={'/'} className="py-1 hover:text-black transition-colors">
+            <Link to={'/'} className="py-1 transition-colors hover:text-black">
               Returns
             </Link>
-            <Link to={'/'} className="py-1 hover:text-black transition-colors">
+            <Link to={'/'} className="py-1 transition-colors hover:text-black">
               Shipping & Delivery
             </Link>
           </div>

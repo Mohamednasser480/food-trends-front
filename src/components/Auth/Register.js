@@ -5,8 +5,11 @@ import { useForm } from 'react-hook-form';
 import { Button, Typography } from '../UI';
 import { joiResolver } from '@hookform/resolvers/joi';
 import registerSchema from '../../services/form-schemes/register';
+import { useDispatch } from 'react-redux';
+// import { registerUser } from "../../store/slices/auth";
 
-export default function Login({ setShowRegister }) {
+export default function Register({ setShowRegister }) {
+  const dispatch = useDispatch();
   const [vendorRegister, setVendorRegister] = useState(false);
   const handleVendorLogin = () => {
     setVendorRegister(true);
@@ -27,16 +30,22 @@ export default function Login({ setShowRegister }) {
   };
 
   return (
-    <Form onSubmit={handleSubmit((d) => console.log(d))} className="p-10">
+    <Form
+      onSubmit={handleSubmit((user) => {
+        console.log('submitted');
+        // dispatch(registerUser({ email: user.email, password: user.password }));
+      })}
+      className="p-10"
+    >
       <Typography component="h1" className="text-center text-primary">
         Sign up
       </Typography>
       <Typography component="body2" className="mt-5 text-center">
-        Don't have an account yet?
+        Already have an account?
         <button type="button" className="mx-1 text-black" onClick={() => setShowRegister(false)}>
-          Sign up
+          Sign in
         </button>
-        for free
+        instead
       </Typography>
       <div className="flex flex-col">
         <Input

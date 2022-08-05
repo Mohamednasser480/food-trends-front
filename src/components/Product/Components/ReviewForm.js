@@ -1,9 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ProductRating } from "../../UI";
+import { useDispatch, useSelector } from "react-redux";
+import { addReview, reviewsSelector } from "../../../store/slices/reviews";
 
-let ratingValue;
-
-export default function ReviewForm() {
+let ratingValue = 0;
+export default function ReviewForm({ productId }) {
+  const dispatch = useDispatch();
   const getRatingValue = (value) => {
     ratingValue = value;
   };
@@ -14,7 +16,7 @@ export default function ReviewForm() {
 
   // Submit Button ==> Call API Service Here.
   let submitReview = () => {
-    if (ratingValue == 0 || ratingValue == undefined) {
+    if (ratingValue == 0) {
       setValidError("Please Choose your Rating");
       return;
     }
@@ -29,10 +31,19 @@ export default function ReviewForm() {
     // If No errors
     setValidError(false);
 
-    // Function to Send Data to Server Below
-    console.log(ratingValue);
-    console.log(reviewTitleRef.current.value);
-    console.log(reviewBodyRef.current.value);
+    // Send Input Data to Backend
+    dispatch(
+      addReview({
+        product: productId, // Add product ID Here
+        rating: ratingValue,
+        title:reviewTitleRef.current.value,
+        body: reviewBodyRef.current.value,
+      })
+    );
+    // Empty the inputs
+    ratingValue = 0;
+    reviewTitleRef.current.value = "";
+    reviewBodyRef.current.value = "";
   };
 
   // Hide Button If No data.

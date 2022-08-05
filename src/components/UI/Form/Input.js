@@ -2,14 +2,16 @@ import React from 'react';
 import { Typography } from '../../UI';
 
 export default function Input({ register, errors, className, label, id, ...options }) {
-  // console.log(options);
   return (
     <>
-      <label htmlFor={id} className="label">
-        <Typography component={'body1'} className="capitalize">
-          {label}
-        </Typography>
-      </label>
+      {label ? (
+        <label htmlFor={id} className="label">
+          <Typography component={'body1'} className="capitalize">
+            {label}
+          </Typography>
+        </label>
+      ) : null}
+
       <input
         id={id}
         {...register}

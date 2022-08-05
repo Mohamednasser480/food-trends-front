@@ -27,12 +27,12 @@ const RatingSection = () => {
     },
   ];
   return (
-    <div className=" container my-4" data-aos="fade-up">
+    <div className="container py-24" data-aos="fade-up">
       <div className="p-4">
         <SectionTitle text={"CUSTOMERS LOVE"} />
       </div>
 
-      <div className="flex flex-wrap justify-center">
+      <div className="flex flex-wrap justify-between gap-5">
         {React.Children.toArray(
           test.map((item) => {
             return <RatingItem {...item} />;
