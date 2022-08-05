@@ -3,10 +3,7 @@ import { ProductRating, Typography } from "../../UI";
 import { TiPencil } from "react-icons/ti";
 import ReviewForm from "./ReviewForm";
 
-export default function WriteAReview({ rating, numberOfReviews }) {
-  let reviewValue = rating;
-  let reviews = numberOfReviews;
-
+export default function WriteAReview({ rating, numberOfReviews,productId }) {
   // TO Be Edited => Control The Review Form To show only If User logged and have purchased the item before.
   const [isLogged, setIsLogged] = useState(true);
   const [itemPurchased, setItemPurchased] = useState(true);
@@ -22,12 +19,12 @@ export default function WriteAReview({ rating, numberOfReviews }) {
             component={"subtitle2"}
             className="!text-5xl  text-primary "
           >
-            {reviewValue.toFixed(2)}
+            {rating ? Number(rating).toFixed(2) : "0.00"}
           </Typography>
           <div className="flex flex-col gap-1">
-            <ProductRating rating={reviewValue} className="text-2xl" />
+            <ProductRating rating={rating} className="text-2xl" />
             <span className="ml-1 font-medium text-base-400">
-              {reviews} Reviews
+              {numberOfReviews} Reviews
             </span>
           </div>
         </div>
@@ -43,7 +40,7 @@ export default function WriteAReview({ rating, numberOfReviews }) {
         <div data-aos="fade" data-aos-duration="700">
           {isLogged && itemPurchased ? (
             // Write a review Form Goes Here
-            <ReviewForm />
+            <ReviewForm productId={productId}/>
           ) : (
             <span className="text-base-400">
               Only logged in customers who have purchased this product may leave
