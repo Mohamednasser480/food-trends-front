@@ -4,7 +4,7 @@ import { ProductIcons } from ".";
 import { ProductRating } from "../UI";
 
 export default function Product({ productDetails, relative }) {
-  let route = `${relative ? "/shop" : "shop"}/${productDetails.id}`;
+  let route = `${relative ? "/shop" : "shop"}/${productDetails._id}`;
   return (
     <div className="group flex  flex-col gap-3 ">
       <div className="relative overflow-hidden">
@@ -12,7 +12,7 @@ export default function Product({ productDetails, relative }) {
           <img
             src={productDetails.images[0]}
             alt={productDetails.name}
-            className="transition-all duration-1000 ease-out hover:scale-110"
+            className="transition-all duration-1000 ease-out hover:scale-110 h-[300px] object-cover w-full"
           />
         </Link>
 
