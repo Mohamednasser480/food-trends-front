@@ -5,7 +5,6 @@ import { Breadcrumb } from "../components/UI";
 
 const ContactUs = () => {
   return (
-
     <>
       <Breadcrumb />
       <div className="flex flex-col container py-8">
@@ -15,7 +14,6 @@ const ContactUs = () => {
         <ContactForm />
       </div>
     </>
-
   );
 };
 
