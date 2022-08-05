@@ -1,41 +1,19 @@
 import * as Joi from 'joi';
 
-// TODO : Update the schema as per the contact us requirment
-
 const contactUsSchema = Joi.object({
-  // productName: Joi.string()
-  //   .regex(/^[A-Za-z]+$/)
-  //   .required()
-  //   .messages({
-  //     'string.pattern.base': 'Product name must be letters only',
-  //     'string.empty': `Product name is required`,
-  //     'any.required': `Product name is required`,
-  //   }),
-  // summary: Joi.string().required().messages({
-  //   'string.empty': `Summary cannot be an empty field`,
-  //   'any.required': `Summary is required`,
-  // }),
-  // description: Joi.string().messages({
-  //   'string.empty': `Summary cannot be an empty field`,
-  // }),
-  // price: Joi.number().required().messages({
-  //   'number.base': `Please provide a price`,
-  //   'any.required': `Price is required`,
-  // }),
-  // category: Joi.string().messages({
-  //   'string.empty': `Summary cannot be an empty field`,
-  // }),
-  // discount: Joi.number().messages({
-  //   'string.empty': `Summary cannot be an empty field`,
-  // }),
-  // inStock: Joi.number().required().min(2).messages({
-  //   'number.base': `Please provide how much is your stock`,
-  //   'any.required': `Stock is required`,
-  // }),
-  // weight: Joi.number().required().min(2).messages({
-  //   'number.base': `Please provide your shipment weight`,
-  //   'any.required': `Stock is required`,
-  // }),
+  name: Joi.string().required().messages({
+    'string.empty': `Please enter your name`,
+    'any.required': `Please enter your name`,
+  }),
+  email: Joi.string().required().messages({
+    'string.empty': `Please enter your email`,
+    'any.required': `Please enter your email`,
+  }),
+  message: Joi.string().min(6).required().messages({
+    'string.empty': `Please enter your password`,
+    'string.min': 'Password must be at least 6 characters',
+    'any.required': `Please enter your password`,
+  }),
 });
 
 export default contactUsSchema;
