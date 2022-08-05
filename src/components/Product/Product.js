@@ -14,7 +14,7 @@ export default function Product() {
   // Fetch Item Here and send each Details to Components
   // Placeholder Product
   let product = {
-    id: "62ec2218345c4dcec1b0c240",
+    id: id,
     name: "Lemon (1kg)",
     summary:
       "Lots of juice and a bright, clear, tart flavor that is suprisingly low in acid. The rind has lots of tang with a bitter note thrown in.",
