@@ -6,7 +6,7 @@ import { AiOutlineClockCircle } from "react-icons/ai";
 const ContactInfo = () => {
   return (
     <div>
-      <div className="flex flex-wrap justify-center px-14">
+      <div className="flex flex-wrap md:justify-center">
         <div className="flex justify-center p-4  lg:w-1/4">
           <GrLocation size={40} className="m-3" />
           <div>
