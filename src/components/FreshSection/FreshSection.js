@@ -30,7 +30,7 @@ const items = [
 
 export default function FreshSection() {
   return (
-    <div className="mb-24 bg-[#eef4ed] py-24">
+    <div className="bg-[#eef4ed] py-24">
       <div className="container grid max-w-[1200px] gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {items.map((item, index) => (
           <FreshItem

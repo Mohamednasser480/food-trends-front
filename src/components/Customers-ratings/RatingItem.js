@@ -5,18 +5,20 @@ import { Typography } from "../UI";
 
 const RatingItem = ({ name, desc, rating, city, img }) => {
   return (
-    <div className=" container m-4 flex min-h-[400px] w-[400px] flex-col gap-12 bg-[#FAF5E9] p-9">
-      <Rating
-        readonly
-        className=""
-        initialRating={rating}
-        emptySymbol={<AiFillStar size={20} color="#b7b7b7" />}
-        fullSymbol={<AiFillStar size={20} color="#EEB31A" />}
-      />
+    <div className="container flex max-h-[400px] w-full flex-col gap-8 bg-[#FAF5E9] p-7 md:w-[350px] ">
+      <div className="flex flex-col gap-3">
+        <Rating
+          readonly
+          className=""
+          initialRating={rating}
+          emptySymbol={<AiFillStar size={20} color="#b7b7b7" />}
+          fullSymbol={<AiFillStar size={20} color="#EEB31A" />}
+        />
 
-      <Typography component={"body1"} className={"text-start !text-primary"}>
-        {desc}
-      </Typography>
+        <Typography component={"body1"} className={"text-start !text-primary"}>
+          {desc}
+        </Typography>
+      </div>
 
       <div className="flex h-full gap-4">
         <img className="h-16 w-16 object-cover" src={img} alt={name} />
