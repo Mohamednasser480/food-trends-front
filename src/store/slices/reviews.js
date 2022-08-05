@@ -25,19 +25,22 @@ export const fetchReviews = createAsyncThunk(
 export const addReview = createAsyncThunk(
   "reviews/addReview",
   async (args, thunkAPI) => {
-    const accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmVjMjBiMmQyMTY5NWQwYzc2MjdhZDgiLCJpYXQiOjE2NTk2NDIwMzQsImV4cCI6MTY1OTkwMTIzNH0.2F5vmwPMnZQDmOMedQJPCS22XrE5LjqjLCXcgNWNOW4"; // Object with the General Top State
+    const accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmVjMjBiMmQyMTY5NWQwYzc2MjdhZDgiLCJpYXQiOjE2NTk2NDIwMzQsImV4cCI6MTY1OTkwMTIzNH0.2F5vmwPMnZQDmOMedQJPCS22XrE5LjqjLCXcgNWNOW4"; 
     try {
       const response = await axios.post(
-        "https://jsonplaceholder.typicode.com/comments",
-        { ...args },
+        "http://localhost:5000/api/v1/reviews",
+        args,
         {
           headers: {
-            Authorization: `bearer ${accessToken}`,
+            Authorization: `Bearer ${accessToken}`,
           },
         }
       );
+      // console.log(args)
+      thunkAPI.dispatch(fetchReviews())
       return response.data;
     } catch (error) {
+      console.log(error)
       thunkAPI.rejectWithValue(error);
     }
   }
@@ -66,7 +69,9 @@ const reviews = createSlice({
     },
     [addReview.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.reviews.push(action.payload);
+      // console.log(action.payload)
+      // state.reviews.push({...action.payload,});
+      
     },
     [addReview.rejected]: (state, action) => {
       state.isLoading = false;
