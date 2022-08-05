@@ -3,6 +3,8 @@ import { SectionTitle } from "../../UI";
 import { Reviews, WriteAReview } from "../";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchReviews, reviewsSelector } from "../../../store/slices/reviews";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 export default function CustomerReviews({ productId }) {
   // Fetch Reviews Here to send Them to both Write a Review and Reviews ( Use Product ID )
@@ -14,12 +16,17 @@ export default function CustomerReviews({ productId }) {
   }, []);
 
   function getOverALlRating() {
-    if (reviews.length == 0) {return};
-    let totalRatingSum = reviews.reduce((acc, current) => acc + current.rating,0);
-    return totalRatingSum/reviews.length;
+    if (reviews.length == 0) {
+      return;
+    }
+    let totalRatingSum = reviews.reduce(
+      (acc, current) => acc + current.rating,
+      0
+    );
+    return totalRatingSum / reviews.length;
   }
   useEffect(() => {
-  setOverallRating(getOverALlRating())
+    setOverallRating(getOverALlRating());
   }, [reviews]);
 
   let [overallRating, setOverallRating] = useState(0);
@@ -28,8 +35,18 @@ export default function CustomerReviews({ productId }) {
     <div className="max-w-full py-12" data-aos="fade-down">
       <div className="container">
         <SectionTitle text={"Customer Reviews"} />
-        <WriteAReview rating={overallRating} numberOfReviews={reviews.length} productId={productId} />
-        {error ? "" : isLoading ? "Loading..." : <Reviews reviews={reviews} />}
+        <WriteAReview
+          rating={overallRating}
+          numberOfReviews={reviews.length}
+          productId={productId}
+        />
+        {error ? (
+          ""
+        ) : isLoading ? (
+          <Skeleton count={5} height="40px" className="mb-3" />
+        ) : (
+          <Reviews reviews={reviews} />
+        )}
       </div>
     </div>
   );
