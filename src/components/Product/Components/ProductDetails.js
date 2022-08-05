@@ -24,15 +24,15 @@ export default function ProductDetails({ product, className, miny = false }) {
         component="subtitle2"
         className="font-satoshi text-3xl font-extrabold"
       >
-        {item.name}
+        {item.productName}
       </Typography>
       <div className="flex flex-wrap items-center gap-3">
         <div className="flex flex-wrap items-center gap-2">
           <span className="font-satoshi font-semibold">5.00</span>
-          <ProductRating rating={item.rating} />
+          <ProductRating rating={(item.rate/item.numberOfReviews)||0} />
         </div>
         <Typography component="body2" className="font-satoshi font-semibold ">
-          {item.reviews} reviews
+          {item.numberOfReviews} reviews
         </Typography>
       </div>
       <Typography component="body2" className="font-satoshi font-semibold ">
