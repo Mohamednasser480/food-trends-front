@@ -29,7 +29,7 @@ export default function CustomerReviews({ productId }) {
     <div className="max-w-full py-12" data-aos="fade-down">
       <div className="container">
         <SectionTitle text={"Customer Reviews"} />
-        <WriteAReview rating={overallRating} numberOfReviews={reviews.length} />
+        <WriteAReview rating={overallRating} numberOfReviews={reviews.length} productId={productId} />
         {error ? "" : isLoading ? "Loading..." : <Reviews reviews={reviews} />}
       </div>
     </div>
