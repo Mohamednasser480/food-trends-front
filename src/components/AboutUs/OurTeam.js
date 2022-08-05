@@ -30,7 +30,7 @@ const team = [
     id: 5,
     name: 'Mahmoud Mekky',
     job: 'Frontend Developer',
-    image: '/sisi.jpg',
+    image: '/mekky.jpeg',
   },
 ];
 export default function OurTeam() {
