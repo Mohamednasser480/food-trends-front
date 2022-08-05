@@ -1,7 +1,7 @@
-import { AiOutlineStar } from "react-icons/ai";
 import React from "react";
+import { AiOutlineStar } from "react-icons/ai";
 
-const Wishlist = () => {
+const WishListSidebar = () => {
   return (
     <>
       <AiOutlineStar
@@ -13,4 +13,4 @@ const Wishlist = () => {
   );
 };
 
-export default Wishlist;
+export default WishListSidebar;
