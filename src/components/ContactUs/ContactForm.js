@@ -1,14 +1,18 @@
 import React from 'react';
 import Form, { Input } from '../UI/Form';
 import { useForm } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
+import contactUsSchema from '../../services/form-schemes/contact';
 
 export default function ContactForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
-  // console.log();
+  } = useForm({
+    resolver: joiResolver(contactUsSchema),
+  });
+
   const productNameRegister = { ...register('productName') };
   return (
     <Form
@@ -16,7 +20,6 @@ export default function ContactForm() {
         console.log(d);
       })}
     >
-      <input type="text" {...register('name')} />
       <Input
         register={productNameRegister}
         errors={errors}
