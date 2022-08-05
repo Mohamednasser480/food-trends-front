@@ -1,10 +1,10 @@
-import { AiOutlineStar } from "react-icons/ai";
 import React from "react";
+import { AiOutlineSearch } from "react-icons/ai";
 
-const Wishlist = () => {
+const SearchSidebar = () => {
   return (
     <>
-      <AiOutlineStar
+      <AiOutlineSearch
         size={25}
         cursor={"pointer"}
         className={"transition-all hover:text-green-800"}
@@ -13,4 +13,4 @@ const Wishlist = () => {
   );
 };
 
-export default Wishlist;
+export default SearchSidebar;
