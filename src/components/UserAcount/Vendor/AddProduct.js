@@ -1,14 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Typography, Button } from "../../UI";
 import addProductSchema from "../../../services/form-schemes/add-product";
 import Form, { DragAndDrop, Input, Select, TextArea } from "../../UI/Form";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useDispatch } from "react-redux";
-import {
-  addProduct,
-  deleteProduct,
-} from "../../../store/slices/Vendor/VendorSlice";
+import { addProduct } from "../../../store/slices/Vendor/VendorSlice";
 
 export default function AddProduct() {
   const dispatch = useDispatch();
@@ -20,7 +17,7 @@ export default function AddProduct() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    // resolver: joiResolver(addProductSchema),
+    resolver: joiResolver(addProductSchema),
   });
 
   const addProductRegister = {
