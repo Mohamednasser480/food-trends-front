@@ -1,15 +1,14 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchProducts,
-  getAllProducts,
-} from "../../../store/Products/ProductSlice";
+  productsSelector,
+} from "../../../store/slices/products";
 import TabelComponent from "./TabelComponent";
 
 export default function Products() {
   // get products using useEffect from redux products slice
-  const productsData = useSelector(getAllProducts);
+  const productsData = useSelector(productsSelector);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchProducts());

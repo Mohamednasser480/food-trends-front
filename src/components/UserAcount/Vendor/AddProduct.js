@@ -1,26 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { Typography, Button } from "../../UI";
 import addProductSchema from "../../../services/form-schemes/add-product";
 import Form, { DragAndDrop, Input, Select, TextArea } from "../../UI/Form";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../../../store/slices/vendor";
 
 export default function AddProduct() {
-  // const [productName, setProductName] = useState("");
-  // const [summary, setSummary] = useState("");
-  // const [description, setDescription] = useState("");
-  // const [price, setPrice] = useState(0);
-  // const [weight, setWeight] = useState(0);
-  // const [discount, setDiscount] = useState(0);
-  // const [inStock, setInStock] = useState(0);
-
-  // const onProductName = (e) => setProductName(e.target.value);
-  // const onSummary = (e) => setSummary(e.target.value);
-  // const onDescription = (e) => setDescription(e.target.value);
-  // const onPrice = (e) => setPrice(e.target.value);
-  // const onWeight = (e) => setWeight(e.target.value);
-  // const onDiscount = (e) => setDiscount(e.target.value);
-  // const onInStock = (e) => setInStock(e.target.value);
+  const dispatch = useDispatch();
 
   const selectOptions = ["Dairy", "Fruits", "Bakery", "Meat"];
 
@@ -31,11 +19,6 @@ export default function AddProduct() {
   } = useForm({
     resolver: joiResolver(addProductSchema),
   });
-
-  const handleSheck = (e) => {
-    e.preventDefault();
-    console.log("submitted");
-  };
 
   const addProductRegister = {
     productName: { ...register("productName") },
@@ -48,6 +31,22 @@ export default function AddProduct() {
     discount: { ...register("discount") },
   };
 
+  const handle = (e) => {
+    const data = {
+      summary: e.summary,
+      productName: e.productName,
+      images: [
+        "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
+        "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW58ZW58MHx8MHx8&w=1000&q=80",
+      ],
+      description: e.description,
+      inStock: e.inStock,
+      category: e.category,
+      price: e.price,
+    };
+    dispatch(addProduct(data));
+  };
+
   return (
     <>
       <div className="bg-[#f8f9fa] p-10">
@@ -57,8 +56,7 @@ export default function AddProduct() {
         >
           Add New Product
         </Typography>
-
-        <Form onSubmit={handleSubmit((d) => console.log(d))}>
+        <Form onSubmit={handleSubmit((e) => handle(e))}>
           <div className="flex flex-col lg:flex-row">
             <div className="mr-9 flex w-full flex-col rounded-xl bg-white p-10 lg:w-2/3">
               <Typography component="h5">Basic</Typography>
