@@ -4,44 +4,31 @@ import { Input } from '../UI/Form';
 import { useForm } from 'react-hook-form';
 import { Button, Typography } from '../UI';
 import { joiResolver } from '@hookform/resolvers/joi';
-import registerSchema from '../../services/form-schemes/customer-register';
+import vendorRegisterSchema from '../../services/form-schemes/vendor-register';
 import { useDispatch } from 'react-redux';
-// import { registerUser } from "../../store/slices/auth";
 
-export default function Register({ setShowRegister, setShowVendorRegister }) {
-  const dispatch = useDispatch();
-  const handleVendorLogin = () => {
-    setShowVendorRegister(true);
-  };
+const VendorRegister = ({ setShowVendorRegister, setShowRegister }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: joiResolver(registerSchema),
+    resolver: joiResolver(vendorRegisterSchema),
   });
 
-  const singUpRegister = {
-    customerName: { ...register('customerName') },
+  const vendorRegister = {
+    vendorName: { ...register('vendorName') },
     email: { ...register('email') },
     password: { ...register('password') },
+    storeName: { ...register('storeName') },
   };
-
-  const handleCheck = (e) => {
-    e.preventDefault();
-    console.log('test');
-  };
-
-  handleSubmit((user) => {
-    console.log('submitted');
-    // dispatch(registerUser({ email: user.email, password: user.password }));
-  });
 
   return (
     <Form onSubmit={handleSubmit((d) => console.log(d))} className="p-10">
-      <Typography component="h1" className="text-center text-primary">
-        Sign up
+      <Typography component="h2" className="text-center tracking-tight text-primary">
+        Join us as a vendor
       </Typography>
+
       <Typography component="body2" className="my-5 text-center">
         Already have an account?
         <button type="button" className="mx-1 text-black" onClick={() => setShowRegister(false)}>
@@ -49,17 +36,17 @@ export default function Register({ setShowRegister, setShowVendorRegister }) {
         </button>
         instead
       </Typography>
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-y-1">
         <Input
           type="text"
-          register={singUpRegister.customerName}
+          register={vendorRegister.vendorName}
           errors={errors}
           placeholder="Your full name"
-          id="customerName"
+          id="vendorName"
         />
         <Input
           type="text"
-          register={singUpRegister.email}
+          register={vendorRegister.email}
           errors={errors}
           placeholder="Your email"
           id="email"
@@ -67,19 +54,30 @@ export default function Register({ setShowRegister, setShowVendorRegister }) {
         {/**set inpput type email */}
         <Input
           type="password"
-          register={singUpRegister.password}
+          register={vendorRegister.password}
           errors={errors}
           placeholder="Password"
           id="password"
+        />
+
+        <Input
+          type="text"
+          register={vendorRegister.storeName}
+          errors={errors}
+          placeholder="Your store name"
+          id="storeName"
         />
       </div>
 
       <Button variant={'secondary'} type="submit" className="mt-5">
         sign up
       </Button>
-      <button type="button" className="mt-5" onClick={handleVendorLogin}>
-        sign up as a vendor instead?
+
+      <button type="button" onClick={() => setShowVendorRegister(false)}>
+        not a vendor?
       </button>
     </Form>
   );
-}
+};
+
+export default VendorRegister;

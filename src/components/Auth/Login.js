@@ -72,10 +72,13 @@ export default function Login({ setShowRegister }) {
           <Typography component="body2"></Typography>
         </div>
 
-        <Button variant={"secondary"} type="submit" className="mt-10">
-          Login
-        </Button>
-      </Form>
+
+      <Button variant={'secondary'} type="submit" className="mt-5">
+        Login
+      </Button>
+    </Form>
+        
     </div>
+
   );
 }
