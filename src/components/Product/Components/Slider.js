@@ -31,29 +31,38 @@ export default function Slider(props) {
       >
         {props.images.map((img, index) => {
           return (
-            <SwiperSlide key={index}>
+            <SwiperSlide
+              key={index}
+              className="flex max-h-[400px] items-center"
+            >
               <img src={img} />
             </SwiperSlide>
           );
         })}
       </Swiper>
-      <Swiper
-        onSwiper={setThumbsSwiper}
-        loop={true}
-        spaceBetween={10}
-        slidesPerView={props.images.length}
-        watchSlidesProgress={true}
-        modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper mt-3 "
-      >
-        {props.images.map((img, index) => {
-          return (
-            <SwiperSlide key={index}>
-              <img src={img} className={`cursor-pointer border-2`} />
-            </SwiperSlide>
-          );
-        })}
-      </Swiper>
+      {
+        props.images.length>=2&&
+        <Swiper
+          onSwiper={setThumbsSwiper}
+          loop={true}
+          spaceBetween={10}
+          slidesPerView={props.images.length}
+          watchSlidesProgress={true}
+          modules={[FreeMode, Navigation, Thumbs]}
+          className="mySwiper mt-3 "
+        >
+          {props.images.map((img, index) => {
+            return (
+              <SwiperSlide
+                key={index}
+                className="flex !h-[150px]   items-center"
+              >
+                <img src={img} className={`cursor-pointer border-2`} />
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      }
     </div>
   );
 }

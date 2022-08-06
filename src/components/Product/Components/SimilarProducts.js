@@ -140,7 +140,7 @@ export default function SimilarProducts() {
       <div className="container relative w-full py-6">
         <Swiper
           spaceBetween={20}
-          slidesPerView={2}
+          slidesPerView={1}
           modules={[Navigation, Scrollbar]}
           navigation={{
             nextEl: ".swiper-next ",

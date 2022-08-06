@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
+import { reviewService } from "../../services/api";
 // Initialize State
 const initialState = {
   reviews: [],
@@ -11,38 +11,16 @@ const initialState = {
 export const fetchReviews = createAsyncThunk(
   "reviews/fetchReviews",
   async (productId, thunkAPI) => {
-    try {
-      const response = await axios.get(
-        `http://localhost:5000/api/v1/products/62ec2218345c4dcec1b0c240/reviews`
-      );
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
+    return await reviewService.fetchReviewsById(productId);
   }
 );
 // Add Review
 export const addReview = createAsyncThunk(
   "reviews/addReview",
   async (args, thunkAPI) => {
-    const accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmVjMjBiMmQyMTY5NWQwYzc2MjdhZDgiLCJpYXQiOjE2NTk2NDIwMzQsImV4cCI6MTY1OTkwMTIzNH0.2F5vmwPMnZQDmOMedQJPCS22XrE5LjqjLCXcgNWNOW4"; 
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/api/v1/reviews",
-        args,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
-      // console.log(args)
-      thunkAPI.dispatch(fetchReviews())
-      return response.data;
-    } catch (error) {
-      console.log(error)
-      thunkAPI.rejectWithValue(error);
-    }
+    const token=thunkAPI.getState().auth.token;
+    await reviewService.addReview(args,token);
+    return thunkAPI.dispatch(fetchReviews(args.product));
   }
 );
 
@@ -61,7 +39,7 @@ const reviews = createSlice({
     },
     [fetchReviews.rejected]: (state, action) => {
       state.isLoading = false;
-      state.error = true;
+      state.error = "Sorry, Can't fetch reviews right now!";
     },
     // Add Review Reducers
     [addReview.pending]: (state, action) => {
@@ -71,12 +49,11 @@ const reviews = createSlice({
       state.isLoading = false;
       // console.log(action.payload)
       // state.reviews.push({...action.payload,});
-      
     },
     [addReview.rejected]: (state, action) => {
       state.isLoading = false;
-      state.error = true;
-      state.reviews=[];
+      state.error = "Sorry, Can't Add Review right now!";
+      state.reviews = [];
     },
   },
 });

@@ -4,15 +4,15 @@ import { ProductIcons } from ".";
 import { ProductRating } from "../UI";
 
 export default function Product({ productDetails, relative }) {
-  let route = `${relative ? "/shop" : "shop"}/${productDetails.id}`;
+  let route = `${relative ? "/shop" : "shop"}/${productDetails._id}`;
   return (
     <div className="group flex  flex-col gap-3 ">
       <div className="relative overflow-hidden">
         <Link to={route} className=" bg-black">
           <img
             src={productDetails.images[0]}
-            alt={productDetails.name}
-            className="transition-all duration-1000 ease-out hover:scale-110"
+            alt={productDetails.productName}
+            className="transition-all duration-1000 ease-out hover:scale-110 h-[300px] object-cover w-full"
           />
         </Link>
 
@@ -27,14 +27,14 @@ export default function Product({ productDetails, relative }) {
           to={route}
           className="font-satoshi text-lg font-semibold hover:text-primary"
         >
-          {productDetails.name}
+          {productDetails.productName}
         </Link>
         <h4 className="font-satoshi text-lg font-extrabold text-primary">
           ${productDetails.price.toFixed(2)}
         </h4>
 
         <div>
-          <ProductRating rating={productDetails.rating} />
+          <ProductRating rating={(productDetails.rate/productDetails.numberOfReviews)||0} />
         </div>
       </div>
     </div>

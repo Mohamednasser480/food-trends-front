@@ -10,6 +10,7 @@ import WriteAReview from "./Components/WriteAReview";
 import ReviewForm from "./Components/ReviewForm";
 import ReviewItem from "./Components/ReviewItem";
 import Reviews from "./Components/Reviews";
+import ReviewLoader from "./Components/reviewLoader";
 export default Product;
 export {
   ImageSection,
@@ -23,4 +24,5 @@ export {
   ReviewForm,
   ReviewItem,
   Reviews,
+  ReviewLoader,
 };

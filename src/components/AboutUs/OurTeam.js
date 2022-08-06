@@ -46,7 +46,7 @@ export default function OurTeam() {
               <img
                 src={require('../../assets' + member.image)}
                 alt=""
-                className="w-full px-5 md:h-3/4 md:p-0"
+                className="px-5 md:h-3/4 md:p-0"
               />
               <Typography component={'h6'} className="pt-8">
                 {member.name}
