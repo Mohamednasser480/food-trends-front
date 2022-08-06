@@ -1,18 +1,19 @@
 import axios from "axios";
+const API_URI = process.env.REACT_APP_API_URI;
+const PRODUCTS_API_URI = `${API_URI}/products`;
+const REVIEWS_API_URI = `${API_URI}/reviews`;
 
-const accessToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmVkN2Y4ZjBlNGEyOTc0MmNiYTkyMmMiLCJpYXQiOjE2NTk3MzE4NTUsImV4cCI6MTY1OTk5MTA1NX0.tOMKnVocs68gTXKvepMWhrnQ2-UD6oZInrhtnhHS5co";
 
 const fetchReviewsById = async (productId) => {
     const response = await axios.get(
-      `http://localhost:5000/api/v1/products/${productId}/reviews`
+      `${PRODUCTS_API_URI}/${productId}/reviews`
     );
     return response.data;
 };
 
-const addReview = async (reviewDetails) => {
+const addReview = async (reviewDetails,accessToken) => {
     const response = await axios.post(
-      "http://localhost:5000/api/v1/reviews",
+      REVIEWS_API_URI,
       reviewDetails,
       {
         headers: {
