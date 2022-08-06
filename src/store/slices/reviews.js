@@ -11,11 +11,7 @@ const initialState = {
 export const fetchReviews = createAsyncThunk(
   "reviews/fetchReviews",
   async (productId, thunkAPI) => {
-    try {
       return await reviewService.fetchReviewsById(productId);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
   }
 );
 // Add Review
