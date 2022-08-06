@@ -10,7 +10,7 @@ import {
 import { IoPerson } from 'react-icons/io5';
 import { AiOutlineTransaction } from 'react-icons/ai';
 
-const userType = 'vendor';
+const userType = 'customer';
 
 export default function AcountNav({ onNavClick, content }) {
   const [activeButton, setActiveButton] = useState(content);
