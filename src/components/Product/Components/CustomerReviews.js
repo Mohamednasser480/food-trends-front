@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { SectionTitle } from "../../UI";
-import { Reviews, WriteAReview } from "../";
+import { Reviews, WriteAReview,ReviewLoader } from "../";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchReviews, reviewsSelector } from "../../../store/slices/reviews";
 import Skeleton from "react-loading-skeleton";
@@ -41,12 +41,15 @@ export default function CustomerReviews({ productId }) {
           productId={productId}
         />
         {error ? (
-          ""
+          <>
+            <h4 className="my-2">Sorry , Can't Fetch Reviews right now!</h4>
+          </>
         ) : isLoading ? (
-          <Skeleton count={5} height="40px" className="mb-3" />
+          <ReviewLoader/>
         ) : (
           <Reviews reviews={reviews} />
         )}
+      
       </div>
     </div>
   );
