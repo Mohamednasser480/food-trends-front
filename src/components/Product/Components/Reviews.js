@@ -1,6 +1,7 @@
 import React from "react";
 import { ReviewItem } from "../";
 export default function Reviews({ reviews }) {
+  console.log(reviews)
   return (
     <section className="py-5">
       {reviews.length ? (
@@ -15,8 +16,8 @@ export default function Reviews({ reviews }) {
               image={item.customer.image}
               rating={item.rating}
               date={new Date(item.createdAt)}
-              reviewTitle={item.comment}
-              reviewBody={item.comment}
+              reviewTitle={item.title}
+              reviewBody={item.body}
             />
           );
         })}

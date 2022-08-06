@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import Layout from "./components/Layout";
 import {
   Home,
@@ -9,28 +10,19 @@ import {
   ProductPage,
 } from "./routes";
 import { Routes, Route } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { cartActions } from "./store";
 import Aos from "aos";
-
-let isInitial = true;
+import { cookie } from "./services";
+import { getUserData } from "./store/slices/auth";
 
 function App() {
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart.items);
-
   useEffect(() => {
-    dispatch(cartActions.fetchCartItems());
-  }, []);
-
-  useEffect(() => {
-    if (!isInitial) {
-      dispatch(cartActions.saveCartItems(cartItems));
+    const token = cookie.getCookie("token");
+    if (token) {
+      dispatch(getUserData(token));
     }
-    isInitial = false;
-  }, [cartItems]);
-
-  // Iniate Animation
+  }, []);
+  // Initiate Animation
   Aos.init({
     once: "true",
   });
