@@ -33,6 +33,10 @@ const authSlice = createSlice({
         state.status = "idle";
         state.token = "";
       })
+      .addCase(logout.rejected, (state, { error }) => {
+        state.status = "error";
+        state.error = error;
+      })
       .addCase(getUserData.fulfilled, (state, { payload }) => {
         state.status = "succeeded";
         state.token = payload.token;
@@ -84,4 +88,5 @@ export const registerUser = createAsyncThunk(
 export default authSlice;
 export const selectUserToken = (state) => state.auth.token;
 export const selectUserData = (state) => state.auth.user;
+export const selectStatus = (state) => state.auth.status;
 export const authReducer = authSlice.reducer;
