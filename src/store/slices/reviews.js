@@ -38,7 +38,7 @@ const reviews = createSlice({
     },
     [fetchReviews.rejected]: (state, action) => {
       state.isLoading = false;
-      state.error = true;
+      state.error = "Sorry, Can't fetch reviews right now!";
     },
     // Add Review Reducers
     [addReview.pending]: (state, action) => {
@@ -51,7 +51,7 @@ const reviews = createSlice({
     },
     [addReview.rejected]: (state, action) => {
       state.isLoading = false;
-      state.error = "true";
+      state.error = "Sorry, Can't Add Review right now!";
       state.reviews = [];
     },
   },

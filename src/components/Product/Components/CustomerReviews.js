@@ -42,7 +42,7 @@ export default function CustomerReviews({ productId }) {
         />
         {error ? (
           <>
-            <h4 className="my-2">Sorry , Can't Fetch Reviews right now!</h4>
+            <h4 className="my-2">{error}</h4>
           </>
         ) : isLoading ? (
           <ReviewLoader/>
