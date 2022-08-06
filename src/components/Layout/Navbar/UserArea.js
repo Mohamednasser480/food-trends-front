@@ -33,7 +33,7 @@ export default function UserArea(props) {
           <Modal
             show={showLoginModal}
             setShow={setShowLoginModal}
-            className="h-2/3 rounded-xl lg:w-1/4"
+            className="mx-3 h-[600px] w-[440px] rounded-xl"
           >
             <Auth />
           </Modal>

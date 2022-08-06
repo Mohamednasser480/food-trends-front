@@ -4,15 +4,14 @@ import { Input } from '../UI/Form';
 import { useForm } from 'react-hook-form';
 import { Button, Typography } from '../UI';
 import { joiResolver } from '@hookform/resolvers/joi';
-import registerSchema from '../../services/form-schemes/register';
+import registerSchema from '../../services/form-schemes/customer-register';
 import { useDispatch } from 'react-redux';
 // import { registerUser } from "../../store/slices/auth";
 
-export default function Register({ setShowRegister }) {
+export default function Register({ setShowRegister, setShowVendorRegister }) {
   const dispatch = useDispatch();
-  const [vendorRegister, setVendorRegister] = useState(false);
   const handleVendorLogin = () => {
-    setVendorRegister(true);
+    setShowVendorRegister(true);
   };
   const {
     register,
@@ -22,25 +21,28 @@ export default function Register({ setShowRegister }) {
     resolver: joiResolver(registerSchema),
   });
 
-  const loginRegister = {
-    name: { ...register('name') },
+  const singUpRegister = {
+    customerName: { ...register('customerName') },
     email: { ...register('email') },
     password: { ...register('password') },
-    storeName: { ...register('storeName') },
   };
 
+  const handleCheck = (e) => {
+    e.preventDefault();
+    console.log('test');
+  };
+
+  handleSubmit((user) => {
+    console.log('submitted');
+    // dispatch(registerUser({ email: user.email, password: user.password }));
+  });
+
   return (
-    <Form
-      onSubmit={handleSubmit((user) => {
-        console.log('submitted');
-        // dispatch(registerUser({ email: user.email, password: user.password }));
-      })}
-      className="p-10"
-    >
+    <Form onSubmit={handleSubmit((d) => console.log(d))} className="p-10">
       <Typography component="h1" className="text-center text-primary">
         Sign up
       </Typography>
-      <Typography component="body2" className="mt-5 text-center">
+      <Typography component="body2" className="my-5 text-center">
         Already have an account?
         <button type="button" className="mx-1 text-black" onClick={() => setShowRegister(false)}>
           Sign in
@@ -50,14 +52,14 @@ export default function Register({ setShowRegister }) {
       <div className="flex flex-col">
         <Input
           type="text"
-          register={loginRegister.name}
+          register={singUpRegister.customerName}
           errors={errors}
           placeholder="Your full name"
-          id="name"
+          id="customerName"
         />
         <Input
           type="text"
-          register={loginRegister.email}
+          register={singUpRegister.email}
           errors={errors}
           placeholder="Your email"
           id="email"
@@ -65,28 +67,17 @@ export default function Register({ setShowRegister }) {
         {/**set inpput type email */}
         <Input
           type="password"
-          register={loginRegister.password}
+          register={singUpRegister.password}
           errors={errors}
           placeholder="Password"
           id="password"
         />
-        {vendorRegister ? (
-          <Input
-            type="text"
-            register={loginRegister.storeName}
-            errors={errors}
-            placeholder="Your store name"
-            id="storeName"
-          />
-        ) : (
-          ''
-        )}
       </div>
 
-      <Button variant={'secondary'} type="submit" className="mt-10">
+      <Button variant={'secondary'} type="submit" className="mt-5">
         sign up
       </Button>
-      <button type="button" onClick={handleVendorLogin}>
+      <button type="button" className="mt-5" onClick={handleVendorLogin}>
         sign up as a vendor instead?
       </button>
     </Form>

@@ -25,7 +25,7 @@ export default function Login({ setShowRegister }) {
       <Typography component="h1" className="text-center text-primary">
         Sign in
       </Typography>
-      <Typography component="body2" className="mt-5 text-center">
+      <Typography component="body2" className="my-5 text-center">
         Don't have an account yet?
         <button type="button" className="mx-1 text-black" onClick={() => setShowRegister(true)}>
           Sign up
@@ -54,7 +54,7 @@ export default function Login({ setShowRegister }) {
         <Typography component="body2"></Typography>
       </div>
 
-      <Button variant={'secondary'} type="submit" className="mt-10">
+      <Button variant={'secondary'} type="submit" className="mt-5">
         Login
       </Button>
     </Form>
