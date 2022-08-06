@@ -14,7 +14,7 @@ export const fetchReviews = createAsyncThunk(
     try {
       return await reviewService.fetchReviewsById(productId);
     } catch (error) {
-      thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
@@ -25,8 +25,8 @@ export const addReview = createAsyncThunk(
     try {
       return await reviewService.addReview(args);
     } catch (error) {
-      console.log(error);
-      thunkAPI.rejectWithValue(error);
+      // console.log(error);
+      return thunkAPI.rejectWithValue(error);
     } finally {
       thunkAPI.dispatch(fetchReviews(args.product));
     }
