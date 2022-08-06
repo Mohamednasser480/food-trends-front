@@ -3,7 +3,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 export default function ReviewLoader() {
-  let arr = [1, 2, 3, 4, 5];
+  let arr = [1, 2];
   return (
     <>
       <div className="flex flex-col gap-2">
