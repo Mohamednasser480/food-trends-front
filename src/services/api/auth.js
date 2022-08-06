@@ -31,7 +31,7 @@ const register = async (newUser) => {
 };
 
 const logout = async (token) => {
-  const res = await axios.post(LOGOUT_API_URI, {
+  const res = await axios.post(LOGOUT_API_URI, null, {
     headers: { Authorization: "Bearer " + token },
   });
   return res.data;
