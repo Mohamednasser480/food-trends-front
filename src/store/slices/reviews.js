@@ -18,7 +18,8 @@ export const fetchReviews = createAsyncThunk(
 export const addReview = createAsyncThunk(
   "reviews/addReview",
   async (args, thunkAPI) => {
-    await reviewService.addReview(args);
+    const token=thunkAPI.getState().auth.token;
+    await reviewService.addReview(args,token);
     return thunkAPI.dispatch(fetchReviews(args.product));
   }
 );
