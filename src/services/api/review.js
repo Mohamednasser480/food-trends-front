@@ -11,7 +11,6 @@ const fetchReviewsById = async (productId) => {
 };
 
 const addReview = async (reviewDetails) => {
-  try{
     const response = await axios.post(
       "http://localhost:5000/api/v1/reviews",
       reviewDetails,
@@ -22,10 +21,6 @@ const addReview = async (reviewDetails) => {
       }
     );
     return response.data;
-  } catch (error) {
-    throw error;
-  }
-
 };
 
 export default { fetchReviewsById, addReview };

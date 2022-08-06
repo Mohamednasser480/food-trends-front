@@ -11,21 +11,15 @@ const initialState = {
 export const fetchReviews = createAsyncThunk(
   "reviews/fetchReviews",
   async (productId, thunkAPI) => {
-      return await reviewService.fetchReviewsById(productId);
+    return await reviewService.fetchReviewsById(productId);
   }
 );
 // Add Review
 export const addReview = createAsyncThunk(
   "reviews/addReview",
   async (args, thunkAPI) => {
-    try {
-      return await reviewService.addReview(args);
-    } catch (error) {
-      // console.log(error);
-      return thunkAPI.rejectWithValue(error);
-    } finally {
-      thunkAPI.dispatch(fetchReviews(args.product));
-    }
+    await reviewService.addReview(args);
+    return thunkAPI.dispatch(fetchReviews(args.product));
   }
 );
 
@@ -57,7 +51,7 @@ const reviews = createSlice({
     },
     [addReview.rejected]: (state, action) => {
       state.isLoading = false;
-      state.error = true;
+      state.error = "true";
       state.reviews = [];
     },
   },
