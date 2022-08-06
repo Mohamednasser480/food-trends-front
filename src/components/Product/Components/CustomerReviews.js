@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { SectionTitle } from "../../UI";
-import { Reviews, WriteAReview,ReviewLoader } from "../";
+import { Reviews, WriteAReview, ReviewLoader } from "../";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchReviews, reviewsSelector } from "../../../store/slices/reviews";
 import Skeleton from "react-loading-skeleton";
@@ -26,10 +26,21 @@ export default function CustomerReviews({ productId }) {
     return totalRatingSum / reviews.length;
   }
   useEffect(() => {
+    // get Over all rating
     setOverallRating(getOverALlRating());
+    // Sort Reviews
+    sortReviews();
   }, [reviews]);
 
   let [overallRating, setOverallRating] = useState(0);
+  let [sortedReviews, setSortedReviews] = useState(reviews);
+  function sortReviews() {
+    const sorted = [...reviews];
+    sorted.sort((a, b) => {
+      return new Date(b.updatedAt) - new Date(a.updatedAt);
+    });
+    setSortedReviews(sorted);
+  }
 
   return (
     <div className="max-w-full py-12" data-aos="fade-down">
@@ -45,11 +56,10 @@ export default function CustomerReviews({ productId }) {
             <h4 className="my-2">{error}</h4>
           </>
         ) : isLoading ? (
-          <ReviewLoader/>
+          <ReviewLoader />
         ) : (
-          <Reviews reviews={reviews} />
+          <Reviews reviews={sortedReviews} />
         )}
-      
       </div>
     </div>
   );
