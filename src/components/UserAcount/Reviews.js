@@ -5,20 +5,20 @@ import { CompactTable, SearchBar, Modal, ProductRating } from '../UI';
 
 const userType = 'vendor';
 
-const headers = ['product', 'customer', 'rate', 'date'];
+const headers = ['product', 'number of reviews', 'average rate'];
 
 export default function Reviews() {
-  const [userData, setUserData] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [productReviews, setProductReviews] = useState([]);
   const [ratingValue, setRatingValue] = useState(0);
-  const [currentCustomer, setCurrentCustomer] = useState(null);
+  const [showReviews, setShowReviews] = useState(false);
 
   useEffect(() => {
-    const url = 'https://jsonplaceholder.typicode.com/users';
-
+    const url = 'http://localhost:3000/api/v1/vendor/62ed27f4539b5574cab3f202';
     const fetchData = async () => {
       const response = await fetch(url);
       const json = await response.json();
-      setUserData(json);
+      setProducts(json);
     };
 
     fetchData();
@@ -29,13 +29,19 @@ export default function Reviews() {
     console.log(ratingValue);
   };
 
-  const getCustomerId = (id) => {
+  const getProductId = (id) => {
+    const url = `http://localhost:3000/api/v1/products/${id}/reviews`;
+    const fetchReviews = async () => {
+      const response = await fetch(url);
+      const json = await response.json();
+      setProductReviews(json);
+    };
+    fetchReviews();
     console.log(id);
-    let customer = userData.find((el) => el.id === id);
-    setCurrentCustomer(customer);
+    console.log(productReviews);
+    setShowReviews(true);
   };
 
-  console.log(currentCustomer);
   const reviews = {
     vendor: () => {
       return (
@@ -47,10 +53,10 @@ export default function Reviews() {
             <div className="flex gap-x-6">
               <div className="flex-1 rounded-xl bg-white p-5">
                 <CompactTable
-                  userData={userData}
+                  products={products}
                   headers={headers}
                   buttonContent="details"
-                  onButtonClick={getCustomerId}
+                  onButtonClick={getProductId}
                 />
               </div>
 
@@ -76,17 +82,59 @@ export default function Reviews() {
               </div>
             </div>
           </div>
-          <Modal show={currentCustomer} setShow={setCurrentCustomer}>
-            {currentCustomer && (
-              <div class="card w-96 bg-base-100 shadow-xl">
-                <div class="card-body">
-                  <h2 class="card-title">{currentCustomer.name}</h2>
-                  <p>If a dog chews shoes whose shoes does he choose?</p>
-                  <div class="card-actions justify-end">
-                    <button class="btn btn-primary">Buy Now</button>
-                  </div>
-                </div>
-              </div>
+          <Modal show={showReviews} setShow={setShowReviews} className="h-[800px] w-[1200px]">
+            {showReviews && (
+              <table class="table-compact table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Title</th>
+                    <th>Comment</th>
+                    <th>Customer</th>
+                    <th>Date</th>
+                    <th>Rate</th>
+                  </tr>
+                </thead>
+                {productReviews.map((rev, index) => {
+                  return (
+                    <tbody key={index}>
+                      <tr>
+                        <th>{index + 1}</th>
+                        <td>
+                          <Typography component={'subtitle2'} className="tracking-tight">
+                            {rev.title}
+                          </Typography>
+                        </td>
+                        <td className="">
+                          <Typography component={'body2'} className="tracking-tight !text-black">
+                            {rev.comment}
+                          </Typography>
+                        </td>
+                        <td>{rev.customer.name}</td>
+                        <td>{rev.createdAt}</td>
+                        <td>
+                          <ProductRating
+                            rating={rev.rating}
+                            editable={false}
+                            className="justify-center"
+                          />
+                        </td>
+                      </tr>
+                    </tbody>
+                  );
+                })}
+
+                <tfoot>
+                  <tr>
+                    <th></th>
+                    <th>Title</th>
+                    <th>Comment</th>
+                    <th>Customer</th>
+                    <th>Date</th>
+                    <th>Rate</th>
+                  </tr>
+                </tfoot>
+              </table>
             )}
           </Modal>
         </>
