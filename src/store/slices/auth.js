@@ -9,56 +9,8 @@ const initialState = {
   error: "",
 };
 
-const authSlice = createSlice({
-  name: "auth",
-  initialState,
-  reducers: {},
-  extraReducers: (builder) =>
-    builder
-      .addCase(login.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(login.fulfilled, (state, { payload }) => {
-        console.log(payload);
-        state.status = "succeeded";
-        state.user = payload.user;
-        state.token = payload.token;
-      })
-      .addCase(login.rejected, (state, { error }) => {
-        state.status = "error";
-        state.error = error.message;
-      })
-      .addCase(logout.fulfilled, (state) => {
-        state.user = {};
-        state.status = "idle";
-        state.token = "";
-      })
-      .addCase(logout.rejected, (state, { error }) => {
-        state.status = "error";
-        state.error = error;
-      })
-      .addCase(getUserData.fulfilled, (state, { payload }) => {
-        state.status = "succeeded";
-        state.token = payload.token;
-        state.user = payload.user;
-      })
-      .addCase(registerUser.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(registerUser.fulfilled, (state, { payload: user }) => {
-        state.status = "succeeded";
-        state.loggedIn = true;
-        state.email = user.email;
-        state.token = user.token;
-      })
-      .addCase(registerUser.rejected, (state, { error }) => {
-        state.status = "error";
-        state.error = error.message;
-      }),
-});
-
-export const login = createAsyncThunk("auth/login", async (payload) => {
-  const data = await authService.login(payload.email, payload.password);
+export const login = createAsyncThunk("auth/login", async (user) => {
+  const data = await authService.login(user);
   cookie.setCookie("token", data.token, 3);
   return data;
 });
@@ -66,7 +18,6 @@ export const login = createAsyncThunk("auth/login", async (payload) => {
 export const getUserData = createAsyncThunk(
   "auth/getUserData",
   async (token) => {
-    console.log("token", token);
     return await authService.getUserData(token);
   }
 );
@@ -81,9 +32,62 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (payload) => {
-    return await authService.register(payload);
+    const userData = await authService.register(payload);
+    cookie.setCookie("token", userData.token, 3);
+    return userData;
   }
 );
+
+const authSlice = createSlice({
+  name: "auth",
+  initialState,
+  reducers: {},
+  extraReducers: {
+    // Login Reducers
+    [login.pending]: (state) => {
+      state.status = "loading";
+    },
+    [login.fulfilled]: (state, { payload }) => {
+      console.log(payload);
+      state.status = "succeeded";
+      state.user = payload.user;
+      state.token = payload.token;
+    },
+    [login.rejected]: (state, { error }) => {
+      state.status = "error";
+      state.error = error.message;
+    },
+    // Logout Reducers
+    [logout.fulfilled]: (state) => {
+      state.user = {};
+      state.status = "idle";
+      state.token = "";
+    },
+    [logout.rejected]: (state, { error }) => {
+      state.status = "error";
+      state.error = error;
+    },
+    // Get User Data Reducers
+    [getUserData.fulfilled]: (state, { payload }) => {
+      state.status = "succeeded";
+      state.token = payload.token;
+      state.user = payload.user;
+    },
+    // Register Reducers
+    [registerUser.pending]: (state) => {
+      state.status = "loading";
+    },
+    [registerUser.fulfilled]: (state, { payload: user }) => {
+      state.status = "succeeded";
+      state.user = user.user;
+      state.token = user.token;
+    },
+    [registerUser.rejected]: (state, { error }) => {
+      state.status = "error";
+      state.error = error.message;
+    },
+  },
+});
 
 export default authSlice;
 export const selectUserToken = (state) => state.auth.token;
