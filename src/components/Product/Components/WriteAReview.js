@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ProductRating, Typography } from "../../UI";
 import { TiPencil } from "react-icons/ti";
 import ReviewForm from "./ReviewForm";
+import { useSelector } from "react-redux";
+import { selectStatus } from "../../../store/slices/auth";
 
-export default function WriteAReview({ rating, numberOfReviews,productId }) {
+export default function WriteAReview({ rating, numberOfReviews, productId }) {
+  const userLogged = useSelector(selectStatus);
+  const [isLogged, setIsLogged] = useState(false);
+  
   // TO Be Edited => Control The Review Form To show only If User logged and have purchased the item before.
-  const [isLogged, setIsLogged] = useState(true);
   const [itemPurchased, setItemPurchased] = useState(true);
+
+  useEffect(()=>{
+    setIsLogged(userLogged=="succeeded")
+  },[userLogged])
 
   //DON"T TOUCH! Control On Button Click to Show Form or Warning
   const [writeAReviewShown, setWriteAReviewShown] = useState(false);
@@ -40,7 +48,7 @@ export default function WriteAReview({ rating, numberOfReviews,productId }) {
         <div data-aos="fade" data-aos-duration="700">
           {isLogged && itemPurchased ? (
             // Write a review Form Goes Here
-            <ReviewForm productId={productId}/>
+            <ReviewForm productId={productId} />
           ) : (
             <span className="text-base-400">
               Only logged in customers who have purchased this product may leave
