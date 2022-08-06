@@ -1,12 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { QuantityInput } from "./index";
+import { QuantityInput } from "./";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
 const CartTableRow = (props) => {
   const { cartData, onQuantityInput, onItemRemove } = props;
 
-  const { productId, name, image, price, quantity, stock } = cartData;
+  const { id, productId, name, image, price, quantity, stock } = cartData;
+
+  console.log("quantity", quantity);
+  console.log("price", price);
 
   return (
     <tr>
@@ -30,7 +33,7 @@ const CartTableRow = (props) => {
       <td className="text-bold">${(quantity * price).toFixed(2)}</td>
       <td>
         <button
-          onClick={onItemRemove}
+          onClick={() => onItemRemove(id)}
           className="text-base-400 transition-colors hover:text-error"
         >
           <RiDeleteBin6Line size="18px" />
