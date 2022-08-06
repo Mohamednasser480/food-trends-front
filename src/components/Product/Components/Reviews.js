@@ -1,7 +1,6 @@
 import React from "react";
 import { ReviewItem } from "../";
 export default function Reviews({ reviews }) {
-  console.log(reviews)
   return (
     <section className="py-5">
       {reviews.length ? (
