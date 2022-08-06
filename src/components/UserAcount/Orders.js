@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import OrdersComponent from "./OrdersComponent";
 import { useDispatch } from "react-redux";
-import { fetchOrders } from "../../store/Orders/OrdersSlice";
+import { fetchOrders } from "../../store/slices/orders";
 
 const userType = "vendor";
 
