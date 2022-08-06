@@ -7,9 +7,9 @@ export default function ReviewLoader() {
   return (
     <>
       <div className="flex flex-col gap-2">
-        {arr.map(() => {
+        {arr.map((_,index) => {
           return (
-            <div className="flex flex-wrap items-center  gap-2">
+            <div key={index} className="flex flex-wrap items-center  gap-2">
               <Skeleton circle count={1} height="50px" width="50px" />
               <div className="flex flex-col">
                 <Skeleton width={140} />
