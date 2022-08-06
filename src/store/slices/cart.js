@@ -1,79 +1,119 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { cartService } from "../../services/api";
 
 const initialState = {
-  items: [
-    // {
-    //   id: 0,
-    //   productId: 20,
-    //   name: "product",
-    //   image:
-    //     "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_05.8-90x90.jpg",
-    //   price: 50,
-    //   quantity: 1,
-    //   stock: 300,
-    // },
-    // {
-    //   id: 1,
-    //   productId: 21,
-    //   name: "product",
-    //   image:
-    //     "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_05.8-90x90.jpg",
-    //   price: 50,
-    //   quantity: 1,
-    //   stock: 300,
-    // },
-    // {
-    //   id: 2,
-    //   productId: 55,
-    //   name: "product",
-    //   image:
-    //     "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_05.8-90x90.jpg",
-    //   price: 50,
-    //   quantity: 1,
-    //   stock: 300,
-    // },
-  ],
-  total: 0,
+  id: "",
+  products: [],
+  cartPrice: 0,
+  status: "idle", // "idle" | "loading" | "succeeded" | "failed",
+  error: null,
 };
 
-const cart = createSlice({
+const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    replaceItems(state, { payload: items }) {
-      state.items = items;
+    updateCartItems(state, { payload: items }) {
+      state.items = [...items];
     },
-    updateCartItem(state, { payload: updatedItem }) {
-      const existingCartItemIndex = state.items.findIndex(
-        (item) => item.id === updatedItem.id
-      );
-      const existingCartItem = state.items[existingCartItemIndex];
-      if (updatedItem.quantity === 0) {
-        state.items.splice(existingCartItemIndex, 1);
-        state.totalPrice -= updatedItem.price * existingCartItem.quantity;
-      } else if (!existingCartItem) {
-        state.items.push(updatedItem);
-        state.totalPrice += updatedItem.price * updatedItem.quantity;
-      } else {
+    addCartItem: {
+      reducer(state, { payload: updatedItem }) {
+        const existingCartItemIndex = state.items.findIndex(
+          (item) => item.id === updatedItem.id
+        );
+        const existingCartItem = state.items[existingCartItemIndex];
+        if (!existingCartItem) {
+          state.items.push(updatedItem);
+          state.totalPrice += updatedItem.price * updatedItem.quantity;
+        } else {
+          state.total +=
+            (updatedItem.quantity - existingCartItem.quantity) *
+            updatedItem.price;
+          state.items[existingCartItemIndex].quantity = updatedItem.quantity;
+        }
+      },
+      prepare(id, name, image, price, stock, quantity) {
+        return {
+          payload: {
+            id,
+            name,
+            image,
+            price,
+            stock,
+            quantity,
+          },
+        };
+      },
+    },
+    updateCartItem: {
+      reducer(state, { payload }) {
+        const { id, newQuantity } = payload;
+        const existingCartItemIndex = state.items.findIndex(
+          (item) => item.id === id
+        );
+        const existingCartItem = state.items[existingCartItemIndex];
+        console.log(existingCartItemIndex);
         state.total +=
-          (updatedItem.quantity - existingCartItem.quantity) *
-          updatedItem.price;
-        state.items[existingCartItemIndex].quantity = updatedItem.quantity;
-      }
+          (newQuantity - existingCartItem.quantity) * existingCartItem.price;
+        state.items[existingCartItemIndex].quantity = newQuantity;
+      },
+      prepare(id, quantity) {
+        return {
+          payload: {
+            id,
+            newQuantity: quantity,
+          },
+        };
+      },
     },
+    deleteCartItem(state, { payload: id }) {
+      const existingCartItemIndex = state.items.findIndex(
+        (item) => item.id === id
+      );
+      if (existingCartItemIndex === -1) throw Error("Item doesn't exist");
+      state.items.splice(existingCartItemIndex, 1);
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchCartItems.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchCartItems.fulfilled, (state, { payload: cart }) => {
+        state.status = "succeeded";
+        state.id = cart._id;
+        state.products = [...cart.products];
+        state.cartPrice = cart.cartPrice;
+      })
+      .addCase(fetchCartItems.rejected, (state, { error }) => {
+        state.status = "failed";
+        console.log(error);
+        state.error = error.message;
+      });
   },
 });
 
-const fetchCartItems = () => (dispatch) => {
-  const items = cartService.getItems();
-  dispatch(cartActions.replaceItems(items));
-};
+export const fetchCartItems = createAsyncThunk(
+  "cart/fetchCartItems",
+  async () => {
+    return await cartService.getCartData();
+  }
+);
 
-const saveCartItems = (items) => () => {
-  localStorage.setItem("cartItems", JSON.stringify(items));
-};
+export const saveCartItems = createAsyncThunk(
+  "cart/saveCartItems",
+  async (cart) => {
+    console.log(cart);
+    return await cartService.postCartData(cart);
+  }
+);
 
-export default cart;
-export const cartActions = { ...cart.actions, fetchCartItems, saveCartItems };
-export const cartReducer = cart.reducer;
+export default cartSlice;
+export const { addCartItem, updateCartItem, updateCartItems, deleteCartItem } =
+  cartSlice.actions;
+export const selectAllCartItems = (state) => state.cart.products;
+export const selectTotalPrice = (state) => state.cart.cartPrice;
+export const selectStatus = (state) => state.cart.status;
+export const selectError = (state) => state.cart.error;
+// export const cartActions = { ...cart.actions, fetchCartItems, saveCartItems };
+export const cartReducer = cartSlice.reducer;
