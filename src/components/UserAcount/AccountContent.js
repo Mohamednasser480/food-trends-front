@@ -9,7 +9,7 @@ export default function AccountContent(props) {
     Reviews: <Reviews />,
     'Add product': <AddProduct />,
     wishlist: <Wishlist />,
-    Profile: <Profile />,
+    'My profile': <Profile />,
   };
 
   return (

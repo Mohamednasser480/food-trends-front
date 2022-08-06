@@ -9,6 +9,8 @@ import QauntityBox from "./QauntityBox";
 import Accordion from "./Accordion";
 import Backdrop from "./Backdrop";
 import Sidebar from "./Sidebar";
+import CompactTable from "./CompactTable";
+import SearchBar from "./SearchBar";
 import Loader from "./Loader";
 
 export {
@@ -24,4 +26,6 @@ export {
   Backdrop,
   Sidebar,
   Loader,
+  CompactTable,
+  SearchBar,
 };

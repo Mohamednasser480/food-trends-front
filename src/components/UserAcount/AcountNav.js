@@ -23,7 +23,7 @@ export default function AcountNav({ onNavClick, content }) {
   };
   const buttons = {
     vendor: ['Products', 'Orders', 'Reviews', 'Add product', 'Transactions'],
-    customer: ['Profile', 'Orders', 'Reviews', 'wishlist'],
+    customer: ['My profile', 'My orders', 'wishlist', 'Reviews'],
     delivery: ['Orders'],
   };
   const icons = {
@@ -33,8 +33,9 @@ export default function AcountNav({ onNavClick, content }) {
     'Add product': <FaPlusSquare className="mx-3" />,
     wishlist: <FaStar className="mx-3" />,
     'Live Orders': <FaShoppingCart className="mx-3 " />,
-    Profile: <IoPerson className="mx-3 " />,
+    'My profile': <IoPerson className="mx-3 " />,
     Transactions: <AiOutlineTransaction className="mx-3 " />,
+    'My orders': <FaShoppingCart className="mx-3" />,
   };
 
   return (
