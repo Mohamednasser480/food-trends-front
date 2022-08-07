@@ -25,7 +25,7 @@ const UserProfile = () => {
             alt={userData.name}
           />
         </button>
-        {showMenu ? <UserMenu /> : null}
+        {showMenu ? <UserMenu onClick={() => setShowMenu(false)} /> : null}
       </div>
     ),
     userNotLoggedIn: (

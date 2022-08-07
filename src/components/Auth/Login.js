@@ -25,14 +25,9 @@ export default function Login({ setShowRegister }) {
   };
 
   return (
-    <div className="h-full">
+    <div className="h-full p-8">
       {authStatus === "loading" ? <Loader /> : null}
-      <Form
-        onSubmit={handleSubmit((user) =>
-          dispatch(login({ email: user.email, password: user.password }))
-        )}
-        className="p-8"
-      >
+      <Form onSubmit={handleSubmit((user) => dispatch(login(user)))}>
         <Typography component="h1" className="text-center text-primary">
           Sign in
         </Typography>
@@ -72,13 +67,10 @@ export default function Login({ setShowRegister }) {
           <Typography component="body2"></Typography>
         </div>
 
-
-      <Button variant={'secondary'} type="submit" className="mt-5">
-        Login
-      </Button>
-    </Form>
-        
+        <Button variant="secondary" type="submit" className="mt-5">
+          Login
+        </Button>
+      </Form>
     </div>
-
   );
 }

@@ -2,12 +2,15 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../store/slices/auth";
 
-const UserMenu = () => {
+const UserMenu = (props) => {
   const dispatch = useDispatch();
   const logoutHandler = () => dispatch(logout());
 
   return (
-    <ul className="menu rounded-box absolute top-12 w-48 -translate-x-1/2 bg-white shadow-md">
+    <ul
+      onClick={props.onClick}
+      className="menu rounded-box absolute top-12 w-48 -translate-x-1/2 bg-white shadow-md"
+    >
       <li>
         <a className="capitalize transition-colors hover:bg-black hover:text-white">
           orders
