@@ -36,7 +36,7 @@ const Profile = () => {
       </div>
 
       {/** middle row that holds all data */}
-      <div className="flex max-w-screen-xl items-center justify-center gap-x-6">
+      <div className="flex max-w-screen-xl items-start justify-center gap-x-6">
         <div className="mt-5 flex  h-full w-1/4 flex-col rounded-xl bg-white p-5 shadow-xl">
           <Typography component="h4" className="text-primary">
             saved address
