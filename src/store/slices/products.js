@@ -98,5 +98,5 @@ const productsSlice = createSlice({
 export const productsSelector = (state) => state.products.products;
 export const currentProductSelector = (state) => state.products.currentProduct;
 export const currentReviewsSelector = (state) => state.products.currentReviews;
-export const currentProductStatusSelector=(state)=>state.products.status;
+export const productsStatusSelector=(state)=>state.products.status;
 export default productsSlice.reducer;

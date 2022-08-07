@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
   currentProductSelector,
-  currentProductStatusSelector,
   getProductById,
+  productsStatusSelector,
 } from "../../store/slices/products";
 import { Breadcrumb, Loader } from "../UI";
 import {
@@ -18,7 +18,7 @@ export default function Product() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const product = useSelector(currentProductSelector);
-  const productStatus = useSelector(currentProductStatusSelector);
+  const productStatus = useSelector(productsStatusSelector);
 
   useEffect(() => {
     dispatch(getProductById(id));
@@ -49,7 +49,7 @@ export default function Product() {
           <CustomerReviews productId={id} />
         </div>
       ) : (
-        ""
+        "Error! Can't Fetch Page."
       )}
     </>
   );
