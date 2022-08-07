@@ -1,9 +1,16 @@
-const Radio = () => {
+const Radio = ({ name, className, children, checked, onChange, value }) => {
   return (
-    <>
-      <input type="radio" name="radio-4" className="radio radio-accent" checked />
-      <input type="radio" name="radio-4" className="radio radio-accent" />
-    </>
+    <div className="mx-2 flex items-center">
+      <input
+        type="radio"
+        name={name}
+        className={`radio radio-accent ${className}`}
+        onChange={onChange}
+        checked={checked === value}
+        value={value}
+      />
+      <h3 className="mx-2 text-lg">{children}</h3>
+    </div>
   );
 };
 
