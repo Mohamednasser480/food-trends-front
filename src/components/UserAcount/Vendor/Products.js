@@ -4,7 +4,7 @@ import {
   fetchProducts,
   productsSelector,
 } from "../../../store/slices/products";
-import TabelComponent from "./TabelComponent";
+import ProductsComponent from "./ProductsComponent";
 
 export default function Products() {
   // get products using useEffect from redux products slice
@@ -20,11 +20,6 @@ export default function Products() {
       <table className="table-compact table w-full">
         <thead>
           <tr>
-            <th>
-              <label>
-                <input type="checkbox" className="checkbox" />
-              </label>
-            </th>
             <th>Name</th>
             <th>Description</th>
             <th>Price</th>
@@ -33,7 +28,7 @@ export default function Products() {
         </thead>
         {React.Children.toArray(
           productsData.map((pro) => {
-            return <TabelComponent {...pro} />;
+            return <ProductsComponent {...pro} />;
           })
         )}
       </table>
