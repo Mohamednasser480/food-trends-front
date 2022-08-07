@@ -1,21 +1,16 @@
 import React from "react";
 
-const TabelComponent = ({
+const ProductsComponent = ({
   productName,
   images,
   price,
   category,
   description,
-  summry,
+  summary,
 }) => {
   return (
     <tbody>
       <tr>
-        <th>
-          <label>
-            <input type="checkbox" className="checkbox" />
-          </label>
-        </th>
         <td>
           <div className="flex items-center space-x-3">
             <div className="avatar">
@@ -31,14 +26,19 @@ const TabelComponent = ({
             </div>
           </div>
         </td>
-        <td>
-          {description}
+        <td className="w-12 max-w-lg truncate">
+          <span>{description}</span>
           <br />
-          <span className="badge badge-sm badge-ghost">{summry}</span>
+          <span className="badge badge-sm badge-ghost mr-4">{summary}</span>
         </td>
         <td>${price}</td>
         <th>
-          <button className="  btn btn-ghost btn-xs hover:bg-red-500 hover:text-white	">
+          <button
+            className="  btn btn-ghost btn-xs hover:bg-red-500 hover:text-white	"
+            onClick={(e) => {
+              console.log(e.target);
+            }}
+          >
             delete
           </button>{" "}
           <button className="btn btn-ghost btn-xs hover:bg-blue-500 hover:text-white	">
@@ -50,4 +50,4 @@ const TabelComponent = ({
   );
 };
 
-export default TabelComponent;
+export default ProductsComponent;

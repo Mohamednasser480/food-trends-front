@@ -1,5 +1,6 @@
-import Button from './Button';
-import Typography from './Typography';
+import React from "react";
+import Button from "./Button";
+import Typography from "./Typography";
 
 const CompactTable = ({ products, headers, buttonContent, onButtonClick }) => {
   return (
@@ -20,20 +21,25 @@ const CompactTable = ({ products, headers, buttonContent, onButtonClick }) => {
         </tr>
       </thead>
       <tbody>
-        {products.map((product, index) => (
-          <tr key={product.id}>
-            <th>{index + 1}</th>
-            <td>{product.productName}</td>
-            <td>{product.numberOfReviews}</td>
-            <td>{(product.rate / product.numberOfReviews).toFixed(2)}</td>
-            <td></td>
-            <td>
-              <Button variant="user-account" onClick={() => onButtonClick(product._id)}>
-                {buttonContent}
-              </Button>
-            </td>
-          </tr>
-        ))}
+        {React.Children.toArray(
+          products.map((product, index) => (
+            <tr key={product.id}>
+              <th>{index + 1}</th>
+              <td>{product.productName}</td>
+              <td>{product.numberOfReviews}</td>
+              <td>{(product.rate / product.numberOfReviews).toFixed(2)}</td>
+              <td></td>
+              <td>
+                <Button
+                  variant="user-account"
+                  onClick={() => onButtonClick(product._id)}
+                >
+                  {buttonContent}
+                </Button>
+              </td>
+            </tr>
+          ))
+        )}
       </tbody>
       <tfoot>
         <tr>
