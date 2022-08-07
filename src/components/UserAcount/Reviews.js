@@ -89,7 +89,7 @@ export default function Reviews() {
           >
             {showReviews && (
               <div className="w-full ">
-                <div className="flex bg-primary p-2 text-center font-medium text-white">
+                <div className="flex h-12 items-center bg-primary p-2 text-center font-medium text-white">
                   <p className="w-10"></p>
                   <p className="w-32 break-words">Title</p>
                   <p className="mx-5 w-96">Comment</p>
