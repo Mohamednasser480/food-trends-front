@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import products from "../../services/api/vendor";
+import { cookie } from "../../services";
 
 const initialState = {
   products: [],
@@ -18,7 +19,8 @@ export const fetchVendorProducts = createAsyncThunk(
 //Add Product to database of the vendor
 export const addProduct = createAsyncThunk(
   "vendor/addProduct",
-  async (userToken, data) => {
+  async (data) => {
+    const userToken = cookie.getCookie("token");
     return await products.saveProduct(userToken, data);
   }
 );
@@ -26,7 +28,8 @@ export const addProduct = createAsyncThunk(
 //Delete a product
 export const deleteProduct = createAsyncThunk(
   "vendor/deleteProduct",
-  async (userToken, id) => {
+  async (id) => {
+    const userToken = cookie.getCookie("token");
     return await products.deleteProduct(userToken, id);
   }
 );
@@ -34,7 +37,8 @@ export const deleteProduct = createAsyncThunk(
 //Update a product
 export const updateProduct = createAsyncThunk(
   "vendor/updateProduct",
-  async (userToken, id, data) => {
+  async (id, data) => {
+    const userToken = cookie.getCookie("token");
     return await products.updateProduct(userToken, id, data);
   }
 );
@@ -57,4 +61,5 @@ const productsSlice = createSlice({
 });
 
 export const vendorSelector = (state) => state.vendor.products;
+export const vendorStatusSelector = (state) => state.status;
 export default productsSlice.reducer;
