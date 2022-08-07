@@ -30,12 +30,6 @@ const Wishlist = () => {
         your wishlist
       </Typography>
       <div className="mx-5 flex items-start justify-evenly gap-x-5">
-        {/* <AiOutlineStar
-        size={25}
-        cursor={'pointer'}
-        className={'transition-all hover:text-green-800'}
-      /> */}
-
         <div className="w-full self-center rounded-xl border shadow-lg md:w-[1200px]">
           <div className="flex bg-[#f7f7f7] p-2 text-center font-medium text-black">
             <p className="w-10"></p>
