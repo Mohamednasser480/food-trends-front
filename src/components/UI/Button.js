@@ -1,16 +1,22 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Button = (props) => {
   let variantClasses;
 
-  if (props.variant === "primary") variantClasses = "bg-primary text-white hover:bg-black hover:text-white";
-  if (props.variant === "secondary") variantClasses = "bg-secondary-400 text-primary hover:bg-black hover:text-white";
+  if (props.variant === 'primary')
+    variantClasses =
+      'btn tracking-widest px-7 bg-primary text-white hover:bg-black hover:text-white';
+  if (props.variant === 'secondary')
+    variantClasses =
+      'btn tracking-widest px-7 bg-secondary-400 text-primary hover:bg-black hover:text-white';
+  if (props.variant === 'user-account')
+    variantClasses =
+      'bg-secondary-400 text-primary hover:bg-primary hover:text-white p-1 rounded-lg capitalize mx-2 font-medium';
 
-  const btnClasses =
-    `btn px-7 text-base tracking-widest border-0 no-underline ${variantClasses || ""} ${
-      props.className || ""
-    }`.trim();
+  const btnClasses = `text-base border-0 no-underline ${variantClasses || ''} ${
+    props.className || ''
+  }`.trim();
   if (props.to)
     return (
       <Link onClick={props.onClick} to={props.to} className={btnClasses}>
@@ -18,11 +24,7 @@ const Button = (props) => {
       </Link>
     );
   return (
-    <button
-      type={props.type || "button"}
-      className={btnClasses}
-      onClick={props.onClick}
-    >
+    <button type={props.type || 'button'} className={btnClasses} onClick={props.onClick}>
       {props.children}
     </button>
   );

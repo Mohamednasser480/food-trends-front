@@ -5,20 +5,20 @@ import { CompactTable, SearchBar, Modal, ProductRating } from '../UI';
 
 const userType = 'vendor';
 
-const headers = ['product', 'customer', 'rate', 'date'];
+const headers = ['product', 'number of reviews', 'average rate'];
 
 export default function Reviews() {
-  const [userData, setUserData] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [productReviews, setProductReviews] = useState([]);
   const [ratingValue, setRatingValue] = useState(0);
-  const [currentCustomer, setCurrentCustomer] = useState(null);
+  const [showReviews, setShowReviews] = useState(false);
 
   useEffect(() => {
-    const url = 'https://jsonplaceholder.typicode.com/users';
-
+    const url = 'http://localhost:3000/api/v1/vendor/62ed27f4539b5574cab3f202';
     const fetchData = async () => {
       const response = await fetch(url);
       const json = await response.json();
-      setUserData(json);
+      setProducts(json);
     };
 
     fetchData();
@@ -29,13 +29,19 @@ export default function Reviews() {
     console.log(ratingValue);
   };
 
-  const getCustomerId = (id) => {
+  const getProductId = (id) => {
+    const url = `http://localhost:3000/api/v1/products/${id}/reviews`;
+    const fetchReviews = async () => {
+      const response = await fetch(url);
+      const json = await response.json();
+      setProductReviews(json);
+    };
+    fetchReviews();
     console.log(id);
-    let customer = userData.find((el) => el.id === id);
-    setCurrentCustomer(customer);
+    console.log(productReviews);
+    setShowReviews(true);
   };
 
-  console.log(currentCustomer);
   const reviews = {
     vendor: () => {
       return (
@@ -47,10 +53,10 @@ export default function Reviews() {
             <div className="flex gap-x-6">
               <div className="flex-1 rounded-xl bg-white p-5">
                 <CompactTable
-                  userData={userData}
+                  products={products}
                   headers={headers}
-                  buttonContent="details"
-                  onButtonClick={getCustomerId}
+                  buttonContent="see details"
+                  onButtonClick={getProductId}
                 />
               </div>
 
@@ -76,16 +82,40 @@ export default function Reviews() {
               </div>
             </div>
           </div>
-          <Modal show={currentCustomer} setShow={setCurrentCustomer}>
-            {currentCustomer && (
-              <div class="card w-96 bg-base-100 shadow-xl">
-                <div class="card-body">
-                  <h2 class="card-title">{currentCustomer.name}</h2>
-                  <p>If a dog chews shoes whose shoes does he choose?</p>
-                  <div class="card-actions justify-end">
-                    <button class="btn btn-primary">Buy Now</button>
-                  </div>
+          <Modal
+            show={showReviews}
+            setShow={setShowReviews}
+            className="h-[500px] w-[1000px] overflow-y-auto rounded-lg"
+          >
+            {showReviews && (
+              <div className="w-full ">
+                <div className="flex bg-primary p-2 text-center font-medium text-white">
+                  <p className="w-10"></p>
+                  <p className="w-32 break-words">Title</p>
+                  <p className="mx-5 w-96">Comment</p>
+                  <p className="w-32">Customer</p>
+                  <p className="mr-5 w-32">Date</p>
+                  <p className="w-32">Rate</p>
                 </div>
+
+                {productReviews.map((rev, index) => {
+                  return (
+                    <div className="flex w-full items-center border-b p-2" key={index}>
+                      <p className="w-10 font-medium">{index + 1}</p>
+                      <p className="w-32 break-words">{rev.title}</p>
+                      <p className="mx-5 w-96">{rev.comment}</p>
+                      <p className="w-32">{rev.customer.name}</p>
+                      <p className="mr-5 w-32">{rev.createdAt}</p>
+                      <p className="w-32">
+                        <ProductRating
+                          rating={rev.rating}
+                          editable={false}
+                          className="justify-center"
+                        />
+                      </p>
+                    </div>
+                  );
+                })}
               </div>
             )}
           </Modal>

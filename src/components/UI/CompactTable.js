@@ -1,7 +1,7 @@
 import Button from './Button';
 import Typography from './Typography';
 
-const CompactTable = ({ userData, headers, buttonContent, onButtonClick }) => {
+const CompactTable = ({ products, headers, buttonContent, onButtonClick }) => {
   return (
     <table className="table-compact table w-full">
       <thead>
@@ -20,16 +20,15 @@ const CompactTable = ({ userData, headers, buttonContent, onButtonClick }) => {
         </tr>
       </thead>
       <tbody>
-        {userData.map((user) => (
-          <tr key={user.id}>
-            <th>{user.id}</th>
-            <td>{user.name}</td>
-            <td>{user.address.street}</td>
-            <td>{user.username}</td>
-            <td>{user.company.name}</td>
-            <td>12/16/2020</td>
+        {products.map((product, index) => (
+          <tr key={product.id}>
+            <th>{index + 1}</th>
+            <td>{product.productName}</td>
+            <td>{product.numberOfReviews}</td>
+            <td>{(product.rate / product.numberOfReviews).toFixed(2)}</td>
+            <td></td>
             <td>
-              <Button variant="secondary" onClick={() => onButtonClick(user.id)}>
+              <Button variant="user-account" onClick={() => onButtonClick(product._id)}>
                 {buttonContent}
               </Button>
             </td>
