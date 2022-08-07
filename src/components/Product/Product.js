@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
   currentProductSelector,
+  currentProductStatusSelector,
   getProductById,
-  productsStatusSelector,
 } from "../../store/slices/products";
 import { Breadcrumb, Loader } from "../UI";
 import {
@@ -18,11 +18,11 @@ export default function Product() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const product = useSelector(currentProductSelector);
-  const productStatus = useSelector(productsStatusSelector);
+  const productStatus = useSelector(currentProductStatusSelector);
 
   useEffect(() => {
     dispatch(getProductById(id));
-  }, []);
+  }, [id]);
 
   // Scroll to Top on Page Load
   function ScrollToTop() {
@@ -37,15 +37,16 @@ export default function Product() {
   return (
     <>
       <Breadcrumb />
+
       {productStatus == "Pending" ? (
-        <Loader/>
+        <Loader />
       ) : productStatus == "Fulfilled" ? (
-        <div className=" flex flex-col  flex-wrap justify-center gap-2 ">
+        <div className=" flex flex-col  flex-wrap justify-center gap-2 mt-8">
           <div className="container flex  flex-wrap justify-center gap-2 pb-10">
             <ImageSection productImages={product.images} />
             <ProductDetails product={product} />
           </div>
-          <SimilarProducts />
+          <SimilarProducts productCategory={product.category} id={id}  />
           <CustomerReviews productId={id} />
         </div>
       ) : (
