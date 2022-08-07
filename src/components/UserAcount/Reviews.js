@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Typography } from '../UI';
 import Checkbox from '../UI/Form/Checkbox';
 import { CompactTable, SearchBar, Modal, ProductRating } from '../UI';
-
-const userType = 'vendor';
+import { useSelector } from 'react-redux/es/exports';
+import { selectUserData } from '../../store/slices/auth';
 
 const headers = ['product', 'number of reviews', 'average rate'];
 
@@ -23,6 +23,8 @@ export default function Reviews() {
 
     fetchData();
   }, []);
+
+  const { userType } = useSelector(selectUserData);
 
   const getRatingValue = (value) => {
     setRatingValue(value);
@@ -123,7 +125,7 @@ export default function Reviews() {
       );
     },
     customer: () => {
-      // return userData.map((user) => <div key={user.id}>{user.id}</div>);
+      return <div>customer reviews</div>;
     },
     delivery: () => {
       return <div>delivery</div>;
