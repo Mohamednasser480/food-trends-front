@@ -55,7 +55,7 @@ export default function Reviews() {
                 <CompactTable
                   products={products}
                   headers={headers}
-                  buttonContent="details"
+                  buttonContent="see details"
                   onButtonClick={getProductId}
                 />
               </div>
@@ -82,59 +82,41 @@ export default function Reviews() {
               </div>
             </div>
           </div>
-          <Modal show={showReviews} setShow={setShowReviews} className="h-[800px] w-[1200px]">
+          <Modal
+            show={showReviews}
+            setShow={setShowReviews}
+            className="h-[500px] w-[1000px] overflow-y-auto rounded-lg"
+          >
             {showReviews && (
-              <table class="table-compact table">
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th>Title</th>
-                    <th>Comment</th>
-                    <th>Customer</th>
-                    <th>Date</th>
-                    <th>Rate</th>
-                  </tr>
-                </thead>
+              <div className="w-full ">
+                <div className="flex bg-primary p-2 text-center font-medium text-white">
+                  <p className="w-10"></p>
+                  <p className="w-32 break-words">Title</p>
+                  <p className="mx-5 w-96">Comment</p>
+                  <p className="w-32">Customer</p>
+                  <p className="mr-5 w-32">Date</p>
+                  <p className="w-32">Rate</p>
+                </div>
+
                 {productReviews.map((rev, index) => {
                   return (
-                    <tbody key={index}>
-                      <tr>
-                        <th>{index + 1}</th>
-                        <td>
-                          <Typography component={'subtitle2'} className="tracking-tight">
-                            {rev.title}
-                          </Typography>
-                        </td>
-                        <td className="">
-                          <Typography component={'body2'} className="tracking-tight !text-black">
-                            {rev.comment}
-                          </Typography>
-                        </td>
-                        <td>{rev.customer.name}</td>
-                        <td>{rev.createdAt}</td>
-                        <td>
-                          <ProductRating
-                            rating={rev.rating}
-                            editable={false}
-                            className="justify-center"
-                          />
-                        </td>
-                      </tr>
-                    </tbody>
+                    <div className="flex w-full items-center border-b p-2" key={index}>
+                      <p className="w-10 font-medium">{index + 1}</p>
+                      <p className="w-32 break-words">{rev.title}</p>
+                      <p className="mx-5 w-96">{rev.comment}</p>
+                      <p className="w-32">{rev.customer.name}</p>
+                      <p className="mr-5 w-32">{rev.createdAt}</p>
+                      <p className="w-32">
+                        <ProductRating
+                          rating={rev.rating}
+                          editable={false}
+                          className="justify-center"
+                        />
+                      </p>
+                    </div>
                   );
                 })}
-
-                <tfoot>
-                  <tr>
-                    <th></th>
-                    <th>Title</th>
-                    <th>Comment</th>
-                    <th>Customer</th>
-                    <th>Date</th>
-                    <th>Rate</th>
-                  </tr>
-                </tfoot>
-              </table>
+              </div>
             )}
           </Modal>
         </>

@@ -55,7 +55,7 @@ const Profile = () => {
             Governate
           </Typography>
 
-          <Button variant="secondary" className="my-3 self-center">
+          <Button variant="user-account" className="my-3 self-center">
             Edit Address
           </Button>
         </div>

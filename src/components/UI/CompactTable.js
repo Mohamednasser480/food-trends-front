@@ -28,7 +28,7 @@ const CompactTable = ({ products, headers, buttonContent, onButtonClick }) => {
             <td>{(product.rate / product.numberOfReviews).toFixed(2)}</td>
             <td></td>
             <td>
-              <Button variant="secondary" onClick={() => onButtonClick(product._id)}>
+              <Button variant="user-account" onClick={() => onButtonClick(product._id)}>
                 {buttonContent}
               </Button>
             </td>
