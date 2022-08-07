@@ -25,7 +25,7 @@ export default function ProductIcons(props) {
       <Modal
         show={isShown}
         setShow={setIsShown}
-        className="h-fit w-full lg:w-3/4 xl:w-1/2  "
+        className="h-fit w-full lg:w-3/4 xl:w-1/2  p-5"
       >
         <QuickviewProduct productInfo={props.productDetails} />
       </Modal>

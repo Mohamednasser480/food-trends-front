@@ -16,7 +16,7 @@ export default function Reviews({ reviews }) {
               rating={item.rating}
               date={new Date(item.createdAt)}
               reviewTitle={item.title}
-              reviewBody={item.body}
+              reviewBody={item.comment}
             />
           );
         })}

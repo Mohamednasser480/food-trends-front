@@ -1,6 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Breadcrumb } from "../UI";
+import {
+  currentProductSelector,
+  currentProductStatusSelector,
+  getProductById,
+} from "../../store/slices/products";
+import { Breadcrumb, Loader } from "../UI";
 import {
   ImageSection,
   ProductDetails,
@@ -10,29 +16,13 @@ import {
 
 export default function Product() {
   const { id } = useParams();
+  const dispatch = useDispatch();
+  const product = useSelector(currentProductSelector);
+  const productStatus = useSelector(currentProductStatusSelector);
 
-  // Fetch Item Here and send each Details to Components
-  // Placeholder Product
-  let product = {
-    id: id,
-    name: "Lemon (1kg)",
-    summary:
-      "Lots of juice and a bright, clear, tart flavor that is suprisingly low in acid. The rind has lots of tang with a bitter note thrown in.",
-    description:
-      "Lots of juice and a bright, clear, tart flavor that is suprisingly low in acid. The rind has lots of tang with a bitter note thrown in.",
-    images: [
-      "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04.1-690x690.jpg",
-      "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04.2-690x690.jpg",
-      "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04.3-690x690.jpg",
-      "https://ecomm.thememove.com/organic/wp-content/uploads/sites/23/2021/10/organic_fruits_veggies_04_detail-690x690.jpg",
-    ],
-    category: "Vegetables",
-    price: 30.59,
-    inStock: 337,
-    discount: "0.00",
-    vendor: "Mahmoud Meky",
-    rating: 3,
-  };
+  useEffect(() => {
+    dispatch(getProductById(id));
+  }, [id]);
 
   // Scroll to Top on Page Load
   function ScrollToTop() {
@@ -46,15 +36,22 @@ export default function Product() {
 
   return (
     <>
-      <Breadcrumb />;
-      <div className=" flex flex-col  flex-wrap justify-center gap-2 ">
-        <div className="container flex  flex-wrap justify-center gap-2 pb-10">
-          <ImageSection productImages={product.images} />
-          <ProductDetails product={product} />
+      <Breadcrumb />
+
+      {productStatus == "Pending" ? (
+        <Loader />
+      ) : productStatus == "Fulfilled" ? (
+        <div className=" flex flex-col  flex-wrap justify-center gap-2 mt-8">
+          <div className="container flex  flex-wrap justify-center gap-2 pb-10">
+            <ImageSection productImages={product.images} />
+            <ProductDetails product={product} />
+          </div>
+          <SimilarProducts productCategory={product.category} id={id}  />
+          <CustomerReviews productId={id} />
         </div>
-        <SimilarProducts />
-        <CustomerReviews productId={product.id} />
-      </div>
+      ) : (
+        "Error! Can't Fetch Page."
+      )}
     </>
   );
 }

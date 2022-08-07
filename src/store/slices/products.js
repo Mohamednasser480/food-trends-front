@@ -5,8 +5,11 @@ const initialState = {
   products: [],
   currentProduct: {},
   currentReviews: [],
+  similiarProducts:[],
   status: null,
   error: null,
+  currentProductStatus:null,
+  similiarProductsStatus:null
 };
 
 //Get All Available Products
@@ -36,10 +39,19 @@ export const getProductReviews = createAsyncThunk(
 // Get most Similar products By Id
 export const getMostSimilar = createAsyncThunk(
   "products/getMostSimilar",
-  async (id) => {
-    return await products.getMostSimilar(id);
+  async (category) => {
+    return await products.getMostSimilar(category);
   }
 );
+
+// Get Featured products By Id
+export const getFeaturedProducts = createAsyncThunk(
+  "products/getFeaturedProducts",
+  async () => {
+    return await products.getFeaturedProducts();
+  }
+);
+
 
 const productsSlice = createSlice({
   name: "products",
@@ -59,14 +71,14 @@ const productsSlice = createSlice({
 
     //GetProductById
     [getProductById.pending]: (state) => {
-      state.status = "Pending";
+      state.currentProductStatus = "Pending";
     },
     [getProductById.fulfilled]: (state, { payload }) => {
-      state.status = "Fulfilled";
+      state.currentProductStatus = "Fulfilled";
       state.currentProduct = payload;
     },
     [getProductById.rejected]: (state) => {
-      state.status = "Rejected";
+      state.currentProductStatus = "Rejected";
     },
 
     //GetProductReviews
@@ -83,20 +95,35 @@ const productsSlice = createSlice({
 
     //GetMostSimilar
     [getMostSimilar.pending]: (state) => {
-      state.status = "Pending";
+      state.similiarProductsStatus = "Pending";
     },
     [getMostSimilar.fulfilled]: (state, { payload }) => {
+      state.similiarProductsStatus = "Fulfilled";
+      state.similiarProducts = [...payload];
+    },
+    [getMostSimilar.rejected]: (state) => {
+      state.similiarProductsStatus = "Rejected";
+    },
+
+    //getFeaturedProducts
+    [getFeaturedProducts.pending]: (state) => {
+      state.status = "Pending";
+    },
+    [getFeaturedProducts.fulfilled]: (state, { payload }) => {
       state.status = "Fulfilled";
       state.products = [...payload];
     },
-    [getMostSimilar.rejected]: (state) => {
+    [getFeaturedProducts.rejected]: (state) => {
       state.status = "Rejected";
     },
   },
 });
 
 export const productsSelector = (state) => state.products.products;
+export const similarProductsSelector = (state) => state.products.similiarProducts;
 export const currentProductSelector = (state) => state.products.currentProduct;
 export const currentReviewsSelector = (state) => state.products.currentReviews;
-
+export const productsStatusSelector=(state)=>state.products.status;
+export const currentProductStatusSelector=(state)=>state.products.currentProductStatus;
+export const similarProductsStatusSelector=(state)=>state.products.similiarProductsStatus;
 export default productsSlice.reducer;

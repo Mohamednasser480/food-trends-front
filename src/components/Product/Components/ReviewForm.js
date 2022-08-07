@@ -37,7 +37,7 @@ export default function ReviewForm({ productId }) {
         product: productId, // Add product ID Here
         rating: ratingValue,
         title:reviewTitleRef.current.value,
-        body: reviewBodyRef.current.value,
+        comment: reviewBodyRef.current.value,
       })
     );
     // Empty the inputs

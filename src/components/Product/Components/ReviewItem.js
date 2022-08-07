@@ -11,7 +11,7 @@ TimeAgo.addLocale(ru)
 export default function ReviewItem(props) {
   return (
     <div className="flex flex-col flex-wrap justify-between gap-4 border-b-[1px] py-3 lg:flex-row md:gap-2">
-      <div className="flex  items-center gap-3 mr-4">
+      <div className="flex  items-center gap-3 mr-4  min-w-[200px]">
         <div className="overflow-hidden rounded-full">
           <img src={props.image} width={"50px"} />
         </div>
@@ -26,14 +26,14 @@ export default function ReviewItem(props) {
       </div>
       <div className="ml-2 flex  flex-col gap-1 lg:ml-0 lg:flex-1 ">
         <div className="text-md flex flex-wrap items-center justify-between font-semibold uppercase tracking-wider">
-          <span className=" break-all">
+          <span className="break-words">
           {props.reviewTitle}
           </span>
           <span className="text-sm font-medium text-base-400">
             <ReactTimeAgo date={props.date} locale="en-US" timeStyle="round-minute"/>
           </span>
         </div>
-        <p className="text-base-400 w-full break-all">{props.reviewBody}</p>
+        <p className="text-base-400 w-full break-words">{props.reviewBody}</p>
       </div>
     </div>
   );
