@@ -25,18 +25,22 @@ const VendorRegister = ({ setShowVendorRegister, setShowRegister }) => {
 
   return (
     <Form onSubmit={handleSubmit((d) => console.log(d))} className="p-10">
-      <Typography component="h2" className="text-center tracking-tight text-primary">
+      <Typography component="h2" className="text-center leading-[44px] tracking-tight text-primary">
         Join us as a vendor
       </Typography>
 
       <Typography component="body2" className="my-5 text-center">
         Already have an account?
-        <button type="button" className="mx-1 text-black" onClick={() => setShowRegister(false)}>
+        <button
+          type="button"
+          className="mx-1 mt-4 font-medium capitalize text-black hover:underline"
+          onClick={() => setShowRegister(false)}
+        >
           Sign in
         </button>
         instead
       </Typography>
-      <div className="flex flex-col gap-y-1">
+      <div className="flex flex-col gap-y-3">
         <Input
           type="text"
           register={vendorRegister.vendorName}
@@ -73,7 +77,11 @@ const VendorRegister = ({ setShowVendorRegister, setShowRegister }) => {
         sign up
       </Button>
 
-      <button type="button" onClick={() => setShowVendorRegister(false)}>
+      <button
+        type="button"
+        className="mt-4 font-medium capitalize hover:underline"
+        onClick={() => setShowVendorRegister(false)}
+      >
         not a vendor?
       </button>
     </Form>
