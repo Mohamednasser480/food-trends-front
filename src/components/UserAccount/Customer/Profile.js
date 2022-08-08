@@ -1,18 +1,21 @@
 import { Typography, Button } from '../../UI';
-import hhhh from '../../../assets/userprofile.jpg';
 import Form from '../../UI/Form/Form';
 import Input from '../../UI/Form/Input';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
+import { selectUserData } from '../../../store/slices/auth';
 
 const Profile = () => {
   const {
     register,
     handleSubmit,
-    getValues,
     watch,
     formState: { errors },
   } = useForm({});
 
+  const { name, image, email, mobile, address } = useSelector(selectUserData);
+
+  console.log(address);
   const updatePasswordRegister = {
     oldPassword: { ...register('oldPassword') },
     newPassword: { ...register('newPassword') },
@@ -42,35 +45,64 @@ const Profile = () => {
             saved address
           </Typography>
 
-          <Typography component="body2" className="h-16">
-            Line 1
-          </Typography>
-          <Typography component="body2" className="h-16">
-            Line 2
-          </Typography>
-          <Typography component="body2" className="h-16">
-            City{' '}
-          </Typography>
-          <Typography component="body2" className="h-16">
-            Governate
-          </Typography>
+          {address ? (
+            <div>
+              <Typography component="body2" className="h-16">
+                Line 1
+              </Typography>
+              <Typography component="body2" className="h-16">
+                Line 2
+              </Typography>
+              <Typography component="body2" className="h-16">
+                City{' '}
+              </Typography>
+              <Typography component="body2" className="h-16">
+                Governate
+              </Typography>
 
-          <Button variant="user-account" className="my-3 self-center">
-            Edit Address
-          </Button>
+              <Button variant="user-account" className="my-3 self-center">
+                Edit Address
+              </Button>
+            </div>
+          ) : (
+            <>
+              <Typography component="body2" className="h-16">
+                you do not have a saved address
+              </Typography>
+              <Button variant="user-account" className="my-3 self-center">
+                add address
+              </Button>
+            </>
+          )}
         </div>
         <div className="mt-5 flex w-1/2 flex-col rounded-xl bg-white p-5 shadow-xl">
           <Typography component="h4" className="text-primary">
             account details
           </Typography>
 
-          <img src={hhhh} alt="Profile" className="h-32 w-32 self-center rounded-full bg-red-400" />
+          <img src={image} alt="Profile" className="h-32 w-32 self-center rounded-full" />
 
-          <Typography component="subtitle2">Name</Typography>
+          <Typography component="subtitle2" className="text-center">
+            {name}
+          </Typography>
           <Typography component="subtitle2">contact info</Typography>
-          <Typography component="body2">Phone</Typography>
-          <Typography component="body2">email</Typography>
-          <Typography component="body2">address</Typography>
+          <div className="flex items-center">
+            <Typography component="subtitle2" className="mr-3">
+              Mobile Number:
+            </Typography>
+            <Typography component="subtitle2" className="font-light text-red-500">
+              {mobile}
+            </Typography>
+          </div>
+          <div className="flex items-center">
+            <Typography component="subtitle2" className="mr-3">
+              email:
+            </Typography>
+            <Typography component="subtitle2" className="font-light text-red-500">
+              {email}
+            </Typography>
+          </div>
+
           <Typography component="subtitle2">Payment info</Typography>
           <Button variant="secondary" className="my-3 w-2/5 self-center">
             Edit profile

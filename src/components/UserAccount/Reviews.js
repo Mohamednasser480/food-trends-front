@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Typography } from '../UI';
-import Checkbox from '../UI/Form/Checkbox';
-import { CompactTable, SearchBar, Modal, ProductRating } from '../UI';
+import React, { useEffect, useState } from "react";
+import { Typography } from "../UI";
+import Checkbox from "../UI/Form/Checkbox";
+import { CompactTable, SearchBar, Modal, ProductRating } from "../UI";
+import { useSelector } from "react-redux/es/exports";
+import { selectUserData } from "../../store/slices/auth";
 
-const userType = 'vendor';
-
-const headers = ['product', 'number of reviews', 'average rate'];
+const headers = ["product", "number of reviews", "average rate"];
 
 export default function Reviews() {
   const [products, setProducts] = useState([]);
@@ -14,7 +14,7 @@ export default function Reviews() {
   const [showReviews, setShowReviews] = useState(false);
 
   useEffect(() => {
-    const url = 'http://localhost:3000/api/v1/vendor/62ed27f4539b5574cab3f202';
+    const url = "http://localhost:3000/api/v1/vendor/62ed27f4539b5574cab3f202";
     const fetchData = async () => {
       const response = await fetch(url);
       const json = await response.json();
@@ -23,6 +23,8 @@ export default function Reviews() {
 
     fetchData();
   }, []);
+
+  const { userType } = useSelector(selectUserData);
 
   const getRatingValue = (value) => {
     setRatingValue(value);
@@ -47,7 +49,10 @@ export default function Reviews() {
       return (
         <>
           <div className="overflow-x-auto bg-[#f8f9fa] p-10">
-            <Typography component={'h3'} className="tracking-tight text-primary">
+            <Typography
+              component={"h3"}
+              className="tracking-tight text-primary"
+            >
               Your Reviews
             </Typography>
             <div className="flex gap-x-6">
@@ -100,7 +105,10 @@ export default function Reviews() {
 
                 {productReviews.map((rev, index) => {
                   return (
-                    <div className="flex w-full items-center border-b p-2" key={index}>
+                    <div
+                      className="flex w-full items-center border-b p-2"
+                      key={index}
+                    >
                       <p className="w-10 font-medium">{index + 1}</p>
                       <p className="w-32 break-words">{rev.title}</p>
                       <p className="mx-5 w-96">{rev.comment}</p>
@@ -123,7 +131,7 @@ export default function Reviews() {
       );
     },
     customer: () => {
-      // return userData.map((user) => <div key={user.id}>{user.id}</div>);
+      return <div>customer reviews</div>;
     },
     delivery: () => {
       return <div>delivery</div>;
