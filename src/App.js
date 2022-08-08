@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Layout from "./components/Layout";
 import {
   Home,
@@ -13,8 +13,11 @@ import { Routes, Route } from "react-router-dom";
 import Aos from "aos";
 import { cookie } from "./services";
 import { getUserData } from "./store/slices/auth";
+import { fetchCartData } from "./store/slices/cart";
+import { selectStatus } from "./store/slices/auth";
 
 function App() {
+  const userStatus = useSelector(selectStatus);
   const dispatch = useDispatch();
   useEffect(() => {
     const token = cookie.getCookie("token");
@@ -22,6 +25,11 @@ function App() {
       dispatch(getUserData(token));
     }
   }, []);
+
+  useEffect(() => {
+    dispatch(fetchCartData());
+  }, [dispatch, userStatus]);
+
   // Initiate Animation
   Aos.init({
     once: "true",
