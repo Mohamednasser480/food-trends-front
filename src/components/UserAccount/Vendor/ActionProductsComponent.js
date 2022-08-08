@@ -1,38 +1,79 @@
 import React from "react";
-import { Typography, Button } from "../../UI";
+import { Typography, Button, Loader } from "../../UI";
 import addProductSchema from "../../../services/form-schemes/add-product";
 import Form, { DragAndDrop, Input, Select, TextArea } from "../../UI/Form";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
-import { useDispatch } from "react-redux";
-import { addProduct } from "../../../store/slices/vendor";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addProduct,
+  updateProduct,
+  vendorStatusSelector,
+} from "../../../store/slices/vendor";
 
-export default function AddProduct() {
+export default function AddProduct({
+  actionType,
+  _id,
+  productName,
+  price,
+  summary,
+  description,
+  inStock,
+  category,
+  weight,
+  discount,
+}) {
+  const vendorStatus = useSelector(vendorStatusSelector);
   const dispatch = useDispatch();
 
-  const selectOptions = ["Dairy", "Fruits", "Bakery", "Meat"];
+  const selectOptions = [
+    "Dairy",
+    "Fruits",
+    "Bakery",
+    "Meat",
+    "Veggies",
+    "Chicken",
+  ];
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: joiResolver(addProductSchema),
   });
 
   const addProductRegister = {
-    productName: { ...register("productName") },
-    price: { ...register("price") },
-    summary: { ...register("summary") },
-    description: { ...register("description") },
-    inStock: { ...register("inStock") },
-    category: { ...register("category") },
-    weight: { ...register("weight") },
-    discount: { ...register("discount") },
+    productName: register("productName", {
+      value: productName ? productName : "",
+    }),
+    price: register("price", {
+      value: price ? price : "",
+    }),
+    summary: register("summary", {
+      value: summary ? summary : "",
+    }),
+    description: register("description", {
+      value: description ? description : "",
+    }),
+    inStock: register("inStock", {
+      value: inStock ? inStock : "",
+    }),
+    category: register("category", {
+      value: category ? category : "",
+    }),
+    weight: register("weight", {
+      value: weight ? weight : "",
+    }),
+    discount: register("discount", {
+      value: discount ? discount : "",
+    }),
   };
 
-  const handle = (e) => {
+  const handleProduct = (e) => {
     const data = {
+      id: _id,
       summary: e.summary,
       productName: e.productName,
       images: [
@@ -44,23 +85,26 @@ export default function AddProduct() {
       category: e.category,
       price: e.price,
     };
-    dispatch(addProduct(data));
+    if (actionType === "EDIT") {
+      dispatch(updateProduct(data));
+    } else dispatch(addProduct(data));
+
+    reset();
   };
 
   return (
     <>
       <div className="bg-[#f8f9fa] p-10">
+        {vendorStatus === " Pending" ? <Loader /> : null}
         <Typography
           component={"h2"}
           className="mb-10 tracking-tight text-primary"
         >
-          Add New Product
+          {actionType === "EDIT" ? "Edit the Product" : "Add New Product"}
         </Typography>
-        <Form onSubmit={handleSubmit((e) => handle(e))}>
+        <Form onSubmit={handleSubmit((e) => handleProduct(e))}>
           <div className="flex flex-col lg:flex-row">
             <div className="mr-9 flex w-full flex-col rounded-xl bg-white p-10 lg:w-2/3">
-              <Typography component="h5">Basic</Typography>
-
               <div className="flex w-2/3 justify-between">
                 <div>
                   <Input
@@ -149,13 +193,23 @@ export default function AddProduct() {
               </div>
             </div>
           </div>
-          <Button
-            variant="secondary"
-            type="submit"
-            className="mt-20 w-1/2 self-center lg:w-2/12 lg:self-start"
-          >
-            Add
-          </Button>
+          {actionType === "EDIT" ? (
+            <Button
+              variant="primary"
+              type="submit"
+              className="mt-20 w-1/2 self-center lg:w-2/12 lg:self-start"
+            >
+              Update
+            </Button>
+          ) : (
+            <Button
+              variant="secondary"
+              type="submit"
+              className="mt-20 w-1/2 self-center lg:w-2/12 lg:self-start"
+            >
+              Add
+            </Button>
+          )}
         </Form>
       </div>
     </>
