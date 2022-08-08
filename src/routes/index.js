@@ -6,4 +6,5 @@ import AboutUs from './AboutUs';
 import UserAcount from './UserAcount';
 import ProductPage from './ProductPage';
 import SearchPage from './SearchPage';
-export { Home, ContactUs, Cart, AboutUs, UserAcount, ProductPage,SearchPage };
+import Error404 from './Error404';
+export { Home, ContactUs, Cart, AboutUs, UserAcount, ProductPage,SearchPage,Error404};
