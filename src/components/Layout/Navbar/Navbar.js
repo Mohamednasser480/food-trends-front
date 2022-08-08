@@ -5,6 +5,7 @@ import { AiOutlineMenu } from "react-icons/ai";
 import Logo from "../../../assets/Logo.png";
 import { Sidebar } from "../../UI";
 import { Link } from "react-router-dom";
+import MobileNavbar from "./MobileNav/MobileNav"
 
 export default function Navbar() {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -43,7 +44,7 @@ export default function Navbar() {
         </div>
 
         <Sidebar show={showSidebar} setShow={setShowSidebar}>
-          <div>Mobile Sidebar</div>
+          <MobileNavbar setShowSidebar={setShowSidebar}/>
         </Sidebar>
       </div>
     </nav>

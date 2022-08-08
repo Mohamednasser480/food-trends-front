@@ -1,12 +1,12 @@
-import React from "react";
-import Form from "../UI/Form/Form";
-import { Input } from "../UI/Form";
-import { useForm } from "react-hook-form";
-import { Button, Loader, Typography } from "../UI";
-import { joiResolver } from "@hookform/resolvers/joi";
-import registerSchema from "../../services/form-schemes/customer-register";
-import { useDispatch, useSelector } from "react-redux";
-import { registerUser, selectStatus } from "../../store/slices/auth";
+import React from 'react';
+import Form from '../UI/Form/Form';
+import { Input } from '../UI/Form';
+import { useForm } from 'react-hook-form';
+import { Button, Loader, Typography } from '../UI';
+import { joiResolver } from '@hookform/resolvers/joi';
+import registerSchema from '../../services/form-schemes/customer-register';
+import { useDispatch, useSelector } from 'react-redux';
+import { registerUser, selectStatus } from '../../store/slices/auth';
 
 export default function Register({ setShowRegister, setShowVendorRegister }) {
   const dispatch = useDispatch();
@@ -23,9 +23,9 @@ export default function Register({ setShowRegister, setShowVendorRegister }) {
   });
 
   const singUpRegister = {
-    customerName: { ...register("customerName") },
-    email: { ...register("email") },
-    password: { ...register("password") },
+    customerName: { ...register('customerName') },
+    email: { ...register('email') },
+    password: { ...register('password') },
   };
 
   handleSubmit((newUser) => {
@@ -34,11 +34,9 @@ export default function Register({ setShowRegister, setShowVendorRegister }) {
 
   return (
     <div className="relative">
-      {userStatus === "loading" ? <Loader /> : null}
+      {userStatus === 'loading' ? <Loader /> : null}
       <Form
-        onSubmit={handleSubmit((newUserData) =>
-          dispatch(registerUser(newUserData))
-        )}
+        onSubmit={handleSubmit((newUserData) => dispatch(registerUser(newUserData)))}
         className="p-10"
       >
         <Typography component="h1" className="text-center text-primary">
@@ -46,16 +44,12 @@ export default function Register({ setShowRegister, setShowVendorRegister }) {
         </Typography>
         <Typography component="body2" className="my-5 text-center">
           Already have an account?
-          <button
-            type="button"
-            className="mx-1 text-black"
-            onClick={() => setShowRegister(false)}
-          >
+          <button type="button" className="mx-1 text-black" onClick={() => setShowRegister(false)}>
             Sign in
           </button>
           instead
         </Typography>
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-y-4">
           <Input
             type="text"
             register={singUpRegister.customerName}
@@ -79,7 +73,7 @@ export default function Register({ setShowRegister, setShowVendorRegister }) {
           />
         </div>
 
-        <Button variant={"secondary"} type="submit" className="mt-5">
+        <Button variant={'secondary'} type="submit" className="mt-5">
           sign up
         </Button>
         <button type="button" className="mt-5" onClick={handleVendorLogin}>

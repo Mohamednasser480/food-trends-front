@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { deleteProduct } from "../../../store/slices/vendor";
+import ActionsModel from "./ActionsModel";
 
 const ProductsComponent = ({
+  _id,
   productName,
   images,
   price,
   category,
   description,
   summary,
+  inStock,
 }) => {
+  const [modelState, setModelState] = useState(false);
+
+  const dispatch = useDispatch();
+
   return (
     <tbody>
       <tr>
@@ -34,18 +43,37 @@ const ProductsComponent = ({
         <td>${price}</td>
         <th>
           <button
-            className="  btn btn-ghost btn-xs hover:bg-red-500 hover:text-white	"
-            onClick={(e) => {
-              console.log(e.target);
+            className="btn btn-ghost btn-xs hover:bg-red-500 hover:text-white	"
+            onClick={() => {
+              dispatch(deleteProduct(_id));
             }}
           >
             delete
           </button>{" "}
-          <button className="btn btn-ghost btn-xs hover:bg-blue-500 hover:text-white	">
+          <button
+            className="btn btn-ghost btn-xs hover:bg-blue-500 hover:text-white"
+            onClick={() => setModelState(true)}
+          >
             edit
           </button>
         </th>
       </tr>
+      {modelState && (
+        <ActionsModel
+          actionType={"EDIT"}
+          showModel={modelState}
+          setShow={setModelState}
+          {...{
+            _id,
+            productName,
+            price,
+            summary,
+            description,
+            inStock,
+            category,
+          }}
+        />
+      )}
     </tbody>
   );
 };

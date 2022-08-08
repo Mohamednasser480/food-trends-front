@@ -23,7 +23,7 @@ export default function Modal(props) {
             onClick={(e) => e.stopPropagation()}
           >
             <span
-              className="absolute right-5 top-5 w-fit cursor-pointer self-end text-xl text-base-400 hover:font-bold hover:text-red-400"
+              className="absolute right-5 top-5 w-fit cursor-pointer self-end text-xl text-base-400 hover:font-bold hover:text-red-400 z-10"
               onClick={() => {
                 props.setShow(false);
               }}

@@ -22,7 +22,9 @@ const getProductReviews = async (id) => {
 
 // Get most Similar products By Id
 const getMostSimilar = async (category) => {
-  const res = await axios.get(`${PRODUCT_API_URI}?sortBy:rate&category=${category}&limit=10`);
+  const res = await axios.get(
+    `${PRODUCT_API_URI}?sortBy:rate&category=${category}&limit=10`
+  );
   return res.data;
 };
 
@@ -31,10 +33,16 @@ const getFeaturedProducts = async () => {
   const res = await axios.get(`${PRODUCT_API_URI}?limit=10&sortBy:rate`);
   return res.data;
 };
+//Get Search Result
+const getSearchResult = async (productName) => {
+  const res = await axios.get(`${PRODUCT_API_URI}?limit=10&search=${productName}`);
+  return res.data;
+};
 export default {
   getAllProducts,
   getProductById,
   getProductReviews,
   getMostSimilar,
   getFeaturedProducts,
+  getSearchResult,
 };

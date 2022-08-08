@@ -3,7 +3,8 @@ import ContactUs from './ContactUs';
 // import Shop from "./Shop";
 import Cart from './Cart';
 import AboutUs from './AboutUs';
-import UserAcount from './UserAcount';
+import UserAccount from "./UserAccount";
 import ProductPage from './ProductPage';
-
-export { Home, ContactUs, Cart, AboutUs, UserAcount, ProductPage };
+import SearchPage from './SearchPage';
+import Error404 from './Error404';
+export { Home, ContactUs, Cart, AboutUs, UserAccount, ProductPage,SearchPage,Error404};

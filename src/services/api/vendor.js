@@ -20,12 +20,11 @@ const saveProduct = async (userToken, data) => {
 
 //Update a product by ID and Data
 const updateProduct = async (userToken, id, data) => {
-  const res = await axios.patch(`${VENDOR_API_URI}/${id}`, data, {
+  await axios.patch(`${VENDOR_API_URI}/${id}`, data, {
     headers: {
       Authorization: `Bearer ${userToken}`,
     },
   });
-  return res.data;
 };
 
 //Delete a product

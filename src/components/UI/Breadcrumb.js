@@ -2,12 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import useBreadcrumbs from "use-react-router-breadcrumbs";
 
-const Breadcrumbs = () => {
+const Breadcrumbs = ({ product }) => {
   const breadcrumbsData = useBreadcrumbs();
   const breadcrumbs = breadcrumbsData.map((breadcrumb, index, arr) => {
     const breadcrumbEl = breadcrumb.breadcrumb;
     return index === arr.length - 1 ? (
-      <li className="capitalize">{breadcrumbEl}</li>
+      <li className="capitalize">
+        {product ? product.productName : breadcrumbEl}
+      </li>
     ) : (
       <li key={breadcrumb.key}>
         <Link
