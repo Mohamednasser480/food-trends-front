@@ -3,7 +3,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { Button, Modal } from "../../UI";
 import { useNavigate } from "react-router-dom";
 
-const SearchSidebar = () => {
+const SearchModal = () => {
   const [showSearchBar, setShowSearchBar] = useState(false);
   const searchInput = useRef();
   let navigate = useNavigate();
@@ -54,4 +54,4 @@ const SearchSidebar = () => {
   );
 };
 
-export default SearchSidebar;
+export default SearchModal;

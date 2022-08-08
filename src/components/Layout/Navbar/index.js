@@ -3,7 +3,7 @@ import NavList from "./NavList";
 import SocialIcons from "./SocialIcons";
 import UserArea from "./UserArea";
 import SocialIcon from "./SocialIcon";
-import SearchSidebar from "./SearchSidebar";
+import SearchModal from "./SearchModal";
 import UserProfile from "./UserProfile";
 import WishListSidebar from "./WishListSidebar";
 import CartSidebar from "./CartSidebar";
@@ -16,7 +16,7 @@ export {
   SocialIcons,
   UserArea,
   SocialIcon,
-  SearchSidebar,
+  SearchModal,
   UserProfile,
   WishListSidebar,
   CartSidebar,
