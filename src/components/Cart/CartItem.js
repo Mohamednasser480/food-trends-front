@@ -1,7 +1,7 @@
 import React from "react";
 import { CartTableRow } from "./";
 import { useDispatch } from "react-redux";
-import { deleteCartItem } from "../../store/slices/cart";
+import { deleteCartItem, updateCartItem } from "../../store/slices/cart";
 
 const CartItem = (props) => {
   const { _id } = props.cartProduct;
