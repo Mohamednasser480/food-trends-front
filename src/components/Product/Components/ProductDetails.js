@@ -35,7 +35,7 @@ export default function ProductDetails({ product, className, miny = false }) {
           {item.numberOfReviews} reviews
         </Typography>
       </div>
-      <Typography component="body2" className="font-satoshi font-semibold ">
+      <Typography component="body2" className="font-satoshi font-semibold break-words">
         {item.description}
       </Typography>
       <div className="flex items-center gap-2">

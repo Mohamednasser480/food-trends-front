@@ -12,7 +12,7 @@ import Sidebar from "./Sidebar";
 import CompactTable from "./CompactTable";
 import SearchBar from "./SearchBar";
 import Loader from "./Loader";
-
+import ProductsLoader from "./ProductsLoader"
 export {
   Button,
   Modal,
@@ -28,4 +28,5 @@ export {
   Loader,
   CompactTable,
   SearchBar,
+  ProductsLoader
 };

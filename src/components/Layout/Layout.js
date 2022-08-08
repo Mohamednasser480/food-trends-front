@@ -4,11 +4,11 @@ import Navbar from './Navbar';
 
 const Layout = (props) => {
   return (
-    <div>
+    <div className='flex flex-col min-h-screen'>
       <Topbar />
       <Navbar />
       <ScrollUp />
-      <main>{props.children}</main>
+      <main className='grow'>{props.children}</main>
       <Footer />
     </div>
   );

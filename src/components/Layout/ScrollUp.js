@@ -21,7 +21,7 @@ export default function ScrollUp() {
   return (
     <div
       className={`fixed right-10 bottom-6 z-10 flex w-fit items-end justify-end ${
-        showTopBtn ? "opacity-50 -translate-y-8" : "opacity-0"
+        showTopBtn ? "opacity-50 -translate-y-8" : "opacity-0 invisible"
       } transition-all duration-300 hover:opacity-100`}
     >
       <BsFillArrowUpCircleFill
