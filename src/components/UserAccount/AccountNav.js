@@ -12,11 +12,10 @@ import { AiOutlineTransaction } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { selectUserData } from "../../store/slices/auth";
 
-export default function AccountNav({ onNavClick, content }) {
+export default function AcountNav({ onNavClick, content }) {
   const { userType } = useSelector(selectUserData);
 
   const [activeButton, setActiveButton] = useState(content);
-
   const [showSidebar, setShowSidebar] = useState(true);
 
   const handleClick = (btn) => {
@@ -25,7 +24,7 @@ export default function AccountNav({ onNavClick, content }) {
   };
   const buttons = {
     vendor: ["Products", "Reviews", "Add product", "Transactions"],
-    customer: ["My profile", "My orders", "wishlist", "Reviews"],
+    customer: ["My profile", "My orders", "wishlist"],
     delivery: ["Orders"],
   };
   const icons = {
