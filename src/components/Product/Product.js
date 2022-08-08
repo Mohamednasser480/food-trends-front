@@ -36,7 +36,7 @@ export default function Product() {
 
   return (
     <>
-      <Breadcrumb />
+      <Breadcrumb product={product} />
 
       {productStatus == "Pending" ? (
         <Loader />
