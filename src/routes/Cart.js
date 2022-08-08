@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { Page } from "../components/UI";
+import React from "react";
+import { Page, Loader } from "../components/UI";
 import { CartList, EmptyCart } from "../components/Cart";
 import { Button } from "../components/UI";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  fetchCartItems,
-  saveCartItems,
-  updateCartItems,
   selectAllCartItems,
   selectStatus,
   selectError,
+  clearCartData,
 } from "../store/slices/cart";
 
 const Cart = () => {
@@ -18,22 +16,15 @@ const Cart = () => {
   const cartItemsStatus = useSelector(selectStatus);
   const error = useSelector(selectError);
   const dispatch = useDispatch();
-  const [postCartStatus, setPostCartStatus] = useState("idle");
-
-  useEffect(() => {
-    if (cartItemsStatus === "idle") {
-      dispatch(fetchCartItems());
-    }
-  }, [cartItemsStatus, dispatch]);
 
   const clearItemsHandler = () => {
-    dispatch(updateCartItems([]));
+    dispatch(clearCartData());
   };
 
   const updateCartHandler = () => {};
 
   const content = {
-    loading: <p>Loading...</p>,
+    loading: <Loader />,
     succeeded: items.length ? (
       <>
         <div className="mx-auto mb-5 max-w-[68rem] overflow-x-auto rounded-lg border border-base-300">
@@ -75,7 +66,7 @@ const Cart = () => {
     ) : (
       <EmptyCart />
     ),
-    failed: <p>{error}</p>,
+    error: <p>{error}</p>,
   };
 
   return <Page title="cart">{content[cartItemsStatus]}</Page>;
