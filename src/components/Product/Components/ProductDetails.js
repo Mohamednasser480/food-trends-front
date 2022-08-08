@@ -1,19 +1,31 @@
-import React from "react";
-import {
-  Typography,
-  ProductRating,
-  Button,
-  QauntityBox,
-  Accordion,
-} from "../../UI";
+import React, { useState } from "react";
+import { Typography, ProductRating, Button, Accordion, Loader } from "../../UI";
 import { CgStopwatch } from "react-icons/cg";
 import { AiOutlineCalendar, AiFillCheckCircle } from "react-icons/ai";
 import { Info } from "../";
+import { QuantityInput } from "../../Cart";
+import { saveCartItem, selectStatus } from "../../../store/slices/cart";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function ProductDetails({ product, className, miny = false }) {
   const item = product;
+  const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
+  const cartStatus = useSelector(selectStatus);
+
+  const quantitySubmitHandler = (quantity) => setQuantity(quantity);
+  const addToCartHandler = () => {
+    dispatch(
+      saveCartItem({
+        product: item._id,
+        quantity: quantity,
+      })
+    );
+  };
+
   return (
     <div className={`flex  w-full flex-col gap-4 p-6 lg:w-1/2 ${className}`}>
+      {cartStatus === "loading" ? <Loader /> : null}
       <Typography
         component="subtitle2"
         className="font-satoshi text-3xl font-extrabold text-primary"
@@ -29,13 +41,16 @@ export default function ProductDetails({ product, className, miny = false }) {
       <div className="flex flex-wrap items-center gap-3">
         <div className="flex flex-wrap items-center gap-2">
           <span className="font-satoshi font-semibold">5.00</span>
-          <ProductRating rating={(item.rate/item.numberOfReviews)||0} />
+          <ProductRating rating={item.rate / item.numberOfReviews || 0} />
         </div>
         <Typography component="body2" className="font-satoshi font-semibold ">
           {item.numberOfReviews} reviews
         </Typography>
       </div>
-      <Typography component="body2" className="font-satoshi font-semibold break-words">
+      <Typography
+        component="body2"
+        className="font-satoshi break-words font-semibold"
+      >
         {item.description}
       </Typography>
       <div className="flex items-center gap-2">
@@ -53,7 +68,11 @@ export default function ProductDetails({ product, className, miny = false }) {
       </div>
       <div className="flex flex-wrap items-center gap-5">
         <span className="font-satoshi text-lg font-bold">Quantity</span>
-        <QauntityBox max={item.inStock} />
+        {/*<QauntityBox max={item.inStock} />*/}
+        <QuantityInput
+          cartProduct={item}
+          onQuantitySubmit={quantitySubmitHandler}
+        />
         <div className="flex flex-wrap items-center gap-2">
           <AiFillCheckCircle size={22} className="text-[#68b65b]" />
           <span className="font-satoshi text-sm font-semibold text-base-400">
@@ -61,7 +80,7 @@ export default function ProductDetails({ product, className, miny = false }) {
           </span>
         </div>
       </div>
-      <Button variant="primary" className="my-5">
+      <Button variant="primary" className="my-5" onClick={addToCartHandler}>
         Add to Cart
       </Button>
       <Info category={product.category} />
