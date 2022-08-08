@@ -11,7 +11,7 @@ export default function ScrollUp() {
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 450) {
+      if (window.scrollY > 500) {
         setShowTopBtn(true);
       } else {
         setShowTopBtn(false);
@@ -20,7 +20,9 @@ export default function ScrollUp() {
   }, []);
   return (
     <div
-      className={`fixed flex w-full items-end justify-end p-2 md:p-10 ${showTopBtn ? 'z-20' : ''}`}
+      className={`fixed flex w-full items-end justify-end p-2 md:p-10 ${
+        showTopBtn ? 'z-20' : 'hidden'
+      }`}
     >
       <button
         variant="primary"

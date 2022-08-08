@@ -70,7 +70,7 @@ export default function Orders() {
             your orders
           </Typography>
 
-          <div className="m-5 flex w-[1200px] flex-col justify-between  lg:flex-row">
+          <div className="m-5 flex flex-col justify-between md:w-[1200px] lg:flex-row">
             <div>
               {filters.map((filter) => {
                 return (
