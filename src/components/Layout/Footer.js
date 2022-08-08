@@ -2,14 +2,13 @@ import React from 'react';
 import { HiOutlineArrowRight } from 'react-icons/hi';
 import { SiVisa, SiMastercard } from 'react-icons/si';
 import { BsPaypal } from 'react-icons/bs';
-
 import { Link } from 'react-router-dom';
-import Typography from '../UI/Typography';
+import { Typography, Button } from '../UI';
 
 const Footer = () => {
   return (
     <footer className="bg-[#f0efea]" data-aos="fade">
-      <div className="container max-w-screen-xl py-14">
+      <div className="container flex max-w-screen-xl flex-col py-14">
         <div className="grid gap-4 text-sm font-medium text-base-400  sm:grid-cols-2 lg:grid-cols-4">
           <div className="flex flex-col text-center sm:text-left  ">
             <Typography component={'h4'} className={'text-primary'}>

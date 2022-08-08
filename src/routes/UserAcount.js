@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Sidebar } from '../components/UI';
 import { AcountNav, AccountContent } from '../components/UserAcount';
 
 export default function UserAcount() {
