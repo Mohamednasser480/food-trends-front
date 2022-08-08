@@ -6,7 +6,7 @@ import {
   ContactUs,
   AboutUs,
   Cart,
-  UserAcount,
+  UserAccount,
   ProductPage,
 } from "./routes";
 import { Routes, Route } from "react-router-dom";
@@ -35,7 +35,7 @@ function App() {
           <Route path={"/contact-us"} element={<ContactUs />} />
           <Route path={"/about"} element={<AboutUs />} />
           <Route path={"/cart"} element={<Cart />} />
-          <Route path={"/user-account"} element={<UserAcount />} />
+          <Route path={"/user-account"} element={<UserAccount />} />
           <Route path={"/shop/:id"} element={<ProductPage />} />
         </Routes>
       </Layout>
