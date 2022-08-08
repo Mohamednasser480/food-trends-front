@@ -23,7 +23,7 @@ export default function AcountNav({ onNavClick, content }) {
     onNavClick(btn);
   };
   const buttons = {
-    vendor: ['Products', 'Reviews', 'Add product', 'Transactions'],
+    vendor: ['Products', 'Reviews', 'Orders', 'Add product', 'Transactions'],
     customer: ['My profile', 'My orders', 'wishlist'],
     delivery: ['Orders'],
   };
