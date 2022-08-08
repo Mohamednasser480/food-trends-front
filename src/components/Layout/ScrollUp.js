@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Button } from '../UI';
-import * as Scroll from 'react-scroll';
-import { animateScroll as scroll } from 'react-scroll';
+import React, { useEffect, useState } from "react";
+import { Button } from "../UI";
+import * as Scroll from "react-scroll";
+import { animateScroll as scroll } from "react-scroll";
+import { BsFillArrowUpCircleFill } from "react-icons/bs";
 
 export default function ScrollUp() {
   const [showTopBtn, setShowTopBtn] = useState(false);
@@ -10,8 +11,8 @@ export default function ScrollUp() {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 450) {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 900) {
         setShowTopBtn(true);
       } else {
         setShowTopBtn(false);
@@ -20,16 +21,15 @@ export default function ScrollUp() {
   }, []);
   return (
     <div
-      className={`fixed flex w-full items-end justify-end p-2 md:p-10 ${showTopBtn ? 'z-20' : ''}`}
+      className={`fixed right-10 bottom-6 z-10 flex w-fit items-end justify-end ${
+        showTopBtn ? "opacity-50 -translate-y-8" : "opacity-0"
+      } transition-all duration-300 hover:opacity-100`}
     >
-      <button
-        variant="primary"
+      <BsFillArrowUpCircleFill
+        size={40}
         onClick={scrollToTop}
-        className=" h-14 w-14 self-end rounded-full bg-primary text-xl font-bold text-white hover:bg-secondary-400 hover:text-primary"
-        smooth={true}
-      >
-        UP
-      </button>
+        className="cursor-pointer text-primary"
+      />
     </div>
   );
 }
