@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "../UI";
 import * as Scroll from "react-scroll";
 import { animateScroll as scroll } from "react-scroll";
 import { BsFillArrowUpCircleFill } from "react-icons/bs";
