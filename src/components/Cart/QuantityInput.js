@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { HiOutlineMinusSm, HiOutlinePlusSm } from "react-icons/hi";
-import { Button } from "../UI";
 
 const QuantityInput = (props) => {
-  const { value, onQuantityInput, stock } = props;
-  const [quantity, setQuantity] = useState(value);
+  const { cartProduct, onQuantitySubmit } = props;
+  const [quantity, setQuantity] = useState(cartProduct.quantity ?? 1);
   const [allowSubmit, setAllowSubmit] = useState(false);
   const commonBtnClasses =
     "absolute top-0 h-full transition-colors min-w-[3rem] rounded-md bg-transparent text-black hover:bg-primary hover:text-white max-w-[33.333%]";
 
+  console.log(cartProduct);
   useEffect(() => {
     if (allowSubmit) {
-      onQuantityInput(quantity);
+      console.log("input", quantity);
+      onQuantitySubmit(quantity);
+      // dispatch(updateCartItem(cartProduct._id, quantity));
     }
-  }, [quantity, allowSubmit, onQuantityInput]);
+  }, [quantity, allowSubmit]);
 
   const quantityIncreaseHandler = () => {
-    if (quantity >= stock) return;
+    if (quantity >= cartProduct.inStock) return;
     setQuantity((quantity) => quantity + 1);
     setAllowSubmit(true);
   };
@@ -29,7 +31,7 @@ const QuantityInput = (props) => {
 
   const quantityInputHandler = () => {
     setQuantity((quantity) => {
-      if (quantity > stock) return stock;
+      if (quantity > cartProduct.inStock) return cartProduct.inStock;
       if (quantity < 1) return 1;
       return quantity;
     });
@@ -53,14 +55,14 @@ const QuantityInput = (props) => {
         onClick={quantityDecreaseHandler}
         className={`${commonBtnClasses} left-0`}
       >
-        <HiOutlineMinusSm className="h-5 w-5 stroke-1 absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2" />
+        <HiOutlineMinusSm className="absolute left-1/2 top-1/2 h-5 w-5 -translate-y-1/2 -translate-x-1/2 stroke-1" />
       </button>
       <input
-        className="min-h-12 focus:bg-white outline-0 rounded-md focus:border-primary border border-transparent w-full appearance-none text-center bg-base-200"
+        className="min-h-12 w-full appearance-none rounded-md border border-transparent bg-base-200 text-center outline-0 focus:border-primary focus:bg-white"
         type="number"
         min="1"
         step="1"
-        max={stock}
+        max={cartProduct.inStock}
         size="4"
         value={`${quantity}`}
         inputMode="numeric"
@@ -73,7 +75,7 @@ const QuantityInput = (props) => {
         onClick={quantityIncreaseHandler}
         className={`${commonBtnClasses} right-0`}
       >
-        <HiOutlinePlusSm className="h-5 w-5 stroke-1 absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2" />
+        <HiOutlinePlusSm className="absolute left-1/2 top-1/2 h-5 w-5 -translate-y-1/2 -translate-x-1/2 stroke-1" />
       </button>
     </div>
   );
