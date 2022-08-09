@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button, Typography } from "../UI";
-import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-import FiltersSidebar from "./FiltersSidebar";
-import { FiltersBox, SelectBox } from "./";
+import { SelectBox } from "./";
 import {
   filteredProductsSelector,
   getFilteredProducts,
@@ -12,48 +10,50 @@ import { useParams, useNavigate } from "react-router-dom";
 
 export default function Controls() {
   const [showFilters, setShowFilters] = useState(false);
-
   const { category } = useParams();
   const navigate = useNavigate();
   const products = useSelector(filteredProductsSelector);
   const dispatch = useDispatch();
   const numberOfProducts = products?.length;
   // Filters Logic
-  let [filtersValues, setFiltersValues] = useState({
-    filterValue: "default",
-    priceValue: "all",
-  });
-  function fetchItemsAfterFilter() {
-    
+  function fetchItemsAfterFilter(filters) {
     const payload = {
       number: 5,
-      filter: filtersValues.filterValue,
-      category: category,
-      price: filtersValues.priceValue,
+      ...filters,
     };
+    // console.log(payload);
     dispatch(getFilteredProducts(payload));
   }
-  const onFilterChange = (e) => {
-    filtersValues.filterValue = e.target.value;
-    console.log(filtersValues)
-    fetchItemsAfterFilter();
+  const genericFilters = useRef("all");
+  const categoriesFilter = useRef(category);
+  const pricesFilter = useRef("all");
+
+  let filters = {
+    filter: genericFilters.current.value,
+    category: category||"all",
+    price: pricesFilter.current.value,
   };
-  const onPriceChange = (e) => {
-    filtersValues.priceValue = e.target.value;
-    fetchItemsAfterFilter();
+  // console.log(filters)
+  const onSelectBoxChange = () => {
+    filters = {
+      filter: genericFilters.current.value,
+      category: category,
+      price: pricesFilter.current.value,
+    };
+    // console.log("Filters", filters);
+    fetchItemsAfterFilter(filters);
   };
   const onCategoryChange = (e) => {
     const value = e.target.value;
-    value == "all"
-      ? navigate(`/shop`)
-      : navigate(`/categories/${e.target.value}`);
-    fetchItemsAfterFilter();
+    filters.category = value;
+    navigate(`/categories/${e.target.value}`);
   };
+
   // Filters Array
-  const filters = [
+  const genericFiltersArray = [
     {
       text: "Default",
-      value: "default",
+      value: "all",
     },
     {
       text: "Average Rating",
@@ -72,7 +72,7 @@ export default function Controls() {
       value: "hightolow",
     },
   ];
-  const categories = [
+  const categoriesArray = [
     {
       text: "All Categories",
       value: "all",
@@ -80,6 +80,10 @@ export default function Controls() {
     {
       text: "Fruits",
       value: "fruits",
+    },
+    {
+      text: "Juices",
+      value: "juices",
     },
     {
       text: "Veggies",
@@ -94,7 +98,7 @@ export default function Controls() {
       value: "dairy",
     },
   ];
-  const prices = [
+  const pricesArray = [
     {
       text: "All Prices",
       value: "all",
@@ -120,6 +124,11 @@ export default function Controls() {
       value: [120, 99999999],
     },
   ];
+  useEffect(() => {
+    if (!category) return;
+    categoriesFilter.current.value = category.toLowerCase();
+  }, [category]);
+
   return (
     <div className="flex flex-col gap-5">
       <div className="mt-6 flex flex-wrap items-center justify-center gap-5 md:justify-between">
@@ -133,13 +142,23 @@ export default function Controls() {
         </Typography>
 
         <div className="flex flex-wrap items-center justify-center gap-5">
-          <SelectBox array={filters} onSelectValue={onFilterChange} />
-          {showFilters && (
-            <>
-              <SelectBox array={categories} onSelectValue={onCategoryChange} />
-              <SelectBox array={prices} onSelectValue={onPriceChange} />
-            </>
-          )}
+          <SelectBox
+            array={genericFiltersArray}
+            ref={genericFilters}
+            onChange={onSelectBoxChange}
+          />
+          <>
+            <SelectBox
+              array={categoriesArray}
+              ref={categoriesFilter}
+              onChange={onCategoryChange}
+            />
+            <SelectBox
+              array={pricesArray}
+              ref={pricesFilter}
+              onChange={onSelectBoxChange}
+            />
+          </>
 
           <Button
             variant="primary"

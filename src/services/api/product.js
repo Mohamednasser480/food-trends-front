@@ -44,50 +44,49 @@ const getSearchResult = async (productName) => {
 //Get Filtered Products on Shop page
 const getFilteredProducts = async (payload) => {
   // ex: payload={ number: 5, filter: "rating" ,category="all" }
-  let res = [];
-  switch (payload.filter) {
-    case "rating":
-      res = await axios.get(
-        `${PRODUCT_API_URI}?sortBy=rate:desc${
-          payload.category ? "&category=" + payload.category : ""
-        }`
-      );
-      break;
-    case "latest":
-      res = await axios.get(
-        `${PRODUCT_API_URI}?sortBy=createdAt:desc${
-          payload.category ? "&category=" + payload.category : ""
-        }`
-      );
-      break;
-    case "lowtohigh":
-      res = await axios.get(
-        `${PRODUCT_API_URI}?sortBy=price:asc${
-          payload.category ? "&category=" + payload.category : ""
-        }`
-      );
-      break;
-    case "hightolow":
-      res = await axios.get(
-        `${PRODUCT_API_URI}?sortBy=price:desc${
-          payload.category ? "&category=" + payload.category : ""
-        }`
-      );
-      console.log(
-        `${PRODUCT_API_URI}?sortBy=price:desc${
-          payload.category ? "&category=" + payload.category : ""
-        }`
-      );
-      break;
+  const filterCategory = () => {
+    if (!payload.category) return "";
+    if (payload.category !== "all") {
+      return `category=${payload.category}`;
+    }
+    return "";
+  };
 
-    default:
-      res = await axios.get(
-        `${PRODUCT_API_URI}?${
-          payload.category ? "&category=" + payload.category : ""
-        }`
-      );
-      break;
-  }
+  const sortFilter = () => {
+    if (!payload.filter || payload.filter == "all") return "";
+    let sortQuery;
+    switch (payload.filter) {
+      case "rating":
+        sortQuery = `rate:desc`;
+        break;
+      case "latest":
+        sortQuery = `createdAt:desc`;
+        break;
+      case "lowtohigh":
+        sortQuery = `price:asc`;
+        break;
+      case "hightolow":
+        sortQuery = `price:desc`;
+        break;
+
+      default:
+        sortQuery = "";
+        break;
+    }
+    return `sortBy=${sortQuery}`;
+  };
+
+  const pricesFilter = () => {
+    if (!payload.price || payload.price == "all") return "";
+    const [min, max] = payload.price.split(",");
+    return `max_price=${max}&min_price=${min}`;
+  };
+
+  const queryURL = `${PRODUCT_API_URI}?
+  &${filterCategory()}&${sortFilter()}&${pricesFilter()}`;
+
+  let res = await axios.get(queryURL);
+  // console.log("%c" + queryURL, "color:red;font-size:20px");
   return res.data;
 };
 export default {
