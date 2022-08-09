@@ -1,6 +1,7 @@
 import React from "react";
 import ShareIcon from "./ShareIcon";
 import { FaFacebookF, FaTwitter, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Info({ category }) {
   let currentUrl = window.location.href;
@@ -32,10 +33,10 @@ export default function Info({ category }) {
     <div className="text-md flex flex-col flex-wrap gap-5 ">
       <div className="flex  flex-wrap items-center gap-2 font-medium">
         <span>Category:</span>
-        <span className="group relative cursor-pointer  text-base-400 transition-colors hover:text-black">
+        <Link to={`/categories/${category}`} className="group relative cursor-pointer  text-base-400 transition-colors hover:text-black">
           <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-black transition-all duration-500 group-hover:w-full"></span>
           {category}
-        </span>
+        </Link>
       </div>
       <div className="flex flex-wrap items-center gap-2 font-medium">
         <span>Share:</span>
