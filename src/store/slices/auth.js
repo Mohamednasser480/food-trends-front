@@ -52,26 +52,35 @@ const authSlice = createSlice({
       state.status = "succeeded";
       state.user = payload.user;
       state.token = payload.token;
+      state.error = null;
     },
     [login.rejected]: (state, { error }) => {
       state.status = "error";
       state.error = error.message;
     },
     // Logout Reducers
+    [logout.pending]: (state) => {
+      state.status = "loading";
+    },
     [logout.fulfilled]: (state) => {
       state.user = {};
       state.status = "idle";
       state.token = "";
+      state.error = null;
     },
     [logout.rejected]: (state, { error }) => {
       state.status = "error";
       state.error = error;
     },
     // Get User Data Reducers
+    [getUserData.pending]: (state) => {
+      state.status = "loading";
+    },
     [getUserData.fulfilled]: (state, { payload }) => {
       state.status = "succeeded";
       state.token = payload.token;
       state.user = payload.user;
+      state.error = null;
     },
     // Register Reducers
     [registerUser.pending]: (state) => {
@@ -81,6 +90,7 @@ const authSlice = createSlice({
       state.status = "succeeded";
       state.user = user.user;
       state.token = user.token;
+      state.error = null;
     },
     [registerUser.rejected]: (state, { error }) => {
       state.status = "error";

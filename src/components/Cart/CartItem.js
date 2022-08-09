@@ -1,30 +1,26 @@
 import React from "react";
 import { CartTableRow } from "./";
 import { useDispatch } from "react-redux";
-import {
-  addCartItem,
-  deleteCartItem,
-  updateCartItem,
-} from "../../store/slices/cart";
+import { deleteCartItem, updateCartItem } from "../../store/slices/cart";
 
 const CartItem = (props) => {
-  const { id } = props.cartData;
+  const { _id } = props.cartProduct;
   const dispatch = useDispatch();
 
-  const itemRemoveHandler = (id) => dispatch(deleteCartItem(id));
+  const itemRemoveHandler = (productId) => dispatch(deleteCartItem(productId));
   const quantityInputHandler = (quantity) => {
-    dispatch(updateCartItem(id, quantity));
+    dispatch(updateCartItem(_id, quantity));
   };
 
   const render = {
     table: (
       <CartTableRow
-        cartData={props.cartData}
+        cartProduct={props.cartProduct}
         onQuantityInput={quantityInputHandler}
         onItemRemove={itemRemoveHandler}
       />
     ),
-    sidebar: <div></div>,
+    sidebar: <li></li>,
   };
   return render[props.form] ? render[props.form] : null;
 };

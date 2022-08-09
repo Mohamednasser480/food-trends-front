@@ -4,36 +4,37 @@ import { QuantityInput } from "./";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
 const CartTableRow = (props) => {
-  const { cartData, onQuantityInput, onItemRemove } = props;
-
-  const { id, productId, name, image, price, quantity, stock } = cartData;
-
-  console.log("quantity", quantity);
-  console.log("price", price);
+  const { cartProduct, onQuantityInput, onItemRemove } = props;
+  const { _id, productName, images, price, quantity } = cartProduct;
+  // console.log("quantity", quantity);
+  // console.log("price", price);
 
   return (
     <tr>
-      <td className="flex items-center gap-3">
-        <img className="hidden lg:block" src={image} alt={name} />
+      <td>
         <Link
-          to={`/shop/${productId}`}
-          className="capitalize transition-colors hover:text-primary"
+          to={`/shop/${_id}`}
+          className="flex items-center gap-3 capitalize transition-colors hover:text-primary"
         >
-          {name}
+          <img
+            className="hidden max-w-full lg:block"
+            src={images[0]}
+            alt={productName}
+          />
+          {productName}
         </Link>
       </td>
       <td>
         <QuantityInput
-          value={quantity}
+          cartProduct={cartProduct}
           onQuantityInput={onQuantityInput}
-          stock={stock}
         />
       </td>
       <td className="text-primary">${price}</td>
       <td className="text-bold">${(quantity * price).toFixed(2)}</td>
       <td>
         <button
-          onClick={() => onItemRemove(id)}
+          onClick={() => onItemRemove(_id)}
           className="text-base-400 transition-colors hover:text-error"
         >
           <RiDeleteBin6Line size="18px" />
