@@ -4,10 +4,9 @@ import { QuantityInput } from "./";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
 const CartTableRow = (props) => {
-  const { cartProduct, onQuantityInput, onItemRemove } = props;
+  const { cartProduct, onQuantitySubmit, onItemRemove } = props;
   const { _id, productName, images, price, quantity } = cartProduct;
-  // console.log("quantity", quantity);
-  // console.log("price", price);
+  console.log("quantity", quantity);
 
   return (
     <tr>
@@ -27,7 +26,7 @@ const CartTableRow = (props) => {
       <td>
         <QuantityInput
           cartProduct={cartProduct}
-          onQuantityInput={onQuantityInput}
+          onQuantitySubmit={onQuantitySubmit}
         />
       </td>
       <td className="text-primary">${price}</td>

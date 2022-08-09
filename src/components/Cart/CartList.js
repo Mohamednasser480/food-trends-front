@@ -5,7 +5,6 @@ import { selectAllCartItems } from "../../store/slices/cart";
 
 const CartList = (props) => {
   const cartProducts = useSelector(selectAllCartItems);
-  console.log(cartProducts);
   return cartProducts.map((cartProduct) => (
     <CartItem
       key={cartProduct._id}

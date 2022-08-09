@@ -15,45 +15,57 @@ const getCartData = async (userToken) => {
 };
 
 const updateCartData = async (userToken, cart) => {
-  const res = await axios({
-    method: "PUT",
-    url: CART_API_URI,
-    data: { ...cart },
-    headers: {
-      Authorization: `Bearer ${userToken}`,
-    },
-  });
-  return res.data;
+  try {
+    const res = await axios({
+      method: "PUT",
+      url: CART_API_URI,
+      data: { ...cart },
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    });
+    return res.data;
+  } catch (e) {
+    throw e.response.data;
+  }
 };
 
 const postCartItem = async (userToken, product, quantity) => {
-  const res = await axios({
-    method: "POST",
-    url: CART_API_URI,
-    data: {
-      product,
-      quantity,
-    },
-    headers: {
-      Authorization: `Bearer ${userToken}`,
-    },
-  });
-  return res.data;
+  try {
+    const res = await axios({
+      method: "POST",
+      url: CART_API_URI,
+      data: {
+        product,
+        quantity,
+      },
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    });
+    return res.data;
+  } catch (e) {
+    throw e.response.data;
+  }
 };
 
 const updateCartItem = async (userToken, id, quantity) => {
-  const res = await axios({
-    method: "PATCH",
-    url: CART_API_URI,
-    data: {
-      id,
-      quantity,
-    },
-    headers: {
-      Authorization: `Bearer ${userToken}`,
-    },
-  });
-  return res.data;
+  try {
+    const res = await axios({
+      method: "PATCH",
+      url: CART_API_URI,
+      data: {
+        id,
+        quantity,
+      },
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    });
+    return res.data;
+  } catch (e) {
+    throw e.response.data;
+  }
 };
 
 const deleteCartItem = async (userToken, id) => {

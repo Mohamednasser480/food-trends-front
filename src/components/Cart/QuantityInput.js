@@ -8,7 +8,6 @@ const QuantityInput = (props) => {
   const commonBtnClasses =
     "absolute top-0 h-full transition-colors min-w-[3rem] rounded-md bg-transparent text-black hover:bg-primary hover:text-white max-w-[33.333%]";
 
-  console.log(cartProduct);
   useEffect(() => {
     if (allowSubmit) {
       console.log("input", quantity);
