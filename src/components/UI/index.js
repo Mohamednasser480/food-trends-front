@@ -13,7 +13,9 @@ import CompactTable from "./CompactTable";
 import SearchBar from "./SearchBar";
 import Spinner from "./Spinner";
 import Loader from "./Loader";
-import ProductsLoader from "./ProductsLoader"
+import ProductsLoader from "./ProductsLoader";
+import Alert from "./Alert";
+
 export {
   Button,
   Modal,
@@ -30,5 +32,6 @@ export {
   Spinner,
   CompactTable,
   SearchBar,
-  ProductsLoader
+  ProductsLoader,
+  Alert,
 };
