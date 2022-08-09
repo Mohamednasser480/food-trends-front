@@ -49,28 +49,33 @@ const getFilteredProducts = async (payload) => {
     case "rating":
       res = await axios.get(
         `${PRODUCT_API_URI}?sortBy=rate:desc${
-          payload.category && "&category=" + payload.category
+          payload.category ? "&category=" + payload.category : ""
         }`
       );
       break;
     case "latest":
       res = await axios.get(
         `${PRODUCT_API_URI}?sortBy=createdAt:desc${
-          payload.category && "&category=" + payload.category
+          payload.category ? "&category=" + payload.category : ""
         }`
       );
       break;
     case "lowtohigh":
       res = await axios.get(
         `${PRODUCT_API_URI}?sortBy=price:asc${
-          payload.category && "&category=" + payload.category
+          payload.category ? "&category=" + payload.category : ""
         }`
       );
       break;
     case "hightolow":
       res = await axios.get(
         `${PRODUCT_API_URI}?sortBy=price:desc${
-          payload.category && "&category=" + payload.category
+          payload.category ? "&category=" + payload.category : ""
+        }`
+      );
+      console.log(
+        `${PRODUCT_API_URI}?sortBy=price:desc${
+          payload.category ? "&category=" + payload.category : ""
         }`
       );
       break;
@@ -78,7 +83,7 @@ const getFilteredProducts = async (payload) => {
     default:
       res = await axios.get(
         `${PRODUCT_API_URI}?${
-          payload.category && "category=" + payload.category
+          payload.category ? "&category=" + payload.category : ""
         }`
       );
       break;
