@@ -11,7 +11,9 @@ const initialState = {
   currentProductStatus:null,
   similiarProductsStatus:null,
   searchResult:[],
-  searchResultStatus:null
+  searchResultStatus:null,
+  filteredProducts:[],
+  filteredProductsStatus:null
 };
 
 //Get All Available Products
@@ -61,6 +63,11 @@ export const getSearchResult = createAsyncThunk(
     return await products.getSearchResult(productName);
   }
 );
+
+// Get Search Result Products
+export const getFilteredProducts=createAsyncThunk("products/getFilteredProducts",async (payload)=>{
+  return await products.getFilteredProducts(payload)
+})
 
 
 const productsSlice = createSlice({
@@ -139,6 +146,18 @@ const productsSlice = createSlice({
     [getSearchResult.rejected]: (state) => {
       state.searchResultStatus = "Rejected";
     },
+
+    //getFilteredProducts
+    [getFilteredProducts.pending]: (state) => {
+      state.filteredProductsStatus = "Pending";
+    },
+    [getFilteredProducts.fulfilled]: (state, { payload }) => {
+      state.filteredProductsStatus = "Fulfilled";
+      state.filteredProducts = [...payload];
+    },
+    [getFilteredProducts.rejected]: (state) => {
+      state.filteredProductsStatus = "Rejected";
+    },
   },
 });
 
@@ -151,5 +170,6 @@ export const currentProductStatusSelector=(state)=>state.products.currentProduct
 export const similarProductsStatusSelector=(state)=>state.products.similiarProductsStatus;
 export const searchResultSelector=(state)=>state.products.searchResult;
 export const searchResultStatusSelector=(state)=>state.products.searchResultStatus;
-
+export const filteredProductsSelector=(state)=>state.products.filteredProducts;
+export const filteredProductsStatusSelector=(state)=>state.products.filteredProductsStatus;
 export default productsSlice.reducer;

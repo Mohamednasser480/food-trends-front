@@ -10,6 +10,8 @@ import {
   ProductPage,
   SearchPage,
   Error404,
+  Shop,
+  Categories,
 } from "./routes";
 import { Routes, Route } from "react-router-dom";
 import Aos from "aos";
@@ -46,7 +48,10 @@ function App() {
           <Route path={"/about"} element={<AboutUs />} />
           <Route path={"/cart"} element={<Cart />} />
           <Route path={"/user-account"} element={<UserAccount />} />
+          <Route path={"/shop"} element={<Shop />} />
           <Route path={"/shop/:id"} element={<ProductPage />} />
+          <Route path={"/categories/"} element={<Categories />} />
+          <Route path={"/categories/:category"} element={<Shop />} />
           <Route path={"/search/:searchText"} element={<SearchPage />} />
           <Route path={"*"} element={<Error404 />} />
         </Routes>
