@@ -76,8 +76,8 @@ export default function Register({ setShowRegister, setShowVendorRegister }) {
         <Button variant={'secondary'} type="submit" className="mt-5">
           sign up
         </Button>
-        <button type="button" className="mt-5" onClick={handleVendorLogin}>
-          sign up as a vendor instead?
+        <button type="button" className="mt-4 font-medium capitalize hover:underline" onClick={handleVendorLogin}>
+          sign up as a vendor instead ?
         </button>
       </Form>
     </div>
