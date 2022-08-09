@@ -10,16 +10,18 @@ const CartTableRow = (props) => {
 
   return (
     <tr>
-      <td>
-        <Link
-          to={`/shop/${_id}`}
-          className="flex items-center gap-3 capitalize transition-colors hover:text-primary"
-        >
+      <td className="flex items-center gap-3 capitalize">
+        <Link to={`/shop/${_id}`}>
           <img
-            className="hidden max-w-full lg:block"
+            className="hidden w-24 lg:block"
             src={images[0]}
             alt={productName}
           />
+        </Link>
+        <Link
+          to={`/shop/${_id}`}
+          className="transition-colors hover:text-primary"
+        >
           {productName}
         </Link>
       </td>
