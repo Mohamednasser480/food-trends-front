@@ -1,12 +1,12 @@
-import React from "react";
-import Form from "../UI/Form/Form";
-import { Input } from "../UI/Form";
-import { useForm } from "react-hook-form";
-import { Button, Typography, Loader } from "../UI";
-import { joiResolver } from "@hookform/resolvers/joi";
-import loginSchema from "../../services/form-schemes/login";
-import { login, selectStatus } from "../../store/slices/auth";
-import { useDispatch, useSelector } from "react-redux";
+import React from 'react';
+import Form from '../UI/Form/Form';
+import { Input } from '../UI/Form';
+import { useForm } from 'react-hook-form';
+import { Button, Typography, Loader } from '../UI';
+import { joiResolver } from '@hookform/resolvers/joi';
+import loginSchema from '../../services/form-schemes/login';
+import { login, selectStatus } from '../../store/slices/auth';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Login({ setShowRegister }) {
   const dispatch = useDispatch();
@@ -20,29 +20,26 @@ export default function Login({ setShowRegister }) {
   });
 
   const loginRegister = {
-    email: { ...register("email") },
-    password: { ...register("password") },
+    email: { ...register('email') },
+    password: { ...register('password') },
   };
 
   return (
-    <div className="h-full p-8">
-      {authStatus === "loading" ? <Loader /> : null}
+    <div className="flex h-full flex-col items-center justify-center p-8">
+      {authStatus === 'loading' ? <Loader /> : null}
       <Form onSubmit={handleSubmit((user) => dispatch(login(user)))}>
+        {/* <img src={require('../../assets/Logo.png')} alt="" /> */}
         <Typography component="h1" className="text-center text-primary">
           Sign in
         </Typography>
         <Typography component="body2" className="mt-5 text-center">
           Don't have an account yet?
-          <button
-            type="button"
-            className="mx-1 text-black"
-            onClick={() => setShowRegister(true)}
-          >
+          <button type="button" className="mx-1 text-black" onClick={() => setShowRegister(true)}>
             Sign up
           </button>
           for free
         </Typography>
-        <div className="flex flex-col">
+        <div className="my-5 flex flex-col gap-y-4">
           <Input
             type="text"
             register={loginRegister.email}
@@ -58,16 +55,13 @@ export default function Login({ setShowRegister }) {
             id="password"
           />
 
-          <button
-            type="button"
-            className="mt-10 self-end font-medium text-black hover:text-primary"
-          >
+          <button type="button" className="self-end font-medium text-black hover:text-primary">
             Forgot password?
           </button>
           <Typography component="body2"></Typography>
         </div>
 
-        <Button variant="secondary" type="submit" className="mt-5">
+        <Button variant="secondary" type="submit" className="">
           Login
         </Button>
       </Form>

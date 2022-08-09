@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { Typography } from '../UI';
-import Checkbox from '../UI/Form/Checkbox';
+import { Checkbox, Radio } from '../UI/Form';
 import { CompactTable, SearchBar, Modal, ProductRating } from '../UI';
-
-const userType = 'vendor';
+import { selectUserData } from '../../store/slices/auth';
+import { useSelector } from 'react-redux';
 
 const headers = ['product', 'number of reviews', 'average rate'];
 
 export default function Reviews() {
   const [products, setProducts] = useState([]);
   const [productReviews, setProductReviews] = useState([]);
-  const [ratingValue, setRatingValue] = useState(0);
+  const [ratingValue, setRatingValue] = useState(null);
   const [showReviews, setShowReviews] = useState(false);
 
+  const { userType, _id } = useSelector(selectUserData);
+  // console.log(useSelector(selectUserData));
   useEffect(() => {
-    const url = 'http://localhost:3000/api/v1/vendor/62ed27f4539b5574cab3f202';
+    const url = `http://localhost:3000/api/v1/vendor/${_id}`;
     const fetchData = async () => {
       const response = await fetch(url);
       const json = await response.json();
@@ -24,9 +26,8 @@ export default function Reviews() {
     fetchData();
   }, []);
 
-  const getRatingValue = (value) => {
-    setRatingValue(value);
-    console.log(ratingValue);
+  const getRatingValue = (e) => {
+    setRatingValue(e.target.value);
   };
 
   const getProductId = (id) => {
@@ -69,13 +70,16 @@ export default function Reviews() {
                 <div className="w-10 p-3">
                   {[...Array(5)].map((filter, index) => {
                     return (
-                      <Checkbox key={index} label={filter}>
-                        <ProductRating
-                          editable={false}
-                          rating={index + 1}
-                          onClick={getRatingValue}
-                        />
-                      </Checkbox>
+                      <Radio
+                        type="radio"
+                        name="rate"
+                        className="my-1"
+                        onChange={getRatingValue}
+                        checked={ratingValue}
+                        value={index + 1}
+                      >
+                        <ProductRating editable={false} rating={index + 1} />
+                      </Radio>
                     );
                   })}
                 </div>

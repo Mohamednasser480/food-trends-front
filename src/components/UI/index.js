@@ -11,6 +11,7 @@ import Backdrop from "./Backdrop";
 import Sidebar from "./Sidebar";
 import CompactTable from "./CompactTable";
 import SearchBar from "./SearchBar";
+import Spinner from "./Spinner";
 import Loader from "./Loader";
 import ProductsLoader from "./ProductsLoader"
 export {
@@ -26,6 +27,7 @@ export {
   Backdrop,
   Sidebar,
   Loader,
+  Spinner,
   CompactTable,
   SearchBar,
   ProductsLoader
