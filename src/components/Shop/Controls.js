@@ -30,7 +30,7 @@ export default function Controls() {
 
   let filters = {
     filter: genericFilters.current.value,
-    category: category||"all",
+    category: category || "all",
     price: pricesFilter.current.value,
   };
   // console.log(filters)
@@ -147,25 +147,23 @@ export default function Controls() {
             ref={genericFilters}
             onChange={onSelectBoxChange}
           />
-          <>
-            <SelectBox
-              array={categoriesArray}
-              ref={categoriesFilter}
-              onChange={onCategoryChange}
-            />
-            <SelectBox
-              array={pricesArray}
-              ref={pricesFilter}
-              onChange={onSelectBoxChange}
-            />
-          </>
 
-          <Button
+          <SelectBox
+            array={categoriesArray}
+            ref={categoriesFilter}
+            onChange={onCategoryChange}
+          />
+          <SelectBox
+            array={pricesArray}
+            ref={pricesFilter}
+            onChange={onSelectBoxChange}
+          />
+          {/* <Button
             variant="primary"
             onClick={() => setShowFilters(!showFilters)}
           >
             Filters
-          </Button>
+          </Button> */}
         </div>
       </div>
     </div>
