@@ -4,9 +4,9 @@ import { NavLink } from "react-router-dom";
 const links = [
   { name: "Home", href: "/" },
   { name: "Shop", href: "/shop" },
+  { name: "Categories", href: "/categories" },
   { name: "About", href: "/about" },
   { name: "Contact", href: "/contact-us" },
-  { name: "Find A Store", href: "/find-store" },
 ];
 
 export default function NavList() {
