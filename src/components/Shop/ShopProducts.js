@@ -20,7 +20,7 @@ export default function ShopProducts() {
   useEffect(() => {
     const payload = { number: null, filter: "default", category: category };
     dispatch(getFilteredProducts(payload));
-  }, []);
+  }, [category]);
   return productsLoading ? (
     <Loader />
   ) : productsError ? (
