@@ -6,7 +6,7 @@ const Radio = ({ name, className, children, checked, onChange, value }) => {
         name={name}
         className={`radio radio-accent ${className}`}
         onChange={onChange}
-        checked={checked === value}
+        checked={+checked === value}
         value={value}
       />
       <h3 className="mx-2 text-lg">{children}</h3>
