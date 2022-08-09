@@ -2,12 +2,13 @@ import React from "react";
 import { CartTableRow } from "./";
 import { useDispatch } from "react-redux";
 import { deleteCartItem, updateCartItem } from "../../store/slices/cart";
+import CartSidebarItem from "./CartSidebarItem";
 
 const CartItem = (props) => {
   const { _id } = props.cartProduct;
   const dispatch = useDispatch();
 
-  const itemRemoveHandler = (productId) => dispatch(deleteCartItem(productId));
+  const itemRemoveHandler = () => dispatch(deleteCartItem(_id));
   const quantitySubmitHandler = (quantity) => {
     console.log(_id, quantity);
     dispatch(updateCartItem({ product: _id, quantity }));
@@ -21,7 +22,13 @@ const CartItem = (props) => {
         onItemRemove={itemRemoveHandler}
       />
     ),
-    sidebar: <li></li>,
+    sidebar: (
+      <CartSidebarItem
+        cartProduct={props.cartProduct}
+        onQuantitySubmit={quantitySubmitHandler}
+        onItemRemove={itemRemoveHandler}
+      />
+    ),
   };
   return render[props.form] ? render[props.form] : null;
 };

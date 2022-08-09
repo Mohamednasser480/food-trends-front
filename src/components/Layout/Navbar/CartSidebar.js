@@ -1,16 +1,31 @@
 import React, { useState } from "react";
 import { AiOutlineShopping } from "react-icons/ai";
-import { Sidebar } from "../../UI";
+import { Alert, Button, Loader, Sidebar, Typography } from "../../UI";
 import { useSelector } from "react-redux";
-import { selectAllCartItems } from "../../../store/slices/cart";
+import {
+  selectAllCartItems,
+  selectStatus,
+  selectError,
+  selectTotalPrice,
+} from "../../../store/slices/cart";
+import { CartList, EmptyCart, TotalPrice } from "../../Cart";
 
 const CartSidebar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const cartProducts = useSelector(selectAllCartItems);
+  const cartStatus = useSelector(selectStatus);
+  const error = useSelector(selectError);
   const cartProductsCount = cartProducts.reduce(
     (prevVal, product) => prevVal + product.quantity,
     0
   );
+  const totalPrice = useSelector(selectTotalPrice);
+
+  const render = {
+    loading: <Loader />,
+    error: <Alert>{error}</Alert>,
+  };
+
   return (
     <>
       <div className="relative">
@@ -27,7 +42,24 @@ const CartSidebar = () => {
         </span>
       </div>
       <Sidebar show={showSidebar} setShow={setShowSidebar} right={true}>
-        <div>Cart Sidebar</div>
+        {render[cartStatus] ? render[cartStatus] : null}
+        {cartProducts.length ? (
+          <div className="flex flex-col gap-y-5 pt-5">
+            <Typography component="h3">shopping cart</Typography>
+            <ul className="border-t border-b p-3">
+              <CartList form="sidebar" />
+            </ul>
+            <TotalPrice totalPrice={totalPrice} />
+            <div className="flex flex-col gap-6">
+              <Button variant="secondary">continue shopping</Button>
+              <Button className="flex gap-x-3 bg-transparent text-black hover:text-primary">
+                view shopping cart
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <EmptyCart />
+        )}
       </Sidebar>
     </>
   );
