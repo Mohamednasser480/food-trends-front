@@ -30,12 +30,39 @@ const getMostSimilar = async (category) => {
 
 //Get Featured Products
 const getFeaturedProducts = async () => {
-  const res = await axios.get(`${PRODUCT_API_URI}?limit=10&sortBy:rate`);
+  const res = await axios.get(`${PRODUCT_API_URI}?limit=10&sortBy=rate:desc`);
   return res.data;
 };
 //Get Search Result
 const getSearchResult = async (productName) => {
-  const res = await axios.get(`${PRODUCT_API_URI}?limit=10&search=${productName}`);
+  const res = await axios.get(
+    `${PRODUCT_API_URI}?limit=10&search=${productName}`
+  );
+  return res.data;
+};
+
+//Get Filtered Products on Shop page
+const getFilteredProducts = async (payload) => {
+  // ex: payload={ number: 5, filter: "rating" ,category="all" }
+  let res = [];
+  switch (payload.filter) {
+    case "rating":
+      res = await axios.get(`${PRODUCT_API_URI}?sortBy=rate:desc`);
+      break;
+    case "latest":
+      res = await axios.get(`${PRODUCT_API_URI}?sortBy=createdAt:desc`);
+      break;
+    case "lowtohigh":
+      res = await axios.get(`${PRODUCT_API_URI}?sortBy=price:asc`);
+      break;
+    case "hightolow":
+      res = await axios.get(`${PRODUCT_API_URI}?sortBy=price:desc`);
+      break;
+
+    default:
+      res = await axios.get(`${PRODUCT_API_URI}`);
+      break;
+  }
   return res.data;
 };
 export default {
@@ -45,4 +72,5 @@ export default {
   getMostSimilar,
   getFeaturedProducts,
   getSearchResult,
+  getFilteredProducts,
 };

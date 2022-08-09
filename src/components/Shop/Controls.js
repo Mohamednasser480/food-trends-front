@@ -2,52 +2,62 @@ import React from "react";
 import { Button, Typography } from "../UI";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import FiltersSidebar from "./FiltersSidebar";
-import { productsSelector } from "../../store/slices/products";
-import { useSelector } from "react-redux";
+import {
+  filteredProductsSelector,
+  getFilteredProducts,
+} from "../../store/slices/products";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Controls() {
-  const products = useSelector(productsSelector);
-
+  const products = useSelector(filteredProductsSelector);
+  const dispatch = useDispatch();
   const numberOfProducts = products?.length;
-  const getSelectValue = (e) => {
-    console.log(e.target.value);
+  // Filters Login
+  const onSelectValue = (e) => {
+    const filterValue = e.target.value;
+    const payload = { number: 5, filter: filterValue };
+    dispatch(getFilteredProducts(payload));
   };
+  // Filters Array
   const filters = [
     {
       text: "Default",
-      value: 0,
+      value: "default",
     },
     {
       text: "Average Rating",
-      value: 1,
+      value: "rating",
     },
     {
       text: "Latest",
-      value: 2,
+      value: "latest",
     },
     {
       text: "Price: Low to High",
-      value: 3,
+      value: "lowtohigh",
     },
     {
       text: "Price: High to Low",
-      value: 4,
+      value: "hightolow",
     },
   ];
 
   return (
     <div className="mt-6 flex flex-wrap items-center justify-center gap-5 md:justify-between">
-      <Typography component={"subtitle2"} className="text-center text-primary">
+      <Typography
+        component={"subtitle2"}
+        className="text-center normal-case text-primary"
+      >
         We found
         <span className="mx-2 text-black">{numberOfProducts}</span>
         products available for you
       </Typography>
-      
+
       <div className="flex flex-wrap items-center justify-center gap-5">
         <div className="relative z-10 flex h-12 w-56 items-center rounded-md  bg-base-200">
           <select
             className="border-0.5 peer h-full w-full appearance-none border-0 bg-transparent px-5 font-medium transition-all duration-300 focus:bg-white"
-            onChange={getSelectValue}
+            onChange={onSelectValue}
           >
             {filters.map((item) => (
               <option key={item.value} className="text-lg" value={item.value}>
