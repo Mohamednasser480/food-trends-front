@@ -2,5 +2,6 @@ import FiltersSidebar from "./FiltersSidebar";
 import Title from "./Title"
 import Controls from "./Controls"
 import ShopProducts from "./ShopProducts";
-
-export { FiltersSidebar,Title,Controls,ShopProducts };
+import FiltersBox from "./FiltersBox"
+import SelectBox from "./SelectBox"
+export { FiltersSidebar,Title,Controls,ShopProducts,FiltersBox,SelectBox };
