@@ -47,20 +47,40 @@ const getFilteredProducts = async (payload) => {
   let res = [];
   switch (payload.filter) {
     case "rating":
-      res = await axios.get(`${PRODUCT_API_URI}?sortBy=rate:desc`);
+      res = await axios.get(
+        `${PRODUCT_API_URI}?sortBy=rate:desc${
+          payload.category && "&category=" + payload.category
+        }`
+      );
       break;
     case "latest":
-      res = await axios.get(`${PRODUCT_API_URI}?sortBy=createdAt:desc`);
+      res = await axios.get(
+        `${PRODUCT_API_URI}?sortBy=createdAt:desc${
+          payload.category && "&category=" + payload.category
+        }`
+      );
       break;
     case "lowtohigh":
-      res = await axios.get(`${PRODUCT_API_URI}?sortBy=price:asc`);
+      res = await axios.get(
+        `${PRODUCT_API_URI}?sortBy=price:asc${
+          payload.category && "&category=" + payload.category
+        }`
+      );
       break;
     case "hightolow":
-      res = await axios.get(`${PRODUCT_API_URI}?sortBy=price:desc`);
+      res = await axios.get(
+        `${PRODUCT_API_URI}?sortBy=price:desc${
+          payload.category && "&category=" + payload.category
+        }`
+      );
       break;
 
     default:
-      res = await axios.get(`${PRODUCT_API_URI}`);
+      res = await axios.get(
+        `${PRODUCT_API_URI}?${
+          payload.category && "category=" + payload.category
+        }`
+      );
       break;
   }
   return res.data;

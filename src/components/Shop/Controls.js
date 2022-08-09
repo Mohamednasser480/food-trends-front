@@ -7,15 +7,17 @@ import {
   getFilteredProducts,
 } from "../../store/slices/products";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 export default function Controls() {
+  const { category } = useParams();
   const products = useSelector(filteredProductsSelector);
   const dispatch = useDispatch();
   const numberOfProducts = products?.length;
   // Filters Login
   const onSelectValue = (e) => {
     const filterValue = e.target.value;
-    const payload = { number: 5, filter: filterValue };
+    const payload = { number: 5, filter: filterValue, category: category };
     dispatch(getFilteredProducts(payload));
   };
   // Filters Array

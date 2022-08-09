@@ -37,10 +37,11 @@ function App() {
           <Route path={"/"} element={<Home />} />
           <Route path={"/contact-us"} element={<ContactUs />} />
           <Route path={"/about"} element={<AboutUs />} />
-          <Route path={"/shop"} element={<Shop />} />
           <Route path={"/cart"} element={<Cart />} />
           <Route path={"/user-account"} element={<UserAccount />} />
+          <Route path={"/shop"} element={<Shop />} />
           <Route path={"/shop/:id"} element={<ProductPage />} />
+          <Route path={"/categories/:category"} element={<Shop />} />
           <Route path={"/search/:searchText"} element={<SearchPage />} />
           <Route path={"*"} element={<Error404 />} />
         </Routes>
