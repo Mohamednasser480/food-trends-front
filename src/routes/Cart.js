@@ -1,5 +1,5 @@
 import React from "react";
-import { Page, Loader } from "../components/UI";
+import { Page, Loader, Alert } from "../components/UI";
 import { CartList, EmptyCart } from "../components/Cart";
 import { Button } from "../components/UI";
 import { RiDeleteBin6Line } from "react-icons/ri";
@@ -20,8 +20,6 @@ const Cart = () => {
   const clearItemsHandler = () => {
     dispatch(clearCartData());
   };
-
-  const updateCartHandler = () => {};
 
   const content = {
     loading: <Loader />,
@@ -54,19 +52,16 @@ const Cart = () => {
             <RiDeleteBin6Line className="text-primary" size="18px" />
             clear cart
           </Button>
-          <Button
-            variant="primary"
-            className="flex gap-x-3"
-            onClick={updateCartHandler}
-          >
-            update cart
-          </Button>
         </div>
       </>
     ) : (
       <EmptyCart />
     ),
-    error: <p>{error}</p>,
+    error: (
+      <Alert>
+        <p>{error}</p>
+      </Alert>
+    ),
   };
 
   return <Page title="cart">{content[cartItemsStatus]}</Page>;

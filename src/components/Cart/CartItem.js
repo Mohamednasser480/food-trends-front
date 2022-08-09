@@ -8,15 +8,16 @@ const CartItem = (props) => {
   const dispatch = useDispatch();
 
   const itemRemoveHandler = (productId) => dispatch(deleteCartItem(productId));
-  const quantityInputHandler = (quantity) => {
-    dispatch(updateCartItem(_id, quantity));
+  const quantitySubmitHandler = (quantity) => {
+    console.log(_id, quantity);
+    dispatch(updateCartItem({ product: _id, quantity }));
   };
 
   const render = {
     table: (
       <CartTableRow
         cartProduct={props.cartProduct}
-        onQuantityInput={quantityInputHandler}
+        onQuantitySubmit={quantitySubmitHandler}
         onItemRemove={itemRemoveHandler}
       />
     ),

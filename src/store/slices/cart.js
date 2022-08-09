@@ -26,13 +26,6 @@ export const fetchCartData = createAsyncThunk(
   }
 );
 
-export const updateCartItems = createAsyncThunk(
-  "cart/saveCartItems",
-  async (cartItems) => {
-    return await cartService.updateCartData(cartItems);
-  }
-);
-
 export const clearCartData = createAsyncThunk(
   "cart/clearCartItems",
   async () => {
@@ -70,46 +63,17 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addCartItem: {
-      reducer(state, { payload: updatedItem }) {
-        const existingCartItemIndex = state.items.findIndex(
-          (item) => item.id === updatedItem.id
-        );
-        const existingCartItem = state.items[existingCartItemIndex];
-        if (!existingCartItem) {
-          state.items.push(updatedItem);
-          state.totalPrice += updatedItem.price * updatedItem.quantity;
-        } else {
-          state.total +=
-            (updatedItem.quantity - existingCartItem.quantity) *
-            updatedItem.price;
-          state.items[existingCartItemIndex].quantity = updatedItem.quantity;
-        }
-      },
-      prepare(id, name, image, price, stock, quantity) {
-        return {
-          payload: {
-            id,
-            name,
-            image,
-            price,
-            stock,
-            quantity,
-          },
-        };
-      },
-    },
     updateCartItem: {
       reducer(state, { payload }) {
         const { id, newQuantity } = payload;
-        const existingCartItemIndex = state.items.findIndex(
-          (item) => item.id === id
+        const existingCartItemIndex = state.products.findIndex(
+          (cartProduct) => cartProduct._id === id
         );
-        const existingCartItem = state.items[existingCartItemIndex];
+        const existingCartItem = state.products[existingCartItemIndex];
         console.log(existingCartItemIndex);
-        state.total +=
+        state.cartPrice +=
           (newQuantity - existingCartItem.quantity) * existingCartItem.price;
-        state.items[existingCartItemIndex].quantity = newQuantity;
+        state.products[existingCartItemIndex].quantity = newQuantity;
       },
       prepare(id, quantity) {
         return {
@@ -138,7 +102,7 @@ const cartSlice = createSlice({
     },
     [fetchCartData.rejected]: (state, { error }) => {
       state.status = "error";
-      console.log(error);
+      console.log(error.message);
       state.error = error.message;
     },
     // Save Cart Item
@@ -157,7 +121,26 @@ const cartSlice = createSlice({
     },
     [saveCartItem.rejected]: (state, { error }) => {
       state.status = "error";
-      console.log(error);
+      console.log(error.message);
+      state.error = error.message;
+    },
+    // Update Cart Item
+    [updateCartItem.pending]: (state) => {
+      state.status = "loading";
+    },
+    [updateCartItem.fulfilled]: (state, { payload: cart }) => {
+      state.status = "succeeded";
+      state.error = null;
+      state.id = cart._id;
+      state.products = cart.products.map((cartProduct) => ({
+        ...cartProduct.product,
+        quantity: cartProduct.quantity,
+      }));
+      state.cartPrice = cart.cartPrice;
+    },
+    [updateCartItem.rejected]: (state, { error }) => {
+      state.status = "error";
+      console.log(error.message);
       state.error = error.message;
     },
     // Clear Cart Data
@@ -176,7 +159,7 @@ const cartSlice = createSlice({
     },
     [clearCartData.rejected]: (state, { error }) => {
       state.status = "error";
-      console.log(error);
+      console.log(error.message);
       state.error = error.message;
     },
     // Delete Cart Item
@@ -195,7 +178,7 @@ const cartSlice = createSlice({
     },
     [deleteCartItem.rejected]: (state, { error }) => {
       state.status = "error";
-      console.log(error);
+      console.log(error.message);
       state.error = error.message;
     },
   },
@@ -204,11 +187,6 @@ const cartSlice = createSlice({
 export default cartSlice;
 // export const { updateCartItem } = cartSlice.actions;
 export const selectAllCartItems = (state) => state.cart.products;
-export const selectCartItemById = (id) => (state) => {
-  // console.log(id);
-  // console.log(state.cart.products.find((product) => product._id === id));
-  return state.cart.products.find((product) => product._id === id);
-};
 export const selectTotalPrice = (state) => state.cart.cartPrice;
 export const selectStatus = (state) => state.cart.status;
 export const selectError = (state) => state.cart.error;
