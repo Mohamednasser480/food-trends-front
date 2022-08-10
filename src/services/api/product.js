@@ -5,7 +5,7 @@ const PRODUCT_API_URI = `${API_URI}/products`;
 //Get All Available Products
 const getAllProducts = async () => {
   const res = await axios.get(PRODUCT_API_URI);
-  return res.data;
+  return res.data.data;
 };
 
 //Get a product By Id
@@ -17,7 +17,7 @@ const getProductById = async (id) => {
 //Get a product reviews By Id
 const getProductReviews = async (id) => {
   const res = await axios.get(`${PRODUCT_API_URI}/${id}/reviews`);
-  return res.data;
+  return res.data.data;
 };
 
 // Get most Similar products By Id
@@ -25,20 +25,20 @@ const getMostSimilar = async (category) => {
   const res = await axios.get(
     `${PRODUCT_API_URI}?sortBy:rate&category=${category}&limit=10`
   );
-  return res.data;
+  return res.data.data;
 };
 
 //Get Featured Products
 const getFeaturedProducts = async () => {
   const res = await axios.get(`${PRODUCT_API_URI}?limit=10&sortBy=rate:desc`);
-  return res.data;
+  return res.data.data;
 };
 //Get Search Result
 const getSearchResult = async (productName) => {
   const res = await axios.get(
     `${PRODUCT_API_URI}?limit=10&search=${productName}`
   );
-  return res.data;
+  return res.data.data;
 };
 
 //Get Filtered Products on Shop page
@@ -87,7 +87,7 @@ const getFilteredProducts = async (payload) => {
 
   let res = await axios.get(queryURL);
   // console.log("%c" + queryURL, "color:red;font-size:20px");
-  return res.data;
+  return res.data.data;
 };
 export default {
   getAllProducts,

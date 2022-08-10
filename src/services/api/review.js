@@ -8,7 +8,7 @@ const fetchReviewsById = async (productId) => {
     const response = await axios.get(
       `${PRODUCTS_API_URI}/${productId}/reviews`
     );
-    return response.data;
+    return response.data.data;
 };
 
 const addReview = async (reviewDetails,accessToken) => {
