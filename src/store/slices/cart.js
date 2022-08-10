@@ -3,25 +3,34 @@ import { cartService } from "../../services/api";
 import { cookie } from "../../services";
 
 const initialState = {
-  id: "",
   products: [],
   cartPrice: 0,
   status: "idle", // "idle" | "loading" | "succeeded" | "error",
   error: null,
 };
 
+const initialCart = {
+  products: [],
+  cartPrice: 0,
+};
+
 export const fetchCartData = createAsyncThunk(
   "cart/fetchCartData",
   async () => {
     const userToken = cookie.getCookie("token");
-    if (!userToken) {
-      return await new Promise((resolve) => {
+    if (!userToken)
+      return await new Promise((resolve, reject) => {
         setTimeout(() => {
-          const cart = localStorage.getItem("cart") || initialState;
-          resolve(cart);
+          try {
+            const cart =
+              JSON.parse(localStorage.getItem("cart")) || initialCart;
+            console.log(cart);
+            resolve(cart);
+          } catch (e) {
+            reject(e);
+          }
         }, 500);
       });
-    }
     return await cartService.getCartData(userToken);
   }
 );
@@ -30,6 +39,14 @@ export const clearCartData = createAsyncThunk(
   "cart/clearCartItems",
   async () => {
     const userToken = cookie.getCookie("token");
+    if (!userToken) {
+      return await new Promise((resolve) => {
+        setTimeout(() => {
+          const cart = localStorage.getItem("cart") || initialCart;
+          resolve(cart);
+        }, 500);
+      });
+    }
     return await cartService.updateCartData(userToken, {
       products: [],
       cartPrice: 0,
@@ -37,10 +54,41 @@ export const clearCartData = createAsyncThunk(
   }
 );
 
-export const saveCartItem = createAsyncThunk("cart/saveCartItem", (payload) => {
-  const userToken = cookie.getCookie("token");
-  return cartService.postCartItem(userToken, payload.product, payload.quantity);
-});
+export const saveCartItem = createAsyncThunk(
+  "cart/saveCartItem",
+  async (payload) => {
+    const userToken = cookie.getCookie("token");
+    if (!userToken) {
+      return await new Promise((resolve) => {
+        setTimeout(() => {
+          const { quantity, ...product } = payload;
+          const cart = JSON.parse(localStorage.getItem("cart")) || initialCart;
+          const cartProducts = cart.products;
+          const cartPrice = cart.cartPrice;
+          const existingCartIndex = cartProducts.findIndex(
+            (cartProduct) => cartProduct.id === payload._id
+          );
+          const existingCart = cartProducts[existingCartIndex];
+          const newCartProduct = {
+            product: { ...product },
+            quantity,
+          };
+          if (existingCartIndex === -1) {
+            // Create new Cart Product
+            cart.products.push(newCartProduct);
+            cart.cartPrice += product.price * quantity;
+            console.log(newCartProduct);
+          } else {
+          }
+          localStorage.setItem("cart", JSON.stringify(cart));
+          console.log(cart);
+          resolve(cart);
+        }, 500);
+      });
+    }
+    return cartService.postCartItem(userToken, payload._id, payload.quantity);
+  }
+);
 
 export const updateCartItem = createAsyncThunk(
   "cart/updateCartItem",
@@ -93,7 +141,6 @@ const cartSlice = createSlice({
     [fetchCartData.fulfilled]: (state, { payload: cart }) => {
       state.status = "succeeded";
       state.error = null;
-      state.id = cart._id;
       state.products = cart.products.map((cartProduct) => ({
         ...cartProduct.product,
         quantity: cartProduct.quantity,
@@ -112,7 +159,7 @@ const cartSlice = createSlice({
     [saveCartItem.fulfilled]: (state, { payload: cart }) => {
       state.status = "succeeded";
       state.error = null;
-      state.id = cart._id;
+      console.log(state.products);
       state.products = cart.products.map((cartProduct) => ({
         ...cartProduct.product,
         quantity: cartProduct.quantity,
@@ -131,7 +178,6 @@ const cartSlice = createSlice({
     [updateCartItem.fulfilled]: (state, { payload: cart }) => {
       state.status = "succeeded";
       state.error = null;
-      state.id = cart._id;
       state.products = cart.products.map((cartProduct) => ({
         ...cartProduct.product,
         quantity: cartProduct.quantity,
@@ -150,7 +196,6 @@ const cartSlice = createSlice({
     [clearCartData.fulfilled]: (state, { payload: cart }) => {
       state.status = "succeeded";
       state.error = null;
-      state.id = cart._id;
       state.products = cart.products.map((cartProduct) => ({
         ...cartProduct.product,
         quantity: cartProduct.quantity,
@@ -169,7 +214,6 @@ const cartSlice = createSlice({
     [deleteCartItem.fulfilled]: (state, { payload: cart }) => {
       state.status = "succeeded";
       state.error = null;
-      state.id = cart._id;
       state.products = cart.products.map((cartProduct) => ({
         ...cartProduct.product,
         quantity: cartProduct.quantity,

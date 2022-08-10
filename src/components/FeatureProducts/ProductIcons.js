@@ -49,7 +49,7 @@ export default function ProductIcons(props) {
         onClick={() =>
           dispatch(
             saveCartItem({
-              product: productDetails._id,
+              ...productDetails,
               quantity: productQuantity + 1,
             })
           )
