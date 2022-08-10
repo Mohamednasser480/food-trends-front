@@ -8,14 +8,13 @@ import { Link } from 'react-router-dom';
 const UserMenu = (props) => {
   const menuItems = {
     vendor: ['Dashboard'],
-    customer: ['My profile', 'My orders', 'wishlist', 'Reviews'],
+    customer: ['My profile', 'My orders', 'Reviews'],
     delivery: ['Orders'],
   };
   const dispatch = useDispatch();
   const logoutHandler = () => dispatch(logout());
 
   const { userType } = useSelector(selectUserData);
-  console.log(userType);
 
   return (
     <ul
@@ -28,14 +27,19 @@ const UserMenu = (props) => {
             <li className="capitalize transition-colors hover:bg-black hover:text-white">
               <Link to={'/user-account'}>{item}</Link>
             </li>
-            {userType == 'customer' ? (
-              <li>
-                <Link to={'/cart'}>My cart</Link>
-              </li>
-            ) : null}
           </Fragment>
         );
       })}
+      {userType == 'customer' ? (
+        <>
+          <li>
+            <Link to={'/cart'}>My cart</Link>
+          </li>
+          <li>
+            <Link to={'/wishlist'}>My Wishlist</Link>
+          </li>
+        </>
+      ) : null}
 
       <li>
         <button
