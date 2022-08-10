@@ -18,7 +18,6 @@ export default function AccountNav({ onNavClick, content }) {
   const { userType } = useSelector(selectUserData);
 
   const [activeButton, setActiveButton] = useState(content);
-
   const [showSidebar, setShowSidebar] = useState(false);
 
   const handleClick = (btn) => {
@@ -27,7 +26,7 @@ export default function AccountNav({ onNavClick, content }) {
   };
   const buttons = {
     vendor: ['Dashboard', 'Products', 'Reviews', 'Orders', 'Add product', 'Transactions'],
-    customer: ['My profile', 'My orders', 'wishlist', 'Reviews'],
+    customer: ['My profile', 'My orders', 'wishlist'],
     delivery: ['Orders'],
   };
   const icons = {
@@ -42,13 +41,12 @@ export default function AccountNav({ onNavClick, content }) {
     Transactions: <AiOutlineTransaction className="mx-3 " />,
     'My orders': <FaShoppingCart className="mx-3" />,
   };
-  // className={showSidebar ? 'w-3/12 py-10 lg:w-2/12' : 'hidden'}
 
   return (
     <>
       <div
-        className={`fixed z-10 h-full w-[380px] bg-white p-10 shadow-2xl transition-all duration-300 md:static md:shadow-none ${
-          showSidebar ? 'left-0' : '-left-[380px]'
+        className={`fixed z-10 h-full w-[350px] bg-white py-11 shadow-2xl transition-all duration-300 md:static md:w-[300px] md:shadow-none ${
+          showSidebar ? 'left-0' : '-left-[350px]'
         }`}
       >
         {buttons[userType]
@@ -68,7 +66,7 @@ export default function AccountNav({ onNavClick, content }) {
       </div>
       <button
         className={`fixed z-10 mt-2 rounded-full bg-white transition-all duration-300 hover:bg-slate-100 md:hidden ${
-          showSidebar ? 'left-[335px]' : 'left-[10px]'
+          showSidebar ? 'left-[310px]' : 'left-[10px]'
         }`}
         onClick={() => {
           setShowSidebar((showSidebar) => !showSidebar);

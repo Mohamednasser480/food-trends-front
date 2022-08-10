@@ -1,19 +1,17 @@
-import { AiOutlineStar } from 'react-icons/ai';
 import React, { useEffect, useState } from 'react';
-import { Button, Typography } from '../../UI';
+import { Button, Page, Typography } from '../../UI';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts, productsSelector } from '../../../store/slices/products';
 
 const Wishlist = () => {
   const [products, setProducts] = useState([]);
-
   const productsData = useSelector(productsSelector);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  console.log(productsData);
   useEffect(() => {
     const url = 'https://jsonplaceholder.typicode.com/todos';
     const fetchData = async () => {
@@ -25,16 +23,13 @@ const Wishlist = () => {
     fetchData();
   }, []);
   return (
-    <>
-      <Typography component="h2" className="p-5 text-primary">
-        your wishlist
-      </Typography>
+    <Page title="wishlist">
       <div className="mx-5 flex items-start justify-evenly gap-x-5">
         <div className="w-full self-center rounded-xl border shadow-lg md:w-[1200px]">
           <div className="flex bg-[#f7f7f7] p-2 text-center font-medium text-black">
             <p className="w-10"></p>
-            <p className="w-32 break-words">Title</p>
-            <p className="mx-5 w-96">Comment</p>
+            <p className="w-32 break-words">Product</p>
+            <p className="w-48">Comment</p>
             <p className="w-32">Customer</p>
             <p className="mr-5 w-32">Date</p>
             <p className="w-32">Rate</p>
@@ -45,11 +40,11 @@ const Wishlist = () => {
               <div className="flex w-full items-center border-b p-2 text-center" key={index}>
                 <p className="w-10 font-medium">{index + 1}</p>
                 <p className="w-32 break-words">{rev.title}</p>
-                <p className="mx-5 w-96">test</p>
+                <p className="w-48">test</p>
                 <p className="w-32">test</p>
                 <p className="mr-5 w-32">test</p>
-                <p className="w-32">
-                  <Button variant="user-account">add to cart</Button>
+                <p className="w-48">
+                  <Button variant="secondary">add to cart</Button>
                 </p>
               </div>
             );
@@ -78,7 +73,7 @@ const Wishlist = () => {
           })}
         </div>
       </div>
-    </>
+    </Page>
   );
 };
 

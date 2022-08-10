@@ -1,9 +1,9 @@
 import React from 'react';
 
 const CompactTable = ({ products, headers, buttonContent, onButtonClick }) => {
-  console.log(products);
+  // console.log(products[0]._id);
   return (
-    <div className="flex flex-1 flex-col rounded-xl bg-white py-10">
+    <div className="flex flex-col rounded-xl bg-white py-10">
       <div className="self-center ">
         <div className="flex h-12 items-center bg-primary p-2 text-center font-medium text-white">
           <p className="w-10"></p>
