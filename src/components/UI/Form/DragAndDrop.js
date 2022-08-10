@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-export default function DragAndDrop({ label }) {
+export default function DragAndDrop({ label, onAddImg }) {
   return (
     <div className="mt-10 flex items-center justify-center font-sans">
       <label
@@ -22,13 +22,23 @@ export default function DragAndDrop({ label }) {
           />
         </svg>
 
-        <h2 className="mt-4 text-xl font-medium tracking-wide text-gray-700">{label}</h2>
+        <h2 className="mt-4 text-xl font-medium tracking-wide text-gray-700">
+          {label}
+        </h2>
 
         <p className="mt-2 tracking-wide text-gray-500">
           Upload or darg & drop your file SVG, PNG, JPG or GIF.
         </p>
 
-        <input id="dropzone-file" type="file" className="hidden" />
+        <input
+          id="dropzone-file"
+          type="file"
+          name="images"
+          className="hidden"
+          onChange={(e) => {
+            onAddImg(e.target.files[0]);
+          }}
+        />
       </label>
     </div>
   );

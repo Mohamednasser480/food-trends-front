@@ -104,13 +104,12 @@ const authSlice = createSlice({
       state.verify.status = "loading";
     },
     [verifyUser.fulfilled]: (state, { payload }) => {
-      console.log(payload)
       state.status = "succeeded";
       state.user = payload;
       // state.token = payload.token;
       state.verify.status = "succeeded";
       state.verify.error = "";
-      state.error=""
+      state.error = "";
     },
     [verifyUser.rejected]: (state, { error }) => {
       state.verify.status = "error";
@@ -125,7 +124,7 @@ const authSlice = createSlice({
       state.status = "idle";
       state.token = "";
       state.error = null;
-      state.login.status=""
+      state.login.status = "";
     },
     [logout.rejected]: (state, { error }) => {
       state.status = "error";
@@ -141,6 +140,7 @@ const authSlice = createSlice({
         state.token = payload.token;
         state.user = payload.user;
         state.error = null;
+        state.login.status = "succeeded";
       }
     },
     // Register Reducers

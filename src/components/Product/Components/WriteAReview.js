@@ -3,17 +3,18 @@ import { ProductRating, Typography } from "../../UI";
 import { TiPencil } from "react-icons/ti";
 import ReviewForm from "./ReviewForm";
 import { useSelector } from "react-redux";
-import { selectStatus } from "../../../store/slices/auth";
+import { loginSelector, selectStatus } from "../../../store/slices/auth";
 
 export default function WriteAReview({ rating, numberOfReviews, productId }) {
-  const userLogged = useSelector(selectStatus);
+  const userLogged = useSelector(loginSelector);
   const [isLogged, setIsLogged] = useState(false);
+  
   
   // TO Be Edited => Control The Review Form To show only If User logged and have purchased the item before.
   const [itemPurchased, setItemPurchased] = useState(true);
 
   useEffect(()=>{
-    setIsLogged(userLogged=="succeeded")
+    setIsLogged(userLogged.status=="succeeded")
   },[userLogged])
 
   //DON"T TOUCH! Control On Button Click to Show Form or Warning

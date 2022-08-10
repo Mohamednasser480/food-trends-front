@@ -1,6 +1,7 @@
 import React from 'react';
 import { Orders, Products, Reviews, Wishlist, Profile } from '.';
-import AddProduct from './Vendor/ActionProductsComponent';
+
+import AddProduct from './Vendor/ActionProducts';
 import VendorProfile from './Vendor/VendorProfile';
 
 export default function AccountContent(props) {
