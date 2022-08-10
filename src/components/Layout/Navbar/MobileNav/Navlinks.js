@@ -6,10 +6,12 @@ import {
   AiOutlineInfoCircle,
   AiOutlineComment,
 } from "react-icons/ai";
+import {BiCategory} from "react-icons/bi"
 
 let links = [
   { to: "/", icon: <AiOutlineHome size={22} />, text: "Home" },
   { to: "/shop", icon: <AiOutlineShop size={22} />, text: "Shop" },
+  { to: "/categories", icon: <BiCategory size={22} />, text: "Categories" },
   { to: "/about", icon: <AiOutlineInfoCircle size={22} />, text: "About" },
   { to: "/contact-us", icon: <AiOutlineComment size={22} />, text: "Contact" },
 ];

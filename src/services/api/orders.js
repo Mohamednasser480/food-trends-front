@@ -9,7 +9,7 @@ const getAllOrders = async (userToken) => {
       Authorization: `Bearer ${userToken}`,
     },
   });
-  return res.data;
+  return res.data.data;
 };
 
 //Create New Order
