@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../../store/slices/auth';
 import { useSelector } from 'react-redux';
@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const UserMenu = (props) => {
   const menuItems = {
-    vendor: ['Products', 'Reviews', 'Add product', 'Transactions'],
+    vendor: ['Dashboard'],
     customer: ['My profile', 'My orders', 'wishlist', 'Reviews'],
     delivery: ['Orders'],
   };
@@ -24,14 +24,19 @@ const UserMenu = (props) => {
     >
       {menuItems[userType].map((item, index) => {
         return (
-          <li className="capitalize transition-colors hover:bg-black hover:text-white" key={index}>
-            <Link to={'/user-account'}>{item}</Link>
-          </li>
+          <Fragment key={index}>
+            <li className="capitalize transition-colors hover:bg-black hover:text-white">
+              <Link to={'/user-account'}>{item}</Link>
+            </li>
+            {userType == 'customer' ? (
+              <li>
+                <Link to={'/cart'}>My cart</Link>
+              </li>
+            ) : null}
+          </Fragment>
         );
       })}
-      <li>
-        <Link to={'/cart'}>My cart</Link>
-      </li>
+
       <li>
         <button
           onClick={logoutHandler}

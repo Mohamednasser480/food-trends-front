@@ -9,9 +9,8 @@ const contactUsSchema = Joi.object({
     'string.empty': `Please enter your email`,
     'any.required': `Please enter your email`,
   }),
-  message: Joi.string().min(6).required().messages({
-    'string.empty': `Please enter your password`,
-    'string.min': 'Password must be at least 6 characters',
+  message: Joi.string().required().messages({
+    'string.empty': `Please enter your message`,
     'any.required': `Please enter your password`,
   }),
 });

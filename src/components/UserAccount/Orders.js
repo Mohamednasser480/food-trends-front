@@ -14,26 +14,33 @@ const filters = ['all orders', 'completed', 'pending', 'canceled'];
 export default function Orders() {
   // const [ordersData, setOrdersData] = useState([]);
 
-  const [products, setProducts] = useState([]);
-  const [filterBtn, setFilterBtn] = useState('');
-
+  // user type state to define which part will be rendered
   const { userType } = useSelector(selectUserData);
 
-  const dispatch = useDispatch();
-  const [selected, setSelected] = useState(null);
+  // products and filters states for vendor
+  const [products, setProducts] = useState([]);
+  const [filterBtn, setFilterBtn] = useState('');
+  const [deliveryOrders, setDeliveryOrders] = useState([]);
 
+  const dispatch = useDispatch();
+
+  // radio button value change to set the filtered orders as such
+  const [selected, setSelected] = useState(null);
   const handleChange = (event) => {
     setSelected(event.target.value);
     if (selected === 'highest') {
     } else {
     }
   };
+
+  // order status filter onchange function
   const handleOrderStatFilter = (filter) => setFilterBtn(filter);
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
+  // fetching products sorted based on price and status
   useEffect(() => {
     let url = 'http://localhost:3000/api/v1/vendor/orders?';
     url +=
@@ -46,8 +53,6 @@ export default function Orders() {
     else if (filterBtn === 'canceled') url += 'status=canceled&';
     else if (filterBtn === 'completed') url += 'status=completed&';
 
-    // const token =
-    //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmVkMjdmNDUzOWI1NTc0Y2FiM2YyMDIiLCJpYXQiOjE2NTk5OTE0MTAsImV4cCI6MTY2MDI1MDYxMH0.z9j_EtY9J6xkWhWKR5eJQMKRwrY7Llrst7dQTL3UPDI";
     const token = cookie.getCookie('token');
     const fetchData = async () => {
       const response = await axios.get(url, {
@@ -92,10 +97,10 @@ export default function Orders() {
 
             <div className="mx-2 my-5 flex items-center lg:my-0">
               <Typography component="subtitle2">Price filters:</Typography>
-              <Radio name={'price'} value="highest" checked={selected} onChange={handleChange}>
+              <Radio name="price" value="highest" checked={selected} onChange={handleChange}>
                 Highest
               </Radio>
-              <Radio name={'price'} checked={selected} onChange={handleChange} value="lowest">
+              <Radio name="price" checked={selected} onChange={handleChange} value="lowest">
                 Lowest
               </Radio>
             </div>
@@ -244,8 +249,6 @@ export default function Orders() {
               </Radio>
             </div>
           </div>
-
-          {/* {selected === 'highest' ? <div className="bg-red-400">test</div> : ''} */}
 
           <div className="mx-5 mb-10 flex items-start">
             <div className="w-full self-center rounded-xl border shadow-lg lg:w-[1200px]">
