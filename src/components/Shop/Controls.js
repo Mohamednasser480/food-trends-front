@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Button, Typography } from "../UI";
 import { SelectBox } from "./";
 import {
+  filterArraySelector,
+  filteredProductsCount,
   filteredProductsSelector,
   getFilteredProducts,
 } from "../../store/slices/products";
@@ -9,43 +11,31 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 
 export default function Controls() {
-  const [showFilters, setShowFilters] = useState(false);
   const { category } = useParams();
   const navigate = useNavigate();
   const products = useSelector(filteredProductsSelector);
   const dispatch = useDispatch();
-  const numberOfProducts = products?.length;
-  // Filters Logic
-  function fetchItemsAfterFilter(filters) {
-    const payload = {
-      number: 5,
-      ...filters,
-    };
-    // console.log(payload);
-    dispatch(getFilteredProducts(payload));
-  }
+  let numberOfProducts = useSelector(filteredProductsCount);
+  let filterArray = useSelector(filterArraySelector);
+
+
   const genericFilters = useRef("all");
   const categoriesFilter = useRef(category);
   const pricesFilter = useRef("all");
 
   let filters = {
-    filter: genericFilters.current.value,
-    category: category || "all",
-    price: pricesFilter.current.value,
+    ...filterArray,
   };
   // console.log(filters)
   const onSelectBoxChange = () => {
-    filters = {
-      filter: genericFilters.current.value,
-      category: category,
-      price: pricesFilter.current.value,
-    };
-    // console.log("Filters", filters);
-    fetchItemsAfterFilter(filters);
-  };
+    filters.filter = genericFilters.current.value;
+    filters.price = pricesFilter.current.value;
+    filters.category=categoriesFilter.current.value;
+    dispatch(getFilteredProducts(filters))
+  }
   const onCategoryChange = (e) => {
-    const value = e.target.value;
-    filters.category = value;
+    // const value = e.target.value;
+    // filters.category = value;
     navigate(`/categories/${e.target.value}`);
   };
 
@@ -125,8 +115,13 @@ export default function Controls() {
     },
   ];
   useEffect(() => {
-    if (!category) return;
-    categoriesFilter.current.value = category.toLowerCase();
+    if (category){
+
+      categoriesFilter.current.value = category.toLowerCase();
+    }else{
+      
+      categoriesFilter.current.value = "all"
+    }
   }, [category]);
 
   return (
