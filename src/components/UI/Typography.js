@@ -17,7 +17,6 @@ const Typography = (props) => {
     body2:
       "text-base text-base-400 font-medium" /**General paragraphs font-size 16px */,
   };
-  console.log(props.variant);
 
   const classes = `${variants[props.variant] || variants[props.component]} ${
     props.className || ""

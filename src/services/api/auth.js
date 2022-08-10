@@ -4,6 +4,7 @@ const LOGIN_API_URI = `${API_URI}/users/login`;
 const LOGOUT_API_URI = `${API_URI}/users/logout`;
 const REGISTER_API_URI = `${API_URI}/users/register`;
 const USER_API_URI = `${API_URI}/users`;
+const VERIFY_API_URI = `${API_URI}/users/confirm`;
 
 const login = async (user) => {
   try {
@@ -11,6 +12,22 @@ const login = async (user) => {
       email: user.email,
       password: user.password,
     });
+    return res.data;
+  } catch (e) {
+    throw e.response.data;
+  }
+};
+
+const verify = async (codeTokenObject) => {
+  try {
+    const res = await axios.post(
+      VERIFY_API_URI,
+      { confirmationCode: codeTokenObject.code },
+      {
+        headers: { Authorization: "Bearer " + codeTokenObject.token },
+      }
+    );
+    // console.log(res)
     return res.data;
   } catch (e) {
     throw e.response.data;
@@ -36,6 +53,7 @@ const register = async (newUser) => {
       password: newUser.password,
       mobile: "01279001036",
     });
+
     return res.data;
   } catch (e) {
     throw e.response.data;
@@ -53,4 +71,4 @@ const logout = async (token) => {
   }
 };
 
-export default { login, register, logout, getUserData };
+export default { login, register, logout, getUserData, verify };
