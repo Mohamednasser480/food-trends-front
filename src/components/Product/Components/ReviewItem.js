@@ -12,8 +12,8 @@ export default function ReviewItem(props) {
   return (
     <div className="flex flex-col flex-wrap justify-between gap-4 border-b-[1px] py-3 lg:flex-row md:gap-2">
       <div className="flex  items-center gap-3 mr-4  min-w-[200px]">
-        <div className="overflow-hidden rounded-full">
-          <img src={props.image} width={"50px"} />
+        <div className="overflow-hidden rounded-full ">
+          <img src={props.image} width={"50px"} className="h-12 w-12 object-cover" />
         </div>
         <div className="flex flex-col gap-2">
           <span className="text-sm font-semibold uppercase tracking-wider">

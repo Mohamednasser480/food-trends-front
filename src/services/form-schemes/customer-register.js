@@ -2,8 +2,8 @@ import * as Joi from 'joi';
 
 const registerSchema = Joi.object({
   customerName: Joi.string().required().messages({
-    'string.empty': `Please enter your email`,
-    'any.required': `Please enter your email`,
+    'string.empty': `Please enter your name`,
+    'any.required': `Please enter your name`,
   }),
   email: Joi.string().required().messages({
     'string.empty': `Please enter your email`,

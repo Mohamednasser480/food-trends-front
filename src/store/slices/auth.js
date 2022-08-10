@@ -7,13 +7,47 @@ const initialState = {
   token: "",
   status: "idle", // "idle" | "loading" | "succeeded" | "error"
   error: "",
+  login: {
+    status: "",
+    error: "",
+  },
+  register: {
+    status: "",
+    error: "",
+  },
+  verify: {
+    status: "",
+    error: "",
+  },
 };
 
 export const login = createAsyncThunk("auth/login", async (user) => {
-  const data = await authService.login(user);
-  cookie.setCookie("token", data.token, 3);
-  return data;
+  try {
+    const data = await authService.login(user);
+
+    cookie.setCookie("token", data.token, 3);
+    if (data.user.status == "Pending") {
+      throw "Pending";
+    }
+    return data;
+  } catch (error) {
+    throw error;
+  }
 });
+// Verify User
+export const verifyUser = createAsyncThunk(
+  "auth/verifyUser",
+  async (codeTokenObject) => {
+    try {
+      const data = await authService.verify(codeTokenObject);
+      // cookie.setCookie("token", data.token, 3);
+      return data;
+    } catch (error) {
+      console.log(error);
+      throw error.msg;
+    }
+  }
+);
 
 export const getUserData = createAsyncThunk(
   "auth/getUserData",
@@ -33,7 +67,7 @@ export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (payload) => {
     const userData = await authService.register(payload);
-    cookie.setCookie("token", userData.token, 3);
+    // cookie.setCookie("token", userData.token, 3);
     return userData;
   }
 );
@@ -45,18 +79,41 @@ const authSlice = createSlice({
   extraReducers: {
     // Login Reducers
     [login.pending]: (state) => {
-      state.status = "loading";
+      // state.status = "loading";
+      state.login.status = "loading";
     },
     [login.fulfilled]: (state, { payload }) => {
       console.log(payload);
-      state.status = "succeeded";
-      state.user = payload.user;
+      // state.status = "succeeded";
+      if (payload.user.status !== "Pending") {
+        state.user = payload.user;
+      }
       state.token = payload.token;
       state.error = null;
+      state.login.status = "succeeded";
+      state.login.error = "";
     },
     [login.rejected]: (state, { error }) => {
       state.status = "error";
       state.error = error.message;
+      state.login.status = "error";
+      state.login.error = error.message;
+    },
+    // Verify Reducers
+    [verifyUser.pending]: (state) => {
+      state.verify.status = "loading";
+    },
+    [verifyUser.fulfilled]: (state, { payload }) => {
+      state.status = "succeeded";
+      state.user = payload;
+      // state.token = payload.token;
+      state.verify.status = "succeeded";
+      state.verify.error = "";
+      state.error = "";
+    },
+    [verifyUser.rejected]: (state, { error }) => {
+      state.verify.status = "error";
+      state.verify.error = error.message;
     },
     // Logout Reducers
     [logout.pending]: (state) => {
@@ -67,6 +124,7 @@ const authSlice = createSlice({
       state.status = "idle";
       state.token = "";
       state.error = null;
+      state.login.status = "";
     },
     [logout.rejected]: (state, { error }) => {
       state.status = "error";
@@ -77,24 +135,32 @@ const authSlice = createSlice({
       state.status = "loading";
     },
     [getUserData.fulfilled]: (state, { payload }) => {
-      state.status = "succeeded";
-      state.token = payload.token;
-      state.user = payload.user;
-      state.error = null;
+      if (payload.user.status !== "Pending") {
+        state.status = "succeeded";
+        state.token = payload.token;
+        state.user = payload.user;
+        state.error = null;
+        state.login.status = "succeeded";
+      }
     },
     // Register Reducers
     [registerUser.pending]: (state) => {
       state.status = "loading";
+      state.register.status = "loading";
     },
     [registerUser.fulfilled]: (state, { payload: user }) => {
-      state.status = "succeeded";
-      state.user = user.user;
-      state.token = user.token;
+      // state.status = "Pending";
+      // state.user = user.user;
+      // state.token = user.token;
       state.error = null;
+      state.register.status = "succeeded";
+      state.register.error = "";
     },
     [registerUser.rejected]: (state, { error }) => {
       state.status = "error";
       state.error = error.message;
+      state.register.status = "error";
+      state.register.error = error.message;
     },
   },
 });
@@ -103,4 +169,7 @@ export default authSlice;
 export const selectUserToken = (state) => state.auth.token;
 export const selectUserData = (state) => state.auth.user;
 export const selectStatus = (state) => state.auth.status;
+export const loginSelector = (state) => state.auth.login;
+export const registerSelector = (state) => state.auth.register;
+export const verifySelector = (state) => state.auth.verify;
 export const authReducer = authSlice.reducer;

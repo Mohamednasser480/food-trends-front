@@ -5,7 +5,7 @@ import { Category } from "./";
 const categories = [
   {
     image: require("../../assets/CategoryItem1.jpeg"),
-    title: "Weekly Purchase",
+    title: "Veggies",
     itemsNumber: 1,
     link: "veggies",
   },
@@ -25,7 +25,7 @@ const categories = [
     image: require("../../assets/CategoryItem4.jpeg"),
     title: "Butter and Eggs",
     itemsNumber: 4,
-    link: "Meat",
+    link: "dairy",
   },
   {
     image: require("../../assets/CategoryItem5.jpeg"),

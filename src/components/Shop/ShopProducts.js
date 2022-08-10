@@ -18,9 +18,15 @@ export default function ShopProducts() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    const payload = { number: null, filter: "default", category: category };
+    // if (category) return;
+    const payload = {
+      number: null,
+      filter: "all",
+      category: category ||"all",
+      price: "all",
+    };
     dispatch(getFilteredProducts(payload));
-  }, []);
+  }, [category]);
   return productsLoading ? (
     <Loader />
   ) : productsError ? (

@@ -11,8 +11,8 @@ export default function Reviews({ reviews }) {
           return (
             <ReviewItem
               key={index}
-              userName={item.customer.name}
-              image={item.customer.image}
+              userName={item.customer?.name||"Mahmoud Meky"}
+              image={item.customer?.image || "https://www.4read.net/uploads/authors/1534154564.png"}
               rating={item.rating}
               date={new Date(item.createdAt)}
               reviewTitle={item.title}
