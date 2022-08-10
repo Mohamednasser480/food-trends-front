@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Typography } from '../UI';
+import { Typography, Search } from '../UI';
 import { Checkbox, Radio } from '../UI/Form';
 import { CompactTable, SearchBar, Modal, ProductRating } from '../UI';
 import { selectUserData } from '../../store/slices/auth';
@@ -52,74 +52,71 @@ export default function Reviews() {
               Your Reviews
             </Typography>
             <div className="flex gap-x-6">
-              <div className="flex-1 rounded-xl bg-white p-5">
-                <CompactTable
-                  products={products}
-                  headers={headers}
-                  buttonContent="see details"
-                  onButtonClick={getProductId}
-                />
-              </div>
-
-              <div className="flex w-3/12 flex-col rounded-xl bg-white">
-                <Typography component="h6" className="p-5">
-                  Filters
-                </Typography>
-                <SearchBar />
-
-                <div className="w-10 p-3">
-                  {[...Array(5)].map((filter, index) => {
-                    return (
-                      <Radio
-                        type="radio"
-                        name="rate"
-                        className="my-1"
-                        onChange={getRatingValue}
-                        checked={ratingValue}
-                        value={index + 1}
-                      >
-                        <ProductRating editable={false} rating={index + 1} />
-                      </Radio>
-                    );
-                  })}
-                </div>
-              </div>
+              <CompactTable
+                products={products}
+                headers={headers}
+                buttonContent="see details"
+                onButtonClick={getProductId}
+              />
             </div>
           </div>
-          <Modal
-            show={showReviews}
-            setShow={setShowReviews}
-            className="h-[500px] w-[1000px] overflow-y-auto rounded-lg"
-          >
+          <Modal show={showReviews} setShow={setShowReviews} className="w-[1200px] overflow-y-auto">
             {showReviews && (
               <div className="w-full ">
-                <div className="flex h-12 items-center bg-primary p-2 text-center font-medium text-white">
-                  <p className="w-10"></p>
-                  <p className="w-32 break-words">Title</p>
-                  <p className="mx-5 w-96">Comment</p>
-                  <p className="w-32">Customer</p>
-                  <p className="mr-5 w-32">Date</p>
-                  <p className="w-32">Rate</p>
-                </div>
+                <div className="flex p-3">
+                  <Search />
+                  <Typography component="h6" className="p-5">
+                    Filters
+                  </Typography>
 
-                {productReviews.map((rev, index) => {
-                  return (
-                    <div className="flex w-full items-center border-b p-2" key={index}>
-                      <p className="w-10 font-medium">{index + 1}</p>
-                      <p className="w-32 break-words">{rev.title}</p>
-                      <p className="mx-5 w-96">{rev.comment}</p>
-                      <p className="w-32">{rev.customer.name}</p>
-                      <p className="mr-5 w-32">{rev.createdAt}</p>
-                      <p className="w-32">
-                        <ProductRating
-                          rating={rev.rating}
-                          editable={false}
-                          className="justify-center"
-                        />
-                      </p>
+                  <div className="flex w-10">
+                    {[...Array(5)].map((filter, index) => {
+                      return (
+                        <Radio
+                          type="radio"
+                          name="rate"
+                          className="h-5 w-5"
+                          onChange={getRatingValue}
+                          checked={ratingValue}
+                          value={index + 1}
+                        >
+                          <ProductRating editable={false} rating={index + 1} />
+                        </Radio>
+                      );
+                    })}
+                  </div>
+                </div>
+                <div className="flex">
+                  <div>
+                    <div className="flex h-12 items-center bg-primary p-2 text-center font-medium text-white">
+                      <p className="w-10"></p>
+                      <p className="w-32 break-words">Title</p>
+                      <p className="mx-5 w-96">Comment</p>
+                      <p className="w-32">Customer</p>
+                      <p className="mr-5 w-32">Date</p>
+                      <p className="w-32">Rate</p>
                     </div>
-                  );
-                })}
+
+                    {productReviews.map((rev, index) => {
+                      return (
+                        <div className="flex w-full items-center border-b p-2" key={index}>
+                          <p className="w-10 font-medium">{index + 1}</p>
+                          <p className="w-32 break-words">{rev.title}</p>
+                          <p className="mx-5 w-96">{rev.comment}</p>
+                          <p className="w-32">{rev.customer.name}</p>
+                          <p className="mr-5 w-32">{rev.createdAt}</p>
+                          <p className="w-32">
+                            <ProductRating
+                              rating={rev.rating}
+                              editable={false}
+                              className="justify-center"
+                            />
+                          </p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
             )}
           </Modal>
