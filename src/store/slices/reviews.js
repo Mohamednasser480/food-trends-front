@@ -52,7 +52,7 @@ const reviews = createSlice({
     },
     [addReview.rejected]: (state, action) => {
       state.isLoading = false;
-      state.error = "Sorry, Can't Add Review right now!";
+      state.error = "Sorry, You should buy this product before adding a review!";
       state.reviews = [];
     },
   },

@@ -132,6 +132,7 @@ const authSlice = createSlice({
         state.token = payload.token;
         state.user = payload.user;
         state.error = null;
+        state.login.status = 'succeeded';
       }
     },
     // Register Reducers

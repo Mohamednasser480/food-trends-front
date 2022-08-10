@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Typography, Button, Loader } from "../../UI";
 import addProductSchema from "../../../services/form-schemes/add-product";
 import Form, { DragAndDrop, Input, Select, TextArea } from "../../UI/Form";
@@ -25,6 +25,7 @@ export default function AddProduct({
 }) {
   const vendorStatus = useSelector(vendorStatusSelector);
   const dispatch = useDispatch();
+  const [images, setImages] = useState(null);
 
   const selectOptions = [
     "Dairy",
@@ -43,6 +44,12 @@ export default function AddProduct({
   } = useForm({
     resolver: joiResolver(addProductSchema),
   });
+
+  const addImageHandler = (selectedImage) => {
+    // console.log(URL.createObjectURL(selectedImage[0]));
+    // imagesArray.push(selectedImage[0]);
+    setImages(selectedImage);
+  };
 
   const addProductRegister = {
     productName: register("productName", {
@@ -72,22 +79,19 @@ export default function AddProduct({
   };
 
   const handleProduct = (e) => {
-    const data = {
-      id: _id,
-      summary: e.summary,
-      productName: e.productName,
-      images: [
-        "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
-        "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW58ZW58MHx8MHx8&w=1000&q=80",
-      ],
-      description: e.description,
-      inStock: e.inStock,
-      category: e.category,
-      price: e.price,
-    };
+    const formData = new FormData();
+    formData.append("id", _id);
+    formData.append("summary", e.summary);
+    formData.append("productName", e.productName);
+    formData.append("images", images);
+    formData.append("description", e.description);
+    formData.append("inStock", e.inStock);
+    formData.append("category", e.category);
+    formData.append("price", e.price);
+
     if (actionType === "EDIT") {
-      dispatch(updateProduct(data));
-    } else dispatch(addProduct(data));
+      dispatch(updateProduct(formData));
+    } else dispatch(addProduct(formData));
 
     reset();
   };
@@ -181,7 +185,16 @@ export default function AddProduct({
             </div>
             <div className="mt-10 w-full rounded-xl bg-white p-10 lg:mt-0 lg:w-1/4">
               <Typography component="h5">Media</Typography>
-              <DragAndDrop label="Product Images" />
+              <DragAndDrop label="Product Images" onAddImg={addImageHandler} />
+              <div className="container m-4 flex">
+                {images && (
+                  <img
+                    className="h-32 w-32 "
+                    src={URL.createObjectURL(images)}
+                    alt="..."
+                  />
+                )}
+              </div>
               <div className="form-control mt-5 w-full">
                 <Select
                   selectOptions={selectOptions}
