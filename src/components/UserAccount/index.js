@@ -5,7 +5,7 @@ import AccountNav from "./AccountNav";
 import AccountContent from "./AccountContent";
 import Profile from "./Customer/Profile";
 import Wishlist from "./Customer/Wishlist";
-import ActionProductsComponent from "./Vendor/ActionProductsComponent";
+import ActionProducts from "./Vendor/ActionProducts";
 
 export {
   Orders,
@@ -15,5 +15,5 @@ export {
   AccountContent,
   Profile,
   Wishlist,
-  ActionProductsComponent,
+  ActionProducts,
 };

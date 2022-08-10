@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal } from "../../UI";
-import AddProduct from "./ActionProductsComponent";
+import AddProduct from "./ActionProducts";
 
 const ActionsModel = ({ actionType, showModel, setShow, ...item }) => {
   return (
