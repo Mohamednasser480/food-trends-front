@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Categories,
   Slider,
@@ -8,8 +8,7 @@ import {
   Ads,
   FreshSection,
   Ratings,
-} from '../components';
-import { ScrollUp } from '../components/Layout';
+} from "../../components";
 
 const Home = () => {
   return (

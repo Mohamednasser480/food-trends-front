@@ -5,10 +5,10 @@ import {
   getSearchResult,
   searchResultSelector,
   searchResultStatusSelector,
-} from "../store/slices/products";
+} from "../../store/slices/products";
 
-import { ProductsLoader } from "../components/UI";
-import ProductItem from "../components/FeatureProducts/ProductItem";
+import { ProductsLoader } from "../../components/UI";
+import ProductItem from "../../components/FeatureProducts/ProductItem";
 
 export default function SearchPage() {
   const searchResult = useSelector(searchResultSelector);
