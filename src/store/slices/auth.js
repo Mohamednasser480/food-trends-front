@@ -66,7 +66,19 @@ export const registerUser = createAsyncThunk('auth/registerUser', async (payload
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    changeRegisterStatus(state,action){
+      state.register.status=action.payload || "idle"
+    },
+    changeLoginStatus(state,action){
+      state.login.status=action.payload || "idle";
+      state.login.error="";
+    },
+    changeVerifyStatus(state,action){
+      state.verify.status=action.payload || "idle";
+      state.verify.error="";
+    },
+  },
   extraReducers: {
     // Login Reducers
     [login.pending]: (state) => {
@@ -165,5 +177,5 @@ export const loginSelector = (state) => state.auth.login;
 export const registerSelector = (state) => state.auth.register;
 export const verifySelector = (state) => state.auth.verify;
 export const loginErrorSelector = (state) => state.auth.login.error;
-
+export const {changeRegisterStatus,changeLoginStatus,changeVerifyStatus} = authSlice.actions;
 export const authReducer = authSlice.reducer;

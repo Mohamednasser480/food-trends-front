@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { Button, Typography, Loader } from "../UI";
 import { joiResolver } from "@hookform/resolvers/joi";
 import loginSchema from "../../services/form-schemes/login";
-import { login, loginSelector } from "../../store/slices/auth";
+import { changeLoginStatus, login, loginSelector } from "../../store/slices/auth";
 import { useDispatch, useSelector } from "react-redux";
 import ConfirmDialog from "./Confirm";
 
@@ -46,9 +46,9 @@ export default function Login({ setShowRegister }) {
     }
   };
 
-  let onClickFunction=()=>{
-      setShowConfirm(true);
-  }
+  let onClickFunction = () => {
+    setShowConfirm(true);
+  };
 
   return (
     <div className="flex h-full flex-col items-center justify-center p-8">
@@ -80,6 +80,7 @@ export default function Login({ setShowRegister }) {
               errors={errors}
               placeholder="Your email"
               id="email"
+              disabled={error == "Pending"}
             />
             <Input
               type="password"
@@ -87,15 +88,8 @@ export default function Login({ setShowRegister }) {
               errors={errors}
               placeholder="Password"
               id="password"
+              disabled={error == "Pending"}
             />
-
-            {/* <button
-              type="button"
-              className="self-end font-medium text-black hover:text-primary"
-            >
-              Forgot password?
-            </button> */}
-
             <p className="px-2 text-center text-lg font-medium text-red-600 md:px-10">
               {errorMessage}
             </p>
@@ -104,9 +98,14 @@ export default function Login({ setShowRegister }) {
           </div>
 
           {error == "Pending" ? (
-            <Button variant="primary" type="button" onClick={onClickFunction}>
-              Verify
-            </Button>
+            <div className="flex flex-col gap-2">
+              <Button variant="primary" type="button" onClick={onClickFunction}>
+                Verify
+              </Button>
+              <Button variant="secondary" type="button" onClick={()=>{dispatch(changeLoginStatus())}}>
+                Login
+              </Button>
+            </div>
           ) : (
             <Button variant="secondary" type="submit" className="">
               Login
