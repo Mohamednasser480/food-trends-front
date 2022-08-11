@@ -42,7 +42,7 @@ export default function AccountNav({ links }) {
         })}
       </div>
       <button
-        className={`fixed z-10 mt-2 rounded-full bg-white transition-all duration-300 hover:bg-slate-100 md:hidden ${
+        className={`fixed z-10 mt-2 rounded-full bg-white transition-all duration-300 hover:bg-slate-100 ${
           showSidebar ? 'left-[310px]' : 'left-[10px]'
         }`}
         onClick={() => {

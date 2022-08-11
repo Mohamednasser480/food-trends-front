@@ -15,7 +15,14 @@ import { MdDashboard } from 'react-icons/md';
 import { GrDeliver } from 'react-icons/gr';
 import { AiOutlineTransaction } from 'react-icons/ai';
 import { Route, Routes } from 'react-router-dom';
-import { Home, AccountSettings, Reviews, ReviewDetail, AddProduct } from '../../routes/vendor';
+import {
+  Home,
+  AccountSettings,
+  Reviews,
+  ReviewDetail,
+  AddProduct,
+  Orders,
+} from '../../routes/vendor';
 
 const links = [
   {
@@ -31,12 +38,12 @@ const links = [
   {
     text: 'reviews',
     icon: <FaCommentAlt className="mx-3" />,
-    link: '/',
+    link: '/reviews',
   },
   {
     text: 'orders',
     icon: <FaShoppingCart className="mx-3" />,
-    link: '/',
+    link: '/orders',
   },
   {
     text: 'add product',
@@ -60,6 +67,8 @@ const VendorLayout = (props) => {
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/reviews/:id" element={<ReviewDetail />} />
           <Route path="/account-settings" element={<AccountSettings />} />
+          <Route path="/orders" element={<Orders />} />
+
           {props.children}
         </Routes>
       </main>
