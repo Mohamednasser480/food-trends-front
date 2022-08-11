@@ -6,6 +6,7 @@ const initialState = {
   products: [],
   status: null,
   error: null,
+  updated: 0,
 };
 
 //Get ALL Products of the Vendor
@@ -30,7 +31,7 @@ export const deleteProduct = createAsyncThunk(
   "vendor/deleteProduct",
   async (id) => {
     const userToken = cookie.getCookie("token");
-    return await products.deleteProduct(userToken, id);
+    await products.deleteProduct(userToken, id);
   }
 );
 
@@ -53,6 +54,7 @@ const vendorSlice = createSlice({
     },
     [fetchVendorProducts.fulfilled]: (state, { payload }) => {
       state.status = "Fulfilled";
+      state.update = payload.length;
       state.products = [...payload];
     },
     [fetchVendorProducts.rejected]: (state) => {
@@ -64,8 +66,9 @@ const vendorSlice = createSlice({
       state.status = "Pending";
     },
     [addProduct.fulfilled]: (state, { payload }) => {
+      state.change++;
+      state.products.push(payload);
       state.status = "Fulfilled";
-      state.products = payload;
     },
     [addProduct.rejected]: (state) => {
       state.status = "Rejected";
@@ -75,9 +78,9 @@ const vendorSlice = createSlice({
     [deleteProduct.pending]: (state) => {
       state.status = "Pending";
     },
-    [deleteProduct.fulfilled]: (state, { payload }) => {
+    [deleteProduct.fulfilled]: (state = initialState, { payload }) => {
       state.status = "Fulfilled";
-      state.products = payload;
+      state.change--;
     },
     [deleteProduct.rejected]: (state) => {
       state.status = "Rejected";
@@ -89,7 +92,6 @@ const vendorSlice = createSlice({
     },
     [updateProduct.fulfilled]: (state, { payload }) => {
       state.status = "Fulfilled";
-      state.products = payload;
     },
     [updateProduct.rejected]: (state) => {
       state.status = "Rejected";
@@ -98,5 +100,6 @@ const vendorSlice = createSlice({
 });
 
 export const vendorSelector = (state) => state.vendor.products;
+export const changeSelector = (state) => state.vendor.updated;
 export const vendorStatusSelector = (state) => state.vendor.status;
 export default vendorSlice.reducer;

@@ -125,7 +125,7 @@ export default function Orders() {
                 return (
                   <div className="flex w-full items-center border-b p-3 text-center" key={index}>
                     <p className="w-10 font-medium">{index + 1}</p>
-                    <p className="w-32 break-words">{order.customer.name}</p>
+                    {/* <p className="w-32 break-words">{order.customer.name}</p> */}
                     {order.status === 'pending' ? (
                       <p className="w-32 text-lg font-medium capitalize text-yellow-400 ">
                         {order.status}

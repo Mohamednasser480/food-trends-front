@@ -1,6 +1,9 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { deleteProduct } from "../../../store/slices/vendor";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  deleteProduct,
+  vendorStatusSelector,
+} from "../../../store/slices/vendor";
 import ActionsModel from "./ActionsModel";
 
 const ProductsComponent = ({
@@ -14,6 +17,7 @@ const ProductsComponent = ({
   inStock,
 }) => {
   const [modelState, setModelState] = useState(false);
+  const vendorStatus = useSelector(vendorStatusSelector);
 
   const dispatch = useDispatch();
 
