@@ -9,9 +9,11 @@ const registerSchema = Joi.object({
     'string.empty': `Please enter your email`,
     'any.required': `Please enter your email`,
   }),
-  mobile: Joi.string().required().messages({
-    'string.empty': `Please enter your mobile`,
-    'any.required': `Please enter your email`,
+  mobile:Joi.string().length(11).pattern(/^(010|012|015|011)\d{8}$/).required().messages({
+    'string.empty': `Please enter your mobile number`,
+    'string.pattern.base':"Please Ente valid phone number",
+    'string.length':"Phone number must have 11 Numbers.",
+    'any.required': `Please enter your mobile number  `,
   }),
   // city: Joi.string().required().messages({
   //   'string.empty': `Please enter your mobile`,
