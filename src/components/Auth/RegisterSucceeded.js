@@ -1,8 +1,16 @@
 import React from "react";
 import { BsCheckCircle } from "react-icons/bs";
+import { changeRegisterStatus } from "../../store/slices/auth";
 import { Button } from "../UI";
+import { useDispatch } from "react-redux";
 
 export default function RegisterSucceeded({ setShowRegister }) {
+  const dispatch = useDispatch();
+
+  const onSignupClickHandler = () => {
+    dispatch(changeRegisterStatus("idle"));
+  };
+
   const handleOnClick = () => {
     setShowRegister(false);
   };
@@ -21,6 +29,13 @@ export default function RegisterSucceeded({ setShowRegister }) {
         onClick={handleOnClick}
       >
         Login!
+      </Button>
+      <Button
+        variant={"secondary"}
+        type="button"
+        onClick={onSignupClickHandler}
+      >
+        Wrong Email Address?
       </Button>
     </div>
   );
