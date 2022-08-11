@@ -3,8 +3,11 @@ import hhhh from '../../../assets/userprofile.jpg';
 import Form from '../../UI/Form/Form';
 import Input from '../../UI/Form/Input';
 import { useForm } from 'react-hook-form';
+import { selectUserData } from '../../../store/slices/auth';
+import { useSelector } from 'react-redux';
 
 const VendorProfile = () => {
+  const { name, email, mobile, storeName } = useSelector(selectUserData);
   const {
     register,
     handleSubmit,
@@ -39,14 +42,14 @@ const VendorProfile = () => {
             className="mt-3 h-32 w-32 self-center rounded-full bg-red-400"
           />
           <Typography component="subtitle2" className="self-center">
-            Name
+            {name}
           </Typography>
-          <Typography component="subtitle2">Store Name</Typography>
+          <Typography component="subtitle2">{storeName}</Typography>
           <Typography component="subtitle2">contact info</Typography>
-          <Typography component="body2">Phone</Typography>
-          <Typography component="body2">email</Typography>
-          <Typography component="body2">address</Typography>
-          <Button variant="secondary" className="my-3 w-2/5 self-center">
+          <Typography component="body2">{mobile}</Typography>
+          <Typography component="body2">{email}</Typography>
+          {/* <Typography component="body2">address</Typography> */}
+          <Button variant="secondary" className="my-2 self-center">
             Edit profile
           </Button>
         </div>
@@ -61,14 +64,8 @@ const VendorProfile = () => {
           <Typography component="h6" className="h-16">
             Monthly Transactions
           </Typography>
-          <Typography component="body2" className="h-16">
-            City{' '}
-          </Typography>
-          <Typography component="body2" className="h-16">
-            Governate
-          </Typography>
 
-          <Button variant="user-account" className="my-3 self-center">
+          <Button variant="secondary" className="my-3 self-center">
             See All Statistics
           </Button>
         </div>
@@ -102,7 +99,9 @@ const VendorProfile = () => {
               id="confirmPassword"
             />
 
-            <button type="submit">Submit</button>
+            <Button variant="secondary" type="submit" className="mt-3">
+              Submit
+            </Button>
           </Form>
         </div>
       </div>

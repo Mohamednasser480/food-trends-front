@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
-import { Modal } from '../../UI';
+import { Alert, Modal } from '../../UI';
 import Auth from '../../Auth/Auth';
 import { useSelector } from 'react-redux';
-import { selectUserData, selectUserToken } from '../../../store/slices/auth';
+import {
+  selectUserData,
+  selectUserToken,
+  // selectError,
+  selectStatus,
+} from '../../../store/slices/auth';
 import { UserMenu } from './index';
 
 const UserProfile = () => {
@@ -11,6 +16,8 @@ const UserProfile = () => {
   const [showMenu, setShowMenu] = useState(false);
   const userToken = useSelector(selectUserToken);
   const userData = useSelector(selectUserData);
+  // const userError = useSelector(selectError);
+  const userStatus = useSelector(selectStatus);
   const isUserLoggedIn = userToken !== '';
 
   const showMenuHandler = () => setShowMenu((showMenu) => !showMenu);
@@ -39,6 +46,8 @@ const UserProfile = () => {
             setShow={setShowLoginModal}
             className="h-[650px] w-[420px] rounded-xl"
           >
+            {/* {userStatus == 'error' ? <Alert>{userError}</Alert> : null} */}
+
             <Auth />
           </Modal>
         ) : null}
