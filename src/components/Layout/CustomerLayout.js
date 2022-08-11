@@ -1,7 +1,7 @@
-import React from "react";
-import { Footer, ScrollUp, Topbar } from "./";
-import Navbar from "./Navbar";
-import { Route, Routes } from "react-router-dom";
+import React from 'react';
+import { Footer, ScrollUp, Topbar } from './';
+import Navbar from './Navbar';
+import { Route, Routes } from 'react-router-dom';
 import {
   AboutUs,
   Cart,
@@ -12,8 +12,8 @@ import {
   SearchPage,
   Shop,
   UserAccount,
-} from "../../routes/customer";
-import { Wishlist } from "../UserAccount";
+} from '../../routes/customer';
+import Wishlist from '../UserAccount/Wishlist';
 
 const CustomerLayout = (props) => {
   return (

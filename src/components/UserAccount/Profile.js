@@ -1,10 +1,8 @@
-import { Typography, Button } from '../../UI';
-import hhhh from '../../../assets/userprofile.jpg';
-import Form from '../../UI/Form/Form';
-import Input from '../../UI/Form/Input';
+import { Typography, Button } from '../UI';
+import Form from '../UI/Form/Form';
+import Input from '../UI/Form/Input';
 import { useForm } from 'react-hook-form';
-
-import { selectUserData } from '../../../store/slices/auth';
+import { selectUserData } from '../../store/slices/auth';
 import { useSelector } from 'react-redux';
 
 const Profile = () => {

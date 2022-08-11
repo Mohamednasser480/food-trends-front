@@ -3,7 +3,7 @@ import { CustomerLayout, VendorLayout } from './';
 import { Error404 } from '../../routes';
 import { Route } from 'react-router-dom';
 
-const userType = '';
+const userType = 'vendor';
 
 const defaultRoutes = (
   <>
