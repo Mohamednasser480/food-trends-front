@@ -1,7 +1,8 @@
-import Layout from './Layout';
-import Topbar from './Topbar';
-import Footer from './Footer';
-import ScrollUp from './ScrollUp';
+import Layout from "./Layout";
+import Topbar from "./Topbar";
+import Footer from "./Footer";
+import ScrollUp from "./ScrollUp";
+import CustomerLayout from "./CustomerLayout";
+import VendorLayout from "./VendorLayout";
 
-export default Layout;
-export { Footer, Topbar, ScrollUp };
+export { Footer, Topbar, ScrollUp, Layout, CustomerLayout, VendorLayout };

@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import Auth from '../components/Auth/Auth';
-import { AccountNav, AccountContent } from '../components/UserAccount';
-import { selectUserToken } from '../store/slices/auth';
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import Auth from "../../components/Auth/Auth";
+import { AccountNav, AccountContent } from "../../components/UserAccount";
+import { selectUserToken } from "../../store/slices/auth";
 
 export default function UserAccount() {
-  const [content, setContent] = useState(localStorage.getItem('clicked') || 'Products');
+  const [content, setContent] = useState(
+    localStorage.getItem("clicked") || "Products"
+  );
   const userToken = useSelector(selectUserToken);
-  const isUserLoggedIn = userToken !== '';
+  const isUserLoggedIn = userToken !== "";
 
   useEffect(() => {
-    localStorage.setItem('clicked', content);
+    localStorage.setItem("clicked", content);
   }, [content]);
 
   const handleNavClick = (btn) => {
