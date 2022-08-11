@@ -12,37 +12,29 @@ import { cookie } from '../../services';
 const filters = ['all orders', 'completed', 'pending', 'canceled'];
 
 export default function Orders() {
-  // const [ordersData, setOrdersData] = useState([]);
-
   // user type state to define which part will be rendered
   const { userType } = useSelector(selectUserData);
 
   // products and filters states for vendor
-  const [products, setProducts] = useState([]);
   const [filterBtn, setFilterBtn] = useState('');
+  const [vendorOrders, setVendorOrders] = useState([]);
+  const [customerOrders, setCustomerOrders] = useState([]);
   const [deliveryOrders, setDeliveryOrders] = useState([]);
-
   const dispatch = useDispatch();
 
+  console.log(vendorOrders);
+  //--------- Vendor Filters -----------------//
   // radio button value change to set the filtered orders as such
   const [selected, setSelected] = useState(null);
   const handleChange = (event) => {
     setSelected(event.target.value);
-    if (selected === 'highest') {
-    } else {
-    }
   };
-
   // order status filter onchange function
   const handleOrderStatFilter = (filter) => setFilterBtn(filter);
 
+  // fetching VENDOR orders by products sorted based on price and status
   useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
-
-  // fetching products sorted based on price and status
-  useEffect(() => {
-    let url = 'http://localhost:3000/api/v1/vendor/orders?';
+    let url = 'https://food-trends-api.herokuapp.com/api/v1/vendor/orders?';
     url +=
       selected === 'lowest'
         ? 'sortBy=totalPrice&'
@@ -60,15 +52,18 @@ export default function Orders() {
       });
 
       const json = response.data;
-      setProducts(json);
+      setVendorOrders(json.data);
     };
 
     fetchData();
   }, [selected, filterBtn]);
 
-  useEffect(() => {
-    dispatch(fetchOrders());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchProducts());
+  // }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchOrders());
+  // }, [dispatch]);
 
   const orders = {
     vendor: () => {
@@ -106,14 +101,12 @@ export default function Orders() {
             </div>
           </div>
 
-          {/* {selected === 'highest' ? <div className="bg-red-400">test</div> : ''} */}
-
           <div className="mx-5 mb-10 flex items-start">
             <div className="w-full self-center rounded-xl border shadow-lg lg:w-[1200px]">
               <div className="flex items-center bg-[#f7f7f7] p-2 text-center font-medium text-black">
                 <p className="w-10">Order ID</p>
-                <p className="w-32">Customer</p>
-                <p className="w-32">Order Status</p>
+                <p className="w-48">Customer</p>
+                <p className="w-48">Order Status</p>
                 <p className="w-32">Order Date</p>
                 <p className="w-32">Delivery Date</p>
                 <p className="w-32">Total Price</p>
@@ -121,29 +114,30 @@ export default function Orders() {
                 <p className="w-32"></p>
               </div>
 
-              {products.map((order, index) => {
+              {vendorOrders.map((order, index) => {
                 return (
                   <div className="flex w-full items-center border-b p-3 text-center" key={index}>
                     <p className="w-10 font-medium">{index + 1}</p>
+                    <p className="w- break-words">test name 3shan nasser mesh tmam</p>
                     {/* <p className="w-32 break-words">{order.customer.name}</p> */}
                     {order.status === 'pending' ? (
-                      <p className="w-32 text-lg font-medium capitalize text-yellow-400 ">
+                      <p className="w-48 text-lg font-medium capitalize text-yellow-400 ">
                         {order.status}
                       </p>
                     ) : order.status === 'completed' ? (
-                      <p className="w-32 text-lg font-medium capitalize text-green-400">
+                      <p className="w-48 text-lg font-medium capitalize text-green-400">
                         {order.status}
                       </p>
                     ) : (
-                      <p className="w-32 text-lg font-medium capitalize text-red-400">
+                      <p className="w-48 text-lg font-medium capitalize text-red-400">
                         {order.status}
                       </p>
                     )}
-                    <p className="w-32">{order.createdAt.slice(0, 10)}</p>
-                    <p className="w-32">Not assigned</p>
-                    <p className="w-32">{order.totalPrice.toFixed(2)} LE</p>
-                    <p className="w-32">Credit Card</p>
-                    <p className="w-32">
+                    <p className="w-2/12">{order.createdAt.slice(0, 10)}</p>
+                    <p className="w-2/12">Not assigned</p>
+                    <p className="w-2/12">{order.totalPrice.toFixed(2)} LE</p>
+                    <p className="w-2/12">Credit Card</p>
+                    <p className="w-2/12">
                       <Button variant="user-account" className="tracking-tight">
                         order details
                       </Button>
@@ -200,11 +194,11 @@ export default function Orders() {
                 <p className="w-32"></p>
               </div>
 
-              {products.map((rev, index) => {
+              {customerOrders.map((rev, index) => {
                 return (
                   <div className="flex w-full items-center border-b p-3 text-center" key={index}>
                     <p className="w-10 font-medium">{index + 1}</p>
-                    <p className="w-32 break-words">{rev.name}</p>
+                    {/* <p className="w-32 break-words">{rev.name}</p> */}
                     <p className="w-32">test</p>
                     <p className="w-32">test</p>
                     <p className="w-32">test</p>
@@ -263,11 +257,11 @@ export default function Orders() {
                 <p className="w-32"></p>
               </div>
 
-              {products.map((rev, index) => {
+              {deliveryOrders.map((rev, index) => {
                 return (
                   <div className="flex w-full items-center border-b p-3 text-center" key={index}>
                     <p className="w-10 font-medium">{index + 1}</p>
-                    <p className="w-32 break-words">{rev.name}</p>
+                    {/* <p className="w-32 break-words">{rev.name}</p> */}
                     <p className="w-32">test</p>
                     <p className="w-32">test</p>
                     <p className="w-32">Not assigned</p>

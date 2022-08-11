@@ -1,33 +1,33 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { authService } from "../../services/api";
-import { cookie } from "../../services";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { authService } from '../../services/api';
+import { cookie } from '../../services';
 
 const initialState = {
   user: {},
-  token: "",
-  status: "idle", // "idle" | "loading" | "succeeded" | "error"
-  error: "",
+  token: '',
+  status: 'idle', // "idle" | "loading" | "succeeded" | "error"
+  error: '',
   login: {
-    status: "",
-    error: "",
+    status: '',
+    error: '',
   },
   register: {
-    status: "",
-    error: "",
+    status: '',
+    error: '',
   },
   verify: {
-    status: "",
-    error: "",
+    status: '',
+    error: '',
   },
 };
 
-export const login = createAsyncThunk("auth/login", async (user) => {
+export const login = createAsyncThunk('auth/login', async (user) => {
   try {
     const data = await authService.login(user);
 
-    cookie.setCookie("token", data.token, 3);
-    if (data.user.status == "Pending") {
-      throw "Pending";
+    cookie.setCookie('token', data.token, 3);
+    if (data.user.status == 'Pending') {
+      throw 'Pending';
     }
     return data;
   } catch (error) {
@@ -35,131 +35,123 @@ export const login = createAsyncThunk("auth/login", async (user) => {
   }
 });
 // Verify User
-export const verifyUser = createAsyncThunk(
-  "auth/verifyUser",
-  async (codeTokenObject) => {
-    try {
-      const data = await authService.verify(codeTokenObject);
-      // cookie.setCookie("token", data.token, 3);
-      return data;
-    } catch (error) {
-      console.log(error);
-      throw error.msg;
-    }
+export const verifyUser = createAsyncThunk('auth/verifyUser', async (codeTokenObject) => {
+  try {
+    const data = await authService.verify(codeTokenObject);
+    // cookie.setCookie("token", data.token, 3);
+    return data;
+  } catch (error) {
+    console.log(error);
+    throw error.msg;
   }
-);
+});
 
-export const getUserData = createAsyncThunk(
-  "auth/getUserData",
-  async (token) => {
-    return await authService.getUserData(token);
-  }
-);
+export const getUserData = createAsyncThunk('auth/getUserData', async (token) => {
+  return await authService.getUserData(token);
+});
 
-export const logout = createAsyncThunk("auth/logout", async () => {
-  const token = cookie.getCookie("token");
+export const logout = createAsyncThunk('auth/logout', async () => {
+  const token = cookie.getCookie('token');
   const data = await authService.logout(token);
-  cookie.eraseCookie("token");
+  cookie.eraseCookie('token');
   return data;
 });
 
-export const registerUser = createAsyncThunk(
-  "auth/registerUser",
-  async (payload) => {
-    const userData = await authService.register(payload);
-    // cookie.setCookie("token", userData.token, 3);
-    return userData;
-  }
-);
+export const registerUser = createAsyncThunk('auth/registerUser', async (payload) => {
+  const userData = await authService.register(payload);
+  // cookie.setCookie("token", userData.token, 3);
+  return userData;
+});
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {},
   extraReducers: {
     // Login Reducers
     [login.pending]: (state) => {
       // state.status = "loading";
-      state.login.status = "loading";
+      state.login.status = 'loading';
     },
     [login.fulfilled]: (state, { payload }) => {
       console.log(payload);
       // state.status = "succeeded";
-      if (payload.user.status !== "Pending") {
+      if (payload.user.status !== 'Pending') {
         state.user = payload.user;
       }
       state.token = payload.token;
       state.error = null;
-      state.login.status = "succeeded";
-      state.login.error = "";
+      state.login.status = 'succeeded';
+      state.login.error = '';
     },
     [login.rejected]: (state, { error }) => {
-      state.status = "error";
+      state.status = 'error';
       state.error = error.message;
-      state.login.status = "error";
+      state.login.status = 'error';
       state.login.error = error.message;
     },
     // Verify Reducers
     [verifyUser.pending]: (state) => {
-      state.verify.status = "loading";
+      state.verify.status = 'loading';
     },
     [verifyUser.fulfilled]: (state, { payload }) => {
-      state.status = "succeeded";
+      console.log(payload);
+      state.status = 'succeeded';
       state.user = payload;
       // state.token = payload.token;
-      state.verify.status = "succeeded";
-      state.verify.error = "";
-      state.error = "";
+      state.verify.status = 'succeeded';
+      state.verify.error = '';
+      state.error = '';
     },
     [verifyUser.rejected]: (state, { error }) => {
-      state.verify.status = "error";
+      state.verify.status = 'error';
       state.verify.error = error.message;
     },
     // Logout Reducers
     [logout.pending]: (state) => {
-      state.status = "loading";
+      state.status = 'loading';
     },
     [logout.fulfilled]: (state) => {
       state.user = {};
-      state.status = "idle";
-      state.token = "";
+      state.status = 'idle';
+      state.token = '';
       state.error = null;
-      state.login.status = "";
+      state.login.status = '';
     },
     [logout.rejected]: (state, { error }) => {
-      state.status = "error";
+      state.status = 'error';
       state.error = error;
     },
     // Get User Data Reducers
     [getUserData.pending]: (state) => {
-      state.status = "loading";
+      state.status = 'loading';
     },
     [getUserData.fulfilled]: (state, { payload }) => {
-      if (payload.user.status !== "Pending") {
-        state.status = "succeeded";
+      if (payload.user.status !== 'Pending') {
+        state.status = 'succeeded';
         state.token = payload.token;
         state.user = payload.user;
         state.error = null;
-        state.login.status = "succeeded";
+        state.login.status = 'succeeded';
       }
     },
     // Register Reducers
     [registerUser.pending]: (state) => {
-      state.status = "loading";
-      state.register.status = "loading";
+      state.status = 'loading';
+      state.register.status = 'loading';
     },
     [registerUser.fulfilled]: (state, { payload: user }) => {
       // state.status = "Pending";
       // state.user = user.user;
       // state.token = user.token;
       state.error = null;
-      state.register.status = "succeeded";
-      state.register.error = "";
+      state.register.status = 'succeeded';
+      state.register.error = '';
     },
     [registerUser.rejected]: (state, { error }) => {
-      state.status = "error";
+      state.status = 'error';
       state.error = error.message;
-      state.register.status = "error";
+      state.register.status = 'error';
       state.register.error = error.message;
     },
   },
@@ -172,4 +164,6 @@ export const selectStatus = (state) => state.auth.status;
 export const loginSelector = (state) => state.auth.login;
 export const registerSelector = (state) => state.auth.register;
 export const verifySelector = (state) => state.auth.verify;
+export const loginErrorSelector = (state) => state.auth.login.error;
+
 export const authReducer = authSlice.reducer;
