@@ -11,7 +11,7 @@ import RegisterError from "./RegisterError";
 import RegisterSucceeded from "./RegisterSucceeded";
 export default function Register({ setShowRegister, setShowVendorRegister }) {
   const dispatch = useDispatch();
-  const {status,error} = useSelector(registerSelector);
+  const { status, error } = useSelector(registerSelector);
   const handleVendorLogin = () => {
     setShowVendorRegister(true);
   };
@@ -24,7 +24,7 @@ export default function Register({ setShowRegister, setShowVendorRegister }) {
   });
 
   const singUpRegister = {
-    customerName: { ...register("customerName") },
+    name: { ...register("name") },
     email: { ...register("email") },
     password: { ...register("password") },
   };
@@ -65,10 +65,10 @@ export default function Register({ setShowRegister, setShowVendorRegister }) {
           <div className="flex flex-col gap-y-4">
             <Input
               type="text"
-              register={singUpRegister.customerName}
+              register={singUpRegister.name}
               errors={errors}
               placeholder="Your full name"
-              id="customerName"
+              id="name"
             />
             <Input
               type="email"
