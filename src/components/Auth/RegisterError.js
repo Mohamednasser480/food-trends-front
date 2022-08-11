@@ -1,32 +1,49 @@
 import React from "react";
 import { BiErrorCircle } from "react-icons/bi";
+import { useDispatch } from "react-redux";
+import { changeRegisterStatus } from "../../store/slices/auth";
 import { Button } from "../UI";
 
-export default function RegisterError({ error }) {
-  let errorMessage = "";
-  switch (error) {
-    case `E11000 duplicate key error collection: food-trends.users index: email_1 dup key: { email: "modymeky@gmail.com" }`:
-      errorMessage="Email is registered before, Please Login!"
-      break;
+export default function RegisterError({ error, setShowRegister }) {
+  const dispatch = useDispatch();
+  const onLoginClickHandler = () => {
+    dispatch(changeRegisterStatus("idle"));
+  };
 
-    default:
-      break;
+  let errorMessage = "";
+
+  const isRegsitered = error.search("email_1 dup key:") !== -1 ? true : false;
+
+  if (error) {
+    if (isRegsitered) {
+      errorMessage = "Email is registered before, Please Login!";
+    }
   }
 
   return (
     <div className="flex flex-col justify-center gap-5">
-      <div className="flex justify-center">
+      <div className="flex flex-col items-center justify-center gap-6">
         <BiErrorCircle size={120} className="text-secondary-400" />
+        <h1 className="text-lg font-medium">{errorMessage}</h1>
       </div>
-      <h1 className="text-lg font-medium">{errorMessage}</h1>
-      <Button
-        variant={"secondary"}
-        type="submit"
-        className="mt-5"
-        onClick={() => window.location.reload(false)}
-      >
-        Refresh!
-      </Button>
+      <div className="flex flex-col justify-center">
+        <Button
+          variant={"primary"}
+          type="submit"
+          className="mt-5"
+          onClick={() => setShowRegister(false)}
+        >
+          Login
+        </Button>
+        <Button
+          variant={"secondary"}
+          type="button"
+          className="mt-5"
+          onClick={onLoginClickHandler}
+        >
+          Sign up with another account?
+        </Button>
+      </div>
     </div>
   );
 }
