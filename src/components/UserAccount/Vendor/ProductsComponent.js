@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteProduct,
-  vendorStatusSelector,
-} from "../../../store/slices/vendor";
+import { deleteProduct, editSelector } from "../../../store/slices/vendor";
 import ActionsModel from "./ActionsModel";
 
 const ProductsComponent = ({
@@ -17,9 +14,13 @@ const ProductsComponent = ({
   inStock,
 }) => {
   const [modelState, setModelState] = useState(false);
-  const vendorStatus = useSelector(vendorStatusSelector);
+  const editStatus = useSelector(editSelector);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (editStatus === "Fulfilled") setModelState(false);
+  }, [editStatus]);
 
   return (
     <tbody>

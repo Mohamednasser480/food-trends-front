@@ -7,6 +7,7 @@ const initialState = {
   status: null,
   error: null,
   updated: 0,
+  edited: "idle",
 };
 
 //Get ALL Products of the Vendor
@@ -38,9 +39,10 @@ export const deleteProduct = createAsyncThunk(
 //Update a product
 export const updateProduct = createAsyncThunk(
   "vendor/updateProduct",
-  async ({ id, ...data }) => {
+  async (data) => {
+    const { _id, formData } = data;
     const userToken = cookie.getCookie("token");
-    return await products.updateProduct(userToken, id, data);
+    return await products.updateProduct(userToken, _id, formData);
   }
 );
 
@@ -53,9 +55,9 @@ const vendorSlice = createSlice({
       state.status = "Pending";
     },
     [fetchVendorProducts.fulfilled]: (state, { payload }) => {
-      state.status = "Fulfilled";
-      state.update = payload.length;
+      state.updated = payload.length;
       state.products = [...payload];
+      state.status = "Fulfilled";
     },
     [fetchVendorProducts.rejected]: (state) => {
       state.status = "Rejected";
@@ -66,7 +68,7 @@ const vendorSlice = createSlice({
       state.status = "Pending";
     },
     [addProduct.fulfilled]: (state, { payload }) => {
-      state.change++;
+      state.updated++;
       state.products.push(payload);
       state.status = "Fulfilled";
     },
@@ -78,9 +80,9 @@ const vendorSlice = createSlice({
     [deleteProduct.pending]: (state) => {
       state.status = "Pending";
     },
-    [deleteProduct.fulfilled]: (state = initialState, { payload }) => {
+    [deleteProduct.fulfilled]: (state, { payload }) => {
+      state.updated--;
       state.status = "Fulfilled";
-      state.change--;
     },
     [deleteProduct.rejected]: (state) => {
       state.status = "Rejected";
@@ -88,13 +90,16 @@ const vendorSlice = createSlice({
 
     //UpdateProduct
     [updateProduct.pending]: (state) => {
-      state.status = "Pending";
+      state.edited = "Pending";
+      state.updated--;
     },
     [updateProduct.fulfilled]: (state, { payload }) => {
-      state.status = "Fulfilled";
+      state.edited = "Fulfilled";
+      state.updated++;
     },
     [updateProduct.rejected]: (state) => {
-      state.status = "Rejected";
+      state.edited = "Rejected";
+      state.updated++;
     },
   },
 });
@@ -102,4 +107,5 @@ const vendorSlice = createSlice({
 export const vendorSelector = (state) => state.vendor.products;
 export const changeSelector = (state) => state.vendor.updated;
 export const vendorStatusSelector = (state) => state.vendor.status;
+export const editSelector = (state) => state.vendor.edited;
 export default vendorSlice.reducer;

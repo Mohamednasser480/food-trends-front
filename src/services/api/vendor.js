@@ -23,6 +23,7 @@ const saveProduct = async (userToken, data) => {
 const updateProduct = async (userToken, id, data) => {
   const res = await axios.patch(`${VENDOR_API_URI}/${id}`, data, {
     headers: {
+      "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${userToken}`,
     },
   });
