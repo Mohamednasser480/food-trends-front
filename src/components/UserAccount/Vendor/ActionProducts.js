@@ -78,20 +78,21 @@ export default function AddProduct({
 
   const handleProduct = (e) => {
     const formData = new FormData();
-    formData.append("id", _id);
-    formData.append("summary", e.summary);
     formData.append("productName", e.productName);
-    formData.append("images", images);
+    formData.append("summary", e.summary);
     formData.append("description", e.description);
-    formData.append("inStock", e.inStock);
+    formData.append("images", images);
     formData.append("category", e.category);
     formData.append("price", e.price);
+    formData.append("inStock", e.inStock);
+    formData.append("discount", e.discount);
+    formData.append("weight", e.weight);
 
     if (actionType === "EDIT") {
-      dispatch(updateProduct(formData));
+      dispatch(updateProduct({ _id, formData }));
     } else dispatch(addProduct(formData));
 
-    reset();
+    // reset();
   };
 
   return (
