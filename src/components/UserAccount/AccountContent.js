@@ -1,5 +1,8 @@
 import React from 'react';
 import { Orders, Products, Reviews, Wishlist, Profile } from '.';
+import AllOrders from './Delivery/AllOrders';
+import History from './Delivery/History';
+import LiveOrders from './Delivery/LiveOrders';
 
 import AddProduct from './Vendor/ActionProducts';
 import VendorProfile from './Vendor/VendorProfile';
@@ -14,6 +17,9 @@ export default function AccountContent(props) {
     wishlist: <Wishlist />,
     'My profile': <Profile />,
     'My orders': <Orders />,
+    'All Orders': <AllOrders />,
+    History: <History />,
+    'Live Orders': <LiveOrders />,
   };
 
   return (

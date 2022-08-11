@@ -1,17 +1,21 @@
-import React from "react";
-import Form from "../UI/Form/Form";
-import { Input } from "../UI/Form";
-import { useForm } from "react-hook-form";
-import { Button, Loader, Typography } from "../UI";
-import { joiResolver } from "@hookform/resolvers/joi";
-import registerSchema from "../../services/form-schemes/customer-register";
-import { useDispatch, useSelector } from "react-redux";
-import { registerSelector, registerUser } from "../../store/slices/auth";
-import RegisterError from "./RegisterError";
-import RegisterSucceeded from "./RegisterSucceeded";
+import React, { useState } from 'react';
+import Form from '../UI/Form/Form';
+import { Input, Select } from '../UI/Form';
+import { useForm } from 'react-hook-form';
+import { Button, Loader, Typography } from '../UI';
+import { joiResolver } from '@hookform/resolvers/joi';
+import registerSchema from '../../services/form-schemes/customer-register';
+import { useDispatch, useSelector } from 'react-redux';
+import { registerSelector, registerUser } from '../../store/slices/auth';
+import RegisterError from './RegisterError';
+import RegisterSucceeded from './RegisterSucceeded';
+import Data from '../../eg.json';
 export default function Register({ setShowRegister, setShowVendorRegister }) {
+  let [city, setCity] = useState('');
+  let [governorate, setGovernorate] = useState('');
+
   const dispatch = useDispatch();
-  const {status,error} = useSelector(registerSelector);
+  const { status, error } = useSelector(registerSelector);
   const handleVendorLogin = () => {
     setShowVendorRegister(true);
   };
@@ -24,34 +28,49 @@ export default function Register({ setShowRegister, setShowVendorRegister }) {
   });
 
   const singUpRegister = {
-    customerName: { ...register("customerName") },
-    email: { ...register("email") },
-    password: { ...register("password") },
+    name: { ...register('name') },
+    email: { ...register('email') },
+    password: { ...register('password') },
+    mobile: { ...register('mobile') },
   };
 
   handleSubmit((newUser) => {
     dispatch(registerUser(newUser));
   });
+  // (newUserData) => dispatch(registerUser(newUserData));
+  const gov = new Set();
+  Data.forEach((record) => gov.add(record.admin_name));
+  // console.log(Array.from(gov));
+  // city = city.toLowerCase();
+  // governorate = governorate.toLowerCase().replace(/\s/g, '');
 
   return (
     <div className="relative flex h-full items-center justify-center">
-      {status === "error" ? (
+      {status === 'error' ? (
         <RegisterError error={error} />
-      ) : status === "loading" ? (
+      ) : status === 'loading' ? (
         <Loader />
-      ) : status === "succeeded" ? (
+      ) : status === 'succeeded' ? (
         <RegisterSucceeded setShowRegister={setShowRegister} />
       ) : (
         <Form
           onSubmit={handleSubmit((newUserData) =>
-            dispatch(registerUser(newUserData))
+            dispatch(
+              registerUser({
+                ...newUserData,
+                address: {
+                  city: city.toLowerCase(),
+                  governorate: governorate.toLowerCase(),
+                },
+              })
+            )
           )}
-          className="p-10"
+          className="w-full px-10"
         >
-          <Typography component="h1" className="text-center text-primary">
+          <Typography component="h1" className="text-center leading-[44px] text-primary">
             Sign up
           </Typography>
-          <Typography component="body2" className="my-5 text-center">
+          <Typography component="body2" className="my-3 text-center">
             Already have an account?
             <button
               type="button"
@@ -60,15 +79,14 @@ export default function Register({ setShowRegister, setShowVendorRegister }) {
             >
               Sign in
             </button>
-            instead
           </Typography>
-          <div className="flex flex-col gap-y-4">
+          <div className="flex flex-col gap-y-2">
             <Input
               type="text"
-              register={singUpRegister.customerName}
+              register={singUpRegister.name}
               errors={errors}
               placeholder="Your full name"
-              id="customerName"
+              id="name"
             />
             <Input
               type="email"
@@ -84,14 +102,46 @@ export default function Register({ setShowRegister, setShowVendorRegister }) {
               placeholder="Password"
               id="password"
             />
+            <Input
+              type="text"
+              register={singUpRegister.mobile}
+              errors={errors}
+              placeholder="Mobile Number"
+              id="mobile"
+            />
+            <p className="font-medium">Address:</p>
+            <select className="select w-full" onChange={(e) => setGovernorate(e.target.value)}>
+              <option selected>Choose Your Governate</option>
+              {Array.from(gov).map((el, index) => {
+                return (
+                  <option value={el} key={index}>
+                    {el}
+                  </option>
+                );
+              })}
+            </select>
+            {governorate !== '' ? (
+              <select onChange={(e) => setCity(e.target.value)} className="select">
+                <option selected>Choose Your City</option>
+                {Data.filter((dt) => dt.admin_name === governorate).map((el, index) => {
+                  return (
+                    <option value={el.city} key={index}>
+                      {el.city}
+                    </option>
+                  );
+                })}
+              </select>
+            ) : (
+              ''
+            )}
           </div>
 
-          <Button variant={"secondary"} type="submit" className="mt-5">
+          <Button variant={'secondary'} type="submit" className="mt-5">
             sign up
           </Button>
           <button
             type="button"
-            className="mt-4 font-medium capitalize hover:underline"
+            className="mt-2 font-medium capitalize hover:underline"
             onClick={handleVendorLogin}
           >
             sign up as a vendor instead ?
