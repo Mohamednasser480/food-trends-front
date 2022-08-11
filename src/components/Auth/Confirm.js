@@ -1,13 +1,16 @@
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Loader } from "../../components/UI";
-import { verifySelector, verifyUser } from "../../store/slices/auth.js";
+import {
+  changeVerifyStatus,
+  verifySelector,
+  verifyUser,
+} from "../../store/slices/auth.js";
 import cookies from "../../services/cookie";
 import { BsCheckCircle } from "react-icons/bs";
 import Welcome from "./Welcome";
 export default function Confirm() {
   const dispatch = useDispatch();
-  const token = cookies.getCookie("token");
   const { status, error } = useSelector(verifySelector);
   function focusCode() {
     const inputs = document.querySelectorAll("#otp > *[id]");
@@ -50,6 +53,9 @@ export default function Confirm() {
       input4.current.value,
       input5.current.value
     );
+
+    const token = cookies.getCookie("token");
+
     dispatch(verifyUser({ code: code, token: token }));
 
     input1.current.value = "";
@@ -126,9 +132,11 @@ export default function Confirm() {
                 </p>
               </div>
 
-              <Button variant="primary" onClick={handleOnClick}>
-                Verify now.
-              </Button>
+              <div className="flex flex-col gap-4 ">
+                <Button variant="primary" onClick={handleOnClick}>
+                  Verify now.
+                </Button>
+              </div>
             </div>
           </div>
         </div>
