@@ -46,8 +46,6 @@ export default function AddProduct({
   });
 
   const addImageHandler = (selectedImage) => {
-    // console.log(URL.createObjectURL(selectedImage[0]));
-    // imagesArray.push(selectedImage[0]);
     setImages(selectedImage);
   };
 

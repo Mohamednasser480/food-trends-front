@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ProductsComponent from "./ProductsComponent";
 import { Loader } from "../../UI";
 import {
+  changeSelector,
   fetchVendorProducts,
   vendorSelector,
   vendorStatusSelector,
@@ -14,10 +15,11 @@ export default function Products() {
   const { _id: id } = useSelector(selectUserData);
   const vendorData = useSelector(vendorSelector);
   const vendorStatus = useSelector(vendorStatusSelector);
+  const updated = useSelector(changeSelector);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchVendorProducts(id));
-  }, [dispatch]);
+  }, [dispatch, updated, id]);
 
   // get table comp from daisy ui
   return (
