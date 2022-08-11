@@ -48,10 +48,11 @@ const getUserData = async (token) => {
 const register = async (newUser) => {
   try {
     const res = await axios.post(REGISTER_API_URI, {
-      name: newUser.customerName,
+      name: newUser.name,
       email: newUser.email,
       password: newUser.password,
       mobile: "01279001036",
+      
     });
 
     return res.data;
@@ -59,6 +60,24 @@ const register = async (newUser) => {
     throw e.response.data;
   }
 };
+
+const registerVendor = async (newUser) => {
+  try {
+    const res = await axios.post(REGISTER_API_URI, {
+      name: newUser.name,
+      email: newUser.email,
+      password: newUser.password,
+      mobile: "01279001036",
+      storeName:newUser.storeName,
+      userType:"vendor"
+    });
+
+    return res.data;
+  } catch (e) {
+    throw e.response.data;
+  }
+};
+
 
 const logout = async (token) => {
   try {
@@ -71,4 +90,4 @@ const logout = async (token) => {
   }
 };
 
-export default { login, register, logout, getUserData, verify };
+export default { login, register, logout, getUserData, verify,registerVendor };

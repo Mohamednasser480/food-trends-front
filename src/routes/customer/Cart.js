@@ -1,7 +1,7 @@
 import React from "react";
-import { Page, Loader, Alert } from "../components/UI";
-import { CartList, EmptyCart } from "../components/Cart";
-import { Button } from "../components/UI";
+import { Page, Loader, Alert } from "../../components/UI";
+import { CartList, EmptyCart } from "../../components/Cart";
+import { Button } from "../../components/UI";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -9,7 +9,7 @@ import {
   selectStatus,
   selectError,
   clearCartData,
-} from "../store/slices/cart";
+} from "../../store/slices/cart";
 
 const Cart = () => {
   const items = useSelector(selectAllCartItems);

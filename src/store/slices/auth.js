@@ -63,10 +63,30 @@ export const registerUser = createAsyncThunk('auth/registerUser', async (payload
   return userData;
 });
 
+export const registerVendor = createAsyncThunk('auth/registerVendor', async (payload) => {
+  const userData = await authService.registerVendor(payload);
+  // cookie.setCookie("token", userData.token, 3);
+  return userData;
+});
+
+
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    changeRegisterStatus(state,action){
+      state.register.status=action.payload || "idle"
+    },
+    changeLoginStatus(state,action){
+      state.login.status=action.payload || "idle";
+      state.login.error="";
+    },
+    changeVerifyStatus(state,action){
+      state.verify.status=action.payload || "idle";
+      state.verify.error="";
+    },
+  },
   extraReducers: {
     // Login Reducers
     [login.pending]: (state) => {
@@ -117,6 +137,9 @@ const authSlice = createSlice({
       state.token = '';
       state.error = null;
       state.login.status = '';
+      state.login.error="";
+      state.register.status="";
+      state.register.error="";
     },
     [logout.rejected]: (state, { error }) => {
       state.status = 'error';
@@ -154,6 +177,25 @@ const authSlice = createSlice({
       state.register.status = 'error';
       state.register.error = error.message;
     },
+      // RegisterVendor Reducers
+      [registerVendor.pending]: (state) => {
+        state.status = 'loading';
+        state.register.status = 'loading';
+      },
+      [registerVendor.fulfilled]: (state, { payload: user }) => {
+        // state.status = "Pending";
+        // state.user = user.user;
+        // state.token = user.token;
+        state.error = null;
+        state.register.status = 'succeeded';
+        state.register.error = '';
+      },
+      [registerVendor.rejected]: (state, { error }) => {
+        state.status = 'error';
+        state.error = error.message;
+        state.register.status = 'error';
+        state.register.error = error.message;
+      },
   },
 });
 
@@ -165,5 +207,5 @@ export const loginSelector = (state) => state.auth.login;
 export const registerSelector = (state) => state.auth.register;
 export const verifySelector = (state) => state.auth.verify;
 export const loginErrorSelector = (state) => state.auth.login.error;
-
+export const {changeRegisterStatus,changeLoginStatus,changeVerifyStatus} = authSlice.actions;
 export const authReducer = authSlice.reducer;
