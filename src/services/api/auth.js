@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 const API_URI = process.env.REACT_APP_API_URI;
 const LOGIN_API_URI = `${API_URI}/users/login`;
 const LOGOUT_API_URI = `${API_URI}/users/logout`;
@@ -24,7 +24,7 @@ const verify = async (codeTokenObject) => {
       VERIFY_API_URI,
       { confirmationCode: codeTokenObject.code },
       {
-        headers: { Authorization: "Bearer " + codeTokenObject.token },
+        headers: { Authorization: 'Bearer ' + codeTokenObject.token },
       }
     );
     // console.log(res)
@@ -37,7 +37,7 @@ const verify = async (codeTokenObject) => {
 const getUserData = async (token) => {
   try {
     const res = await axios.get(USER_API_URI, {
-      headers: { Authorization: "Bearer " + token },
+      headers: { Authorization: 'Bearer ' + token },
     });
     return res.data;
   } catch (e) {
@@ -47,12 +47,14 @@ const getUserData = async (token) => {
 
 const register = async (newUser) => {
   try {
+    console.log(newUser);
     const res = await axios.post(REGISTER_API_URI, {
       name: newUser.name,
       email: newUser.email,
       password: newUser.password,
-      mobile: "01279001036",
-      
+      mobile: newUser.mobile,
+      city: newUser.address.city,
+      governorate: newUser.address.governorate,
     });
 
     return res.data;
@@ -67,9 +69,9 @@ const registerVendor = async (newUser) => {
       name: newUser.name,
       email: newUser.email,
       password: newUser.password,
-      mobile: "01279001036",
-      storeName:newUser.storeName,
-      userType:"vendor"
+      mobile: '01279001036',
+      storeName: newUser.storeName,
+      userType: 'vendor',
     });
 
     return res.data;
@@ -77,12 +79,11 @@ const registerVendor = async (newUser) => {
     throw e.response.data;
   }
 };
-
 
 const logout = async (token) => {
   try {
     const res = await axios.post(LOGOUT_API_URI, null, {
-      headers: { Authorization: "Bearer " + token },
+      headers: { Authorization: 'Bearer ' + token },
     });
     return res.data;
   } catch (e) {
@@ -90,4 +91,4 @@ const logout = async (token) => {
   }
 };
 
-export default { login, register, logout, getUserData, verify,registerVendor };
+export default { login, register, logout, getUserData, verify, registerVendor };

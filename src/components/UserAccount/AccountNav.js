@@ -7,9 +7,11 @@ import {
   FaPlusSquare,
   FaAngleLeft,
   FaStar,
+  FaHistory,
 } from 'react-icons/fa';
 import { IoPerson } from 'react-icons/io5';
 import { MdDashboard } from 'react-icons/md';
+import { GrDeliver } from 'react-icons/gr';
 import { AiOutlineTransaction } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
 import { selectUserData } from '../../store/slices/auth';
@@ -27,7 +29,7 @@ export default function AccountNav({ onNavClick, content }) {
   const buttons = {
     vendor: ['Dashboard', 'Products', 'Reviews', 'Orders', 'Add product', 'Transactions'],
     customer: ['My profile', 'My orders', 'wishlist'],
-    delivery: ['Orders'],
+    delivery: ['All Orders', 'Live Orders', 'History'],
   };
   const icons = {
     Dashboard: <MdDashboard className="mx-3" />,
@@ -36,10 +38,12 @@ export default function AccountNav({ onNavClick, content }) {
     Reviews: <FaCommentAlt className="mx-3" />,
     'Add product': <FaPlusSquare className="mx-3" />,
     wishlist: <FaStar className="mx-3" />,
-    'Live Orders': <FaShoppingCart className="mx-3 " />,
+    'All Orders': <FaShoppingCart className="mx-3 " />,
     'My profile': <IoPerson className="mx-3 " />,
     Transactions: <AiOutlineTransaction className="mx-3 " />,
     'My orders': <FaShoppingCart className="mx-3" />,
+    'Live Orders': <GrDeliver className="mx-3" size={24} />,
+    History: <FaHistory className="mx-3" />,
   };
 
   return (

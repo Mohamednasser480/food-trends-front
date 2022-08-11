@@ -1,9 +1,9 @@
-import React from "react";
-import { CustomerLayout, VendorLayout } from "./";
-import { Error404 } from "../../routes";
-import { Route } from "react-router-dom";
+import React from 'react';
+import { CustomerLayout, VendorLayout } from './';
+import { Error404 } from '../../routes';
+import { Route } from 'react-router-dom';
 
-const userType = "vendor";
+const userType = '';
 
 const defaultRoutes = (
   <>
