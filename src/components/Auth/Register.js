@@ -47,7 +47,7 @@ export default function Register({ setShowRegister, setShowVendorRegister }) {
   return (
     <div className="relative flex h-full items-center justify-center">
       {status === 'error' ? (
-        <RegisterError error={error} />
+        <RegisterError error={error} setShowRegister={setShowRegister} />
       ) : status === 'loading' ? (
         <Loader />
       ) : status === 'succeeded' ? (
