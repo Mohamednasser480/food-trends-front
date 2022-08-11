@@ -20,7 +20,7 @@ const Layout = () => {
   };
   return (
     <div className="flex min-h-screen flex-col">
-      {layouts[userType] ? layouts[userType] : null}
+      {layouts[userType] ? layouts[userType] : layouts.customer}
     </div>
   );
 };
