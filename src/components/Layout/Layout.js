@@ -1,15 +1,26 @@
-import React from 'react';
-import { Footer, Topbar, ScrollUp } from './';
-import Navbar from './Navbar';
+import React from "react";
+import { CustomerLayout, VendorLayout } from "./";
+import { Error404 } from "../../routes";
+import { Route } from "react-router-dom";
 
-const Layout = (props) => {
+const userType = "vendor";
+
+const defaultRoutes = (
+  <>
+    <Route path="*" element={<Error404 />} />;
+  </>
+);
+
+const Layout = () => {
+  const layouts = {
+    customer: <CustomerLayout>{defaultRoutes}</CustomerLayout>,
+    vendor: <VendorLayout>{defaultRoutes}</VendorLayout>,
+    // delivery: <DeliveryLayout />,
+    // admin: <AdminLayout />,
+  };
   return (
-    <div className='flex flex-col min-h-screen'>
-      <Topbar />
-      <Navbar />
-      <ScrollUp />
-      <main className='grow'>{props.children}</main>
-      <Footer />
+    <div className="flex min-h-screen flex-col">
+      {layouts[userType] ? layouts[userType] : null}
     </div>
   );
 };
