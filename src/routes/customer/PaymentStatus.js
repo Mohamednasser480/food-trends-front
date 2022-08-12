@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react";
 import { BsCheckCircle, BsXCircle } from "react-icons/bs";
 import { useSearchParams } from "react-router-dom";
 import { Button } from "../../components/UI";
+import { useDispatch } from "react-redux";
+import { createOrder } from "../../store/slices/orders";
+
 export default function PaymentStatus() {
   let [paymentSuccess, setPaymentSuccess] = useState(false);
   const [queryParams, setQueryParams] = useSearchParams();
+  const dispatch = useDispatch();
 
+  const status = queryParams.get("success");
   function paymentSuccessful() {
-    const status = queryParams.get("success");
-    console.log(status);
     if (status == "true") {
       setPaymentSuccess(true);
     } else if (status == "false") {
@@ -18,6 +21,12 @@ export default function PaymentStatus() {
 
   useEffect(() => {
     paymentSuccessful();
+    // Send Order To DB IF Payment Success
+    if (status == "true") {
+      dispatch(createOrder());
+      // Clear Cart Items Here
+      
+    }
   }, []);
 
   const render = {

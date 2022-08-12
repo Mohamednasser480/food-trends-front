@@ -11,7 +11,7 @@ export const doPayment = createAsyncThunk(
   "payment/doPayment",
   async (cartId) => {
     const userToken = cookie.getCookie("token");
-    const data = await paymentService.doPayment(userToken, cartId);
+    const data = await paymentService.doPayment(userToken);
     return data;
   }
 );

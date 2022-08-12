@@ -13,8 +13,8 @@ const getAllOrders = async (userToken) => {
 };
 
 //Create New Order
-const createOrder = async (userToken, data) => {
-  await axios.post(`${Order_API_URI}`, data, {
+const createOrder = async (userToken) => {
+  await axios.post(`${Order_API_URI}/save`,null, {
     headers: {
       Authorization: `Bearer ${userToken}`,
     },
