@@ -8,6 +8,9 @@ import UserProfile from "./UserProfile";
 import WishListSidebar from "./WishListSidebar";
 import CartSidebar from "./CartSidebar";
 import UserMenu from "./UserMenu";
+import DashboardNavbar from "./DashboardNavbar";
+import DashboardSidebar from "./DashboardSidebar";
+import AccountNav from "./AccountNav";
 
 export default Navbar;
 export {
@@ -21,4 +24,7 @@ export {
   WishListSidebar,
   CartSidebar,
   UserMenu,
+  DashboardNavbar,
+  DashboardSidebar,
+  AccountNav,
 };
