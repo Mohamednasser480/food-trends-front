@@ -40,8 +40,7 @@ const CustomerLayout = (props) => {
         </Routes>
       </main>
       <Footer />
-    <div/>
-
+    </div>
   );
 };
 
