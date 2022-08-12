@@ -17,9 +17,9 @@ export const fetchOrders = createAsyncThunk("orders/fetchOrders", async () => {
 //Create New Order
 export const createOrder = createAsyncThunk(
   "orders/createOrder",
-  async (data) => {
+  async () => {
     const userToken = cookie.getCookie("token");
-    return await orders.getAllOrders(userToken, data);
+    return await orders.createOrder(userToken);
   }
 );
 
@@ -28,7 +28,7 @@ export const deleteOrder = createAsyncThunk(
   "orders/createOrder",
   async (data) => {
     const userToken = cookie.getCookie("token");
-    return await orders.getAllOrders(userToken, data);
+    return await orders.deleteOrder(userToken, data);
   }
 );
 

@@ -23,32 +23,32 @@ import { Products } from '../../routes/vendor';
 const links = [
   {
     text: 'dashboard',
-    icon: <MdDashboard size={24} />,
+    icon: <MdDashboard className="mx-3" />,
     to: '/',
   },
   {
     text: 'Products',
-    icon: <FaShoppingBag size={24} />,
+    icon: <FaShoppingBag className="mx-3" />,
     to: '/products',
   },
   {
     text: 'reviews',
-    icon: <MdInsertComment size={24} />,
+    icon: <FaCommentAlt className="mx-3" />,
     to: '/reviews',
   },
   {
     text: 'orders',
-    icon: <FaShoppingCart size={24} />,
+    icon: <FaShoppingCart className="mx-3" />,
     to: '/orders',
   },
   {
     text: 'add product',
-    icon: <FaPlusSquare size={24} />,
+    icon: <FaPlusSquare className="mx-3" />,
     to: '/add-product',
   },
   {
     text: 'transactions',
-    icon: <AiOutlineTransaction size={24} />,
+    icon: <AiOutlineTransaction className="mx-3 " />,
     to: '/transactions',
   },
 ];

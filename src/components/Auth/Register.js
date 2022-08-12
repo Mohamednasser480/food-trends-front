@@ -46,7 +46,7 @@ export default function Register({ setShowRegister, setShowVendorRegister }) {
   const [govNotValid, setGovNotValid] = useState(false);
   const [cityNotValid, setCityNotValid] = useState(false);
   return (
-    <div className="absolute left-0 top-0 w-full flex h-full items-center justify-center">
+    <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center">
       {status === "error" ? (
         <RegisterError error={error} setShowRegister={setShowRegister} />
       ) : status === "loading" ? (
@@ -77,8 +77,8 @@ export default function Register({ setShowRegister, setShowVendorRegister }) {
             );
             setCityNotValid(false);
             setGovNotValid(false);
-            setCity("")
-            setGovernorate("")
+            setCity("");
+            setGovernorate("");
           })}
           className="w-full px-10"
         >
@@ -160,11 +160,6 @@ export default function Register({ setShowRegister, setShowVendorRegister }) {
               <select
                 onChange={(e) => {
                   setCity(e.target.value);
-
-                  if (city == "") {
-                    setCityNotValid(true);
-                    return;
-                  }
                   setCityNotValid(false);
                 }}
                 className="select"
