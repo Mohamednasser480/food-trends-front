@@ -1,13 +1,12 @@
-import { Typography, Button, DashboardPage } from "../../components/UI";
-import { Input } from "../../components/UI/Form";
-import hhhh from "../../assets/userprofile.jpg";
-import Form from "../../components/UI/Form";
-import { useForm } from "react-hook-form";
-import { selectUserData } from "../../store/slices/auth";
-import { useSelector } from "react-redux";
+import { Typography, Button } from '../../components/UI';
+import { Input } from '../../components/UI/Form';
+import Form from '../../components/UI/Form';
+import { useForm } from 'react-hook-form';
+import { selectUserData } from '../../store/slices/auth';
+import { useSelector } from 'react-redux';
 
 const Home = () => {
-  const { name, email, mobile, storeName } = useSelector(selectUserData);
+  const { name, email, mobile, storeName, image } = useSelector(selectUserData);
   const {
     register,
     handleSubmit,
@@ -16,13 +15,13 @@ const Home = () => {
   } = useForm({});
 
   const updatePasswordRegister = {
-    oldPassword: { ...register("oldPassword") },
-    newPassword: { ...register("newPassword") },
+    oldPassword: { ...register('oldPassword') },
+    newPassword: { ...register('newPassword') },
     confirmPassword: {
-      ...register("confirmPassword", {
+      ...register('confirmPassword', {
         validate: (value) => {
-          if (watch("newPassword") !== value) {
-            return "Your passwords do no match";
+          if (watch('newPassword') !== value) {
+            return 'Your passwords do no match';
           }
         },
       }),
@@ -35,11 +34,7 @@ const Home = () => {
         <Typography component="h3" className="text-primary">
           account details
         </Typography>
-        <img
-          src={hhhh}
-          alt="Profile"
-          className="h-32 w-32 self-center rounded-full bg-red-400"
-        />
+        <img src={image} alt="Profile" className="h-32 w-32 self-center rounded-full" />
         <Typography component="subtitle2" className="self-center">
           {name}
         </Typography>
