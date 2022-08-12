@@ -37,8 +37,9 @@ const CustomerLayout = (props) => {
           {props.children}
         </Routes>
       </main>
-      <Footer />;
-    </div>
+      <Footer />
+    <div/>
+
   );
 };
 
