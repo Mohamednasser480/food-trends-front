@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { CompactTable, Typography } from '../../components/UI';
-import { selectUserData, selectUserToken } from '../../store/slices/auth';
-import { useSelector } from 'react-redux';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { CompactTable, DashboardPage, Typography } from "../../components/UI";
+import { selectUserData, selectUserToken } from "../../store/slices/auth";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
-const headers = ['product', 'number of reviews', 'average rate'];
+const headers = ["product", "number of reviews", "average rate"];
 
 const Reviews = () => {
   const [products, setProducts] = useState([]);
@@ -56,21 +56,22 @@ const Reviews = () => {
   // console.log(ratingValue);
 
   return (
-    <>
-      <div className="overflow-x-auto bg-[#f8f9fa] p-10">
-        <Typography component={'h3'} className="tracking-tight text-primary">
-          Your Reviews
-        </Typography>
-        <div className="flex w-full gap-x-6">
-          <CompactTable
-            products={products}
-            headers={headers}
-            buttonContent="see details"
-            // onButtonClick={getProductId}
-          />
-        </div>
-      </div>
-    </>
+    <DashboardPage title="your reviews">
+      {/*<Typography*/}
+      {/*  component={"h3"}*/}
+      {/*  className="text-center tracking-tight text-primary"*/}
+      {/*>*/}
+      {/*  Your Reviews*/}
+      {/*</Typography>*/}
+      {/*<div className="flex w-full gap-x-6">*/}
+      <CompactTable
+        products={products}
+        headers={headers}
+        buttonContent="see details"
+        // onButtonClick={getProductId}
+      />
+      {/*</div>*/}
+    </DashboardPage>
   );
 };
 

@@ -1,10 +1,10 @@
-import { Typography, Button } from '../../components/UI';
-import { Input } from '../../components/UI/Form';
-import hhhh from '../../assets/userprofile.jpg';
-import Form from '../../components/UI/Form';
-import { useForm } from 'react-hook-form';
-import { selectUserData } from '../../store/slices/auth';
-import { useSelector } from 'react-redux';
+import { Typography, Button, DashboardPage } from "../../components/UI";
+import { Input } from "../../components/UI/Form";
+import hhhh from "../../assets/userprofile.jpg";
+import Form from "../../components/UI/Form";
+import { useForm } from "react-hook-form";
+import { selectUserData } from "../../store/slices/auth";
+import { useSelector } from "react-redux";
 
 const Home = () => {
   const { name, email, mobile, storeName } = useSelector(selectUserData);
@@ -16,13 +16,13 @@ const Home = () => {
   } = useForm({});
 
   const updatePasswordRegister = {
-    oldPassword: { ...register('oldPassword') },
-    newPassword: { ...register('newPassword') },
+    oldPassword: { ...register("oldPassword") },
+    newPassword: { ...register("newPassword") },
     confirmPassword: {
-      ...register('confirmPassword', {
+      ...register("confirmPassword", {
         validate: (value) => {
-          if (watch('newPassword') !== value) {
-            return 'Your passwords do no match';
+          if (watch("newPassword") !== value) {
+            return "Your passwords do no match";
           }
         },
       }),
@@ -30,9 +30,9 @@ const Home = () => {
   };
 
   return (
-    <div className=" flex flex-col bg-[#f8f9fa] ">
-      <div className="my-5 flex max-w-screen-xl flex-col items-start justify-center gap-x-6 p-2 sm:p-10 lg:flex-row">
-        <div className="mt-5 flex w-full flex-col rounded-xl bg-white p-5 shadow-xl lg:w-1/2">
+    <div>
+      <div className="flex flex-col items-start justify-center gap-x-6 lg:flex-row">
+        <div className="flex w-full flex-col rounded-xl bg-white p-5 shadow-xl lg:w-1/2">
           <Typography component="h3" className="p-4 text-primary">
             account details
           </Typography>
@@ -53,7 +53,7 @@ const Home = () => {
             Edit profile
           </Button>
         </div>
-        <div className="mt-5 flex h-full w-full flex-col rounded-xl bg-white p-5 shadow-xl lg:w-1/4">
+        <div className="flex h-full w-full flex-col rounded-xl bg-white p-5 shadow-xl lg:w-1/4">
           <Typography component="h3" className="p-4 text-primary">
             Stats
           </Typography>
@@ -69,7 +69,7 @@ const Home = () => {
             See All Statistics
           </Button>
         </div>
-        <div className="mt-5 flex w-full flex-col rounded-xl bg-white p-5 shadow-xl lg:w-1/4">
+        <div className="flex w-full flex-col rounded-xl bg-white p-5 shadow-xl lg:w-1/4">
           <Typography component="h4" className="text-primary">
             change password
           </Typography>
@@ -105,8 +105,6 @@ const Home = () => {
           </Form>
         </div>
       </div>
-
-      <div></div>
     </div>
   );
 };
