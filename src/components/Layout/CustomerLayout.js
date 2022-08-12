@@ -1,7 +1,7 @@
-import React from 'react';
-import { Footer, ScrollUp, Topbar } from './';
-import Navbar from './Navbar';
-import { Route, Routes } from 'react-router-dom';
+import React from "react";
+import { Footer, ScrollUp, Topbar } from "./";
+import Navbar from "./Navbar";
+import { Route, Routes } from "react-router-dom";
 import {
   AboutUs,
   Cart,
@@ -12,12 +12,12 @@ import {
   SearchPage,
   Shop,
   UserAccount,
-} from '../../routes/customer';
-import Wishlist from '../UserAccount/Wishlist';
+} from "../../routes/customer";
+import Wishlist from "../UserAccount/Wishlist";
 
 const CustomerLayout = (props) => {
   return (
-    <>
+    <div className="flex min-h-screen  flex-col">
       <Topbar />
       <Navbar />
       <ScrollUp />
@@ -38,7 +38,7 @@ const CustomerLayout = (props) => {
         </Routes>
       </main>
       <Footer />;
-    </>
+    </div>
   );
 };
 
