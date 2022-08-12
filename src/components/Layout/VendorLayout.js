@@ -1,13 +1,14 @@
-import React from "react";
+import React from 'react';
 import {
   FaShoppingBag,
   FaShoppingCart,
   FaCommentAlt,
   FaPlusSquare,
-} from "react-icons/fa";
-import { MdDashboard } from "react-icons/md";
-import { AiOutlineTransaction } from "react-icons/ai";
-import { Route, Routes } from "react-router-dom";
+  FaMoneyBillAlt,
+} from 'react-icons/fa';
+import { MdDashboard, MdInsertComment } from 'react-icons/md';
+import { AiOutlineTransaction } from 'react-icons/ai';
+import { Route, Routes } from 'react-router-dom';
 import {
   Home,
   AccountSettings,
@@ -15,40 +16,40 @@ import {
   ReviewDetail,
   AddProduct,
   Orders,
-} from "../../routes/vendor";
-import { DashboardLayout } from "./index";
-import { Products } from "../../routes/vendor";
+} from '../../routes/vendor';
+import { DashboardLayout } from './index';
+import { Products } from '../../routes/vendor';
 
 const links = [
   {
-    text: "dashboard",
-    icon: <MdDashboard className="mx-3" />,
-    to: "/",
+    text: 'dashboard',
+    icon: <MdDashboard size={24} />,
+    to: '/',
   },
   {
-    text: "Products",
-    icon: <FaShoppingBag className="mx-3" />,
-    to: "/products",
+    text: 'Products',
+    icon: <FaShoppingBag size={24} />,
+    to: '/products',
   },
   {
-    text: "reviews",
-    icon: <FaCommentAlt className="mx-3" />,
-    to: "/reviews",
+    text: 'reviews',
+    icon: <MdInsertComment size={24} />,
+    to: '/reviews',
   },
   {
-    text: "orders",
-    icon: <FaShoppingCart className="mx-3" />,
-    to: "/orders",
+    text: 'orders',
+    icon: <FaShoppingCart size={24} />,
+    to: '/orders',
   },
   {
-    text: "add product",
-    icon: <FaPlusSquare className="mx-3" />,
-    to: "/add-product",
+    text: 'add product',
+    icon: <FaPlusSquare size={24} />,
+    to: '/add-product',
   },
   {
-    text: "transactions",
-    icon: <AiOutlineTransaction className="mx-3 " />,
-    to: "/transactions",
+    text: 'transactions',
+    icon: <AiOutlineTransaction size={24} />,
+    to: '/transactions',
   },
 ];
 
