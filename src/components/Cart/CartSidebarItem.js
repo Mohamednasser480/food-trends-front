@@ -19,7 +19,7 @@ const CartSidebarItem = (props) => {
         </button>
       </div>
       <div className="w-24">
-        <img className="max-w-full" src={images[0]} alt={productName} />
+        <img className="max-w-full" src={images?.length?images[0]:""} alt={productName} />
       </div>
       <section className="flex flex-1 flex-col gap-y-4">
         <Typography
