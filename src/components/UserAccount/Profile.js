@@ -1,16 +1,16 @@
-import { Typography, Button } from '../../UI';
-import hhhh from '../../../assets/userprofile.jpg';
-import Form from '../../UI/Form/Form';
-import Input from '../../UI/Form/Input';
+import { Typography, Button } from '../UI';
+import Form from '../UI/Form/Form';
+import Input from '../UI/Form/Input';
 import { useForm } from 'react-hook-form';
-import { selectUserData } from '../../../store/slices/auth';
+import { selectUserData } from '../../store/slices/auth';
 import { useSelector } from 'react-redux';
 
-const VendorProfile = () => {
-  const { name, email, mobile, storeName } = useSelector(selectUserData);
+const Profile = () => {
+  const { name, email, image, mobile, address } = useSelector(selectUserData);
   const {
     register,
     handleSubmit,
+    getValues,
     watch,
     formState: { errors },
   } = useForm({});
@@ -30,45 +30,62 @@ const VendorProfile = () => {
   };
 
   return (
-    <div className=" flex flex-col bg-[#f8f9fa] ">
-      <div className="my-5 flex max-w-screen-xl flex-col items-start justify-center gap-x-6 p-2 sm:p-10 lg:flex-row">
+    <div className="flex flex-col bg-[#f8f9fa] p-2 sm:p-10">
+      <div className="my-5 flex max-w-screen-xl flex-col items-start justify-center gap-x-6 lg:flex-row">
+        <div className="mt-5 flex w-full flex-col rounded-xl bg-white p-5 shadow-xl lg:w-1/3">
+          <Typography component="h4" className="text-primary">
+            saved address
+          </Typography>
+
+          {address ? (
+            <>
+              <Typography component="body2" className="h-16">
+                Line 1
+              </Typography>
+              <Typography component="body2" className="h-16">
+                Line 2
+              </Typography>
+              <Typography component="body2" className="h-16">
+                City{' '}
+              </Typography>
+              <Typography component="body2" className="h-16">
+                Governate
+              </Typography>
+              <Button variant="secondary" className="my-3 self-center">
+                Edit Address
+              </Button>
+            </>
+          ) : (
+            <>
+              <Typography component="h6" className="h-16">
+                You don't have a saved address yet
+              </Typography>
+              <Button variant="secondary" className="my-3 self-center">
+                Add Address
+              </Button>
+            </>
+          )}
+        </div>
         <div className="mt-5 flex w-full flex-col rounded-xl bg-white p-5 shadow-xl lg:w-1/2">
-          <Typography component="h3" className="p-4 text-primary">
+          <Typography component="h4" className="text-primary">
             account details
           </Typography>
-          <img
-            src={hhhh}
-            alt="Profile"
-            className="mt-3 h-32 w-32 self-center rounded-full bg-red-400"
-          />
+
+          <img src={image} alt="Profile" className="h-32 w-32 self-center rounded-full" />
+
           <Typography component="subtitle2" className="self-center">
             {name}
           </Typography>
-          <Typography component="subtitle2">{storeName}</Typography>
           <Typography component="subtitle2">contact info</Typography>
           <Typography component="body2">{mobile}</Typography>
           <Typography component="body2">{email}</Typography>
-          {/* <Typography component="body2">address</Typography> */}
-          <Button variant="secondary" className="my-2 self-center">
+
+          <Typography component="subtitle2">Payment info</Typography>
+          <Button variant="secondary" className="my-3 w-2/5 self-center">
             Edit profile
           </Button>
         </div>
-        <div className="mt-5 flex h-full w-full flex-col rounded-xl bg-white p-5 shadow-xl lg:w-1/4">
-          <Typography component="h3" className="p-4 text-primary">
-            Stats
-          </Typography>
 
-          <Typography component="h6" className="h-16">
-            Total Average rate
-          </Typography>
-          <Typography component="h6" className="h-16">
-            Monthly Transactions
-          </Typography>
-
-          <Button variant="secondary" className="my-3 self-center">
-            See All Statistics
-          </Button>
-        </div>
         <div className="mt-5 flex w-full flex-col rounded-xl bg-white p-5 shadow-xl lg:w-1/4">
           <Typography component="h4" className="text-primary">
             change password
@@ -111,4 +128,4 @@ const VendorProfile = () => {
   );
 };
 
-export default VendorProfile;
+export default Profile;

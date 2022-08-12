@@ -1,4 +1,5 @@
-import Home from "../vendor/Home";
+import Home from "./Home";
+import Products from "./Products";
 import ProductDetail from "./ProductDetail";
 import AddProduct from "./AddProduct";
 import Orders from "./Orders";
@@ -10,6 +11,7 @@ import Register from "./Register";
 
 export {
   Home,
+  Products,
   ProductDetail,
   AddProduct,
   Orders,
