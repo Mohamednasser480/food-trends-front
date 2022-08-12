@@ -44,7 +44,7 @@ const UserProfile = () => {
           <Modal
             show={showLoginModal}
             setShow={setShowLoginModal}
-            className="h-[650px] w-[420px] rounded-xl"
+            className="h-[690px] w-[420px] rounded-xl"
           >
             {/* {userStatus == 'error' ? <Alert>{userError}</Alert> : null} */}
 
