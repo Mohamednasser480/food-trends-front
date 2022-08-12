@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Button, Typography } from '../../UI';
+import { Button, Typography } from '../../components/UI';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUserData, selectUserToken } from '../../../store/slices/auth';
+import { selectUserData, selectUserToken } from '../../store/slices/auth';
 import axios from 'axios';
 // import { cookie } from '..';
 

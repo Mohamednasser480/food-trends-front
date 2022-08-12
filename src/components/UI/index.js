@@ -17,6 +17,8 @@ import ProductsLoader from "./ProductsLoader";
 import Alert from "./Alert";
 import Search from "./Search";
 import Pagination from "./Pagination";
+import DashboardPage from "./DashboardPage";
+
 export {
   Button,
   Modal,
@@ -37,4 +39,5 @@ export {
   Alert,
   Search,
   Pagination,
+  DashboardPage,
 };

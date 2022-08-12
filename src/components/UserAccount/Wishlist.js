@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Page, Typography } from '../../UI';
+import { Button, Page, Typography } from '../UI';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts, productsSelector } from '../../../store/slices/products';
+import { fetchProducts, productsSelector } from '../../store/slices/products';
 
 const Wishlist = () => {
   const [products, setProducts] = useState([]);
