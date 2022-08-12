@@ -3,7 +3,7 @@ import Navlinks from "./MobileNav/Navlinks";
 const DashboardSidebar = ({ links, showSidebar }) => {
   return (
     <div
-      className={`overflow-y-auto ${
+      className={`h-full overflow-y-auto shadow-md ${
         showSidebar ? "w-1/4" : "w-0"
       } transition-[width] duration-500`}
     >

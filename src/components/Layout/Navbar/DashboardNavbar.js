@@ -7,8 +7,8 @@ import UserProfile from "./UserProfile";
 
 const DashboardNavbar = ({ onToggleSidebar }) => {
   return (
-    <nav className="sticky top-0 z-40 bg-white shadow-sm">
-      <div className="container flex flex-col gap-y-10 py-6 xl:pt-8">
+    <nav className="h-20 bg-white shadow-sm">
+      <div className="container flex h-full flex-col justify-center gap-y-10">
         <div className="flex items-center gap-x-5">
           {/* Left Section - Social Media and toggle sidebar button */}
           <div className="flex items-center gap-x-5">
