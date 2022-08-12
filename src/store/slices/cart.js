@@ -190,4 +190,6 @@ export const selectAllCartItems = (state) => state.cart.products;
 export const selectTotalPrice = (state) => state.cart.cartPrice;
 export const selectStatus = (state) => state.cart.status;
 export const selectError = (state) => state.cart.error;
+export const selectCartID = (state) => state.cart.id;
+
 export const cartReducer = cartSlice.reducer;
