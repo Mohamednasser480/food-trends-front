@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProduct, editSelector } from "../../../store/slices/vendor";
+import { deleteProduct, editSelector } from "../../store/slices/vendor";
 import ActionsModel from "./ActionsModel";
 
 const ProductsComponent = ({

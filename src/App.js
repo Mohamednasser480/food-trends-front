@@ -19,7 +19,7 @@ import { cookie } from "./services";
 import { getUserData } from "./store/slices/auth";
 import { fetchCartData } from "./store/slices/cart";
 import { selectStatus } from "./store/slices/auth";
-import { Wishlist } from "./components/UserAccount";
+// import { Wishlist } from "./components/UserAccount";
 
 function App() {
   const userStatus = useSelector(selectStatus);

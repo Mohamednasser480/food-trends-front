@@ -13,11 +13,11 @@ import {
   Shop,
   UserAccount,
 } from "../../routes/customer";
-import { Wishlist } from "../UserAccount";
+import Wishlist from "../UserAccount/Wishlist";
 
 const CustomerLayout = (props) => {
   return (
-    <>
+    <div className="flex min-h-screen  flex-col">
       <Topbar />
       <Navbar />
       <ScrollUp />
@@ -39,6 +39,7 @@ const CustomerLayout = (props) => {
       </main>
       <Footer />
     </>
+
   );
 };
 
