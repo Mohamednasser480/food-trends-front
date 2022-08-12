@@ -1,20 +1,13 @@
-import React from 'react';
-import Navbar, { DashbaordNavbar } from './Navbar';
+import React from "react";
 import {
   FaShoppingBag,
-  FaAngleRight,
   FaShoppingCart,
   FaCommentAlt,
   FaPlusSquare,
-  FaAngleLeft,
-  FaStar,
-  FaHistory,
-} from 'react-icons/fa';
-import { IoPerson } from 'react-icons/io5';
-import { MdDashboard } from 'react-icons/md';
-import { GrDeliver } from 'react-icons/gr';
-import { AiOutlineTransaction } from 'react-icons/ai';
-import { Route, Routes } from 'react-router-dom';
+} from "react-icons/fa";
+import { MdDashboard } from "react-icons/md";
+import { AiOutlineTransaction } from "react-icons/ai";
+import { Route, Routes } from "react-router-dom";
 import {
   Home,
   AccountSettings,
@@ -22,57 +15,55 @@ import {
   ReviewDetail,
   AddProduct,
   Orders,
-} from '../../routes/vendor';
+} from "../../routes/vendor";
+import { DashboardLayout } from "./index";
 
 const links = [
   {
-    text: 'dashboard',
+    text: "dashboard",
     icon: <MdDashboard className="mx-3" />,
-    link: '/',
+    to: "/",
   },
   {
-    text: 'Products',
+    text: "Products",
     icon: <FaShoppingBag className="mx-3" />,
-    link: '/',
+    to: "/products",
   },
   {
-    text: 'reviews',
+    text: "reviews",
     icon: <FaCommentAlt className="mx-3" />,
-    link: '/reviews',
+    to: "/reviews",
   },
   {
-    text: 'orders',
+    text: "orders",
     icon: <FaShoppingCart className="mx-3" />,
-    link: '/orders',
+    to: "/orders",
   },
   {
-    text: 'add product',
+    text: "add product",
     icon: <FaPlusSquare className="mx-3" />,
-    link: '/',
+    to: "/add-product",
   },
   {
-    text: 'transactions',
+    text: "transactions",
     icon: <AiOutlineTransaction className="mx-3 " />,
-    link: '/',
+    to: "/transactions",
   },
 ];
+
 const VendorLayout = (props) => {
   return (
-    <>
-      <DashbaordNavbar links={links} />
-      <main className="grow">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/" element={<AddProduct />} />
-          <Route path="/reviews" element={<Reviews />} />
-          <Route path="/reviews/:id" element={<ReviewDetail />} />
-          <Route path="/account-settings" element={<AccountSettings />} />
-          <Route path="/orders" element={<Orders />} />
-
-          {props.children}
-        </Routes>
-      </main>
-    </>
+    <DashboardLayout links={links}>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/add-product" element={<AddProduct />} />
+        <Route path="/reviews" element={<Reviews />} />
+        <Route path="/reviews/:id" element={<ReviewDetail />} />
+        <Route path="/account-settings" element={<AccountSettings />} />
+        <Route path="/orders" element={<Orders />} />
+        {props.children}
+      </Routes>
+    </DashboardLayout>
   );
 };
 
