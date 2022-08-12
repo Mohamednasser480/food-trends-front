@@ -18,7 +18,9 @@ const DashboardPage = (props) => {
           {props.title}
         </Typography>
       )}
-      <div className={`rounded-xl bg-white p-5 ${props.className || ""}`}>
+      <div
+        className={`rounded-xl bg-white p-5 shadow-md ${props.className || ""}`}
+      >
         {props.children}
       </div>
     </div>

@@ -30,30 +30,30 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <div className="flex flex-col items-start justify-center gap-x-6 lg:flex-row">
-        <div className="flex w-full flex-col rounded-xl bg-white p-5 shadow-xl lg:w-1/2">
-          <Typography component="h3" className="p-4 text-primary">
-            account details
-          </Typography>
-          <img
-            src={hhhh}
-            alt="Profile"
-            className="mt-3 h-32 w-32 self-center rounded-full bg-red-400"
-          />
-          <Typography component="subtitle2" className="self-center">
-            {name}
-          </Typography>
-          <Typography component="subtitle2">{storeName}</Typography>
-          <Typography component="subtitle2">contact info</Typography>
-          <Typography component="body2">{mobile}</Typography>
-          <Typography component="body2">{email}</Typography>
-          {/* <Typography component="body2">address</Typography> */}
-          <Button variant="secondary" className="my-2 self-center">
-            Edit profile
-          </Button>
-        </div>
-        <div className="flex h-full w-full flex-col rounded-xl bg-white p-5 shadow-xl lg:w-1/4">
+    <div className="flex flex-col items-center gap-y-10 text-center">
+      <div className="flex w-full flex-col gap-y-2 rounded-xl bg-white p-5 shadow-md">
+        <Typography component="h3" className="text-primary">
+          account details
+        </Typography>
+        <img
+          src={hhhh}
+          alt="Profile"
+          className="h-32 w-32 self-center rounded-full bg-red-400"
+        />
+        <Typography component="subtitle2" className="self-center">
+          {name}
+        </Typography>
+        <Typography component="subtitle2">{storeName}</Typography>
+        <Typography component="subtitle2">contact info</Typography>
+        <Typography component="body2">{mobile}</Typography>
+        <Typography component="body2">{email}</Typography>
+        {/* <Typography component="body2">address</Typography> */}
+        <Button variant="secondary" className="my-2 self-center">
+          Edit profile
+        </Button>
+      </div>
+      <div className="flex w-full gap-x-5">
+        <div className="flex w-full flex-col rounded-xl bg-white p-5 shadow-md">
           <Typography component="h3" className="p-4 text-primary">
             Stats
           </Typography>
@@ -69,7 +69,7 @@ const Home = () => {
             See All Statistics
           </Button>
         </div>
-        <div className="flex w-full flex-col rounded-xl bg-white p-5 shadow-xl lg:w-1/4">
+        <div className="flex w-full flex-col rounded-xl bg-white p-5 shadow-md">
           <Typography component="h4" className="text-primary">
             change password
           </Typography>

@@ -5,6 +5,7 @@ import ScrollUp from "./ScrollUp";
 import CustomerLayout from "./CustomerLayout";
 import VendorLayout from "./VendorLayout";
 import DashboardLayout from "./DashboardLayout";
+import DeliveryLayout from "./DeliveryLayout";
 
 export {
   Footer,
@@ -14,4 +15,5 @@ export {
   CustomerLayout,
   VendorLayout,
   DashboardLayout,
+  DeliveryLayout,
 };
