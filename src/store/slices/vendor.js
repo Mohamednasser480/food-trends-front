@@ -14,6 +14,7 @@ const initialState = {
 export const fetchVendorProducts = createAsyncThunk(
   "vendor/fetchProducts",
   async (vendorId) => {
+    console.log(vendorId);
     return await products.getProducts(vendorId);
   }
 );

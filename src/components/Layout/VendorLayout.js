@@ -21,7 +21,7 @@ import { Products } from "../../routes/vendor";
 
 const links = [
   {
-    text: "dashboard",
+    text: "Dashboard",
     icon: <MdDashboard className="mx-3" />,
     to: "/",
   },
@@ -31,22 +31,22 @@ const links = [
     to: "/products",
   },
   {
-    text: "reviews",
+    text: "Reviews",
     icon: <FaCommentAlt className="mx-3" />,
     to: "/reviews",
   },
   {
-    text: "orders",
+    text: "Orders",
     icon: <FaShoppingCart className="mx-3" />,
     to: "/orders",
   },
   {
-    text: "add product",
+    text: "Add Product",
     icon: <FaPlusSquare className="mx-3" />,
     to: "/add-product",
   },
   {
-    text: "transactions",
+    text: "Transactions",
     icon: <AiOutlineTransaction className="mx-3 " />,
     to: "/transactions",
   },
