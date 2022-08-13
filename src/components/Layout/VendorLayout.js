@@ -1,13 +1,14 @@
-import React from "react";
+import React from 'react';
 import {
   FaShoppingBag,
   FaShoppingCart,
   FaCommentAlt,
   FaPlusSquare,
-} from "react-icons/fa";
-import { MdDashboard } from "react-icons/md";
-import { AiOutlineTransaction } from "react-icons/ai";
-import { Route, Routes } from "react-router-dom";
+  FaMoneyBillAlt,
+} from 'react-icons/fa';
+import { MdDashboard, MdInsertComment } from 'react-icons/md';
+import { AiOutlineTransaction } from 'react-icons/ai';
+import { Route, Routes } from 'react-router-dom';
 import {
   Home,
   AccountSettings,
@@ -22,34 +23,34 @@ import { Products } from "../../routes/vendor";
 
 const links = [
   {
-    text: "Dashboard",
+    text: 'dashboard',
     icon: <MdDashboard className="mx-3" />,
-    to: "/",
+    to: '/',
   },
   {
-    text: "Products",
+    text: 'Products',
     icon: <FaShoppingBag className="mx-3" />,
-    to: "/products",
+    to: '/products',
   },
   {
-    text: "Reviews",
+    text: 'reviews',
     icon: <FaCommentAlt className="mx-3" />,
-    to: "/reviews",
+    to: '/reviews',
   },
   {
-    text: "Orders",
+    text: 'orders',
     icon: <FaShoppingCart className="mx-3" />,
-    to: "/orders",
+    to: '/orders',
   },
   {
-    text: "Add Product",
+    text: 'add product',
     icon: <FaPlusSquare className="mx-3" />,
-    to: "/add-product",
+    to: '/add-product',
   },
   {
-    text: "Transactions",
+    text: 'transactions',
     icon: <AiOutlineTransaction className="mx-3 " />,
-    to: "/transactions",
+    to: '/transactions',
   },
 ];
 

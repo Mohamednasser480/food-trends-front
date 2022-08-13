@@ -10,7 +10,8 @@ import { registerSelector, registerUser } from "../../store/slices/auth";
 import RegisterError from "./RegisterError";
 import RegisterSucceeded from "./RegisterSucceeded";
 import Data from "../../eg.json";
-export default function Register({ setShowRegister, setShowVendorRegister }) {
+import { useNavigate } from "react-router-dom";
+export default function Register({ setShowRegister, setShowVendorRegister,setShowModal }) {
   let [city, setCity] = useState("");
   let [governorate, setGovernorate] = useState("");
 
@@ -33,7 +34,7 @@ export default function Register({ setShowRegister, setShowVendorRegister }) {
     password: { ...register("password") },
     mobile: { ...register("mobile") },
   };
-
+  const navigate = useNavigate();
   // handleSubmit((newUser) => {
   //   // dispatch(registerUser(newUser));
   // });
@@ -46,7 +47,7 @@ export default function Register({ setShowRegister, setShowVendorRegister }) {
   const [govNotValid, setGovNotValid] = useState(false);
   const [cityNotValid, setCityNotValid] = useState(false);
   return (
-    <div className="absolute left-0 top-0 w-full flex h-full items-center justify-center">
+    <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center">
       {status === "error" ? (
         <RegisterError error={error} setShowRegister={setShowRegister} />
       ) : status === "loading" ? (
@@ -77,8 +78,8 @@ export default function Register({ setShowRegister, setShowVendorRegister }) {
             );
             setCityNotValid(false);
             setGovNotValid(false);
-            setCity("")
-            setGovernorate("")
+            setCity("");
+            setGovernorate("");
           })}
           className="w-full px-10"
         >
@@ -160,11 +161,6 @@ export default function Register({ setShowRegister, setShowVendorRegister }) {
               <select
                 onChange={(e) => {
                   setCity(e.target.value);
-
-                  if (city == "") {
-                    setCityNotValid(true);
-                    return;
-                  }
                   setCityNotValid(false);
                 }}
                 className="select"
@@ -197,10 +193,20 @@ export default function Register({ setShowRegister, setShowVendorRegister }) {
           </Button>
           <button
             type="button"
-            className="mt-2 font-medium capitalize hover:underline"
+            className="mt-5 font-medium capitalize hover:underline"
             onClick={handleVendorLogin}
           >
             sign up as a vendor instead ?
+          </button>
+          <button
+            type="button"
+            className="mt-2 font-medium capitalize hover:underline"
+            onClick={() => {
+              setShowModal(false)
+              navigate("/register/delivery");
+            }}
+          >
+            Sign up as a delivery ?
           </button>
         </Form>
       )}

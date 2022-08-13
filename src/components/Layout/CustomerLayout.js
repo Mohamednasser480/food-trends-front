@@ -8,11 +8,13 @@ import {
   Categories,
   ContactUs,
   Home,
+  PaymentStatus,
   ProductPage,
   SearchPage,
   Shop,
   UserAccount,
 } from "../../routes/customer";
+import DeliveryRegister from "../Auth/DeliveryRegister"
 import Wishlist from "../UserAccount/Wishlist";
 
 const CustomerLayout = (props) => {
@@ -34,10 +36,12 @@ const CustomerLayout = (props) => {
           <Route path="/categories/:category" element={<Shop />} />
           <Route path="/search/:searchText" element={<SearchPage />} />
           <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/payment" element={<PaymentStatus />} />
+          <Route path="/register/delivery" element={<DeliveryRegister />} />
           {props.children}
         </Routes>
       </main>
-      <Footer />;
+      <Footer />
     </div>
   );
 };

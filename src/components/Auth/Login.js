@@ -5,11 +5,15 @@ import { useForm } from "react-hook-form";
 import { Button, Typography, Loader } from "../UI";
 import { joiResolver } from "@hookform/resolvers/joi";
 import loginSchema from "../../services/form-schemes/login";
-import { changeLoginStatus, login, loginSelector } from "../../store/slices/auth";
+import {
+  changeLoginStatus,
+  login,
+  loginSelector,
+} from "../../store/slices/auth";
 import { useDispatch, useSelector } from "react-redux";
 import ConfirmDialog from "./Confirm";
 
-export default function Login({ setShowRegister }) {
+export default function Login({ setShowRegister, showSignUp = true }) {
   const [showConfirm, setShowConfirm] = useState(false);
   const dispatch = useDispatch();
   const { status, error } = useSelector(loginSelector);
@@ -62,7 +66,11 @@ export default function Login({ setShowRegister }) {
           <Typography component="h1" className="text-center text-primary">
             Sign in
           </Typography>
-          <Typography component="body2" className="mt-5 text-center">
+
+          <Typography
+            component="body2"
+            className={`mt-5 text-center ${showSignUp ? "" : "invisible"}`}
+          >
             Don't have an account yet?
             <button
               type="button"
@@ -73,6 +81,7 @@ export default function Login({ setShowRegister }) {
             </button>
             for free
           </Typography>
+
           <div className="my-5 flex flex-col gap-y-4">
             <Input
               type="email"
@@ -102,7 +111,13 @@ export default function Login({ setShowRegister }) {
               <Button variant="primary" type="button" onClick={onClickFunction}>
                 Verify
               </Button>
-              <Button variant="secondary" type="button" onClick={()=>{dispatch(changeLoginStatus())}}>
+              <Button
+                variant="secondary"
+                type="button"
+                onClick={() => {
+                  dispatch(changeLoginStatus());
+                }}
+              >
                 Login
               </Button>
             </div>

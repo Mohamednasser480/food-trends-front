@@ -7,7 +7,7 @@ import UserAccount from "./UserAccount";
 import ProductPage from "./ProductPage";
 import SearchPage from "./SearchPage";
 import Categories from "./Categories";
-
+import PaymentStatus from "./PaymentStatus"
 export {
   Home,
   ContactUs,
@@ -18,4 +18,5 @@ export {
   SearchPage,
   Shop,
   Categories,
+  PaymentStatus
 };

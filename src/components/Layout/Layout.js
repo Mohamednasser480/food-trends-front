@@ -5,8 +5,6 @@ import { Route } from "react-router-dom";
 import { selectUserData } from "../../store/slices/auth";
 import { useSelector } from "react-redux";
 
-// const userType = "vendor";
-
 const defaultRoutes = (
   <>
     <Route path="*" element={<Error404 />} />;
