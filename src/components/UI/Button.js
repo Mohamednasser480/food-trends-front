@@ -6,13 +6,13 @@ const Button = (props) => {
 
   if (props.variant === "primary")
     variantClasses =
-      "btn px-7 bg-primary text-white hover:bg-black hover:text-white";
+      "btn px-7 bg-primary text-white hover:bg-black hover:text-white transition-all duration-500";
   if (props.variant === "secondary")
     variantClasses =
-      "btn px-7 bg-secondary-400 text-primary hover:bg-black hover:text-white";
+      "btn px-7 bg-secondary-400 text-primary hover:bg-black hover:text-white transition-all duration-500";
   if (props.variant === "user-account")
     variantClasses =
-      "bg-secondary-400 text-primary hover:bg-primary hover:text-white p-1 rounded-lg capitalize mx-2 font-medium";
+      "bg-secondary-400 text-primary hover:bg-primary hover:text-white p-1 rounded-lg capitalize mx-2 font-medium transition-all duration-500";
 
   const btnClasses = `text-base btn tracking-widest border-0 no-underline ${
     variantClasses || ""
@@ -28,6 +28,7 @@ const Button = (props) => {
       type={props.type || "button"}
       className={btnClasses}
       onClick={props.onClick}
+      value={props.value}
     >
       {props.children}
     </button>

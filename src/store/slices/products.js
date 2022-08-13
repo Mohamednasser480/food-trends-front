@@ -5,13 +5,18 @@ const initialState = {
   products: [],
   currentProduct: {},
   currentReviews: [],
-  similiarProducts:[],
+  similiarProducts: [],
   status: null,
   error: null,
-  currentProductStatus:null,
-  similiarProductsStatus:null,
-  searchResult:[],
-  searchResultStatus:null
+  currentProductStatus: null,
+  similiarProductsStatus: null,
+  searchResult: [],
+  searchResultStatus: null,
+  filteredProducts: [],
+  filteredProductsStatus: null,
+  filteredProductsCount: 0,
+  filterArray: { filter: "all", category: "all", price: "all" },
+  page: 1,
 };
 
 //Get All Available Products
@@ -62,6 +67,25 @@ export const getSearchResult = createAsyncThunk(
   }
 );
 
+// Get Search Result Products
+export const getFilteredProducts = createAsyncThunk(
+  "products/getFilteredProducts",
+  async (filters) => {
+    const data = await products.getFilteredProducts({ ...filters, pageNumber: 1 });
+    return { data, filters };
+  }
+);
+
+// get Filtered and Pagination
+export const getFilteredProductsWhilePagination = createAsyncThunk(
+  "products/getFilteredProductsWhilePagination",
+  async (pageNumber,thunkAPI) => {
+    const filters=thunkAPI.getState().products.filterArray;
+    console.log(filters)
+    const data = await products.getFilteredProducts({...filters,pageNumber});
+    return { data, pageNumber };
+  }
+);
 
 const productsSlice = createSlice({
   name: "products",
@@ -127,7 +151,6 @@ const productsSlice = createSlice({
       state.status = "Rejected";
     },
 
-
     //getSearchResult
     [getSearchResult.pending]: (state) => {
       state.searchResultStatus = "Pending";
@@ -139,17 +162,58 @@ const productsSlice = createSlice({
     [getSearchResult.rejected]: (state) => {
       state.searchResultStatus = "Rejected";
     },
+
+    //getFilteredProducts
+    [getFilteredProducts.pending]: (state) => {
+      state.filteredProductsStatus = "Pending";
+      console.log("MMMM")
+    },
+    [getFilteredProducts.fulfilled]: (state, { payload }) => {
+      state.filteredProductsStatus = "Fulfilled";
+      state.filteredProducts = payload.data.data;
+      state.filteredProductsCount = payload.data.count;
+      state.filterArray = payload.filters;
+      state.page = 1;
+    },
+    [getFilteredProducts.rejected]: (state) => {
+      state.filteredProductsStatus = "Rejected";
+    },
+
+    // getFilteredProductsWhile Pagination
+    [getFilteredProductsWhilePagination.pending]: (state) => {
+      state.filteredProductsStatus = "Pending";
+    },
+    [getFilteredProductsWhilePagination.fulfilled]: (state, { payload }) => {
+      state.filteredProductsStatus = "Fulfilled";
+      state.filteredProducts = payload.data.data;
+      state.filteredProductsCount = payload.data.count;
+      state.page = payload.pageNumber
+    },
+    [getFilteredProductsWhilePagination.rejected]: (state) => {
+      state.filteredProductsStatus = "Rejected";
+    },
   },
 });
 
 export const productsSelector = (state) => state.products.products;
-export const similarProductsSelector = (state) => state.products.similiarProducts;
+export const similarProductsSelector = (state) =>
+  state.products.similiarProducts;
 export const currentProductSelector = (state) => state.products.currentProduct;
 export const currentReviewsSelector = (state) => state.products.currentReviews;
-export const productsStatusSelector=(state)=>state.products.status;
-export const currentProductStatusSelector=(state)=>state.products.currentProductStatus;
-export const similarProductsStatusSelector=(state)=>state.products.similiarProductsStatus;
-export const searchResultSelector=(state)=>state.products.searchResult;
-export const searchResultStatusSelector=(state)=>state.products.searchResultStatus;
-
+export const productsStatusSelector = (state) => state.products.status;
+export const currentProductStatusSelector = (state) =>
+  state.products.currentProductStatus;
+export const similarProductsStatusSelector = (state) =>
+  state.products.similiarProductsStatus;
+export const searchResultSelector = (state) => state.products.searchResult;
+export const searchResultStatusSelector = (state) =>
+  state.products.searchResultStatus;
+export const filteredProductsSelector = (state) =>
+  state.products.filteredProducts;
+export const filteredProductsStatusSelector = (state) =>
+  state.products.filteredProductsStatus;
+export const filteredProductsCount = (state) =>
+  state.products.filteredProductsCount;
+export const filterArraySelector = (state) => state.products.filterArray;
+export const productsPageNumber = (state) => state.products.page;
 export default productsSlice.reducer;

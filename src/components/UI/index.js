@@ -15,6 +15,9 @@ import Spinner from "./Spinner";
 import Loader from "./Loader";
 import ProductsLoader from "./ProductsLoader";
 import Alert from "./Alert";
+import Search from "./Search";
+import Pagination from "./Pagination";
+import DashboardPage from "./DashboardPage";
 
 export {
   Button,
@@ -34,4 +37,7 @@ export {
   SearchBar,
   ProductsLoader,
   Alert,
+  Search,
+  Pagination,
+  DashboardPage,
 };

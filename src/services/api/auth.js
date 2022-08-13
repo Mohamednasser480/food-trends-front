@@ -4,6 +4,7 @@ const LOGIN_API_URI = `${API_URI}/users/login`;
 const LOGOUT_API_URI = `${API_URI}/users/logout`;
 const REGISTER_API_URI = `${API_URI}/users/register`;
 const USER_API_URI = `${API_URI}/users`;
+const VERIFY_API_URI = `${API_URI}/users/confirm`;
 
 const login = async (user) => {
   try {
@@ -11,6 +12,22 @@ const login = async (user) => {
       email: user.email,
       password: user.password,
     });
+    return res.data;
+  } catch (e) {
+    throw e.response.data;
+  }
+};
+
+const verify = async (codeTokenObject) => {
+  try {
+    const res = await axios.post(
+      VERIFY_API_URI,
+      { confirmationCode: codeTokenObject.code },
+      {
+        headers: { Authorization: "Bearer " + codeTokenObject.token },
+      }
+    );
+    // console.log(res)
     return res.data;
   } catch (e) {
     throw e.response.data;
@@ -31,13 +48,56 @@ const getUserData = async (token) => {
 const register = async (newUser) => {
   try {
     const res = await axios.post(REGISTER_API_URI, {
-      name: newUser.customerName,
+      name: newUser.name,
+      email: newUser.email,
+      password: newUser.password,
+      mobile: newUser.mobile,
+      address: {
+        city: newUser.address.city,
+        governorate: newUser.address.governorate,
+      },
+    });
+
+    return res.data;
+  } catch (e) {
+    throw e.response.data;
+  }
+};
+
+const registerVendor = async (newUser) => {
+  try {
+    const res = await axios.post(REGISTER_API_URI, {
+      name: newUser.name,
       email: newUser.email,
       password: newUser.password,
       mobile: "01279001036",
+      storeName: newUser.storeName,
+      userType: "vendor",
     });
+
     return res.data;
   } catch (e) {
+    throw e.response.data;
+  }
+};
+
+const registerDelivery = async (newUser) => {
+  try {
+    const res = await axios.post(REGISTER_API_URI, {
+      name: newUser.name,
+      email: newUser.email,
+      password: newUser.password,
+      mobile: newUser.mobile,
+      userType: "delivery",
+      address: {
+        city: "any",
+        governorate: "any",
+      },
+    });
+
+    return res.data;
+  } catch (e) {
+    console.log(e.response.data)
     throw e.response.data;
   }
 };
@@ -53,4 +113,12 @@ const logout = async (token) => {
   }
 };
 
-export default { login, register, logout, getUserData };
+export default {
+  login,
+  register,
+  logout,
+  getUserData,
+  verify,
+  registerVendor,
+  registerDelivery,
+};

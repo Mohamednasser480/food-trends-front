@@ -1,7 +1,7 @@
 import * as Joi from 'joi';
 
 const vendorRegisterSchema = Joi.object({
-  vendorName: Joi.string().required().messages({
+  name: Joi.string().required().messages({
     'string.empty': `Please enter your name`,
     'any.required': `Please enter your name`,
   }),
