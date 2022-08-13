@@ -81,6 +81,27 @@ const registerVendor = async (newUser) => {
   }
 };
 
+const registerDelivery = async (newUser) => {
+  try {
+    const res = await axios.post(REGISTER_API_URI, {
+      name: newUser.name,
+      email: newUser.email,
+      password: newUser.password,
+      mobile: newUser.mobile,
+      userType: "delivery",
+      address: {
+        city: "any",
+        governorate: "any",
+      },
+    });
+
+    return res.data;
+  } catch (e) {
+    console.log(e.response.data)
+    throw e.response.data;
+  }
+};
+
 const logout = async (token) => {
   try {
     const res = await axios.post(LOGOUT_API_URI, null, {
@@ -92,4 +113,12 @@ const logout = async (token) => {
   }
 };
 
-export default { login, register, logout, getUserData, verify, registerVendor };
+export default {
+  login,
+  register,
+  logout,
+  getUserData,
+  verify,
+  registerVendor,
+  registerDelivery,
+};

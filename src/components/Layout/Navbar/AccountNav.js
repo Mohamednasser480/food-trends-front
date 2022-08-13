@@ -16,10 +16,6 @@ export default function AccountNav({ links }) {
     wishlist: <FaStar className="mx-3" />,
     'All Orders': <FaShoppingCart className="mx-3 " />,
     'My profile': <IoPerson className="mx-3 " />,
-
-    'My orders': <FaShoppingCart className="mx-3" />,
-    'Live Orders': <GrDeliver className="mx-3" size={24} />,
-    History: <FaHistory className="mx-3" />,
   };
 
   console.log(links);

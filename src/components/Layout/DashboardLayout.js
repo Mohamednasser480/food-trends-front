@@ -1,11 +1,10 @@
-import React, { useState } from "react";
-import { DashboardNavbar, DashboardSidebar } from "./Navbar";
+import React, { useState } from 'react';
+import { DashboardNavbar, DashboardSidebar } from './Navbar';
 
 const DashboardLayout = (props) => {
   const [showSidebar, setShowSidebar] = useState(true);
 
   const navbarToggleHandler = () => {
-    console.log(showSidebar);
     setShowSidebar((showSide) => !showSide);
   };
 
