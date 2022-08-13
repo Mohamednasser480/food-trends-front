@@ -1,19 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "./components/Layout";
-import {
-  Home,
-  ContactUs,
-  AboutUs,
-  Cart,
-  UserAccount,
-  ProductPage,
-  SearchPage,
-  Error404,
-  Shop,
-  Categories,
-} from "./routes";
-import { Routes, Route } from "react-router-dom";
 import Aos from "aos";
 import { cookie } from "./services";
 import { getUserData } from "./store/slices/auth";
@@ -30,10 +17,6 @@ function App() {
       dispatch(getUserData(token));
     }
   }, []);
-
-  useEffect(() => {
-    dispatch(fetchCartData());
-  }, [dispatch, userStatus]);
 
   // Initiate Animation
   Aos.init({
