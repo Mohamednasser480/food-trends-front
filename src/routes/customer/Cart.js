@@ -37,7 +37,6 @@ const Cart = () => {
 
   const navigateToPaymentPage = () => {
     window.location.href = payment.paymentLink;
-    // navigate(`/${payment.paymentLink}`);
   };
 
   return (

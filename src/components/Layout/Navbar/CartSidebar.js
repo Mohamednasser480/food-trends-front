@@ -50,9 +50,24 @@ const CartSidebar = () => {
               <CartList form="sidebar" />
             </ul>
             <TotalPrice totalPrice={totalPrice} />
-            <div className="flex flex-col gap-6">
-              <Button variant="secondary">continue shopping</Button>
-              <Button className="flex gap-x-3 bg-transparent text-black hover:text-primary">
+            <div className="flex flex-col gap-3">
+              <Button
+                variant="secondary"
+                to="/shop"
+                onClick={() => {
+                  setShowSidebar(false);
+                }}
+              >
+                continue shopping
+              </Button>
+              <Button
+                className="flex gap-x-3 bg-transparent text-black hover:text-primary"
+                variant="primary"
+                to="/cart"
+                onClick={() => {
+                  setShowSidebar(false);
+                }}
+              >
                 view shopping cart
               </Button>
             </div>

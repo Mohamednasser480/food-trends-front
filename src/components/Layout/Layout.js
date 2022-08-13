@@ -5,8 +5,6 @@ import { Route } from 'react-router-dom';
 import { selectUserData } from '../../store/slices/auth';
 import { useSelector } from 'react-redux';
 
-// const userType = 'customer';
-
 const defaultRoutes = (
   <>
     <Route path="*" element={<Error404 />} />;
@@ -14,7 +12,9 @@ const defaultRoutes = (
 );
 
 const Layout = () => {
+
   const userType = useSelector(selectUserData).userType || 'customer';
+
   const layouts = {
     customer: <CustomerLayout>{defaultRoutes}</CustomerLayout>,
     vendor: <VendorLayout>{defaultRoutes}</VendorLayout>,
