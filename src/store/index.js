@@ -6,6 +6,7 @@ import productReducer from "./slices/products";
 import reviewsReducer from "./slices/reviews";
 import vendorReducer from "./slices/vendor";
 import paymentReducer from "./slices/payment"
+import categoryReducer from "./slices/category"
 const store = configureStore({
   reducer: {
     cart: cartReducer,
@@ -14,7 +15,8 @@ const store = configureStore({
     products: productReducer,
     reviews: reviewsReducer,
     vendor: vendorReducer,
-    payment:paymentReducer
+    payment:paymentReducer,
+    category:categoryReducer
   },
 });
 
