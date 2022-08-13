@@ -21,7 +21,7 @@ const doPayment = async (userToken) => {
     return res.data.url;
     // return { userToken, orderItems };
   } catch (error) {
-    console.log(error.response.data);
+    // console.log(error.response.data);
     throw error.response.data;
   }
 };

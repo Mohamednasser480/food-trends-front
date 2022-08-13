@@ -10,6 +10,7 @@ import {
   selectStatus,
 } from "../../store/slices/cart";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 export default function ProductIcons(props) {
   const { className, productDetails } = props;
@@ -45,14 +46,19 @@ export default function ProductIcons(props) {
 
       <ProductIcon
         tooltip="Add to Cart"
-        onClick={() =>
+        onClick={() => {
           dispatch(
             saveCartItem({
               ...productDetails,
               quantity: productQuantity + 1,
             })
-          )
-        }
+          );
+          toast.success(`${productDetails?.productName} has been Added!`,{
+            position:"bottom-left",
+            autoClose: 1000,
+
+          });
+        }}
         disabled={cartStatus === "loading"}
       >
         {cartStatus === "loading" ? (
@@ -70,6 +76,8 @@ export default function ProductIcons(props) {
         effect="solid"
         className="!font-satoshi !w-fit !px-2 !py-1 !font-medium"
       />
+
+      {/* Toastify Notification */}
     </div>
   );
 }

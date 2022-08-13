@@ -18,7 +18,7 @@ export default function AccountNav({ links }) {
     'My profile': <IoPerson className="mx-3 " />,
   };
 
-  console.log(links);
+  // console.log(links);
   return (
     <>
       <div
@@ -26,9 +26,9 @@ export default function AccountNav({ links }) {
           showSidebar ? 'left-0' : '-left-[350px]'
         }`}
       >
-        {links.map((link) => {
+        {links.map((link,index) => {
           return (
-            <Link to={link.link} className="flex items-center">
+            <Link key={index} to={link.link} className="flex items-center">
               {link.icon}
               <Typography component="h6" className="my-2">
                 {link.text}

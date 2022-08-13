@@ -39,6 +39,26 @@ const LiveOrders = () => {
   //   }
   // }, []);
 
+  console.log(data);
+  // useEffect(() => {
+  //   const url = process.env.REACT_APP_API_URI + '/delivery/me?status=assigned';
+  //   try {
+  //     const fetchData = async () => {
+  //       const res = await axios.get(url, {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       });
+  //       console.log(res.data);
+  //       setAssignedOrders(res.data);
+  //     };
+
+  //     fetchData();
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }, []);
+
   return (
     <DashboardPage title="live orders" className="flex justify-center">
       <div className="mx-5 mb-10 flex w-full flex-col items-start">
