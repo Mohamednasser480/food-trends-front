@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import orders from "../../services/api/orders";
 import { cookie } from "../../services";
-
+import {clearCartData} from "./cart"
 const initialState = {
   orders: [],
   status: null,
@@ -17,9 +17,11 @@ export const fetchOrders = createAsyncThunk("orders/fetchOrders", async () => {
 //Create New Order
 export const createOrder = createAsyncThunk(
   "orders/createOrder",
-  async () => {
+  async (_, thunkAPI) => {
     const userToken = cookie.getCookie("token");
-    return await orders.createOrder(userToken);
+    const order = await orders.createOrder(userToken);
+    thunkAPI.dispatch(clearCartData());
+    return order;
   }
 );
 

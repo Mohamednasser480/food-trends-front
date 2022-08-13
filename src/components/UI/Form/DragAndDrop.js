@@ -30,7 +30,7 @@ export default function DragAndDrop({ label, onAddImg, images, onImgRemove }) {
           </h2>
 
           <p className="mt-2 tracking-wide text-gray-500">
-            Upload or darg & drop your file SVG, PNG, JPG or GIF.
+            Upload your files [ SVG, PNG, JPG or GIF ].
           </p>
 
           <input
@@ -38,6 +38,7 @@ export default function DragAndDrop({ label, onAddImg, images, onImgRemove }) {
             type="file"
             name="images"
             className="hidden"
+            accept="image/*"
             onChange={(e) => {
               onAddImg(e.target.files);
             }}
@@ -65,6 +66,8 @@ export default function DragAndDrop({ label, onAddImg, images, onImgRemove }) {
         type="file"
         name="images"
         className="hidden"
+        accept="image/*"
+
         onChange={(e) => {
           onAddImg(e.target.files);
         }}

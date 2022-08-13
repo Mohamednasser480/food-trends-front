@@ -6,6 +6,7 @@ export default function Form(props) {
       encType="multipart/form-data"
       className={`flex flex-col ${props.className || ""}`}
       onSubmit={props.onSubmit}
+      noValidate={true}
     >
       {props.children}
     </form>

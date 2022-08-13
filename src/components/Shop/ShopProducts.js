@@ -54,7 +54,7 @@ export default function ShopProducts() {
     "Can't Fetch Products!"
   ) : (
     <section className="flex flex-col items-center justify-center">
-      <div className="flex flex-wrap justify-center gap-5 py-6 lg:justify-start lg:gap-y-12">
+      <div className="flex flex-wrap justify-center gap-5 py-6  lg:gap-y-12">
         {products.map((prod) => (
           <ProductItem productDetails={prod} relative={true} />
         ))}

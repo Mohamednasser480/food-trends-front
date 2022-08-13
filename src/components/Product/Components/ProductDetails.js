@@ -83,7 +83,7 @@ export default function ProductDetails({ product, className, miny = false }) {
       <Button variant="primary" className="my-5" onClick={addToCartHandler}>
         Add to Cart
       </Button>
-      <Info category={product.category} />
+      <Info category={product.category} productId={product._id} />
       {!miny && (
         <Accordion
           title="SHIPPING AND RETURN"

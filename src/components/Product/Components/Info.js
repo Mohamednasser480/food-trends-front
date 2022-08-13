@@ -3,28 +3,27 @@ import ShareIcon from "./ShareIcon";
 import { FaFacebookF, FaTwitter, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-export default function Info({ category }) {
-  let currentUrl = window.location.href;
-
+export default function Info({ category ,productId}) {
+  let productUrl = `${window.location.origin }/shop/${productId}`;
   let shareIcons = [
     {
       icon: <FaFacebookF />,
-      href: `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`,
+      href: `https://www.facebook.com/sharer/sharer.php?u=${productUrl}`,
       tooltip: "Facebook",
     },
     {
       icon: <FaTwitter />,
-      href: `https://twitter.com/intent/tweet?text=&url=${currentUrl}`,
+      href: `https://twitter.com/intent/tweet?text=&url=${productUrl}`,
       tooltip: "Twitter",
     },
     {
       icon: <FaLinkedin />,
-      href: `https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}`,
+      href: `https://www.linkedin.com/sharing/share-offsite/?url=${productUrl}`,
       tooltip: "LinkedIn",
     },
     {
       icon: <FaEnvelope />,
-      href: `mailto:"Receiver Email goes here"?subject=${"Check This Product!"}&body="You can Check this Product from here : ${currentUrl}"`,
+      href: `mailto:"Receiver Email goes here"?subject=${"Check This Product!"}&body="You can Check this Product from here : ${productUrl}"`,
       tooltip: "Email",
     },
   ];

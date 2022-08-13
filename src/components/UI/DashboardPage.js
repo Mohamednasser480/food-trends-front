@@ -1,14 +1,23 @@
 import React from "react";
 import { Typography } from "./";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Breadcrumbs from "./Breadcrumb";
+import { useSelector } from "react-redux";
+import { vendorSelector } from "../../store/slices/vendor";
 
 const DashboardPage = (props) => {
   const { pathname } = useLocation();
-
+  const products = useSelector(vendorSelector);
+  const { id } = useParams();
+  const isProductsPage = pathname.split("/")[1] == "products";
+  const theProduct = products.find((el) => {
+    return el._id == id;
+  });
   return (
     <div className="flex flex-col gap-y-5">
-      {pathname.split("/").length > 2 ? <Breadcrumbs /> : null}
+      {pathname.split("/").length > 2 ? (
+        <Breadcrumbs product={isProductsPage ? theProduct : ""} />
+      ) : null}
       {props.title && (
         <Typography
           variant="h3"
