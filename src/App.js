@@ -20,6 +20,8 @@ import { getUserData } from "./store/slices/auth";
 import { fetchCartData } from "./store/slices/cart";
 import { selectStatus } from "./store/slices/auth";
 // import { Wishlist } from "./components/UserAccount";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const userStatus = useSelector(selectStatus);
@@ -58,6 +60,7 @@ function App() {
       {/*    <Route path={"/wishlist"} element={<Wishlist />} />*/}
       {/*  </Routes>*/}
       {/*</Layout>*/}
+      <ToastContainer />
       <Layout />
     </div>
   );
