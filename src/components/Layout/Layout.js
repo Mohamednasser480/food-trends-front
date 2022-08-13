@@ -5,7 +5,7 @@ import { Route } from "react-router-dom";
 import { selectUserData } from "../../store/slices/auth";
 import { useSelector } from "react-redux";
 
-const userType = "vendor";
+// const userType = "vendor";
 
 const defaultRoutes = (
   <>
@@ -14,7 +14,7 @@ const defaultRoutes = (
 );
 
 const Layout = () => {
-  // const userType = useSelector(selectUserData).userType || "customer";
+  const userType = useSelector(selectUserData).userType || "customer";
   const layouts = {
     customer: <CustomerLayout>{defaultRoutes}</CustomerLayout>,
     vendor: <VendorLayout>{defaultRoutes}</VendorLayout>,
