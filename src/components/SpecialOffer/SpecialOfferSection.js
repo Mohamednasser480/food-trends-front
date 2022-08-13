@@ -3,6 +3,8 @@ import { CountDwon } from "./";
 import { Button, Typography } from "../UI";
 import { useCountdown } from "./CounterHook";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+
 import {
   saveCartItem,
   selectAllCartItems,
@@ -91,6 +93,11 @@ const SpecialOfferSection = () => {
                   quantity: productQuantity + 1,
                 })
               );
+
+              toast.success(`${item?.productName} Added!`, {
+                position: "bottom-left",
+                autoClose: 1000,
+              });
             }}
           >
             Add To Bag
