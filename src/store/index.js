@@ -8,7 +8,7 @@ import reviewsReducer from './slices/reviews';
 import vendorReducer from './slices/vendor';
 import paymentReducer from './slices/payment';
 import deliveryReducer from './slices/delivery';
-
+import categoryReducer from "./slices/category"
 const store = configureStore({
   reducer: {
     cart: cartReducer,
