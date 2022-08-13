@@ -26,8 +26,8 @@ const addProductSchema = Joi.object({
     "any.required": `Stock is required`,
   }),
   category: Joi.string().required().messages({
-    "string.empty": `Description cannot be an empty field`,
-    "any.required": `Description cannot be an empty field`,
+    "string.empty": `Please choose a category`,
+    "any.required": `Please choose a category`,
   }),
   weight: Joi.number().messages({
     "number.base": `Please provide how much weight`,

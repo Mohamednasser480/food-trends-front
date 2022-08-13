@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Footer, ScrollUp, Topbar } from "./";
 import Navbar from "./Navbar";
 import { Route, Routes } from "react-router-dom";
@@ -14,10 +14,20 @@ import {
   Shop,
   UserAccount,
 } from "../../routes/customer";
-import DeliveryRegister from "../Auth/DeliveryRegister"
+import DeliveryRegister from "../Auth/DeliveryRegister";
 import Wishlist from "../UserAccount/Wishlist";
+import { fetchCartData } from "../../store/slices/cart";
+import { useDispatch, useSelector } from "react-redux";
+import { selectStatus } from "../../store/slices/auth";
 
 const CustomerLayout = (props) => {
+  const dispatch = useDispatch();
+  const userStatus = useSelector(selectStatus);
+
+  useEffect(() => {
+    dispatch(fetchCartData());
+  }, [dispatch, userStatus]);
+
   return (
     <div className="flex min-h-screen  flex-col">
       <Topbar />

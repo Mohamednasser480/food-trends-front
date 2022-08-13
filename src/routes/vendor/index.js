@@ -1,6 +1,6 @@
 import Home from "./Home";
 import Products from "./Products";
-import ProductDetail from "./ProductDetail";
+import ProductEdit from "./ProductEdit";
 import AddProduct from "./AddProduct";
 import Orders from "./Orders";
 import OrderDetail from "./OrderDetail";
@@ -12,7 +12,7 @@ import Register from "./Register";
 export {
   Home,
   Products,
-  ProductDetail,
+  ProductEdit,
   AddProduct,
   Orders,
   OrderDetail,

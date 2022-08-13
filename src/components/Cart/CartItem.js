@@ -11,7 +11,7 @@ const CartItem = (props) => {
   const itemRemoveHandler = () => dispatch(deleteCartItem(_id));
   const quantitySubmitHandler = (quantity) => {
     console.log(_id, quantity);
-    dispatch(updateCartItem({ product: _id, quantity }));
+    dispatch(updateCartItem({ _id, quantity }));
   };
 
   const render = {

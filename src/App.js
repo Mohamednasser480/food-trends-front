@@ -1,41 +1,25 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "./components/Layout";
-import {
-  Home,
-  ContactUs,
-  AboutUs,
-  Cart,
-  UserAccount,
-  ProductPage,
-  SearchPage,
-  Error404,
-  Shop,
-  Categories,
-} from "./routes";
-import { Routes, Route } from "react-router-dom";
 import Aos from "aos";
 import { cookie } from "./services";
 import { getUserData } from "./store/slices/auth";
-import { fetchCartData } from "./store/slices/cart";
 import { selectStatus } from "./store/slices/auth";
+import { Loader } from "./components/UI";
 // import { Wishlist } from "./components/UserAccount";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
 function App() {
-  const userStatus = useSelector(selectStatus);
   const dispatch = useDispatch();
+  const userStatus = useSelector(selectStatus);
+
   useEffect(() => {
     const token = cookie.getCookie("token");
     if (token) {
       dispatch(getUserData(token));
     }
   }, []);
-
-  useEffect(() => {
-    dispatch(fetchCartData());
-  }, [dispatch, userStatus]);
 
   // Initiate Animation
   Aos.init({
@@ -44,24 +28,8 @@ function App() {
 
   return (
     <div className="App">
-      {/*<Layout>*/}
-      {/*  <Routes>*/}
-      {/*    <Route path={"/"} element={<Home />} />*/}
-      {/*    <Route path={"/contact-us"} element={<ContactUs />} />*/}
-      {/*    <Route path={"/about"} element={<AboutUs />} />*/}
-      {/*    <Route path={"/cart"} element={<Cart />} />*/}
-      {/*    <Route path={"/user-account"} element={<UserAccount />} />*/}
-      {/*    <Route path={"/shop"} element={<Shop />} />*/}
-      {/*    <Route path={"/shop/:id"} element={<ProductPage />} />*/}
-      {/*    <Route path={"/categories/"} element={<Categories />} />*/}
-      {/*    <Route path={"/categories/:category"} element={<Shop />} />*/}
-      {/*    <Route path={"/search/:searchText"} element={<SearchPage />} />*/}
-      {/*    <Route path={"*"} element={<Error404 />} />*/}
-      {/*    <Route path={"/wishlist"} element={<Wishlist />} />*/}
-      {/*  </Routes>*/}
-      {/*</Layout>*/}
       <ToastContainer />
-      <Layout />
+      {userStatus === "loading" ? <Loader /> : <Layout />}
     </div>
   );
 }
