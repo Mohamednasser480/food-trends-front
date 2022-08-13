@@ -27,7 +27,7 @@ export default function Category({
       <div className="flex flex-col gap-1">
         <Link
           to={navigateTo}
-          className="font-satoshi text-xl font-semibold transition-all hover:text-primary"
+          className="font-satoshi text-xl font-semibold transition-all hover:text-primary capitalize"
         >
           {title}
         </Link>
