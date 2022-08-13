@@ -46,7 +46,7 @@ const CartSidebar = () => {
         {cartProducts.length ? (
           <div className="flex flex-col gap-y-5 pt-5">
             <Typography component="h3">shopping cart</Typography>
-            <ul className="border-t border-b p-3">
+            <ul className="border-t border-b p-3 overflow-auto h-[550px]">
               <CartList form="sidebar" />
             </ul>
             <TotalPrice totalPrice={totalPrice} />
