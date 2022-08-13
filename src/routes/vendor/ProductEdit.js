@@ -12,7 +12,7 @@ const ProductEdit = () => {
     (vendorProduct) => vendorProduct._id === id
   );
   console.log(vendorProducts, id);
-  return <AddProduct {...product} />;
+  return <AddProduct actionType="EDIT" {...product} />;
 };
 
 export default ProductEdit;

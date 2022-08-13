@@ -1,22 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchOrders } from '../../store/slices/orders';
-import { Button, Typography } from '../UI';
-import { selectUserData } from '../../store/slices/auth';
-import { fetchProducts, productsSelector } from '../../store/slices/products';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchOrders } from "../../../store/slices/orders";
+import { Button, Typography } from "../../../components/UI";
+import { selectUserData } from "../../../store/slices/auth";
+import {
+  fetchProducts,
+  productsSelector,
+} from "../../../store/slices/products";
 
-import Radio from '../UI/Form/Radio';
-import axios from 'axios';
-import { cookie } from '../../services';
+import Radio from "../../../components/UI/Form/Radio";
+import axios from "axios";
+import { cookie } from "../../../services";
 
-const filters = ['all orders', 'completed', 'pending', 'canceled'];
+const filters = ["all orders", "completed", "pending", "canceled"];
 
 export default function Orders() {
   // user type state to define which part will be rendered
   const { userType } = useSelector(selectUserData);
 
   // products and filters states for vendor
-  const [filterBtn, setFilterBtn] = useState('');
+  const [filterBtn, setFilterBtn] = useState("");
   const [vendorOrders, setVendorOrders] = useState([]);
   const [customerOrders, setCustomerOrders] = useState([]);
   const [deliveryOrders, setDeliveryOrders] = useState([]);
@@ -35,21 +38,21 @@ export default function Orders() {
 
   // fetching VENDOR orders by products sorted based on price and status
   useEffect(() => {
-    let url = 'https://food-trends-api.herokuapp.com/api/v1/vendor/orders?';
+    let url = "https://food-trends-api.herokuapp.com/api/v1/vendor/orders?";
     url +=
-      selected === 'lowest'
-        ? 'sortBy=totalPrice&'
-        : selected === 'highest'
-        ? 'sortBy=totalPrice:desc&'
-        : '';
-    if (filterBtn === 'pending') url += 'status=pending&';
-    else if (filterBtn === 'canceled') url += 'status=canceled&';
-    else if (filterBtn === 'completed') url += 'status=completed&';
+      selected === "lowest"
+        ? "sortBy=totalPrice&"
+        : selected === "highest"
+        ? "sortBy=totalPrice:desc&"
+        : "";
+    if (filterBtn === "pending") url += "status=pending&";
+    else if (filterBtn === "canceled") url += "status=canceled&";
+    else if (filterBtn === "completed") url += "status=completed&";
 
-    const token = cookie.getCookie('token');
+    const token = cookie.getCookie("token");
     const fetchData = async () => {
       const response = await axios.get(url, {
-        headers: { Authorization: 'Bearer ' + token },
+        headers: { Authorization: "Bearer " + token },
       });
 
       const json = response.data;
@@ -78,7 +81,11 @@ export default function Orders() {
             <div>
               {filters.map((filter, index) => {
                 return (
-                  <Button variant="user-account" className="w-32 hover:bg-primary" key={index}>
+                  <Button
+                    variant="user-account"
+                    className="w-32 hover:bg-primary"
+                    key={index}
+                  >
                     {filter}
                   </Button>
                 );
@@ -87,10 +94,20 @@ export default function Orders() {
 
             <div className="mx-2 my-5 flex items-center lg:my-0">
               <Typography component="subtitle2">Price filters:</Typography>
-              <Radio name={'price'} value="highest" checked={selected} onChange={handleChange}>
+              <Radio
+                name={"price"}
+                value="highest"
+                checked={selected}
+                onChange={handleChange}
+              >
                 Highest
               </Radio>
-              <Radio name={'price'} checked={selected} onChange={handleChange} value="lowest">
+              <Radio
+                name={"price"}
+                checked={selected}
+                onChange={handleChange}
+                value="lowest"
+              >
                 Lowest
               </Radio>
             </div>
@@ -113,7 +130,10 @@ export default function Orders() {
 
               {customerOrders.map((rev, index) => {
                 return (
-                  <div className="flex w-full items-center border-b p-3 text-center" key={index}>
+                  <div
+                    className="flex w-full items-center border-b p-3 text-center"
+                    key={index}
+                  >
                     <p className="w-10 font-medium">{index + 1}</p>
                     {/* <p className="w-32 break-words">{rev.name}</p> */}
                     <p className="w-32">test</p>
