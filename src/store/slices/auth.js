@@ -177,7 +177,7 @@ const authSlice = createSlice({
     },
     // Register Reducers
     [registerUser.pending]: (state) => {
-      state.status = "loading";
+      // state.status = "loading";
       state.register.status = "loading";
     },
     [registerUser.fulfilled]: (state, { payload: user }) => {
@@ -196,7 +196,7 @@ const authSlice = createSlice({
     },
     // RegisterVendor Reducers
     [registerVendor.pending]: (state) => {
-      state.status = "loading";
+      // state.status = "loading";
       state.register.status = "loading";
     },
     [registerVendor.fulfilled]: (state, { payload: user }) => {
@@ -215,7 +215,7 @@ const authSlice = createSlice({
     },
     // RegisterDelivery Reducers
     [registerDelivery.pending]: (state) => {
-      state.status = "loading";
+      // state.status = "loading";
       state.register.status = "loading";
     },
     [registerDelivery.fulfilled]: (state, { payload: user }) => {
