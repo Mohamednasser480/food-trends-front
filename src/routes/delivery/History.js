@@ -1,29 +1,22 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, DashboardPage, Typography } from '../../components/UI';
 import { cookie } from '../../services';
+import {
+  completedOrdersCountSelector,
+  completedOrdersSelector,
+  getCompletedOrders,
+} from '../../store/slices/delivery';
 
 const History = () => {
-  const [orderHistory, setOrderHIstory] = useState([]);
+  const data = useSelector(completedOrdersSelector);
 
+  const dispatch = useDispatch();
   const token = cookie.getCookie('token');
+
   useEffect(() => {
-    const url = process.env.REACT_APP_API_URI + '/delivery/me?status=completed';
-    try {
-      const fetchData = async () => {
-        const res = await axios.get(url, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        setOrderHIstory(res.data);
-      };
-
-      fetchData();
-    } catch (e) {
-      console.log(e);
-    }
+    dispatch(getCompletedOrders());
   }, []);
 
   return (
@@ -39,7 +32,7 @@ const History = () => {
           <p className="w-2/12 text-lg uppercase">Total Price (EGP)</p>
         </div>
 
-        {orderHistory.map((order, index) => {
+        {data.map((order, index) => {
           return (
             <div className="flex w-full items-center border-b p-3 text-center" key={index}>
               <Typography component="subtitle2" className="w-1/12 font-medium">
