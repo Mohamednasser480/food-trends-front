@@ -12,6 +12,8 @@ const ProductsComponent = ({
   description,
   summary,
   inStock,
+  weight,
+  discount,
 }) => {
   const [modelState, setModelState] = useState(false);
   const editStatus = useSelector(editSelector);
@@ -76,6 +78,8 @@ const ProductsComponent = ({
             description,
             inStock,
             category,
+            weight,
+            discount,
           }}
         />
       )}
