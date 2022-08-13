@@ -1,11 +1,9 @@
-import React from 'react';
-import { CustomerLayout, VendorLayout, DeliveryLayout } from './';
-import { Error404 } from '../../routes';
-import { Route } from 'react-router-dom';
-import { selectUserData } from '../../store/slices/auth';
-import { useSelector } from 'react-redux';
-
-// const userType = 'customer';
+import React from "react";
+import { CustomerLayout, VendorLayout, DeliveryLayout } from "./";
+import { Error404 } from "../../routes";
+import { Route } from "react-router-dom";
+import { selectUserData } from "../../store/slices/auth";
+import { useSelector } from "react-redux";
 
 const defaultRoutes = (
   <>
@@ -14,7 +12,7 @@ const defaultRoutes = (
 );
 
 const Layout = () => {
-  const userType = useSelector(selectUserData).userType || 'customer';
+  const userType = useSelector(selectUserData).userType || "customer";
   const layouts = {
     customer: <CustomerLayout>{defaultRoutes}</CustomerLayout>,
     vendor: <VendorLayout>{defaultRoutes}</VendorLayout>,

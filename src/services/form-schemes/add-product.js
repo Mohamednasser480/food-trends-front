@@ -2,7 +2,7 @@ import * as Joi from "joi";
 
 const addProductSchema = Joi.object({
   productName: Joi.string()
-    .pattern(new RegExp(/^[A-Za-z]+$/))
+    .pattern(new RegExp(/^[A-Za-z0-9_ ]+$/))
     .required()
     .messages({
       "string.pattern.base": "Product name must be letters only",
@@ -26,8 +26,8 @@ const addProductSchema = Joi.object({
     "any.required": `Stock is required`,
   }),
   category: Joi.string().required().messages({
-    "string.empty": `Description cannot be an empty field`,
-    "any.required": `Description cannot be an empty field`,
+    "string.empty": `Please choose a category`,
+    "any.required": `Please choose a category`,
   }),
   weight: Joi.number().messages({
     "number.base": `Please provide how much weight`,

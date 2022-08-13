@@ -16,9 +16,10 @@ import {
   ReviewDetail,
   AddProduct,
   Orders,
-} from '../../routes/vendor';
-import { DashboardLayout } from './index';
-import { Products } from '../../routes/vendor';
+  ProductEdit,
+} from "../../routes/vendor";
+import { DashboardLayout } from "./index";
+import { Products } from "../../routes/vendor";
 
 const links = [
   {
@@ -59,6 +60,7 @@ const VendorLayout = (props) => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/products/:id" element={<ProductEdit />} />
         <Route path="/add-product" element={<AddProduct />} />
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/reviews/:id" element={<ReviewDetail />} />

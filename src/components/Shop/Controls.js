@@ -18,7 +18,6 @@ export default function Controls() {
   let numberOfProducts = useSelector(filteredProductsCount);
   let filterArray = useSelector(filterArraySelector);
 
-
   const genericFilters = useRef("all");
   const categoriesFilter = useRef(category);
   const pricesFilter = useRef("all");
@@ -30,9 +29,9 @@ export default function Controls() {
   const onSelectBoxChange = () => {
     filters.filter = genericFilters.current.value;
     filters.price = pricesFilter.current.value;
-    filters.category=categoriesFilter.current.value;
-    dispatch(getFilteredProducts(filters))
-  }
+    filters.category = categoriesFilter.current.value;
+    dispatch(getFilteredProducts(filters));
+  };
   const onCategoryChange = (e) => {
     // const value = e.target.value;
     // filters.category = value;
@@ -72,8 +71,8 @@ export default function Controls() {
       value: "fruits",
     },
     {
-      text: "Juices",
-      value: "juices",
+      text: "Bakery",
+      value: "bakery",
     },
     {
       text: "Veggies",
@@ -86,6 +85,10 @@ export default function Controls() {
     {
       text: "Dairy",
       value: "dairy",
+    },
+    {
+      text: "Chicken",
+      value: "chicken",
     },
   ];
   const pricesArray = [
@@ -115,12 +118,10 @@ export default function Controls() {
     },
   ];
   useEffect(() => {
-    if (category){
-
+    if (category) {
       categoriesFilter.current.value = category.toLowerCase();
-    }else{
-      
-      categoriesFilter.current.value = "all"
+    } else {
+      categoriesFilter.current.value = "all";
     }
   }, [category]);
 

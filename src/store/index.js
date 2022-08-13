@@ -1,3 +1,4 @@
+
 import { configureStore } from '@reduxjs/toolkit';
 import { cartReducer } from './slices/cart';
 import { authReducer } from './slices/auth';
@@ -7,6 +8,7 @@ import reviewsReducer from './slices/reviews';
 import vendorReducer from './slices/vendor';
 import paymentReducer from './slices/payment';
 import deliveryReducer from './slices/delivery';
+
 const store = configureStore({
   reducer: {
     cart: cartReducer,
@@ -14,9 +16,11 @@ const store = configureStore({
     orders: orderReducer,
     products: productReducer,
     reviews: reviewsReducer,
-    vendor: vendorReducer,
-    payment: paymentReducer,
+    vendor: vendorReducer,    
     delivery: deliveryReducer,
+    payment:paymentReducer,
+    category:categoryReducer
+
   },
 });
 

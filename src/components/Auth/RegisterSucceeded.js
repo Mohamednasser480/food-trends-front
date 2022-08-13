@@ -4,7 +4,10 @@ import { changeRegisterStatus } from "../../store/slices/auth";
 import { Button } from "../UI";
 import { useDispatch } from "react-redux";
 
-export default function RegisterSucceeded({ setShowRegister }) {
+export default function RegisterSucceeded({
+  setShowRegister,
+  showLogin = true,
+}) {
   const dispatch = useDispatch();
 
   const onSignupClickHandler = () => {
@@ -22,14 +25,16 @@ export default function RegisterSucceeded({ setShowRegister }) {
       <h1 className="text-lg font-medium">
         Thank you! Please check your email for confirmation code.
       </h1>
-      <Button
-        variant={"primary"}
-        type="submit"
-        className="mt-5"
-        onClick={handleOnClick}
-      >
-        Login!
-      </Button>
+      {showLogin && (
+        <Button
+          variant={"primary"}
+          type="submit"
+          className="mt-5"
+          onClick={handleOnClick}
+        >
+          Login!
+        </Button>
+      )}
       <Button
         variant={"secondary"}
         type="button"
