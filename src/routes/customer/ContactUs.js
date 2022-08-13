@@ -7,7 +7,7 @@ const ContactUs = () => {
   return (
     <>
       <Breadcrumb />
-      <div className="container flex flex-col py-8">
+      <div className="container flex flex-col py-8 ">
         <Info />
         <ContactInfo />
         <Map />
