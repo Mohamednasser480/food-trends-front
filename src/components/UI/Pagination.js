@@ -8,20 +8,7 @@ export default function Pagination({ onPageChange,currentPage,numberOfItems }) {
 
   return (
     <div className="flex w-full items-center justify-between border-t border-gray-200 bg-white px-4 py-3 md:px-0">
-      {/* <div className="flex flex-1 justify-between sm:hidden">
-        <span
-          href="#"
-          className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-        >
-          Previous
-        </span>
-        <span
-          href="#"
-          className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-        >
-          Next
-        </span>
-      </div> */}
+    
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-gray-700">
@@ -38,6 +25,7 @@ export default function Pagination({ onPageChange,currentPage,numberOfItems }) {
             {pageNumbersArray.map((page, index) => {
               return (
                 <button
+                  key={index}
                   className={` relative inline-flex cursor-pointer items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-primary hover:text-white ${currentPage==index+1?"bg-primary !text-white cursor-auto":""}`}
                   onClick={() => {
                     onClickHanlder(index + 1);

@@ -7,7 +7,7 @@ const Breadcrumbs = ({ product }) => {
   const breadcrumbs = breadcrumbsData.map((breadcrumb, index, arr) => {
     const breadcrumbEl = breadcrumb.breadcrumb;
     return index === arr.length - 1 ? (
-      <li className="capitalize">
+      <li key={index} className="capitalize">
         {product ? product.productName : breadcrumbEl}
       </li>
     ) : (
