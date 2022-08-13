@@ -12,7 +12,7 @@ export default function Product({ productDetails, relative }) {
           <img
             src={productDetails?.images?productDetails.images[0]:""}
             alt={productDetails?.productName}
-            className="transition-all duration-1000 ease-out hover:scale-110 h-[300px] object-cover w-full"
+            className="transition-all duration-1000 ease-out hover:scale-110 md:h-[300px] md:w-[300px] object-cover "
           />
         </Link>
 
