@@ -1,20 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Button, Typography } from '../../components/UI';
 import { DashboardPage } from '../../components/UI';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectUserData, selectUserToken } from '../../store/slices/auth';
 import axios from 'axios';
 import { cookie } from '../../services';
-// import { cookie } from '..';
 
 const AllOrders = () => {
   const [allOrders, setAllOrders] = useState([]);
   const [orderCount, setOrderCount] = useState(0);
-
-  // const { token } = useSelector(selectUserData);
-  // const token =
-  // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmY1MDVhNmZlMDNiNDM0NDlhZmFlNGIiLCJpYXQiOjE2NjAzMTkzNzksImV4cCI6MTY2MDU3ODU3OX0.QASPSk5qGZm3lSJqloAzlIOKqfkFdiEGiFalHwcuXus';
-  // console.log(token);
 
   const token = cookie.getCookie('token');
   useEffect(() => {
@@ -37,6 +29,17 @@ const AllOrders = () => {
   }, []);
 
   console.log(allOrders);
+  const handleAssignOrder = async (id) => {
+    const url = process.env.REACT_APP_API_URI + '/delivery';
+    let data = { id: id };
+    const response = await axios.post(url, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(data);
+    return response.data;
+  };
 
   return (
     <DashboardPage title="All Orders" className="flex flex-col justify-center">
@@ -89,7 +92,11 @@ const AllOrders = () => {
                 {order.totalPrice.toFixed(2)}
               </Typography>
               <Typography component="subtitle2" className="">
-                <Button variant="secondary" className="tracking-tight">
+                <Button
+                  variant="secondary"
+                  className="tracking-tight"
+                  onClick={() => handleAssignOrder(order._id)}
+                >
                   Assign
                 </Button>
               </Typography>
