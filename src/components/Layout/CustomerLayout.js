@@ -12,10 +12,14 @@ import {
   ProductPage,
   SearchPage,
   Shop,
-  UserAccount,
 } from "../../routes/customer";
+import UserAccount, {
+  Profile,
+  Orders,
+} from "../../routes/customer/UserAccount";
+
 import DeliveryRegister from "../Auth/DeliveryRegister";
-import Wishlist from "../UserAccount/Wishlist";
+import Wishlist from "../../routes/customer/Wishlist";
 import { fetchCartData } from "../../store/slices/cart";
 import { useDispatch, useSelector } from "react-redux";
 import { selectStatus } from "../../store/slices/auth";
@@ -39,7 +43,11 @@ const CustomerLayout = (props) => {
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/user-account" element={<UserAccount />} />
+          <Route path="/user-account" element={<UserAccount />}>
+            <Route path="" element={<Profile />} />
+            <Route path="orders" element={<Orders />} />
+            <Route path="wishlist" element={<Wishlist />} />
+          </Route>
           <Route path="/shop" element={<Shop />} />
           <Route path="/shop/:id" element={<ProductPage />} />
           <Route path="/categories/" element={<Categories />} />
