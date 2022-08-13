@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { deleteProduct, editSelector } from '../../store/slices/vendor';
-import ActionsModel from './ActionsModel';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteProduct, editSelector } from "../../store/slices/vendor";
+import ActionsModel from "./ActionsModel";
+import { Link } from "react-router-dom";
 
 const ProductsComponent = ({
   _id,
@@ -60,9 +61,9 @@ const ProductsComponent = ({
           </button>{' '}
           <button
             className="btn btn-ghost btn-xs hover:bg-blue-500 hover:text-white"
-            onClick={() => setModelState(true)}
+            // onClick={() => setModelState(true)}
           >
-            edit
+            <Link to={`/products/${_id}`}>Edit</Link>
           </button>
         </th>
       </tr>
