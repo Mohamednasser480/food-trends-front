@@ -3,7 +3,7 @@ import Typography from "../Typography";
 
 export default function Select({ selectOptions, register, label, errors, id }) {
   return (
-    <div className="form-control mt-5 w-full">
+    <div className="form-control w-full">
       <label className="label">
         <Typography component="body1">{label}</Typography>
       </label>

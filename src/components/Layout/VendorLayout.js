@@ -15,6 +15,7 @@ import {
   ReviewDetail,
   AddProduct,
   Orders,
+  ProductEdit,
 } from "../../routes/vendor";
 import { DashboardLayout } from "./index";
 import { Products } from "../../routes/vendor";
@@ -58,6 +59,7 @@ const VendorLayout = (props) => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/products/:id" element={<ProductEdit />} />
         <Route path="/add-product" element={<AddProduct />} />
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/reviews/:id" element={<ReviewDetail />} />
