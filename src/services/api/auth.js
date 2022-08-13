@@ -73,6 +73,10 @@ const registerVendor = async (newUser) => {
       mobile: "01279001036",
       storeName: newUser.storeName,
       userType: "vendor",
+      address: {
+        city: "any",
+        governorate: "any",
+      },
     });
 
     return res.data;
