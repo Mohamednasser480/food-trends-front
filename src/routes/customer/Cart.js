@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Page, Loader, Alert } from "../../components/UI";
 import { CartList, EmptyCart } from "../../components/Cart";
 import { Button } from "../../components/UI";
@@ -12,6 +12,7 @@ import {
   clearCartData,
   selectCartID,
 } from "../../store/slices/cart";
+import { loginSelector } from "../../store/slices/auth";
 import { doPayment, paymentSelector } from "../../store/slices/payment";
 const Cart = () => {
   const items = useSelector(selectAllCartItems);
@@ -20,11 +21,17 @@ const Cart = () => {
   const payment = useSelector(paymentSelector);
   const dispatch = useDispatch();
   const cartId = useSelector(selectCartID);
+  const loginStatus = useSelector(loginSelector);
+  const [guestShowLogin,setGuestShowLogin]=useState(false);
   const clearItemsHandler = () => {
     dispatch(clearCartData());
   };
   const checkoutHandler = () => {
-    dispatch(doPayment(cartId));
+    if (loginStatus.status == "succeeded") {
+      dispatch(doPayment(cartId));
+    }else{
+      setGuestShowLogin(true)
+    }
   };
   const content = {
     loading: <Loader />,
@@ -95,6 +102,11 @@ const Cart = () => {
             {payment.error && (
               <p className="text-lg font-medium text-red-500">
                 Error During Checkout! Please try again.
+              </p>
+            )}
+            {guestShowLogin && (
+              <p className="text-lg font-medium text-primary">
+                Please Login Before Checkout
               </p>
             )}
           </div>
