@@ -24,7 +24,6 @@ export const fetchCartData = createAsyncThunk(
           try {
             const cart =
               JSON.parse(localStorage.getItem("cart")) || initialCart;
-            console.log(cart);
             resolve(cart);
           } catch (e) {
             reject(e);
@@ -42,8 +41,8 @@ export const clearCartData = createAsyncThunk(
     if (!userToken) {
       return await new Promise((resolve) => {
         setTimeout(() => {
-          const cart = localStorage.getItem("cart") || initialCart;
-          resolve(cart);
+          localStorage.setItem("cart", JSON.stringify(initialCart));
+          resolve(initialCart);
         }, 500);
       });
     }
@@ -64,11 +63,10 @@ export const saveCartItem = createAsyncThunk(
           const { quantity, ...product } = payload;
           const cart = JSON.parse(localStorage.getItem("cart")) || initialCart;
           const cartProducts = cart.products;
-          const cartPrice = cart.cartPrice;
           const existingCartIndex = cartProducts.findIndex(
-            (cartProduct) => cartProduct.id === payload._id
+            (cartProduct) => cartProduct.product._id === payload._id
           );
-          const existingCart = cartProducts[existingCartIndex];
+          const existingCartProduct = cartProducts[existingCartIndex];
           const newCartProduct = {
             product: { ...product },
             quantity,
@@ -77,11 +75,14 @@ export const saveCartItem = createAsyncThunk(
             // Create new Cart Product
             cart.products.push(newCartProduct);
             cart.cartPrice += product.price * quantity;
-            console.log(newCartProduct);
           } else {
+            // Replace Existing Cart Product
+            cart.products[existingCartIndex] = newCartProduct;
+            cart.cartPrice +=
+              (quantity - existingCartProduct.quantity) *
+              existingCartProduct.product.price;
           }
           localStorage.setItem("cart", JSON.stringify(cart));
-          console.log(cart);
           resolve(cart);
         }, 500);
       });
@@ -92,20 +93,68 @@ export const saveCartItem = createAsyncThunk(
 
 export const updateCartItem = createAsyncThunk(
   "cart/updateCartItem",
-  (payload) => {
+  async (payload) => {
     const userToken = cookie.getCookie("token");
-    return cartService.updateCartItem(
-      userToken,
-      payload.product,
-      payload.quantity
-    );
+    if (!userToken)
+      return await new Promise((resolve, reject) => {
+        setTimeout(() => {
+          const { _id, quantity } = payload;
+          const cart = JSON.parse(localStorage.getItem("cart")) || initialCart;
+          const cartProducts = cart.products;
+          const existingCartIndex = cartProducts.findIndex(
+            (cartProduct) => cartProduct.product._id === _id
+          );
+          const existingCartProduct = cartProducts[existingCartIndex];
+          if (existingCartIndex === -1) return reject("Product doesn't exist.");
+          else {
+            // Replace Existing Cart Product
+            const newCartProduct = {
+              product: { ...existingCartProduct.product },
+              quantity,
+            };
+            cart.products[existingCartIndex] = newCartProduct;
+            // console.log(existingCartProduct.quantity, quantity);
+            cart.cartPrice +=
+              (quantity - existingCartProduct.quantity) *
+              existingCartProduct.product.price;
+          }
+          localStorage.setItem("cart", JSON.stringify(cart));
+          resolve(cart);
+        }, 500);
+      });
+    return cartService.updateCartItem(userToken, payload._id, payload.quantity);
   }
 );
 
-export const deleteCartItem = createAsyncThunk("cart/deleteCartItem", (id) => {
-  const userToken = cookie.getCookie("token");
-  return cartService.deleteCartItem(userToken, id);
-});
+export const deleteCartItem = createAsyncThunk(
+  "cart/deleteCartItem",
+  async (_id) => {
+    const userToken = cookie.getCookie("token");
+    if (!userToken)
+      return await new Promise((resolve, reject) => {
+        setTimeout(() => {
+          const cart = JSON.parse(localStorage.getItem("cart")) || initialCart;
+          const cartProducts = cart.products;
+          const cartPrice = cart.cartPrice;
+          const existingCartIndex = cartProducts.findIndex(
+            (cartProduct) => cartProduct.product._id === _id
+          );
+          const existingCartProduct = cartProducts[existingCartIndex];
+
+          if (existingCartIndex === -1) reject("Product doesn't exist");
+          else {
+            // Delete cart product
+            cart.products.splice(existingCartIndex, 1);
+            cart.cartPrice -=
+              existingCartProduct.quantity * existingCartProduct.product.price;
+            localStorage.setItem("cart", JSON.stringify(cart));
+            resolve(cart);
+          }
+        }, 500);
+      });
+    return cartService.deleteCartItem(userToken, _id);
+  }
+);
 
 const cartSlice = createSlice({
   name: "cart",
@@ -118,7 +167,6 @@ const cartSlice = createSlice({
           (cartProduct) => cartProduct._id === id
         );
         const existingCartItem = state.products[existingCartItemIndex];
-        console.log(existingCartItemIndex);
         state.cartPrice +=
           (newQuantity - existingCartItem.quantity) * existingCartItem.price;
         state.products[existingCartItemIndex].quantity = newQuantity;

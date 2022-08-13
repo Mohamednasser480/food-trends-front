@@ -17,9 +17,8 @@ export default function ProductIcons(props) {
   const cartStatus = useSelector(selectStatus);
   const cartProducts = useSelector(selectAllCartItems);
   const productQuantity =
-    cartProducts.find(
-      (cartProduct) => cartProduct.product === productDetails._id
-    )?.quantity || 0;
+    cartProducts.find((cartProduct) => cartProduct._id === productDetails._id)
+      ?.quantity || 0;
   const [isShown, setIsShown] = useState(false);
   return (
     <div className={className}>
