@@ -1,30 +1,63 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { DashboardPage, Typography } from '../../components/UI';
 import { cookie } from '../../services';
+import {
+  assignedOrdersCountSelector,
+  assignedOrdersSelector,
+  getAssignedOrders,
+} from '../../store/slices/delivery';
 
 const LiveOrders = () => {
-  const [assignedOrders, setAssignedOrders] = useState([]);
+  const data = useSelector(assignedOrdersSelector);
+  const count = useSelector(assignedOrdersCountSelector);
 
-  const token = cookie.getCookie('token');
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    const url = process.env.REACT_APP_API_URI + '/delivery/me?status=assigned';
-    try {
-      const fetchData = async () => {
-        const res = await axios.get(url, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        console.log(res.data);
-        setAssignedOrders(res.data);
-      };
-
-      fetchData();
-    } catch (e) {
-      console.log(e);
-    }
+    dispatch(getAssignedOrders());
   }, []);
+
+  console.log(data);
+  // useEffect(() => {
+  //   const url = process.env.REACT_APP_API_URI + '/delivery/me?status=assigned';
+  //   try {
+  //     const fetchData = async () => {
+  //       const res = await axios.get(url, {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       });
+  //       console.log(res.data);
+  //       setAssignedOrders(res.data);
+  //     };
+
+  //     fetchData();
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }, []);
+
+  console.log(data);
+  // useEffect(() => {
+  //   const url = process.env.REACT_APP_API_URI + '/delivery/me?status=assigned';
+  //   try {
+  //     const fetchData = async () => {
+  //       const res = await axios.get(url, {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       });
+  //       console.log(res.data);
+  //       setAssignedOrders(res.data);
+  //     };
+
+  //     fetchData();
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }, []);
 
   return (
     <DashboardPage title="live orders" className="flex justify-center">
@@ -39,7 +72,7 @@ const LiveOrders = () => {
           <p className="w-2/12 text-lg uppercase">Total Price (EGP)</p>
         </div>
 
-        {assignedOrders.map((order, index) => {
+        {data.map((order, index) => {
           return (
             <div className="flex w-full items-center border-b p-3 text-center" key={index}>
               <Typography component="subtitle2" className="w-1/12 font-medium">

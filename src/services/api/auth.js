@@ -73,6 +73,10 @@ const registerVendor = async (newUser) => {
       mobile: "01279001036",
       storeName: newUser.storeName,
       userType: "vendor",
+      address: {
+        city: "any",
+        governorate: "any",
+      },
     });
 
     return res.data;
@@ -97,7 +101,7 @@ const registerDelivery = async (newUser) => {
 
     return res.data;
   } catch (e) {
-    console.log(e.response.data)
+    // console.log(e.response.data)
     throw e.response.data;
   }
 };

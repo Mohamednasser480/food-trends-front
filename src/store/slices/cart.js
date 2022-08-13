@@ -197,7 +197,7 @@ const cartSlice = createSlice({
     },
     [fetchCartData.rejected]: (state, { error }) => {
       state.status = "error";
-      console.log(error.message);
+      // console.log(error.message);
       state.error = error.message;
     },
     // Save Cart Item
@@ -207,7 +207,7 @@ const cartSlice = createSlice({
     [saveCartItem.fulfilled]: (state, { payload: cart }) => {
       state.status = "succeeded";
       state.error = null;
-      console.log(state.products);
+      // console.log(state.products);
       state.products = cart.products.map((cartProduct) => ({
         ...cartProduct.product,
         quantity: cartProduct.quantity,
@@ -216,7 +216,7 @@ const cartSlice = createSlice({
     },
     [saveCartItem.rejected]: (state, { error }) => {
       state.status = "error";
-      console.log(error.message);
+      // console.log(error.message);
       state.error = error.message;
     },
     // Update Cart Item
@@ -234,7 +234,7 @@ const cartSlice = createSlice({
     },
     [updateCartItem.rejected]: (state, { error }) => {
       state.status = "error";
-      console.log(error.message);
+      // console.log(error.message);
       state.error = error.message;
     },
     // Clear Cart Data
@@ -252,7 +252,7 @@ const cartSlice = createSlice({
     },
     [clearCartData.rejected]: (state, { error }) => {
       state.status = "error";
-      console.log(error.message);
+      // console.log(error.message);
       state.error = error.message;
     },
     // Delete Cart Item
@@ -270,7 +270,7 @@ const cartSlice = createSlice({
     },
     [deleteCartItem.rejected]: (state, { error }) => {
       state.status = "error";
-      console.log(error.message);
+      // console.log(error.message);
       state.error = error.message;
     },
   },

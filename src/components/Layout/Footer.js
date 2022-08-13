@@ -15,8 +15,11 @@ const Footer = () => {
               information
             </Typography>
 
-            <a href="mailto:test@gmail.com" className="py-2 transition-colors hover:text-black">
-              test@gmail.com
+            <a
+              href="mailto:foodtrendswebsite@gmail.com"
+              className="py-2 transition-colors hover:text-black"
+            >
+              foodtrendswebsite@gmail.com
             </a>
             <a href="telto:00201112405807" className="py-2 transition-colors hover:text-black">
               (+2) 01112405807
@@ -36,14 +39,11 @@ const Footer = () => {
             <Link to={'/'} className="py-1 transition-colors hover:text-black">
               Careers
             </Link>
-            <Link to={'/contact'} className="py-1 transition-colors hover:text-black">
+            <Link to={'/contact-us'} className="py-1 transition-colors hover:text-black">
               Our location
             </Link>
             <Link to={'/'} className="py-1 transition-colors hover:text-black">
               Reviews
-            </Link>
-            <Link to={'/'} className="py-1 transition-colors hover:text-black">
-              Our Blog
             </Link>
           </div>
           <div className="grid gap-1 text-center sm:text-left">
@@ -51,19 +51,19 @@ const Footer = () => {
               support
             </Typography>
 
-            <Link to={'/'} className="py-1 transition-colors hover:text-black">
-              FAQ
+            <Link to={'/user-account/login'} className="py-1 transition-colors hover:text-black">
+              My Account
             </Link>
-            <Link to={'/'} className="py-1 transition-colors hover:text-black">
+            <Link to={'/shop'} className="py-1 transition-colors hover:text-black">
               Look up Product
             </Link>
-            <Link to={'/'} className="py-1 transition-colors hover:text-black">
+            <Link to={'/register'} className="py-1 transition-colors hover:text-black">
               Become a vendor
             </Link>
-            <Link to={'/'} className="py-1 transition-colors hover:text-black">
+            <Link to={'/contact-us'} className="py-1 transition-colors hover:text-black">
               Returns
             </Link>
-            <Link to={'/'} className="py-1 transition-colors hover:text-black">
+            <Link to={'/register/delivery'} className="py-1 transition-colors hover:text-black">
               Shipping & Delivery
             </Link>
           </div>

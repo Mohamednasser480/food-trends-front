@@ -1,56 +1,55 @@
 import { useState, useEffect } from 'react';
-import { Button, Typography } from '../../components/UI';
+import { Button, Loader, Typography } from '../../components/UI';
 import { DashboardPage } from '../../components/UI';
-import axios from 'axios';
 import { cookie } from '../../services';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  allOrdersCountSelector,
+  allOrdersSelector,
+  assignedOrdersCountSelector,
+  assignOrders,
+  completedOrdersCountSelector,
+  getAllOrders,
+  getAssignedOrders,
+  getCompletedOrders,
+  statusSelector,
+} from '../../store/slices/delivery';
 
 const AllOrders = () => {
-  const [allOrders, setAllOrders] = useState([]);
-  const [orderCount, setOrderCount] = useState(0);
+  const data = useSelector(allOrdersSelector);
+  const count = useSelector(allOrdersCountSelector);
+  const assignedOrdersCount = useSelector(assignedOrdersCountSelector);
+  const completedOrdersCount = useSelector(completedOrdersCountSelector);
+  const status = useSelector(statusSelector);
 
-  const token = cookie.getCookie('token');
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    const url = process.env.REACT_APP_API_URI + '/delivery';
-    try {
-      const fetchData = async () => {
-        const res = await axios.get(url, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setAllOrders(res.data.data);
-        setOrderCount(res.data.count);
-      };
+    dispatch(getAllOrders());
+    dispatch(getAssignedOrders());
+    dispatch(getCompletedOrders());
+  }, [assignedOrdersCount]);
 
-      fetchData();
-    } catch (e) {
-      console.log(e);
-    }
-  }, []);
-
-  console.log(allOrders);
   const handleAssignOrder = async (id) => {
-    const url = process.env.REACT_APP_API_URI + '/delivery';
-    let data = { id: id };
-    const response = await axios.post(url, data, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    console.log(data);
-    return response.data;
+    dispatch(assignOrders(id));
   };
 
   return (
     <DashboardPage title="All Orders" className="flex flex-col justify-center">
+      {status === 'Pending' ? <Loader /> : null}
       <Typography component="h6" className=" self-end">
-        Your assigned orders: <span className="mt-5 font-medium text-red-400">0</span>
+        Your assigned orders:{' '}
+        {assignedOrdersCount > 0 ? (
+          <span className="mt-5 font-medium text-green-400">{assignedOrdersCount}</span>
+        ) : (
+          <span className="mt-5 font-medium text-red-400">{assignedOrdersCount}</span>
+        )}
       </Typography>
       <Typography component="h6" className="self-end">
-        delivered: <span className="font-medium text-green-400">10</span>
+        delivered: <span className="font-medium text-green-400">{completedOrdersCount}</span>
       </Typography>
       <Typography component="h6" className="mb-5 self-end">
-        All Orders: <span className="font-medium text-yellow-400">{orderCount}</span>
+        All Orders: <span className="font-medium text-yellow-400">{count}</span>
       </Typography>
       <div className="mb-10 flex w-full flex-col items-start px-10">
         <div className="flex w-full items-center bg-primary p-2 text-center font-medium text-white">
@@ -64,7 +63,7 @@ const AllOrders = () => {
           <p className=""></p>
         </div>
 
-        {allOrders.map((order, index) => {
+        {data.map((order, index) => {
           return (
             <div className="flex w-full items-center border-b p-3 text-center" key={index}>
               <Typography component="subtitle2" className="w-1/12 font-medium">
@@ -84,9 +83,6 @@ const AllOrders = () => {
               </Typography>
               <Typography component="subtitle2" className="w-2/12">
                 {order.createdAt.substring(0, 10)}
-              </Typography>
-              <Typography component="subtitle2" className="w-2/12">
-                Not assigned
               </Typography>
               <Typography component="subtitle2" className="w-2/12">
                 {order.totalPrice.toFixed(2)}

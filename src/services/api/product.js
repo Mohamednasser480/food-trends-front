@@ -84,7 +84,7 @@ const getFilteredProducts = async (payload) => {
   const productsPerPage=10; //Change to 10
   const queryURL = `${PRODUCT_API_URI}?limit=${productsPerPage}&skip=${(payload.pageNumber-1)*productsPerPage}
   &${filterCategory()}&${sortFilter()}&${pricesFilter()}`;
-  console.log(queryURL)
+  // console.log(queryURL)
   let res = await axios.get(queryURL);
   // console.log("%c" + queryURL, "color:red;font-size:20px");
   return {data:res.data.data,count:res.data.count};

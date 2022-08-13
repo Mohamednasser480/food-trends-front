@@ -81,7 +81,7 @@ export const getFilteredProductsWhilePagination = createAsyncThunk(
   "products/getFilteredProductsWhilePagination",
   async (pageNumber,thunkAPI) => {
     const filters=thunkAPI.getState().products.filterArray;
-    console.log(filters)
+    // console.log(filters)
     const data = await products.getFilteredProducts({...filters,pageNumber});
     return { data, pageNumber };
   }
@@ -166,7 +166,7 @@ const productsSlice = createSlice({
     //getFilteredProducts
     [getFilteredProducts.pending]: (state) => {
       state.filteredProductsStatus = "Pending";
-      console.log("MMMM")
+      // console.log("MMMM")
     },
     [getFilteredProducts.fulfilled]: (state, { payload }) => {
       state.filteredProductsStatus = "Fulfilled";
