@@ -213,7 +213,7 @@ const AddProduct = ({
           <Button
             variant="primary"
             type="submit"
-            className="mt-20 w-1/2 self-center lg:self-start"
+            className="mt-20 w-1/2 self-center"
           >
             Update
           </Button>
