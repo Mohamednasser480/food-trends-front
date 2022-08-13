@@ -7,6 +7,8 @@ import { getUserData } from "./store/slices/auth";
 import { selectStatus } from "./store/slices/auth";
 import { Loader } from "./components/UI";
 // import { Wishlist } from "./components/UserAccount";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,6 +28,7 @@ function App() {
 
   return (
     <div className="App">
+      <ToastContainer />
       {userStatus === "loading" ? <Loader /> : <Layout />}
     </div>
   );

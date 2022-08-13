@@ -36,12 +36,12 @@ const AddProduct = ({
   const isImagesValid = images.length <= 4 && images.length >= 1;
 
   const selectOptions = [
-    "Dairy",
-    "Fruits",
-    "Bakery",
-    "Meat",
-    "Veggies",
-    "Chicken",
+    "dairy",
+    "fruits",
+    "bakery",
+    "meat",
+    "veggies",
+    "chicken",
   ];
 
   const {
@@ -118,8 +118,9 @@ const AddProduct = ({
       formData.append("discount", e.discount);
       formData.append("weight", e.weight);
 
-      if (actionType === "EDIT") dispatch(updateProduct({ _id, formData }));
-      else dispatch(addProduct(formData));
+    if (actionType === "EDIT") {
+      dispatch(updateProduct({ _id, formData }));
+    } else dispatch(addProduct(formData));
 
       reset();
     }

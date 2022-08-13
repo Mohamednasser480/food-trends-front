@@ -26,21 +26,25 @@ const Products = () => {
       {" "}
       <div className=" container overflow-x-auto">
         {vendorStatus === "Pending" ? <Loader /> : null}
-        <table className="table-compact table w-full">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Price</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          {React.Children.toArray(
-            vendorData.map((pro) => {
-              return <ProductsComponent {...pro} />;
-            })
-          )}
-        </table>
+        {vendorData.length !== 0 ? (
+          <table className="table-compact table w-full">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            {React.Children.toArray(
+              vendorData.map((pro) => {
+                return <ProductsComponent {...pro} />;
+              })
+            )}
+          </table>
+        ) : (
+          <div className=" text-center">No Products Added to The List Yet!</div>
+        )}
       </div>
     </DashboardPage>
   );

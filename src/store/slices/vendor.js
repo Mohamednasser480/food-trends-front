@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import products from "../../services/api/vendor";
 import { cookie } from "../../services";
+import Toast from "../../components/UI/Toast";
 
 const initialState = {
   products: [],
@@ -14,7 +15,6 @@ const initialState = {
 export const fetchVendorProducts = createAsyncThunk(
   "vendor/fetchProducts",
   async (vendorId) => {
-    console.log(vendorId);
     return await products.getProducts(vendorId);
   }
 );
@@ -72,9 +72,11 @@ const vendorSlice = createSlice({
       state.updated++;
       state.products.push(payload);
       state.status = "Fulfilled";
+      Toast.successToast("The Item has been Added!");
     },
     [addProduct.rejected]: (state) => {
       state.status = "Rejected";
+      Toast.errorToast("Something Went Wrong!");
     },
 
     //DeleteProduct
@@ -84,9 +86,11 @@ const vendorSlice = createSlice({
     [deleteProduct.fulfilled]: (state, { payload }) => {
       state.updated--;
       state.status = "Fulfilled";
+      Toast.successToast("The Item has been Deleted!");
     },
     [deleteProduct.rejected]: (state) => {
       state.status = "Rejected";
+      Toast.errorToast("Something Went Wrong!");
     },
 
     //UpdateProduct
@@ -97,10 +101,12 @@ const vendorSlice = createSlice({
     [updateProduct.fulfilled]: (state, { payload }) => {
       state.edited = "Fulfilled";
       state.updated++;
+      Toast.successToast("The Item has been Updated!");
     },
     [updateProduct.rejected]: (state) => {
       state.edited = "Rejected";
       state.updated++;
+      Toast.errorToast("Something Went Wrong!");
     },
   },
 });

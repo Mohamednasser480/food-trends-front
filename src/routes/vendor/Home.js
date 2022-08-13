@@ -43,9 +43,9 @@ const Home = () => {
         <Typography component="body2">{mobile}</Typography>
         <Typography component="body2">{email}</Typography>
         {/* <Typography component="body2">address</Typography> */}
-        <Button variant="secondary" className="my-2 self-center">
+        {/* <Button variant="secondary" className="my-2 self-center">
           Edit profile
-        </Button>
+        </Button> */}
       </div>
       <div className="flex w-full gap-x-5">
         <div className="flex w-full flex-col rounded-xl bg-white p-5 shadow-md">
@@ -64,7 +64,7 @@ const Home = () => {
             See All Statistics
           </Button>
         </div>
-        <div className="flex w-full flex-col rounded-xl bg-white p-5 shadow-md">
+        {/* <div className="flex w-full flex-col rounded-xl bg-white p-5 shadow-md">
           <Typography component="h4" className="text-primary">
             change password
           </Typography>
@@ -98,7 +98,7 @@ const Home = () => {
               Submit
             </Button>
           </Form>
-        </div>
+        </div> */}
       </div>
     </div>
   );

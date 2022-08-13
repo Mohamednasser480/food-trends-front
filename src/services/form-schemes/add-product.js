@@ -2,7 +2,7 @@ import * as Joi from "joi";
 
 const addProductSchema = Joi.object({
   productName: Joi.string()
-    .pattern(new RegExp(/^[A-Z a-z]+$/))
+    .pattern(new RegExp(/^[A-Za-z0-9_ ]+$/))
     .required()
     .messages({
       "string.pattern.base": "Product name must be letters only",
