@@ -10,9 +10,7 @@ const QuantityInput = (props) => {
 
   useEffect(() => {
     if (allowSubmit) {
-      console.log("input", quantity);
       onQuantitySubmit(quantity);
-      // dispatch(updateCartItem(cartProduct._id, quantity));
     }
   }, [quantity, allowSubmit]);
 
