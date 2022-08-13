@@ -27,7 +27,7 @@ const ReviewDetail = () => {
     else if (ratingValue == 4) url += "min_rate=3&max_rate=4";
     else if (ratingValue == 5) url += "min_rate=4&max_rate=5";
 
-    console.log(url);
+    // console.log(url);
     const fetchData = async () => {
       const response = await axios.get(url, {
         headers: { Authorization: "Bearer " + token },

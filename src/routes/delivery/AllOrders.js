@@ -24,11 +24,11 @@ const AllOrders = () => {
 
       fetchData();
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
   }, []);
 
-  console.log(allOrders);
+  // console.log(allOrders);
   const handleAssignOrder = async (id) => {
     const url = process.env.REACT_APP_API_URI + '/delivery';
     let data = { id: id };
@@ -37,7 +37,7 @@ const AllOrders = () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(data);
+    // console.log(data);
     return response.data;
   };
 

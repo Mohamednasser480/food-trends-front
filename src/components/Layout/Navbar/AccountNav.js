@@ -18,7 +18,7 @@ export default function AccountNav({ links }) {
     'My profile': <IoPerson className="mx-3 " />,
   };
 
-  console.log(links);
+  // console.log(links);
   return (
     <>
       <div

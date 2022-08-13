@@ -43,7 +43,7 @@ export const verifyUser = createAsyncThunk(
       // cookie.setCookie("token", data.token, 3);
       return data;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       throw error.msg;
     }
   }
@@ -132,7 +132,7 @@ const authSlice = createSlice({
       state.verify.status = "loading";
     },
     [verifyUser.fulfilled]: (state, { payload }) => {
-      console.log(payload);
+      // console.log(payload);
       state.status = "succeeded";
       state.user = payload;
       state.token = payload.token;

@@ -97,7 +97,7 @@ const registerDelivery = async (newUser) => {
 
     return res.data;
   } catch (e) {
-    console.log(e.response.data)
+    // console.log(e.response.data)
     throw e.response.data;
   }
 };

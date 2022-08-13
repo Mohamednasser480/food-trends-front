@@ -16,7 +16,7 @@ const LiveOrders = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(res.data);
+        // console.log(res.data);
         setAssignedOrders(res.data);
       };
 

@@ -2,7 +2,7 @@ import React from "react";
 import { HiOutlinePlusSm, HiOutlineX } from "react-icons/hi";
 
 export default function DragAndDrop({ label, onAddImg, images, onImgRemove }) {
-  console.log(images);
+  // console.log(images);
   if (images.length === 0)
     return (
       <div className="flex items-center justify-center font-sans">

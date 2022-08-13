@@ -6,12 +6,12 @@ import { vendorSelector } from "../../store/slices/vendor";
 
 const ProductEdit = () => {
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
   const vendorProducts = useSelector(vendorSelector);
   const product = vendorProducts.find(
     (vendorProduct) => vendorProduct._id === id
   );
-  console.log(vendorProducts, id);
+  // console.log(vendorProducts, id);
   return <AddProduct {...product} />;
 };
 

@@ -11,10 +11,10 @@ export const fetchCategories = createAsyncThunk(
   async () => {
     try {
       const data = await categoryService.fetchCategories();
-      console.log(data);
+      // console.log(data);
       return data;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       throw error;
     }
   }
