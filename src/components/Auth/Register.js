@@ -11,7 +11,11 @@ import RegisterError from "./RegisterError";
 import RegisterSucceeded from "./RegisterSucceeded";
 import Data from "../../eg.json";
 import { useNavigate } from "react-router-dom";
-export default function Register({ setShowRegister, setShowVendorRegister,setShowModal }) {
+export default function Register({
+  setShowRegister,
+  setShowVendorRegister,
+  setShowModal,
+}) {
   let [city, setCity] = useState("");
   let [governorate, setGovernorate] = useState("");
 
@@ -139,8 +143,9 @@ export default function Register({ setShowRegister, setShowVendorRegister,setSho
                 setGovNotValid(false);
                 setGovernorate(e.target.value);
               }}
+              defaultValue=""
             >
-              <option selected disabled value="">
+              <option disabled value="">
                 Choose Your Governate
               </option>
               {Array.from(gov).map((el, index) => {
@@ -164,8 +169,9 @@ export default function Register({ setShowRegister, setShowVendorRegister,setSho
                   setCityNotValid(false);
                 }}
                 className="select"
+                defaultValue=""
               >
-                <option selected disabled value={""}>
+                <option disabled value={""}>
                   Choose Your City
                 </option>
                 {Data.filter((dt) => dt.admin_name === governorate).map(
@@ -202,7 +208,7 @@ export default function Register({ setShowRegister, setShowVendorRegister,setSho
             type="button"
             className="mt-2 font-medium capitalize hover:underline"
             onClick={() => {
-              setShowModal(false)
+              setShowModal(false);
               navigate("/register/delivery");
             }}
           >
