@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { changeRegisterStatus } from "../../store/slices/auth";
 import { Button } from "../UI";
 
-export default function RegisterError({ error, setShowRegister }) {
+export default function RegisterError({ error, setShowRegister ,showLogin=true}) {
   const dispatch = useDispatch();
   const onLoginClickHandler = () => {
     dispatch(changeRegisterStatus("idle"));
@@ -27,14 +27,15 @@ export default function RegisterError({ error, setShowRegister }) {
         <h1 className="text-lg font-medium">{errorMessage}</h1>
       </div>
       <div className="flex flex-col justify-center">
-        <Button
+        {showLogin&&
+          <Button
           variant={"primary"}
           type="submit"
           className="mt-5"
           onClick={() => setShowRegister(false)}
         >
           Login
-        </Button>
+        </Button>}
         <Button
           variant={"secondary"}
           type="button"

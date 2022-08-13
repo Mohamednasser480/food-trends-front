@@ -14,6 +14,7 @@ import {
   Shop,
   UserAccount,
 } from "../../routes/customer";
+import DeliveryRegister from "../Auth/DeliveryRegister"
 import Wishlist from "../UserAccount/Wishlist";
 
 const CustomerLayout = (props) => {
@@ -36,12 +37,12 @@ const CustomerLayout = (props) => {
           <Route path="/search/:searchText" element={<SearchPage />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/payment" element={<PaymentStatus />} />
+          <Route path="/register/delivery" element={<DeliveryRegister />} />
           {props.children}
         </Routes>
       </main>
       <Footer />
     </div>
-
   );
 };
 
