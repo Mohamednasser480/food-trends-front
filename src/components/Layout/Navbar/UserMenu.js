@@ -35,9 +35,9 @@ const UserMenu = (props) => {
           <li>
             <Link to={"/cart"}>My cart</Link>
           </li>
-          <li>
+          {/* <li>
             <Link to={"/wishlist"}>My Wishlist</Link>
-          </li>
+          </li> */}
         </>
       ) : null}
 
