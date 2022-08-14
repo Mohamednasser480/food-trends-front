@@ -1,3 +1,4 @@
+
 import React, { useEffect, useCallback, useState } from "react";
 import Form, { Input, TextArea } from "../UI/Form";
 import { useForm } from "react-hook-form";
@@ -8,6 +9,8 @@ import { selectUserToken } from "../../store/slices/auth";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { toast } from "react-toastify";
+const API_URI = process.env.REACT_APP_API_URI;
+
 export default function ContactForm() {
   const token = useSelector(selectUserToken);
   const {
@@ -45,7 +48,7 @@ export default function ContactForm() {
   const onSubmit = async (data) => {
     const onSendMessage = async (data) => {
       try {
-        const url = `https://food-trends-api.herokuapp.com/api/v1/users/contact`;
+        const url = `${API_URI}/users/contact`;
         const res = await axios.post(url, data, {
           headers: {
             Authorization: `Bearer ${token}`,
