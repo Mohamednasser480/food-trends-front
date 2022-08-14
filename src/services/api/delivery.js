@@ -2,12 +2,16 @@ import axios from 'axios';
 const url = `${process.env.REACT_APP_API_URI}/delivery`;
 
 const getAllOrders = async (token) => {
-  const res = await axios.get(url, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return res.data;
+  try {
+    const res = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res.data;
+  } catch (error) {
+    console.log(error.response.data)
+  }
 };
 
 const getAssignedOrders = async (token) => {
