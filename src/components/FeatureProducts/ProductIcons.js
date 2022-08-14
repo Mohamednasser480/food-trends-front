@@ -26,9 +26,9 @@ export default function ProductIcons(props) {
 
   return (
     <div className={className}>
-      <ProductIcon tooltip="Add to Wishlist" border>
+      {/* <ProductIcon tooltip="Add to Wishlist" border>
         <AiOutlineStar size={25} className={"text-black transition-all"} />
-      </ProductIcon>
+      </ProductIcon> */}
 
       <ProductIcon
         tooltip="Quick view"
