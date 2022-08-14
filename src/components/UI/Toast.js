@@ -5,9 +5,9 @@ const successToast = (message) => {
     position: "bottom-center",
     autoClose: 5000,
     hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
+    closeOnClick: false,
+    pauseOnHover: false,
+    draggable: false,
     progress: undefined,
   });
 };
@@ -17,9 +17,9 @@ const errorToast = (message) => {
     position: "bottom-center",
     autoClose: 5000,
     hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
+    closeOnClick: false,
+    pauseOnHover: false,
+    draggable: false,
     progress: undefined,
   });
 };

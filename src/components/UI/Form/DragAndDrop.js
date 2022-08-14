@@ -39,6 +39,7 @@ export default function DragAndDrop({ label, onAddImg, images, onImgRemove }) {
             name="images"
             className="hidden"
             accept="image/*"
+            multiple
             onChange={(e) => {
               onAddImg(e.target.files);
             }}
@@ -67,7 +68,6 @@ export default function DragAndDrop({ label, onAddImg, images, onImgRemove }) {
         name="images"
         className="hidden"
         accept="image/*"
-
         onChange={(e) => {
           onAddImg(e.target.files);
         }}
