@@ -13,7 +13,6 @@ import { FreeMode, Navigation, Thumbs } from "swiper";
 
 export default function Slider(props) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  // console.log(props);
 
   return (
     <div className={props.className}>
@@ -29,40 +28,49 @@ export default function Slider(props) {
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper2"
       >
-        {props.images.map((img, index) => {
-          return (
-            <SwiperSlide
-              key={index}
-              className="flex max-h-[400px] items-center"
-            >
-              <img src={img} />
-            </SwiperSlide>
-          );
-        })}
-      </Swiper>
-      {
-        props.images.length>=2&&
-        <Swiper
-          onSwiper={setThumbsSwiper}
-          loop={true}
-          spaceBetween={10}
-          slidesPerView={props.images.length}
-          watchSlidesProgress={true}
-          modules={[FreeMode, Navigation, Thumbs]}
-          className="mySwiper mt-3 "
-        >
-          {props.images.map((img, index) => {
+        {React.Children.toArray(
+          props.images.map((img, index) => {
             return (
               <SwiperSlide
                 key={index}
-                className="flex !h-[150px]   items-center"
+                className="flex max-h-[400px] items-center"
               >
-                <img src={img} className={`cursor-pointer border-2`} />
+                <img src={`${process.env.REACT_APP_API_URI}/${img}`} />
               </SwiperSlide>
             );
-          })}
-        </Swiper>
-      }
+          })
+        )}
+      </Swiper>
+      {React.Children.toArray(
+        props.images.length >= 2 && (
+          <Swiper
+            onSwiper={setThumbsSwiper}
+            loop={true}
+            spaceBetween={10}
+            slidesPerView={props.images.length}
+            watchSlidesProgress={true}
+            modules={[FreeMode, Navigation, Thumbs]}
+            className="mySwiper mt-3 "
+          >
+            {React.Children.toArray(
+              props.images.map((img, index) => {
+                return (
+                  <SwiperSlide
+                    key={index}
+                    className="flex !h-[150px]   items-center"
+                  >
+                    <img
+                      alt={index}
+                      src={`${process.env.REACT_APP_API_URI}/${img}`}
+                      className={`cursor-pointer border-2`}
+                    />
+                  </SwiperSlide>
+                );
+              })
+            )}
+          </Swiper>
+        )
+      )}
     </div>
   );
 }
