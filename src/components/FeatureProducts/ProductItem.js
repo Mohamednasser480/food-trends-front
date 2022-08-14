@@ -2,9 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ProductIcons } from ".";
 import { ProductRating } from "../UI";
+import OutOfStockBadge from "./OutOfStockBadge";
 
 export default function Product({ productDetails, relative }) {
   let route = `${relative ? "/shop" : "shop"}/${productDetails._id}`;
+  const outOfStock=productDetails.inStock<=0;
+  // const outOfStock=true;
+  // 
   return (
     <div className="group flex  flex-col gap-3 ">
       <div className="relative overflow-hidden">
@@ -19,7 +23,9 @@ export default function Product({ productDetails, relative }) {
         <ProductIcons
           className="absolute -bottom-16 flex w-full justify-center gap-3 py-4  px-8 transition-all  duration-300 group-hover:bottom-0 "
           productDetails={productDetails}
+          outOfStock={outOfStock}
         />
+      {outOfStock&&<OutOfStockBadge className={"absolute top-2 right-10"}/>}
       </div>
 
       <div className="flex flex-col items-center gap-1">
@@ -37,6 +43,7 @@ export default function Product({ productDetails, relative }) {
           <ProductRating rating={(productDetails?.rate/productDetails?.numberOfReviews)||0} />
         </div>
       </div>
+
     </div>
   );
 }
