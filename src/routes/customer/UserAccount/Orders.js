@@ -11,6 +11,8 @@ import {
 import Radio from "../../../components/UI/Form/Radio";
 import axios from "axios";
 import { cookie } from "../../../services";
+const API_URI = process.env.REACT_APP_API_URI;
+const ORDERS_API_URI = `${API_URI}/orders`;
 
 const filters = ["all orders", "completed", "pending", "canceled"];
 
@@ -20,10 +22,7 @@ export default function Orders() {
 
   // products and filters states for vendor
   const [filterBtn, setFilterBtn] = useState("");
-  const [vendorOrders, setVendorOrders] = useState([]);
   const [customerOrders, setCustomerOrders] = useState([]);
-  const [deliveryOrders, setDeliveryOrders] = useState([]);
-  const dispatch = useDispatch();
 
   // console.log(vendorOrders);
 
@@ -38,25 +37,25 @@ export default function Orders() {
 
   // fetching VENDOR orders by products sorted based on price and status
   useEffect(() => {
-    let url = "https://food-trends-api.herokuapp.com/api/v1/vendor/orders?";
-    url +=
-      selected === "lowest"
-        ? "sortBy=totalPrice&"
-        : selected === "highest"
-        ? "sortBy=totalPrice:desc&"
-        : "";
-    if (filterBtn === "pending") url += "status=pending&";
-    else if (filterBtn === "canceled") url += "status=canceled&";
-    else if (filterBtn === "completed") url += "status=completed&";
+    let url = ORDERS_API_URI;
+    // url +=
+    //   selected === "lowest"
+    //     ? "sortBy=totalPrice&"
+    //     : selected === "highest"
+    //     ? "sortBy=totalPrice:desc&"
+    //     : "";
+    if (filterBtn === "pending") url += "?&status=pending&";
+    else if (filterBtn === "canceled") url += "?&status=canceled&";
+    else if (filterBtn === "completed") url += "?&status=completed&";
 
     const token = cookie.getCookie("token");
     const fetchData = async () => {
       const response = await axios.get(url, {
         headers: { Authorization: "Bearer " + token },
       });
-
       const json = response.data;
-      setVendorOrders(json.data);
+      setCustomerOrders(json.data);
+      console.log(json.data);
     };
 
     fetchData();
@@ -68,7 +67,6 @@ export default function Orders() {
   // useEffect(() => {
   //   dispatch(fetchOrders());
   // }, [dispatch]);
-
   const orders = {
     customer: () => {
       return (
@@ -83,8 +81,11 @@ export default function Orders() {
                 return (
                   <Button
                     variant="user-account"
-                    className="w-32 hover:bg-primary"
+                    className="w-fit px-4 hover:bg-primary"
                     key={index}
+                    onClick={()=>{
+                      handleOrderStatFilter(filter)
+                    }}
                   >
                     {filter}
                   </Button>
@@ -92,7 +93,7 @@ export default function Orders() {
               })}
             </div>
 
-            <div className="mx-2 my-5 flex items-center lg:my-0">
+            {/* <div className="mx-2 my-5 flex items-center lg:my-0">
               <Typography component="subtitle2">Price filters:</Typography>
               <Radio
                 name={"price"}
@@ -110,7 +111,7 @@ export default function Orders() {
               >
                 Lowest
               </Radio>
-            </div>
+            </div> */}
           </div>
 
           {/* {selected === 'highest' ? <div className="bg-red-400">test</div> : ''} */}
@@ -118,31 +119,35 @@ export default function Orders() {
           <div className="mx-5 mb-10 flex items-start">
             <div className="w-full self-center rounded-xl border shadow-lg lg:w-[1200px]">
               <div className="flex items-center bg-[#f7f7f7] p-2 text-center font-medium text-black">
-                <p className="w-10">Order ID</p>
-                <p className="w-32">Product</p>
-                <p className="w-32">Price</p>
-                <p className="w-32">Order Status</p>
-                <p className="w-32">Order Date</p>
-                <p className="w-32">Delivery Date</p>
-                <p className="w-32">Payment Method</p>
-                <p className="w-32"></p>
+                <p className="w-[200px] ">Order ID</p>
+                {/* <p className="w-32">Product</p> */}
+                <p className="w-[200px] px-4">Price</p>
+                <p className="w-[200px] px-4">Order Status</p>
+                <p className="w-[200px] px-4">Order Date</p>
+                <p className="w-[200px] px-4">Delivery Date</p>
+                {/* <p className="w-[200px] px-4">Payment Method</p> */}
+                <p className="w-[200px] px-4"></p>
               </div>
 
-              {customerOrders.map((rev, index) => {
+              {customerOrders.map((order, index) => {
                 return (
                   <div
                     className="flex w-full items-center border-b p-3 text-center"
                     key={index}
                   >
-                    <p className="w-10 font-medium">{index + 1}</p>
-                    {/* <p className="w-32 break-words">{rev.name}</p> */}
-                    <p className="w-32">test</p>
-                    <p className="w-32">test</p>
-                    <p className="w-32">test</p>
-                    <p className="w-32">test</p>
-                    <p className="w-32">test</p>
+                    <p className="w-[200px] font-medium">{index + 1}</p>
+                    {/* <p className="w-[200px] px-4 break-words">{rev.name}</p> */}
+                    {/* <p className="w-[200px] px-4">{""}</p> */}
+                    <p className="w-[200px] px-4">{order.totalPrice.toFixed(2)} $</p>
+                    <p className="w-[200px] px-4">{order.status}</p>
+                    <p className="w-[200px] px-4">
+                      {new Date(order.createdAt).toLocaleString()}
+                    </p>
+                    <p className="w-[200px] px-4">
+                      After 3 Days
+                    </p>
                     <p className="w-48">
-                      <Button variant="user-account">order details</Button>
+                      {/* <Button variant="user-account">order details</Button> */}
                     </p>
                   </div>
                 );
