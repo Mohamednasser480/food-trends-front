@@ -30,14 +30,14 @@ export default function ProductDetails({ product, className, miny = false }) {
       dispatch(
         saveCartItem({
           ...product,
-          quantity: 1,
+          quantity: quantity,
         })
       );
     } else {
       dispatch(
         saveCartItem({
           ...product,
-          quantity: productQuantity + 1,
+          quantity: productQuantity + quantity,
         })
       );
     }

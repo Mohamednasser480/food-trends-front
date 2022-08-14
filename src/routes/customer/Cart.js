@@ -28,6 +28,7 @@ const Cart = () => {
   };
   const checkoutHandler = () => {
     if (loginStatus.status == "succeeded") {
+      setGuestShowLogin(false)
       dispatch(doPayment(cartId));
     }else{
       setGuestShowLogin(true)
