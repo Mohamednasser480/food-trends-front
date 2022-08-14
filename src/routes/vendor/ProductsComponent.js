@@ -33,7 +33,7 @@ const ProductsComponent = ({
             <div className="avatar">
               <div className="mask mask-squircle h-12 w-12">
                 <img
-                  src={`${process.env.REACT_APP_API_URI}/${images[0]}`}
+                  src={images?images[0]:""}
                   alt="Avatar Tailwind CSS Component"
                 />
               </div>

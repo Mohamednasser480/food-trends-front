@@ -106,21 +106,24 @@ const AddProduct = ({
 
   const handleProduct = (e) => {
     if (isImagesValid) {
-      const imgsFiles = images.map((image) => image.imgFile);
       const formData = new FormData();
+
+      for (const i of images) {
+        formData.append("images", i.imgFile);
+      }
+
       formData.append("productName", e.productName);
       formData.append("summary", e.summary);
       formData.append("description", e.description);
-      formData.append("images", imgsFiles);
       formData.append("category", e.category);
       formData.append("price", e.price);
       formData.append("inStock", e.inStock);
       formData.append("discount", e.discount);
       formData.append("weight", e.weight);
 
-    if (actionType === "EDIT") {
-      dispatch(updateProduct({ _id, formData }));
-    } else dispatch(addProduct(formData));
+      if (actionType === "EDIT") {
+        dispatch(updateProduct({ _id, formData }));
+      } else dispatch(addProduct(formData));
 
       reset();
     }
