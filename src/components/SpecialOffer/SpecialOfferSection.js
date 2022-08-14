@@ -10,6 +10,7 @@ import {
   selectAllCartItems,
   selectStatus,
 } from "../../store/slices/cart";
+import { useNavigate } from "react-router-dom";
 const SpecialOfferSection = () => {
   const item = {
     _id: "SpecialOffer#000000100001",
@@ -28,8 +29,10 @@ const SpecialOfferSection = () => {
     discount: 0,
     rate: 0,
     numberOfReviews: 0,
-    vendor: "62f66dcf7ac0be1f0dd16d6e",
+    vendor: "62f8368bdd82d96cf75ec13c",
   };
+  const navigate = useNavigate();
+
   const [days, hours, mins, secs] = useCountdown(item.offerExpier);
   const dispatch = useDispatch();
   const cartProducts = useSelector(selectAllCartItems);
@@ -87,20 +90,23 @@ const SpecialOfferSection = () => {
             variant="secondary"
             className="my-5 w-4/6 !tracking-normal text-white transition-all duration-700 hover:bg-[#3D6642] lg:w-6/12"
             onClick={() => {
-              dispatch(
-                saveCartItem({
-                  ...item,
-                  quantity: productQuantity + 1,
-                })
-              );
+              // dispatch(
+              //   saveCartItem({
+              //     ...item,
+              //     quantity: productQuantity + 1,
+              //   })
+              // );
 
-              toast.success(`${item?.productName} Added!`, {
-                position: "bottom-left",
-                autoClose: 1000,
-              });
+              // toast.success(`${item?.productName} Added!`, {
+              //   position: "bottom-left",
+              //   autoClose: 1000,
+              // });
+
+              navigate("/shop");
             }}
           >
-            Add To Bag
+            {/* Add To Bag */}
+            Shop Now!
           </Button>
         </div>
       </div>

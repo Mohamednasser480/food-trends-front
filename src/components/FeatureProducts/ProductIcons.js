@@ -11,8 +11,10 @@ import {
 } from "../../store/slices/cart";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { loginSelector } from "../../store/slices/auth";
 
 export default function ProductIcons(props) {
+  const isLoggedIn = useSelector(loginSelector);
   const { className, productDetails } = props;
   const dispatch = useDispatch();
   const cartStatus = useSelector(selectStatus);
@@ -21,6 +23,7 @@ export default function ProductIcons(props) {
     cartProducts.find((cartProduct) => cartProduct._id === productDetails._id)
       ?.quantity || 0;
   const [isShown, setIsShown] = useState(false);
+
   return (
     <div className={className}>
       <ProductIcon tooltip="Add to Wishlist" border>
@@ -47,16 +50,25 @@ export default function ProductIcons(props) {
       <ProductIcon
         tooltip="Add to Cart"
         onClick={() => {
-          dispatch(
-            saveCartItem({
-              ...productDetails,
-              quantity: productQuantity + 1,
-            })
-          );
-          toast.success(`${productDetails?.productName} has been Added!`,{
-            position:"bottom-left",
+          if (isLoggedIn.status == "succeeded") {
+            dispatch(
+              saveCartItem({
+                ...productDetails,
+                quantity: 1,
+              })
+            );
+          } else {
+            dispatch(
+              saveCartItem({
+                ...productDetails,
+                quantity: productQuantity + 1,
+              })
+            );
+          }
+          console.log(productQuantity);
+          toast.success(`${productDetails?.productName} has been Added!`, {
+            position: "bottom-left",
             autoClose: 1000,
-
           });
         }}
         disabled={cartStatus === "loading"}

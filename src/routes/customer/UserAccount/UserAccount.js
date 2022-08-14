@@ -16,10 +16,10 @@ const links = [
     text: "Orders",
     to: "/user-account/orders",
   },
-  {
-    text: "Wishlist",
-    to: "/user-account/wishlist",
-  },
+  // {
+  //   text: "Wishlist",
+  //   to: "/user-account/wishlist",
+  // },
 ];
 
 export default function UserAccount() {

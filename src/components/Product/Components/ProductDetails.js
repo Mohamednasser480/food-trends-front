@@ -4,23 +4,43 @@ import { CgStopwatch } from "react-icons/cg";
 import { AiOutlineCalendar, AiFillCheckCircle } from "react-icons/ai";
 import { Info } from "../";
 import { QuantityInput } from "../../Cart";
-import { saveCartItem, selectStatus } from "../../../store/slices/cart";
+import {
+  saveCartItem,
+  selectAllCartItems,
+  selectStatus,
+} from "../../../store/slices/cart";
 import { useDispatch, useSelector } from "react-redux";
+import { loginSelector } from "../../../store/slices/auth";
 
 export default function ProductDetails({ product, className, miny = false }) {
+  const isLoggedIn = useSelector(loginSelector);
+
   const item = product;
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const cartStatus = useSelector(selectStatus);
+  const cartProducts = useSelector(selectAllCartItems);
 
+  const productQuantity =
+    cartProducts.find((cartProduct) => cartProduct._id === product._id)
+      ?.quantity || 0;
   const quantitySubmitHandler = (quantity) => setQuantity(quantity);
   const addToCartHandler = () => {
-    dispatch(
-      saveCartItem({
-        product: item._id,
-        quantity: quantity,
-      })
-    );
+    if (isLoggedIn.status == "succeeded") {
+      dispatch(
+        saveCartItem({
+          ...product,
+          quantity: 1,
+        })
+      );
+    } else {
+      dispatch(
+        saveCartItem({
+          ...product,
+          quantity: productQuantity + 1,
+        })
+      );
+    }
   };
 
   return (

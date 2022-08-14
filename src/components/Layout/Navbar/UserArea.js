@@ -7,7 +7,7 @@ export default function UserArea() {
       <div className="flex items-center gap-3">
         <SearchModal />
         <UserProfile />
-        <WishListSidebar />
+        {/* <WishListSidebar /> */}
         <CartSidebar />
       </div>
     </>
