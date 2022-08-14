@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const UserMenu = (props) => {
   const menuItems = {
     vendor: ["Dashboard"],
-    customer: ["My profile", "My orders", "Reviews"],
+    customer: ["My profile"],
     delivery: ["Orders"],
   };
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const UserMenu = (props) => {
         return (
           <Fragment key={index}>
             <li className="capitalize transition-colors hover:bg-black hover:text-white">
-              <Link to={"/user-account"}>{item}</Link>
+              <Link to={`${userType=="customer"?"/user-account":"/"}`}>{item}</Link>
             </li>
           </Fragment>
         );
@@ -35,9 +35,9 @@ const UserMenu = (props) => {
           <li>
             <Link to={"/cart"}>My cart</Link>
           </li>
-          <li>
+          {/* <li>
             <Link to={"/wishlist"}>My Wishlist</Link>
-          </li>
+          </li> */}
         </>
       ) : null}
 

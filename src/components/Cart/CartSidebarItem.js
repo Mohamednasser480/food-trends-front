@@ -37,7 +37,7 @@ const CartSidebarItem = (props) => {
           <Link to="/" className="transition-colors hover:text-primary">
             {productName}
           </Link>
-          <Typography component="body1">${price.toFixed(2)}</Typography>
+          <Typography component="body1">${price?.toFixed(2)}</Typography>
         </Typography>
         <div className="flex justify-end">
           <QuantityInput
