@@ -14,11 +14,7 @@ export default function Product({ productDetails, relative }) {
       <div className="relative overflow-hidden">
         <Link to={route} className=" bg-black">
           <img
-            src={
-              productDetails?.images
-                ? `${process.env.REACT_APP_API_URI}/${productDetails.images[0]}`
-                : ""
-            }
+            src={productDetails?.images?productDetails.images[0]:""}
             alt={productDetails?.productName}
             className="object-cover transition-all duration-1000 ease-out hover:scale-110 md:h-[300px] md:w-[300px] "
           />

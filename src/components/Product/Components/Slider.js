@@ -35,7 +35,7 @@ export default function Slider(props) {
                 key={index}
                 className="flex max-h-[400px] items-center"
               >
-                <img src={`${process.env.REACT_APP_API_URI}/${img}`} />
+                <img src={`${img}`} />
               </SwiperSlide>
             );
           })
@@ -61,7 +61,7 @@ export default function Slider(props) {
                   >
                     <img
                       alt={index}
-                      src={`${process.env.REACT_APP_API_URI}/${img}`}
+                      src={`${img}`}
                       className={`cursor-pointer border-2`}
                     />
                   </SwiperSlide>
