@@ -1,5 +1,5 @@
 import React from "react";
-import { CustomerLayout, VendorLayout, DeliveryLayout } from "./";
+import { CustomerLayout, VendorLayout, DeliveryLayout,AdminLayout } from "./";
 import { Error404 } from "../../routes";
 import { Route } from "react-router-dom";
 import { selectUserData } from "../../store/slices/auth";
@@ -17,7 +17,7 @@ const Layout = () => {
     customer: <CustomerLayout>{defaultRoutes}</CustomerLayout>,
     vendor: <VendorLayout>{defaultRoutes}</VendorLayout>,
     delivery: <DeliveryLayout>{defaultRoutes}</DeliveryLayout>,
-    // admin: <AdminLayout />,
+    admin: <AdminLayout />,
   };
   return layouts[userType] ? layouts[userType] : layouts.customer;
 };
