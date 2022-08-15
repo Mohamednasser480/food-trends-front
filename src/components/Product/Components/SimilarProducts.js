@@ -50,7 +50,7 @@ export default function SimilarProducts({ productCategory, id }) {
         </div>
 
         <div className="container relative w-full py-6">
-          {similarProductsStatus == "Pending" ? (
+          {similarProductsStatus === "Pending" ? (
             <ProductsLoader />
           ) : (
             <Swiper
@@ -77,13 +77,15 @@ export default function SimilarProducts({ productCategory, id }) {
                 },
               }}
             >
-              {unqiueSimiliarProds.map((prod) => {
-                return (
-                  <SwiperSlide key={prod.id}>
-                    <ProductItem productDetails={prod} relative={true} />
-                  </SwiperSlide>
-                );
-              })}
+              {React.Children.toArray(
+                unqiueSimiliarProds.map((prod) => {
+                  return (
+                    <SwiperSlide key={prod.id}>
+                      <ProductItem productDetails={prod} relative={true} />
+                    </SwiperSlide>
+                  );
+                })
+              )}
               <div className="swiper-next absolute top-1/2 -right-0 z-10 flex cursor-pointer items-center justify-center">
                 <MdOutlineKeyboardArrowRight
                   size={25}

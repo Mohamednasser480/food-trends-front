@@ -70,12 +70,12 @@ export default function Orders() {
   const orders = {
     customer: () => {
       return (
-        <>
+        <div className=" container">
           <Typography component="h2" className="p-5 text-primary">
             your orders
           </Typography>
 
-          <div className="m-5 flex flex-col justify-between xl:w-[1200px] xl:flex-row">
+          <div className="m-5 flex flex-col justify-between  xl:flex-row">
             <div>
               {filters.map((filter, index) => {
                 return (
@@ -154,7 +154,7 @@ export default function Orders() {
               })}
             </div>
           </div>
-        </>
+        </div>
       );
     },
   };

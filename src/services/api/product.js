@@ -87,7 +87,7 @@ const getFilteredProducts = async (payload) => {
   // console.log(queryURL)
   let res = await axios.get(queryURL);
   // console.log("%c" + queryURL, "color:red;font-size:20px");
-  return {data:res.data.data,count:res.data.count};
+  return { data: res.data.data, count: res.data.count };
 };
 export default {
   getAllProducts,

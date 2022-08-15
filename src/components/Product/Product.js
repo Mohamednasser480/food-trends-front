@@ -40,12 +40,12 @@ export default function Product() {
     <>
       <Breadcrumb product={product} />
 
-      {productStatus == "Pending" ? (
+      {productStatus === "Pending" ? (
         <Loader />
       ) : productStatus == "Fulfilled" ? (
         <div className=" mt-8 flex  flex-col flex-wrap justify-center gap-2">
           <div className="container flex  flex-wrap justify-center gap-2 pb-10">
-            <ImageSection productImages={product.images} />
+            <ImageSection productImages={product?.images} />
             <ProductDetails product={product} outOfStock={outOfStock} />
           </div>
           <SimilarProducts productCategory={product.category} id={id} />

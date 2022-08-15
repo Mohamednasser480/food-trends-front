@@ -13,7 +13,11 @@ const CartTableRow = (props) => {
         <Link to={`/shop/${_id}`}>
           <img
             className="hidden w-24 lg:block"
-            src={images?.length?images[0]:""}
+            src={
+              images?.length
+                ? `${process.env.REACT_APP_API_URI}/${images[0]}`
+                : ""
+            }
             alt={productName}
           />
         </Link>

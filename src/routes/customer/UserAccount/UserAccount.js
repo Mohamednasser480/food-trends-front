@@ -36,11 +36,11 @@ export default function UserAccount() {
   return (
     <>
       {isUserLoggedIn ? (
-        <div className="container flex gap-6 py-6 lg:max-w-[70%]">
-          <div className="w-1/3 rounded-xl border px-2">
+        <div className="container flex gap-6 py-6">
+          <div className=" w-1/4 rounded-xl border px-2">
             <Navlinks links={links} />
           </div>
-          <div className="flex-1">
+          <div className="w-2/3 flex-1">
             <Outlet />
           </div>
         </div>
