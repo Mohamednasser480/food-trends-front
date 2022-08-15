@@ -17,9 +17,20 @@ export const fetchOrders = createAsyncThunk("orders/fetchOrders", async () => {
 //Create New Order
 export const createOrder = createAsyncThunk(
   "orders/createOrder",
-  async (_, thunkAPI) => {
+  async (cartData, thunkAPI) => {
     const userToken = cookie.getCookie("token");
-    const order = await orders.createOrder(userToken);
+    const order = await orders.createOrder(userToken,cartData);
+    // thunkAPI.dispatch(clearCartData());
+    return order;
+  }
+  );
+
+  //SaveOrder
+export const saveOrder = createAsyncThunk(
+  "orders/saveOrder",
+  async (cartData, thunkAPI) => {
+    const userToken = cookie.getCookie("token");
+    const order = await orders.saveOrder(userToken,cartData);
     thunkAPI.dispatch(clearCartData());
     return order;
   }

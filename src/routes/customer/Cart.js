@@ -29,7 +29,8 @@ const Cart = () => {
   const checkoutHandler = () => {
     if (loginStatus.status == "succeeded") {
       setGuestShowLogin(false)
-      dispatch(doPayment(cartId));
+      const preparedItems=prepareCartItemsForPayment(items)
+      dispatch(doPayment(preparedItems));
     }else{
       setGuestShowLogin(true)
     }
@@ -42,10 +43,18 @@ const Cart = () => {
       </Alert>
     ),
   };
-
   const navigateToPaymentPage = () => {
     window.location.href = payment.paymentLink;
   };
+  
+  function prepareCartItemsForPayment(items){
+    const preparedItems=items.map((el)=>{
+      return {id:el._id,quantity:el.quantity}
+    })
+    console.log(preparedItems)
+    return preparedItems
+  }
+
 
   return (
     <Page title="cart">

@@ -144,7 +144,7 @@ export default function Orders() {
                       {new Date(order.createdAt).toLocaleString()}
                     </p>
                     <p className="w-[200px] px-4">
-                      After 3 Days
+                    {order.expectedDeliveryDate?order.expectedDeliveryDate:"Not assigned yet."}
                     </p>
                     <p className="w-48">
                       {/* <Button variant="user-account">order details</Button> */}
