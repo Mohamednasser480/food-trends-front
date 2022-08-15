@@ -81,7 +81,7 @@ const getFilteredProducts = async (payload) => {
     const [min, max] = payload.price.split(",");
     return `max_price=${max}&min_price=${min}`;
   };
-  const productsPerPage=10; //Change to 10
+  const productsPerPage=8; //Change to 10
   const queryURL = `${PRODUCT_API_URI}?limit=${productsPerPage}&skip=${(payload.pageNumber-1)*productsPerPage}
   &${filterCategory()}&${sortFilter()}&${pricesFilter()}`;
   // console.log(queryURL)
