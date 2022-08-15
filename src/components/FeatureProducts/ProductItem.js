@@ -6,7 +6,7 @@ import OutOfStockBadge from "./OutOfStockBadge";
 
 export default function Product({ productDetails, relative }) {
   let route = `${relative ? "/shop" : "shop"}/${productDetails._id}`;
-  const outOfStock=productDetails.inStock<=0;
+  const outOfStock=productDetails?.inStock<=0;
   // const outOfStock=true;
   // 
   return (
@@ -25,18 +25,18 @@ export default function Product({ productDetails, relative }) {
           productDetails={productDetails}
           outOfStock={outOfStock}
         />
-      {outOfStock&&<OutOfStockBadge className={"absolute top-2 right-10"}/>}
+      {outOfStock&&<OutOfStockBadge className={"absolute top-8 right-10"}/>}
       </div>
 
       <div className="flex flex-col items-center gap-1">
         <Link
           to={route}
-          className="font-satoshi text-lg font-semibold hover:text-primary"
+          className="font-satoshi text-lg font-semibold hover:text-primary capitalize"
         >
           {productDetails?.productName}
         </Link>
         <h4 className="font-satoshi text-lg font-extrabold text-primary">
-          ${productDetails?.price?.toFixed(2)}
+          {productDetails?.price?.toFixed(2)} LE
         </h4>
 
         <div>
