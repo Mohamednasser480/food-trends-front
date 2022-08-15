@@ -53,6 +53,7 @@ export default function ShopProducts() {
   ) : productsError ? (
     "Can't Fetch Products!"
   ) : (
+    products?.length>0?
     <section className="flex flex-col items-center justify-center">
       <div className="flex flex-wrap justify-center gap-5 py-6  lg:gap-y-12">
         {products.map((prod,index) => (
@@ -65,6 +66,12 @@ export default function ShopProducts() {
         currentPage={currentPage}
         numberOfItems={numberOfProducts}
       />
-    </section>
+    </section>:
+    <section className="flex flex-col items-center justify-center">
+    <div className="flex flex-wrap justify-center gap-5 py-24 lg:gap-y-12 text-red-500 text-xl font-bold">
+          No Products Found!
+    </div>
+    
+  </section>
   );
 }
