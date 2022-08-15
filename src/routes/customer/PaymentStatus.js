@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import { BsCheckCircle, BsXCircle } from "react-icons/bs";
 import { useSearchParams } from "react-router-dom";
 import { Button } from "../../components/UI";
-import { useDispatch } from "react-redux";
-import { createOrder } from "../../store/slices/orders";
-
+import { useDispatch, useSelector } from "react-redux";
+import {  saveOrder } from "../../store/slices/orders";
+import { selectAllCartItems, selectTotalPrice } from "../../store/slices/cart";
+let flag = false;
 export default function PaymentStatus() {
   let [paymentSuccess, setPaymentSuccess] = useState(false);
   const [queryParams, setQueryParams] = useSearchParams();
   const dispatch = useDispatch();
-
+  const cartItems = useSelector(selectAllCartItems);
+  const totalPrice = useSelector(selectTotalPrice);
   const status = queryParams.get("success");
   function paymentSuccessful() {
     if (status == "true") {
@@ -18,16 +20,25 @@ export default function PaymentStatus() {
       setPaymentSuccess(false);
     }
   }
-
+  function prepareCartItemsForPayment(items) {
+    const preparedItems = items.map((el) => {
+      return { product: el._id, quantity: el.quantity };
+    });
+    // console.log(preparedItems);
+    return preparedItems;
+  }
   useEffect(() => {
     paymentSuccessful();
     // Send Order To DB IF Payment Success
-    if (status == "true") {
-      dispatch(createOrder());
+
+    if (status == "true" && !flag && cartItems.length > 0) {
+      const preparedItems = prepareCartItemsForPayment(cartItems);
+      // console.log(preparedItems)
+      dispatch(saveOrder({ items: preparedItems, totalPrice: totalPrice }));
+      flag = true;
       // Clear Cart Items Here
-      
     }
-  }, []);
+  }, [cartItems]);
 
   const render = {
     successfull: (
