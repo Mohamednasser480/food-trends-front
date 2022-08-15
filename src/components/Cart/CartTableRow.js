@@ -34,8 +34,8 @@ const CartTableRow = (props) => {
           onQuantitySubmit={onQuantitySubmit}
         />
       </td>
-      <td className="text-primary">${price}</td>
-      <td className="text-bold">${(quantity * price).toFixed(2)}</td>
+      <td className="text-primary">{price} LE</td>
+      <td className="text-bold">{(quantity * price).toFixed(2)} LE</td>
       <td>
         <button
           onClick={() => onItemRemove(_id)}

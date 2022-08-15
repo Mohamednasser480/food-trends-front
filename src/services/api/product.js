@@ -5,7 +5,6 @@ const PRODUCT_API_URI = `${API_URI}/products`;
 //Get All Available Products
 const getAllProducts = async () => {
   const res = await axios.get(PRODUCT_API_URI);
-  console.log(res.data);
   return res.data.data;
 };
 
@@ -82,10 +81,8 @@ const getFilteredProducts = async (payload) => {
     const [min, max] = payload.price.split(",");
     return `max_price=${max}&min_price=${min}`;
   };
-  const productsPerPage = 10; //Change to 10
-  const queryURL = `${PRODUCT_API_URI}?limit=${productsPerPage}&skip=${
-    (payload.pageNumber - 1) * productsPerPage
-  }
+  const productsPerPage=8; //Change to 10
+  const queryURL = `${PRODUCT_API_URI}?limit=${productsPerPage}&skip=${(payload.pageNumber-1)*productsPerPage}
   &${filterCategory()}&${sortFilter()}&${pricesFilter()}`;
   // console.log(queryURL)
   let res = await axios.get(queryURL);

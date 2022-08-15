@@ -24,6 +24,8 @@ export default function Product() {
     dispatch(getProductById(id));
   }, [id]);
 
+  const outOfStock = product?.inStock <= 0;
+
   // Scroll to Top on Page Load
   function ScrollToTop() {
     // console.log("Scrooled");
@@ -33,18 +35,18 @@ export default function Product() {
   useEffect(() => {
     ScrollToTop();
   }, [id]);
-
+  
   return (
     <>
       <Breadcrumb product={product} />
 
       {productStatus === "Pending" ? (
         <Loader />
-      ) : productStatus === "Fulfilled" ? (
+      ) : productStatus == "Fulfilled" ? (
         <div className=" mt-8 flex  flex-col flex-wrap justify-center gap-2">
           <div className="container flex  flex-wrap justify-center gap-2 pb-10">
-            <ImageSection productImages={product.images} />
-            <ProductDetails product={product} />
+            <ImageSection productImages={product?.images} />
+            <ProductDetails product={product} outOfStock={outOfStock} />
           </div>
           <SimilarProducts productCategory={product.category} id={id} />
           <CustomerReviews productId={id} />
