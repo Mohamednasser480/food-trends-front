@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import addProductSchema from "../../services/form-schemes/add-product";
 import Form, {
   DragAndDrop,
@@ -16,6 +16,7 @@ import {
   vendorStatusSelector,
 } from "../../store/slices/vendor";
 import { v4 } from "uuid";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = ({
   actionType,
@@ -27,13 +28,14 @@ const AddProduct = ({
   inStock,
   category,
   weight,
-  discount,
+  images,
 }) => {
+  const navigate = useNavigate();
   const vendorStatus = useSelector(vendorStatusSelector);
   const dispatch = useDispatch();
-  const [images, setImages] = useState([]);
+  const [imagesFiles, setImagesFiles] = useState(!images ? [] : images);
 
-  const isImagesValid = images.length <= 4 && images.length >= 1;
+  const isImagesValid = imagesFiles.length <= 4 && imagesFiles.length >= 1;
 
   const selectOptions = [
     "dairy",
@@ -63,11 +65,11 @@ const AddProduct = ({
         imgFile: newImage,
       });
     }
-    setImages((prevImages) => [...prevImages, ...images]);
+    setImagesFiles((prevImages) => [...prevImages, ...images]);
   };
 
   const imgRemoveHandler = (imgId) => {
-    setImages((prevImgs) => {
+    setImagesFiles((prevImgs) => {
       const removedImgIndex = prevImgs.findIndex(
         (prevImg) => prevImg.id === imgId
       );
@@ -99,16 +101,15 @@ const AddProduct = ({
     weight: register("weight", {
       value: weight ? weight : "",
     }),
-    discount: register("discount", {
-      value: discount ? discount : "",
-    }),
   };
 
   const handleProduct = (e) => {
     if (isImagesValid) {
       const formData = new FormData();
 
-      for (const i of images) {
+      for (const i of imagesFiles) {
+        if (typeof i === "string") formData.append("images", i);
+
         formData.append("images", i.imgFile);
       }
 
@@ -118,13 +119,14 @@ const AddProduct = ({
       formData.append("category", e.category);
       formData.append("price", e.price);
       formData.append("inStock", e.inStock);
-      formData.append("discount", e.discount);
       formData.append("weight", e.weight);
 
       if (actionType === "EDIT") {
         dispatch(updateProduct({ _id, formData }));
+        navigate("/products");
       } else dispatch(addProduct(formData));
 
+      setImagesFiles([]);
       reset();
     }
   };
@@ -193,16 +195,6 @@ const AddProduct = ({
               </div>
               <div className="form-control flex-1">
                 <Input
-                  register={addProductRegister.discount}
-                  errors={errors}
-                  type="number"
-                  placeholder="LE"
-                  label="discount"
-                  id="discount"
-                />
-              </div>
-              <div className="form-control flex-1">
-                <Input
                   register={addProductRegister.inStock}
                   errors={errors}
                   type="number"
@@ -219,7 +211,7 @@ const AddProduct = ({
               label="Product Images"
               onAddImg={addImageHandler}
               onImgRemove={imgRemoveHandler}
-              images={images}
+              images={imagesFiles}
             />
             {!isImagesValid && (
               <Typography component="body1" className="text-center text-error">
