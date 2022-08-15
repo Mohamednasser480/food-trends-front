@@ -4,18 +4,15 @@ const API_URI = process.env.REACT_APP_API_URI;
 const USERS_API_URI = `${API_URI}/admin/users`;
 const numberToFetchPerPage = 8;
 
-
-const getUsers = async (Args) => {
+const getUsers = async (Args, filters) => {
   const token = cookie.getCookie("token");
-
+  const URL = `${USERS_API_URI}?&limit=${numberToFetchPerPage}&name=${filters.name}&verified=${filters.verified}`;
+  console.log(URL);
   try {
-    const response = await axios.get(
-      `${USERS_API_URI}?&limit=${numberToFetchPerPage}`,
-      {
-        headers: { Authorization: "Bearer " + token },
-      }
-    );
-    // console.log(response.data);
+    const response = await axios.get(URL, {
+      headers: { Authorization: "Bearer " + token },
+    });
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.log(error.response.data);
@@ -23,7 +20,7 @@ const getUsers = async (Args) => {
   }
 };
 
-const paginateUsers = async (Args) => {
+const paginateUsers = async (Args, filters) => {
   const token = cookie.getCookie("token");
 
   const pageNumber = Args?.pageNumber || 1;
@@ -31,7 +28,8 @@ const paginateUsers = async (Args) => {
 
   const URL = `${USERS_API_URI}?&limit=${numberToFetchPerPage}&skip=${
     (pageNumber - 1) * numberToFetchPerPage
-  }`;
+  }&name=${filters.name}&verified=${filters.verified}`;
+  console.log(URL);
 
   try {
     const response = await axios.get(URL, {
