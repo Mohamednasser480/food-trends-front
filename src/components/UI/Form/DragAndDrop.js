@@ -2,7 +2,6 @@ import React from "react";
 import { HiOutlinePlusSm, HiOutlineX } from "react-icons/hi";
 
 export default function DragAndDrop({ label, onAddImg, images, onImgRemove }) {
-  // console.log(images);
   if (images.length === 0)
     return (
       <div className="flex items-center justify-center font-sans">
@@ -50,18 +49,24 @@ export default function DragAndDrop({ label, onAddImg, images, onImgRemove }) {
 
   return (
     <div className="relative flex max-h-[20rem] flex-wrap overflow-y-auto rounded-xl border-2 border-dashed border-blue-400 bg-slate-50 p-3">
-      {images.map((image) => (
-        <div key={image.id} className="group relative max-h-[11rem] w-1/2 p-2">
-          <img className="h-full w-full object-cover" src={image.imgPrev} />
-          <button
-            type="button"
-            className="absolute top-0 right-0 flex h-8 w-8 items-center justify-center rounded-full bg-white opacity-20 transition-all hover:bg-error hover:text-white group-hover:opacity-100"
-            onClick={() => onImgRemove(image.id)}
-          >
-            <HiOutlineX className="h-5 w-5" />
-          </button>
-        </div>
-      ))}
+      {React.Children.toArray(
+        images.map((image) => (
+          <div className="group relative max-h-[11rem] w-1/2 p-2">
+            <img
+              className="h-full w-full object-cover"
+              src={!image.imgPrev ? image : image.imgPrev}
+              alt={label}
+            />
+            <button
+              type="button"
+              className="absolute top-0 right-0 flex h-8 w-8 items-center justify-center rounded-full bg-white opacity-20 transition-all hover:bg-error hover:text-white group-hover:opacity-100"
+              onClick={() => onImgRemove(image.id)}
+            >
+              <HiOutlineX className="h-5 w-5" />
+            </button>
+          </div>
+        ))
+      )}
       <input
         id="dropzone-file"
         type="file"
