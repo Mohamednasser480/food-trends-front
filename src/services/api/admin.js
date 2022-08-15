@@ -4,8 +4,10 @@ const API_URI = process.env.REACT_APP_API_URI;
 const USERS_API_URI = `${API_URI}/admin/users`;
 const numberToFetchPerPage = 8;
 
-const token = cookie.getCookie("token");
+
 const getUsers = async (Args) => {
+  const token = cookie.getCookie("token");
+
   try {
     const response = await axios.get(
       `${USERS_API_URI}?&limit=${numberToFetchPerPage}`,
@@ -22,6 +24,8 @@ const getUsers = async (Args) => {
 };
 
 const paginateUsers = async (Args) => {
+  const token = cookie.getCookie("token");
+
   const pageNumber = Args?.pageNumber || 1;
   console.log(pageNumber);
 

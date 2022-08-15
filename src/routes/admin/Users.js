@@ -5,19 +5,25 @@ import {
   paginateUsers,
 } from "../../store/slices/admin";
 import { useDispatch, useSelector } from "react-redux";
-import { Pagination } from "../../components/UI";
+import { Loader, Pagination } from "../../components/UI";
 export default function Users() {
   const dispatch = useDispatch();
   const users = useSelector(adminUsersSelector).users;
   const usersCount = useSelector(adminUsersSelector).count;
   const currentPage = useSelector(adminUsersSelector).currentPage;
+  const usersLoading = useSelector(adminUsersSelector).isLoading;
+  const usersError = useSelector(adminUsersSelector).error;
   useEffect(() => {
     dispatch(getUsers());
   }, []);
   const changeUsersPerPage = (pageNumber) => {
     dispatch(paginateUsers({ pageNumber: pageNumber }));
   };
-  return (
+  return usersError ? (
+    <div className="w-full h-full items-center justify-center flex">
+      <img src={require("../../assets/ServerError.png")}/>
+    </div>
+  ) : (
     <section className="">
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
@@ -52,71 +58,77 @@ export default function Users() {
               </th>
             </tr>
           </thead>
-          <tbody>
-            {users &&
-              users.map((user, index) => {
-                return (
-                  <tr
-                    key={index}
-                    className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
-                  >
-                    <td className="py-4 px-4">
-                      <img
-                        src={user?.image}
-                        className="h-12 w-12 rounded-full object-cover"
-                      />
-                    </td>
+          {usersLoading ? (
+            <Loader />
+          ) : (
+            <tbody>
+              {users &&
+                users.map((user, index) => {
+                  return (
+                    <tr
+                      key={index}
+                      className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
+                    >
+                      <td className="py-4 px-4">
+                        <img
+                          src={user?.image}
+                          className="h-12 w-12 rounded-full object-cover"
+                        />
+                      </td>
 
-                    <td className="py-4 px-6 capitalize">{user?.name}</td>
-                    <td className="py-4 px-6 capitalize">{user?.storeName}</td>
-                    <th
-                      scope="row"
-                      className="whitespace-nowrap py-4 px-2 font-medium text-gray-900 dark:text-white"
-                    >
-                      {user?.email}
-                    </th>
-                    <td className="py-4 px-2">{user?.mobile}</td>
-                    <td className="py-4 px-2 capitalize">{`${user?.address?.governorate} - ${user?.address?.city} `}</td>
-                    <td className="py-4 px-6 capitalize">{user?.userType}</td>
-                    <td
-                      className={`py-4 px-6 font-bold capitalize ${
-                        user?.verified == "pending"
-                          ? "text-orange-400 "
-                          : user?.verified == "true"
-                          ? "text-green-500"
-                          : "text-red-500"
-                      }`}
-                    >
-                      {user?.verified == "true"
-                        ? "Verified"
-                        : user?.verified == "false"
-                        ? "Refused"
-                        : "Pending"}
-                    </td>
-                    <td className=" py-4 px-1">
-                      <div className="flex flex-col items-center  justify-center gap-2 px-3 ">
-                        {(user?.verified == "false" ||
-                          user?.verified == "pending") &&
-                          user?.userType !== "customer" && (
-                            <a
-                              href="#"
-                              className="rounded-lg bg-green-500  py-1 px-2 font-bold text-white transition-all  duration-300 hover:bg-green-700 dark:text-blue-500"
-                            >
-                              Verify
-                            </a>
-                          )}
-                        <a
-                          href="#"
-                          className="rounded-lg bg-red-500  py-1 px-2 font-bold text-white transition-all duration-300 hover:bg-red-700 dark:text-blue-500"
-                        >
-                          Delete
-                        </a>
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
-          </tbody>
+                      <td className="py-4 px-6 capitalize">{user?.name}</td>
+                      <td className="py-4 px-6 capitalize">
+                        {user?.storeName}
+                      </td>
+                      <th
+                        scope="row"
+                        className="whitespace-nowrap py-4 px-2 font-medium text-gray-900 dark:text-white"
+                      >
+                        {user?.email}
+                      </th>
+                      <td className="py-4 px-2">{user?.mobile}</td>
+                      <td className="py-4 px-2 capitalize">{`${user?.address?.governorate} - ${user?.address?.city} `}</td>
+                      <td className="py-4 px-6 capitalize">{user?.userType}</td>
+                      <td
+                        className={`py-4 px-6 font-bold capitalize ${
+                          user?.verified == "pending"
+                            ? "text-orange-400 "
+                            : user?.verified == "true"
+                            ? "text-green-500"
+                            : "text-red-500"
+                        }`}
+                      >
+                        {user?.verified == "true"
+                          ? "Verified"
+                          : user?.verified == "false"
+                          ? "Refused"
+                          : "Pending"}
+                      </td>
+                      <td className=" py-4 px-1">
+                        <div className="flex flex-col items-center  justify-center gap-2 px-3 ">
+                          {(user?.verified == "false" ||
+                            user?.verified == "pending") &&
+                            user?.userType !== "customer" && (
+                              <a
+                                href="#"
+                                className="rounded-lg bg-green-500  py-1 px-2 font-bold text-white transition-all  duration-300 hover:bg-green-700 dark:text-blue-500"
+                              >
+                                Verify
+                              </a>
+                            )}
+                          <a
+                            href="#"
+                            className="rounded-lg bg-red-500  py-1 px-2 font-bold text-white transition-all duration-300 hover:bg-red-700 dark:text-blue-500"
+                          >
+                            Delete
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+            </tbody>
+          )}
         </table>
       </div>
       <Pagination
@@ -124,6 +136,7 @@ export default function Users() {
         currentPage={currentPage}
         numberOfItems={usersCount}
         numberOfItemsToShow={8}
+        className="bg-inherit"
       />
     </section>
   );
