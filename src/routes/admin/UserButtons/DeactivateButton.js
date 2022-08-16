@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { deactivateUser } from "../../store/slices/admin";
+import { deactivateUser } from "../../../store/slices/admin";
 
 export default function DeactivateButton({ userId }) {
   const dispatch = useDispatch();

@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { deleteUser } from "../../store/slices/admin";
+import { deleteUser } from "../../../store/slices/admin";
 
 export default function DeleteButton({ userId }) {
   const dispatch = useDispatch();

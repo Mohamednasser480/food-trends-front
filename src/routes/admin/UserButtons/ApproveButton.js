@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { approveUser } from "../../store/slices/admin";
+import { approveUser } from "../../../store/slices/admin";
 
 export default function ApproveButton({ userId }) {
   const dispatch = useDispatch();
