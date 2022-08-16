@@ -58,6 +58,18 @@ export const approveUser = createAsyncThunk(
     }
   }
 );
+export const deactivateUser = createAsyncThunk(
+  "users/deactivateUser",
+  async (userId, thunkAPI) => {
+    try {
+      // console.log(userId)
+      const data = await adminService.deactivateUser(userId);
+      return userId;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
 
 const AdminSlice = createSlice({
   name: "users",
@@ -154,6 +166,37 @@ const AdminSlice = createSlice({
       state.error = false;
     },
     [approveUser.rejected]: (state, action) => {
+      state.isLoading = false;
+      // state.users = [];
+      state.error = action.error;
+    },
+
+    
+    // deactivate Users
+    [deactivateUser.pending]: (state) => {
+      state.isLoading = true;
+      // state.users = [];
+      state.error = false;
+    },
+    [deactivateUser.fulfilled]: (state, action) => {
+      // Make new Array of Users
+      const usersAfterdeactivate = state.users.map((user) => {
+        if (user._id == action.payload) {
+          return {
+            ...user,
+            verified: "false",
+          };
+        } else {
+          return { ...user };
+        }
+      });
+      state.isLoading = false;
+      // state.users = state.users.filter((el)=>el._id!==action.payload);
+      state.users = usersAfterdeactivate;
+      // state.currentPage = action.payload.currentPage;
+      state.error = false;
+    },
+    [deactivateUser.rejected]: (state, action) => {
       state.isLoading = false;
       // state.users = [];
       state.error = action.error;

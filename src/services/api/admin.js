@@ -86,5 +86,25 @@ const approveUser = async (userId) => {
     throw error.response.data;
   }
 };
+const deactivateUser = async (userId) => {
+  try {
+    const token = cookie.getCookie("token");
+    const data = await axios.put(
+      `${USERS_API_URI}/${userId}`,
+      {
+        verified: false,
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    // console.log(data)
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
 
-export default { getUsers, paginateUsers, deleteUser, approveUser };
+export default { getUsers, paginateUsers, deleteUser, approveUser,deactivateUser };

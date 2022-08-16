@@ -9,6 +9,7 @@ import { Loader, Pagination } from "../../components/UI";
 import Filters from "./Filters";
 import DeleteButton from "./DeleteButton";
 import ApproveButton from "./ApproveButton";
+import DeactivateButton from "./DeactivateButton";
 export default function Users() {
   const dispatch = useDispatch();
   const users = useSelector(adminUsersSelector).users;
@@ -92,6 +93,7 @@ export default function Users() {
               {users &&
                 users.map((user, index) => {
                   return (
+                  
                     <tr
                       key={index}
                       className={`border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600 ${
@@ -144,6 +146,10 @@ export default function Users() {
                             !isUserDeleted(user) && (
                               <ApproveButton userId={user._id} />
                             )}
+
+                          {user?.verified == "true" && !isUserDeleted(user) && (
+                            <DeactivateButton userId={user._id} />
+                          )}
 
                           {isUserDeleted(user) ? (
                             <span className="font-bold">Deleted</span>
