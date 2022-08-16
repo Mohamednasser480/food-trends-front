@@ -3,17 +3,12 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, DashboardPage, Typography } from '../../components/UI';
 import { cookie } from '../../services';
-import {
-  completedOrdersCountSelector,
-  completedOrdersSelector,
-  getCompletedOrders,
-} from '../../store/slices/delivery';
+import { completedOrdersSelector, getCompletedOrders } from '../../store/slices/delivery';
 
 const History = () => {
   const data = useSelector(completedOrdersSelector);
 
   const dispatch = useDispatch();
-  const token = cookie.getCookie('token');
 
   useEffect(() => {
     dispatch(getCompletedOrders());
@@ -44,9 +39,9 @@ const History = () => {
               {order.customer === null ? (
                 <>
                   <Typography component="subtitle2">Deleted User</Typography>
-                  <Typography component="subtitle2">Deleted User</Typography>
-                  <Typography component="subtitle2">Deleted User</Typography>
-                  <Typography component="subtitle2">Deleted User</Typography>
+                  <Typography component="subtitle2">-</Typography>
+                  <Typography component="subtitle2">-</Typography>
+                  <Typography component="subtitle2">-</Typography>
                 </>
               ) : (
                 <>

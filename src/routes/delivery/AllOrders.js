@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Button, Loader, Typography } from '../../components/UI';
 import { DashboardPage } from '../../components/UI';
-import { cookie } from '../../services';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   allOrdersCountSelector,
