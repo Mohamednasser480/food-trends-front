@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Typography, ProductRating, Button, Accordion, Loader } from "../../UI";
 import { CgStopwatch } from "react-icons/cg";
 import { AiOutlineCalendar, AiFillCheckCircle } from "react-icons/ai";
@@ -31,6 +31,7 @@ export default function ProductDetails({
     cartProducts.find((cartProduct) => cartProduct._id === product._id)
       ?.quantity || 0;
   const quantitySubmitHandler = (quantity) => setQuantity(quantity);
+  let [isMaxAtCart, setIsMaxAtCart] = useState(false);
   const addToCartHandler = () => {
     if (isLoggedIn.status == "succeeded") {
       dispatch(
@@ -48,6 +49,22 @@ export default function ProductDetails({
       );
     }
   };
+  // Fix Add to Cart If All Instock Added in Cart
+  useEffect(() => {
+    // console.log(productQuantity);
+    // console.log(product.inStock);
+    if (productQuantity >= product.inStock) {
+      setIsMaxAtCart(true);
+    } else {
+      setIsMaxAtCart(false);
+    }
+
+    if (quantity > product.inStock - productQuantity) {
+      setIsMaxAtCart(true);
+    } else {
+      setIsMaxAtCart(false);
+    }
+  }, [productQuantity, quantity]);
 
   return (
     <div className={`flex  w-full flex-col gap-4 p-6 lg:w-1/2 ${className}`}>
@@ -120,7 +137,12 @@ export default function ProductDetails({
         </div>
       )}
 
-      <Button variant="primary" className="my-5" onClick={addToCartHandler} disabled={outOfStock}>
+      <Button
+        variant="primary"
+        className="my-5"
+        onClick={addToCartHandler}
+        disabled={outOfStock || isMaxAtCart}
+      >
         Add to Cart
       </Button>
       <Info category={product.category} productId={product._id} />

@@ -9,9 +9,9 @@ let initialState = {
 
 export const doPayment = createAsyncThunk(
   "payment/doPayment",
-  async (cartId) => {
+  async (cartItems) => {
     const userToken = cookie.getCookie("token");
-    const data = await paymentService.doPayment(userToken);
+    const data = await paymentService.doPayment(userToken,cartItems);
     return data;
   }
 );

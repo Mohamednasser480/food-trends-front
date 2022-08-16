@@ -10,6 +10,7 @@ const UserMenu = (props) => {
     vendor: ["Dashboard"],
     customer: ["My profile"],
     delivery: ["Orders"],
+    admin:[]
   };
   const dispatch = useDispatch();
   const logoutHandler = () => dispatch(logout());
@@ -19,7 +20,7 @@ const UserMenu = (props) => {
   return (
     <ul
       onClick={props.onClick}
-      className="menu rounded-box absolute top-12 right-0 w-48 bg-white shadow-md"
+      className="menu rounded-box absolute top-12 right-0 w-48 bg-white shadow-md z-10"
     >
       {menuItems[userType].map((item, index) => {
         return (

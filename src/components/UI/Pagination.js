@@ -2,8 +2,9 @@ export default function Pagination({
   onPageChange,
   currentPage,
   numberOfItems,
+  numberOfItemsToShow
 }) {
-  const pageNumbers = Math.ceil(numberOfItems / 8); //Change to 10
+  const pageNumbers = Math.ceil(numberOfItems / numberOfItemsToShow); //Change to 10
   const pageNumbersArray = Array(pageNumbers).fill(0);
 
   const onClickHanlder = (currentPage) => {
