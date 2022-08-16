@@ -6,7 +6,7 @@ import {
 } from "../../store/slices/admin";
 import { useDispatch, useSelector } from "react-redux";
 import { Loader, Pagination } from "../../components/UI";
-import Filters from "./Filters"
+import Filters from "./Filters";
 export default function Users() {
   const dispatch = useDispatch();
   const users = useSelector(adminUsersSelector).users;
@@ -14,7 +14,7 @@ export default function Users() {
   const currentPage = useSelector(adminUsersSelector).currentPage;
   const usersLoading = useSelector(adminUsersSelector).isLoading;
   const usersError = useSelector(adminUsersSelector).error;
-  const usersFilters=useSelector(adminUsersSelector).filterObject
+  const usersFilters = useSelector(adminUsersSelector).filterObject;
   useEffect(() => {
     dispatch(getUsers(usersFilters));
   }, []);
@@ -26,10 +26,9 @@ export default function Users() {
       <img src={require("../../assets/ServerError.png")} />
     </div>
   ) : (
-
     <section className="flex flex-col gap-2">
       <div className="py-1 px-1">
-          <Filters/>
+        <Filters />
       </div>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
@@ -90,7 +89,12 @@ export default function Users() {
                         scope="row"
                         className="whitespace-nowrap py-3 px-2 font-medium text-gray-900 dark:text-white"
                       >
-                        {user?.email}
+                        {/* {user?.email} */}
+                        {user?.email.split(".")[
+                          user?.email.split(".").length - 1
+                        ] == "deleted"
+                          ? user?.email.split(".").slice(0, 2).join(".")
+                          : user?.email}
                       </th>
                       <td className="py-3 px-2">{user?.mobile}</td>
                       <td className="py-3 px-2 capitalize">{`${user?.address?.governorate} - ${user?.address?.city} `}</td>
@@ -122,12 +126,19 @@ export default function Users() {
                                 Verify
                               </a>
                             )}
-                          <a
-                            href="#"
-                            className="rounded-lg bg-red-500  py-1 px-2 font-bold text-white transition-all duration-300 hover:bg-red-700 dark:text-blue-500"
-                          >
-                            Delete
-                          </a>
+
+                          {user?.email.split(".")[
+                            user?.email.split(".").length - 1
+                          ] == "deleted" ? (
+                            <span className="font-bold">Deleted</span>
+                          ) : (
+                            <a
+                              href="#"
+                              className="rounded-lg bg-red-500  py-1 px-2 font-bold text-white transition-all duration-300 hover:bg-red-700 dark:text-blue-500"
+                            >
+                              Delete
+                            </a>
+                          )}
                         </div>
                       </td>
                     </tr>
