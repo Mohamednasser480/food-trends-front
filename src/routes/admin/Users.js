@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Loader, Pagination } from "../../components/UI";
 import Filters from "./Filters";
 import DeleteButton from "./DeleteButton";
+import ApproveButton from "./ApproveButton";
 export default function Users() {
   const dispatch = useDispatch();
   const users = useSelector(adminUsersSelector).users;
@@ -26,7 +27,7 @@ export default function Users() {
   function isUserDeleted(user) {
     if (
       // user?.email.split(".")[user?.email.split(".").length - 1] == "deleted"
-      user?.available==false
+      user?.available == false
     ) {
       // return user?.email.split(".").slice(0, 2).join(".");
       return true;
@@ -141,12 +142,7 @@ export default function Users() {
                             user?.verified == "pending") &&
                             user?.userType !== "customer" &&
                             !isUserDeleted(user) && (
-                              <a
-                                href="#"
-                                className="rounded-lg bg-green-500  py-1 px-2 font-bold text-white transition-all  duration-300 hover:bg-green-700 dark:text-blue-500"
-                              >
-                                Approve
-                              </a>
+                              <ApproveButton userId={user._id} />
                             )}
 
                           {isUserDeleted(user) ? (

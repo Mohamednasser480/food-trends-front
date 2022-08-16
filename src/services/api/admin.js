@@ -49,22 +49,42 @@ const paginateUsers = async (Args, filters) => {
   }
 };
 
-const deleteUser = async(userId) => {
+const deleteUser = async (userId) => {
   try {
     const token = cookie.getCookie("token");
     const data = await axios.delete(`${USERS_API_URI}`, {
       headers: {
         Authorization: "Bearer " + token,
       },
-      data:{
-        id:userId
-      }
+      data: {
+        id: userId,
+      },
     });
     // console.log(data)
-    return data
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+const approveUser = async (userId) => {
+  try {
+    const token = cookie.getCookie("token");
+    const data = await axios.put(
+      `${USERS_API_URI}/${userId}`,
+      {
+        verified: true,
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    // console.log(data)
+    return data;
   } catch (error) {
     throw error.response.data;
   }
 };
 
-export default { getUsers, paginateUsers, deleteUser };
+export default { getUsers, paginateUsers, deleteUser, approveUser };
