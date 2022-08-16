@@ -6,6 +6,7 @@ import {
 } from "../../store/slices/admin";
 import { useDispatch, useSelector } from "react-redux";
 import { Loader, Pagination } from "../../components/UI";
+import Filters from "./Filters"
 export default function Users() {
   const dispatch = useDispatch();
   const users = useSelector(adminUsersSelector).users;
@@ -13,47 +14,52 @@ export default function Users() {
   const currentPage = useSelector(adminUsersSelector).currentPage;
   const usersLoading = useSelector(adminUsersSelector).isLoading;
   const usersError = useSelector(adminUsersSelector).error;
+  const usersFilters=useSelector(adminUsersSelector).filterObject
   useEffect(() => {
-    dispatch(getUsers());
+    dispatch(getUsers(usersFilters));
   }, []);
   const changeUsersPerPage = (pageNumber) => {
     dispatch(paginateUsers({ pageNumber: pageNumber }));
   };
   return usersError ? (
-    <div className="w-full h-full items-center justify-center flex">
-      <img src={require("../../assets/ServerError.png")}/>
+    <div className="flex h-full w-full items-center justify-center">
+      <img src={require("../../assets/ServerError.png")} />
     </div>
   ) : (
-    <section className="">
+
+    <section className="flex flex-col gap-2">
+      <div className="py-1 px-1">
+          <Filters/>
+      </div>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
           <thead className="bg-primary text-xs uppercase text-white  dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th scope="col" className="py-3 px-4">
+              <th scope="col" className="py-3 px-5">
                 Image
               </th>
-              <th scope="col" className="py-3 px-6">
+              <th scope="col" className="py-3 px-3">
                 Username
               </th>
-              <th scope="col" className="py-3 px-6">
+              <th scope="col" className="py-3 px-3">
                 StoreName
               </th>
-              <th scope="col" className="py-3 px-6">
+              <th scope="col" className="py-3 px-3">
                 Email
               </th>
-              <th scope="col" className="py-3 px-6">
+              <th scope="col" className="py-3 px-3">
                 Mobile Number
               </th>
-              <th scope="col" className="py-3 px-6">
+              <th scope="col" className="py-3 px-3">
                 Address
               </th>
-              <th scope="col" className="py-3 px-6">
+              <th scope="col" className="py-3 px-3">
                 User Type
               </th>
-              <th scope="col" className="py-3 px-6">
+              <th scope="col" className="py-3 px-3">
                 Status
               </th>
-              <th scope="col" className="py-3 px-6">
+              <th scope="col" className="py-3 px-3">
                 <span className="sr-only">Edit</span>
               </th>
             </tr>
@@ -69,28 +75,28 @@ export default function Users() {
                       key={index}
                       className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
                     >
-                      <td className="py-4 px-4">
+                      <td className="py-3 px-4">
                         <img
                           src={user?.image}
                           className="h-12 w-12 rounded-full object-cover"
                         />
                       </td>
 
-                      <td className="py-4 px-6 capitalize">{user?.name}</td>
-                      <td className="py-4 px-6 capitalize">
+                      <td className="py-3 px-3 capitalize">{user?.name}</td>
+                      <td className="py-3 px-3 capitalize">
                         {user?.storeName}
                       </td>
                       <th
                         scope="row"
-                        className="whitespace-nowrap py-4 px-2 font-medium text-gray-900 dark:text-white"
+                        className="whitespace-nowrap py-3 px-2 font-medium text-gray-900 dark:text-white"
                       >
                         {user?.email}
                       </th>
-                      <td className="py-4 px-2">{user?.mobile}</td>
-                      <td className="py-4 px-2 capitalize">{`${user?.address?.governorate} - ${user?.address?.city} `}</td>
-                      <td className="py-4 px-6 capitalize">{user?.userType}</td>
+                      <td className="py-3 px-2">{user?.mobile}</td>
+                      <td className="py-3 px-2 capitalize">{`${user?.address?.governorate} - ${user?.address?.city} `}</td>
+                      <td className="py-3 px-3 capitalize">{user?.userType}</td>
                       <td
-                        className={`py-4 px-6 font-bold capitalize ${
+                        className={`py-3 px-3 font-bold capitalize ${
                           user?.verified == "pending"
                             ? "text-orange-400 "
                             : user?.verified == "true"
@@ -104,7 +110,7 @@ export default function Users() {
                           ? "Refused"
                           : "Pending"}
                       </td>
-                      <td className=" py-4 px-1">
+                      <td className=" py-3 px-1">
                         <div className="flex flex-col items-center  justify-center gap-2 px-3 ">
                           {(user?.verified == "false" ||
                             user?.verified == "pending") &&
