@@ -7,7 +7,7 @@ const initialState = {
   isLoading: false,
   error: false,
   currentPage: 1,
-  filterObject: { name: "", verified: "" },
+  filterObject: { name: "", verified: "" ,userType:""},
 };
 
 export const getUsers = createAsyncThunk("users/getUsers", async (filters) => {

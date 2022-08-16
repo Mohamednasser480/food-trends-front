@@ -2,11 +2,13 @@ import React, { useRef } from "react";
 import SelectBox from "../../components/Shop/SelectBox";
 import { useDispatch, useSelector } from "react-redux";
 import { adminUsersSelector, getUsers } from "../../store/slices/admin";
+import { Button } from "react-scroll";
 
 export default function Filters() {
   const dispatch = useDispatch();
   const filters = useSelector(adminUsersSelector).filterObject;
   const userStatusRef = useRef();
+  const userTypeRef = useRef();
   const searchRef = useRef();
   const statusArray = [
     {
@@ -26,6 +28,24 @@ export default function Filters() {
       value: "false",
     },
   ];
+  const userTypeArray = [
+    {
+      text: "All Users",
+      value: "",
+    },
+    {
+      text: "Customers",
+      value: "customer",
+    },
+    {
+      text: "Vendor",
+      value: "vendor",
+    },
+    {
+      text: "Delivery",
+      value: "delivery",
+    },
+  ];
 
   // let filtersPayload = { name: "", verified: "" };
 
@@ -34,6 +54,7 @@ export default function Filters() {
       getUsers({
         name: searchRef.current.value,
         verified: userStatusRef.current.value,
+        userType: userTypeRef.current.value,
       })
     );
   };
@@ -43,6 +64,20 @@ export default function Filters() {
       getUsers({
         name: searchRef.current.value,
         verified: userStatusRef.current.value,
+        userType: userTypeRef.current.value,
+      })
+    );
+  };
+
+  const resetFilters = () => {
+    searchRef.current.value = "";
+    userStatusRef.current.value = "";
+    userTypeRef.current.value = "";
+    dispatch(
+      getUsers({
+        name: searchRef.current.value,
+        verified: userStatusRef.current.value,
+        userType: userTypeRef.current.value,
       })
     );
   };
@@ -76,7 +111,7 @@ export default function Filters() {
       >
         Search
       </button>
-      <div className="ml-12 flex items-center gap-4">
+      <div className=" flex items-center gap-4">
         <h4 className="font-bold">Filter by user status</h4>
         <SelectBox
           array={statusArray}
@@ -84,6 +119,20 @@ export default function Filters() {
           ref={userStatusRef}
         />
       </div>
+      <div className=" flex items-center gap-4">
+        <h4 className="font-bold">Filter by user type</h4>
+        <SelectBox
+          array={userTypeArray}
+          onChange={onChangeHandler}
+          ref={userTypeRef}
+        />
+      </div>
+      <button
+        onClick={resetFilters}
+        className="rounded-md bg-secondary-400 px-4 py-2 font-sans font-medium text-black transition-all duration-300 hover:text-black hover:opacity-80 focus:bg-secondary-400 focus:text-black"
+      >
+        Reset
+      </button>
     </div>
   );
 }
