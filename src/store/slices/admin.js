@@ -10,19 +10,15 @@ const initialState = {
   filterObject: { name: "", verified: "" },
 };
 
-export const getUsers = createAsyncThunk(
-  "users/getUsers",
-  async (args, thunkAPI) => {
-    try {
-      const filters = thunkAPI.getState().users.filterObject;
-      const data = await adminService.getUsers(args, filters);
-      // console.log(data)
-      return data;
-    } catch (error) {
-      throw error;
-    }
+export const getUsers = createAsyncThunk("users/getUsers", async (filters) => {
+  try {
+    const data = await adminService.getUsers(filters);
+    // console.log(data)
+    return { data, filters };
+  } catch (error) {
+    throw error;
   }
-);
+});
 export const paginateUsers = createAsyncThunk(
   "users/paginateUsers",
   async (args, thunkAPI) => {
@@ -48,9 +44,11 @@ const AdminSlice = createSlice({
     },
     [getUsers.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.users = action.payload.data;
-      state.count = action.payload.count;
+      state.users = action.payload.data.data;
+      state.count = action.payload.data.count;
       state.error = false;
+      state.filterObject = action.payload.filters;
+      state.currentPage = 1;
     },
     [getUsers.rejected]: (state, action) => {
       state.isLoading = false;
