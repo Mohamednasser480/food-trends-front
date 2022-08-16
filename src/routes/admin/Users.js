@@ -7,6 +7,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Loader, Pagination } from "../../components/UI";
 import Filters from "./Filters";
+import DeleteButton from "./DeleteButton";
 export default function Users() {
   const dispatch = useDispatch();
   const users = useSelector(adminUsersSelector).users;
@@ -15,6 +16,7 @@ export default function Users() {
   const usersLoading = useSelector(adminUsersSelector).isLoading;
   const usersError = useSelector(adminUsersSelector).error;
   const usersFilters = useSelector(adminUsersSelector).filterObject;
+
   useEffect(() => {
     dispatch(getUsers(usersFilters));
   }, []);
@@ -23,7 +25,8 @@ export default function Users() {
   };
   function isUserDeleted(user) {
     if (
-      user?.email.split(".")[user?.email.split(".").length - 1] == "deleted"
+      // user?.email.split(".")[user?.email.split(".").length - 1] == "deleted"
+      user?.available==false
     ) {
       // return user?.email.split(".").slice(0, 2).join(".");
       return true;
@@ -36,7 +39,7 @@ export default function Users() {
     // Need to remove just last 2
     // return email.split(".").slice(0, 2).join(".");
     let emailArr = email.split(".");
-    return emailArr.slice(0, emailArr.length-2).join(".");
+    return emailArr.slice(0, emailArr.length - 2).join(".");
   }
 
   return usersError ? (
@@ -136,7 +139,8 @@ export default function Users() {
                         <div className="flex flex-col items-center  justify-center gap-2 px-3 ">
                           {(user?.verified == "false" ||
                             user?.verified == "pending") &&
-                            user?.userType !== "customer" && (
+                            user?.userType !== "customer" &&
+                            !isUserDeleted(user) && (
                               <a
                                 href="#"
                                 className="rounded-lg bg-green-500  py-1 px-2 font-bold text-white transition-all  duration-300 hover:bg-green-700 dark:text-blue-500"
@@ -148,12 +152,7 @@ export default function Users() {
                           {isUserDeleted(user) ? (
                             <span className="font-bold">Deleted</span>
                           ) : (
-                            <a
-                              href="#"
-                              className="rounded-lg bg-red-500  py-1 px-4 font-bold text-white transition-all duration-300 hover:bg-red-700 dark:text-blue-500"
-                            >
-                              Delete
-                            </a>
+                            <DeleteButton userId={user._id} />
                           )}
                         </div>
                       </td>

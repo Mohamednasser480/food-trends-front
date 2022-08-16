@@ -49,4 +49,22 @@ const paginateUsers = async (Args, filters) => {
   }
 };
 
-export default { getUsers, paginateUsers };
+const deleteUser = async(userId) => {
+  try {
+    const token = cookie.getCookie("token");
+    const data = await axios.delete(`${USERS_API_URI}`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+      data:{
+        id:userId
+      }
+    });
+    // console.log(data)
+    return data
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export default { getUsers, paginateUsers, deleteUser };

@@ -7,7 +7,7 @@ const initialState = {
   isLoading: false,
   error: false,
   currentPage: 1,
-  filterObject: { name: "", verified: "" ,userType:""},
+  filterObject: { name: "", verified: "", userType: "" },
 };
 
 export const getUsers = createAsyncThunk("users/getUsers", async (filters) => {
@@ -27,6 +27,19 @@ export const paginateUsers = createAsyncThunk(
       const data = await adminService.paginateUsers(args, filters);
       // console.log(data)
       return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
+export const deleteUser = createAsyncThunk(
+  "users/deleteUser",
+  async (userId, thunkAPI) => {
+    try {
+      // console.log(userId)
+      const data = await adminService.deleteUser(userId);
+      return userId;
     } catch (error) {
       throw error;
     }
@@ -70,6 +83,37 @@ const AdminSlice = createSlice({
     [paginateUsers.rejected]: (state, action) => {
       state.isLoading = false;
       state.users = [];
+      state.error = action.error;
+    },
+    // Delete Users
+    [deleteUser.pending]: (state) => {
+      state.isLoading = true;
+      // state.users = [];
+      state.error = false;
+    },
+    [deleteUser.fulfilled]: (state, action) => {
+      // Make new Array of Users
+      const usersAfterDelete = state.users.map((user) => {
+        if (user._id == action.payload) {
+          return {
+            ...user,
+            email: `${user.email}.${user._id}.deleted`,
+            available: false,
+          };
+        } else {
+          return { ...user };
+        }
+      });
+
+      state.isLoading = false;
+      // state.users = state.users.filter((el)=>el._id!==action.payload);
+      state.users = usersAfterDelete;
+      // state.currentPage = action.payload.currentPage;
+      state.error = false;
+    },
+    [deleteUser.rejected]: (state, action) => {
+      state.isLoading = false;
+      // state.users = [];
       state.error = action.error;
     },
   },
