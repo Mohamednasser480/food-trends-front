@@ -33,7 +33,10 @@ export default function Users() {
   }
 
   function emailWithoutDeleted(email) {
-    return email.split(".").slice(0, 2).join(".");
+    // Need to remove just last 2
+    // return email.split(".").slice(0, 2).join(".");
+    let emailArr = email.split(".");
+    return emailArr.slice(0, emailArr.length-2).join(".");
   }
 
   return usersError ? (
@@ -87,7 +90,9 @@ export default function Users() {
                   return (
                     <tr
                       key={index}
-                      className={`border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600 ${isUserDeleted(user)?"bg-red-100 hover:bg-red-200":""}`}
+                      className={`border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600 ${
+                        isUserDeleted(user) ? "bg-red-100 hover:bg-red-200" : ""
+                      }`}
                     >
                       <td className="py-3 px-4">
                         <img
@@ -136,7 +141,7 @@ export default function Users() {
                                 href="#"
                                 className="rounded-lg bg-green-500  py-1 px-2 font-bold text-white transition-all  duration-300 hover:bg-green-700 dark:text-blue-500"
                               >
-                                Verify
+                                Approve
                               </a>
                             )}
 
@@ -145,7 +150,7 @@ export default function Users() {
                           ) : (
                             <a
                               href="#"
-                              className="rounded-lg bg-red-500  py-1 px-2 font-bold text-white transition-all duration-300 hover:bg-red-700 dark:text-blue-500"
+                              className="rounded-lg bg-red-500  py-1 px-4 font-bold text-white transition-all duration-300 hover:bg-red-700 dark:text-blue-500"
                             >
                               Delete
                             </a>
