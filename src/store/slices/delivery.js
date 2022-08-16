@@ -30,6 +30,16 @@ export const assignOrders = createAsyncThunk('delivery/assignOrders', async (id)
   return await delivery.assignOrders(token, id);
 });
 
+export const deassignOrder = createAsyncThunk('delivery/deassignOrder', async (id) => {
+  const token = cookie.getCookie('token');
+  return await delivery.deassignOrder(token, id);
+});
+
+export const setOrderComplete = createAsyncThunk('delivery/setOrdersComplete', async (id) => {
+  const token = cookie.getCookie('token');
+  return await delivery.setOrderComplete(token, id);
+});
+
 const deliverySlice = createSlice({
   name: 'delivery',
   initialState,

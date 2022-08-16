@@ -10,7 +10,7 @@ const getAllOrders = async (token) => {
     });
     return res.data;
   } catch (error) {
-    console.log(error.response.data)
+    console.log(error.response.data);
   }
 };
 
@@ -42,5 +42,31 @@ const assignOrders = async (token, id) => {
   });
   return response.data;
 };
+const setOrderComplete = async (token, id) => {
+  let data = { id: id, status: 'completed' };
+  const response = await axios.put(url, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
 
-export default { getAllOrders, getAssignedOrders, getCompletedOrders, assignOrders };
+const deassignOrder = async (token, id) => {
+  let data = { id: id, status: 'pending' };
+  const response = await axios.put(url, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
+
+export default {
+  getAllOrders,
+  getAssignedOrders,
+  getCompletedOrders,
+  assignOrders,
+  setOrderComplete,
+  deassignOrder,
+};
