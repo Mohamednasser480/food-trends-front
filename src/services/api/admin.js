@@ -6,8 +6,13 @@ const numberToFetchPerPage = 8;
 
 const getUsers = async (filters) => {
   const token = cookie.getCookie("token");
-  const URL = `${USERS_API_URI}?&limit=${numberToFetchPerPage}&name=${filters?.name}&verified=${filters?.verified}`;
-  console.log("Get Filters",URL);
+  const URL = `${USERS_API_URI}?&user_type=${
+    filters?.userType
+  }&limit=${numberToFetchPerPage}&name=${filters?.name}${
+    filters.verified ? `&verified=${filters?.verified}` : ""
+  }`;
+  // const URL = `${USERS_API_URI}?&user_type=de;
+  console.log("Get Filters", filters);
   try {
     const response = await axios.get(URL, {
       headers: { Authorization: "Bearer " + token },
@@ -27,7 +32,9 @@ const paginateUsers = async (Args, filters) => {
 
   const URL = `${USERS_API_URI}?&limit=${numberToFetchPerPage}&skip=${
     (pageNumber - 1) * numberToFetchPerPage
-  }&name=${filters.name}&verified=${filters.verified}`;
+  }&name=${filters.name}&user_type=${filters?.userType}${
+    filters.verified ? `&verified=${filters?.verified}` : ""
+  }`;
   console.log(URL);
 
   try {

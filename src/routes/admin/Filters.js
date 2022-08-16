@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import SelectBox from "../../components/Shop/SelectBox";
 import { useDispatch, useSelector } from "react-redux";
 import { adminUsersSelector, getUsers } from "../../store/slices/admin";
@@ -16,7 +16,7 @@ export default function Filters() {
       value: "",
     },
     {
-      text: "Active",
+      text: "Verified",
       value: "true",
     },
     {
@@ -34,7 +34,7 @@ export default function Filters() {
       value: "",
     },
     {
-      text: "Customers",
+      text: "Customer",
       value: "customer",
     },
     {
@@ -70,6 +70,13 @@ export default function Filters() {
   };
 
   const resetFilters = () => {
+    if (
+      searchRef.current.value == "" &&
+      userStatusRef.current.value == "" &&
+      userTypeRef.current.value == ""
+    ) {
+      return;
+    }
     searchRef.current.value = "";
     userStatusRef.current.value = "";
     userTypeRef.current.value = "";
