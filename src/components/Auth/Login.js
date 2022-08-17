@@ -31,7 +31,9 @@ export default function Login({ setShowRegister, showSignUp = true }) {
   };
 
   let errorMessage = "";
+  console.log(error)
   switch (error) {
+    
     case `Pending`:
       errorMessage =
         "Please Verify Your Email, We 've send you a confirmation code.";
@@ -39,7 +41,14 @@ export default function Login({ setShowRegister, showSignUp = true }) {
     case `Error: Unable to login`:
       errorMessage = "Wrong Email or Password!";
       break;
+    case `Error: Pending for admin approvement`:
+      errorMessage = "Thank you for Registeration, Your account is being checked , We will alert you when your Account is Verified."
+      break;
+    case `Error: your account was refused`:
+      errorMessage = "Thank you for being intersted in our website , but your account doesn't meet our standards."
+      break;
     default:
+      errorMessage=error
       break;
   }
 

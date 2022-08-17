@@ -2,8 +2,10 @@ export default function Pagination({
   onPageChange,
   currentPage,
   numberOfItems,
+  numberOfItemsToShow,
+  className
 }) {
-  const pageNumbers = Math.ceil(numberOfItems / 8); //Change to 10
+  const pageNumbers = Math.ceil(numberOfItems / numberOfItemsToShow); //Change to 10
   const pageNumbersArray = Array(pageNumbers).fill(0);
 
   const onClickHanlder = (currentPage) => {
@@ -11,7 +13,7 @@ export default function Pagination({
   };
 
   return (
-    <div className="flex w-full items-center justify-between border-t border-gray-200 bg-white px-4 py-3 md:px-0">
+    <div className={`flex w-full items-center justify-between border-t border-gray-200 bg-white px-4 py-3 md:px-0 ${className}`}>
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-gray-700">

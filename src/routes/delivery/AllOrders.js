@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Button, Loader, Typography } from '../../components/UI';
 import { DashboardPage } from '../../components/UI';
-import { cookie } from '../../services';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   allOrdersCountSelector,
@@ -51,43 +50,34 @@ const AllOrders = () => {
       <Typography component="h6" className="mb-5 self-end">
         All Orders: <span className="font-medium text-yellow-400">{count}</span>
       </Typography>
-      <div className="mb-10 flex w-full flex-col items-start px-10">
-        <div className="flex w-full items-center bg-primary p-2 text-center font-medium text-white">
-          <p className="w-1/12 text-lg uppercase">Order ID</p>
-          <p className="w-2/12 text-lg uppercase">Customer Name</p>
-          <p className="w-2/12 text-lg uppercase">Contact</p>
-          <p className="w-2/12 text-lg uppercase">Governorate</p>
-          <p className="w-2/12 text-lg uppercase">City</p>
-          <p className="w-2/12 text-lg uppercase">Order Date</p>
-          <p className="w-2/12 text-lg uppercase">Total Price (EGP)</p>
-          <p className=""></p>
+      <div className="mb-10 flex w-full min-w-[800px] flex-col items-start px-10">
+        <div className="flex w-full items-center bg-primary p-2 text-center font-medium text-white [&>*]:w-2/12 [&>*]:text-lg [&>*]:uppercase">
+          <p className="!w-16">Order ID</p>
+          <p>Customer Name</p>
+          <p>Contact</p>
+          <p>Governorate</p>
+          <p>City</p>
+          <p>Order Date</p>
+          <p>Total Price (EGP)</p>
+          <p></p>
         </div>
 
         {data.map((order, index) => {
           return (
-            <div className="flex w-full items-center border-b p-3 text-center" key={index}>
-              <Typography component="subtitle2" className="w-1/12 font-medium">
+            <div
+              className="[&>*]:text-md flex w-full items-center border-b py-1 text-center [&>*]:w-2/12"
+              key={index}
+            >
+              <Typography component="subtitle2" className="!w-16 px-1">
                 {order._id.substring(order._id.length - 6)}
               </Typography>
-              <Typography component="subtitle2" className="w-2/12 break-words">
-                {order.customer.name}
-              </Typography>
-              <Typography component="subtitle2" className="w-2/12 break-words">
-                {order.customer.mobile}
-              </Typography>
-              <Typography component="subtitle2" className="w-2/12">
-                {order.customer.address.governorate}
-              </Typography>
-              <Typography component="subtitle2" className="w-2/12">
-                {order.customer.address.city}
-              </Typography>
-              <Typography component="subtitle2" className="w-2/12">
-                {order.createdAt.substring(0, 10)}
-              </Typography>
-              <Typography component="subtitle2" className="w-2/12">
-                {order.totalPrice.toFixed(2)}
-              </Typography>
-              <Typography component="subtitle2" className="">
+              <Typography component="subtitle2">{order.customer.name}</Typography>
+              <Typography component="subtitle2">{order.customer.mobile}</Typography>
+              <Typography component="subtitle2">{order.customer.address.governorate}</Typography>
+              <Typography component="subtitle2">{order.customer.address.city}</Typography>
+              <Typography component="subtitle2">{order.createdAt.substring(0, 10)}</Typography>
+              <Typography component="subtitle2">{order.totalPrice.toFixed(2)}</Typography>
+              <div>
                 <Button
                   variant="secondary"
                   className="tracking-tight"
@@ -95,7 +85,7 @@ const AllOrders = () => {
                 >
                   Assign
                 </Button>
-              </Typography>
+              </div>
             </div>
           );
         })}

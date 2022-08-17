@@ -13,13 +13,24 @@ const getAllOrders = async (userToken) => {
 };
 
 //Create New Order
-const createOrder = async (userToken) => {
-  await axios.post(`${Order_API_URI}/save`,null, {
+const createOrder = async (userToken,cartData) => {
+  await axios.post(`${Order_API_URI}/save`,cartData, {
     headers: {
       Authorization: `Bearer ${userToken}`,
     },
   });
 };
+//SaveOrder
+const saveOrder = async (userToken,cartData) => {
+  await axios.post(`${Order_API_URI}/save`,cartData, {
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+    },
+  });
+};
+
+
+
 
 //Delete an Order
 const deleteOrder = async (userToken, id) => {
@@ -34,4 +45,5 @@ export default {
   getAllOrders,
   createOrder,
   deleteOrder,
+  saveOrder
 };

@@ -61,10 +61,10 @@ export default function ShopProducts() {
         ))}
       </div>
       <Pagination
-        allProducts={numberOfProducts}
         onPageChange={changeProductsPerPage}
         currentPage={currentPage}
         numberOfItems={numberOfProducts}
+        numberOfItemsToShow={8}
       />
     </section>:
     <section className="flex flex-col items-center justify-center">
