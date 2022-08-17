@@ -9,7 +9,7 @@ import {
   vendorStatusSelector,
 } from "../../store/slices/vendor";
 
-const filters = ["all", "completed", "pending", "canceled"];
+const filters = ["all", "completed", "pending"];
 const Orders = () => {
   const [selected, setSelected] = useState("");
   const filtersObj = useSelector(filteredOrdersSelector);
@@ -130,7 +130,7 @@ const Orders = () => {
                   filteredData.map((item) => {
                     console.log(item)
                     return (
-                      <tr className=" text-center">
+                      <tr className=" text-center capitalize">
                         <th>{item.customer?.name || "Deleted User"}</th>
                         <th>
                           <div
@@ -141,8 +141,8 @@ const Orders = () => {
                             {item.status}
                           </div>
                         </th>
-                        <th>{convertData(item.createdAt)}</th>
-                        <th></th>
+                        <th>{new Date(item?.createdAt).toLocaleDateString()}</th>
+                        <th>{new Date(item?.expectedDeliveryDate).toLocaleDateString()}</th>
                         <th>{item.totalPrice.toFixed(2)} EGP</th>
                         <th></th>
                       </tr>
