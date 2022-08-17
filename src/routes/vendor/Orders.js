@@ -70,7 +70,7 @@ const Orders = () => {
               return (
                 <Button
                   variant="user-account"
-                  className={`m-2 w-28 capitalize hover:bg-primary`}
+                  className={`m-2 w-28 capitalize hover:bg-primary ${indexBtn == index?"!bg-primary !text-white":""}`}
                   key={index}
                   onClick={(e) => handleOrderStatFilter(e.target.value, index)}
                   value={filter}
@@ -122,12 +122,13 @@ const Orders = () => {
                   <th>Order Date</th>
                   <th>Delivery Date</th>
                   <th>Total Price</th>
-                  <th>Payment Method</th>
+                  {/* <th>Payment Method</th> */}
                 </tr>
               </thead>
               <tbody>
                 {React.Children.toArray(
                   filteredData.map((item) => {
+                    console.log(item)
                     return (
                       <tr className=" text-center">
                         <th>{item.customer?.name || "Deleted User"}</th>

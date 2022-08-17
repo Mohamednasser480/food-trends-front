@@ -21,13 +21,13 @@ const Cart = () => {
   const payment = useSelector(paymentSelector);
   const dispatch = useDispatch();
   const cartId = useSelector(selectCartID);
-  const loginStatus = useSelector(loginSelector);
+  const loginStatus = useSelector(selectStatus);
   const [guestShowLogin,setGuestShowLogin]=useState(false);
   const clearItemsHandler = () => {
     dispatch(clearCartData());
   };
   const checkoutHandler = () => {
-    if (loginStatus.status == "succeeded") {
+    if (loginStatus == "succeeded") {
       setGuestShowLogin(false)
       const preparedItems=prepareCartItemsForPayment(items)
       dispatch(doPayment(preparedItems));
@@ -54,6 +54,10 @@ const Cart = () => {
     console.log(preparedItems)
     return preparedItems
   }
+
+  // useEffect(()=>{
+  //   checkoutHandler()
+  // },[loginStatus])
 
 
   return (
@@ -109,7 +113,8 @@ const Cart = () => {
             ) : (
               ""
             )}
-            {payment.error && (
+            {console.log(payment)}
+            {(payment.error && Object.keys(payment.error).length !== 0 ) && (
               <p className="text-lg font-medium text-red-500">
                 Error During Checkout! Please try again.
               </p>
