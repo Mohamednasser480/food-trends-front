@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { DashboardLayout } from "./index";
 import Users from '../../routes/admin/Users';
+import Products from '../../routes/admin/Products';
 
 const links = [
   {
@@ -26,6 +27,7 @@ const AdminLayout = (props) => {
     <DashboardLayout links={links}>
       <Routes>
         <Route path="/" element={<Users />} />
+        <Route path="/products" element={<Products />} />
         {/* <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductEdit />} />
         <Route path="/add-product" element={<AddProduct />} />
