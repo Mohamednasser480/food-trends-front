@@ -11,28 +11,39 @@ import {
   selectError,
   clearCartData,
   selectCartID,
+  selectTotalPrice,
 } from "../../store/slices/cart";
 import { loginSelector } from "../../store/slices/auth";
 import { doPayment, paymentSelector } from "../../store/slices/payment";
 const Cart = () => {
   const items = useSelector(selectAllCartItems);
+  const cartTotalPrice = useSelector(selectTotalPrice);
   const cartStatus = useSelector(selectStatus);
   const error = useSelector(selectError);
   const payment = useSelector(paymentSelector);
   const dispatch = useDispatch();
   const cartId = useSelector(selectCartID);
   const loginStatus = useSelector(selectStatus);
-  const [guestShowLogin,setGuestShowLogin]=useState(false);
+  const [guestShowLogin, setGuestShowLogin] = useState(false);
   const clearItemsHandler = () => {
     dispatch(clearCartData());
   };
+
+  let [cartTotalPriceError, setCartTotalPriceError] = useState(false);
+
   const checkoutHandler = () => {
+    if (cartTotalPrice < 50) {
+      setCartTotalPriceError(true);
+      return;
+    }
+
     if (loginStatus == "succeeded") {
-      setGuestShowLogin(false)
-      const preparedItems=prepareCartItemsForPayment(items)
+      setGuestShowLogin(false);
+      const preparedItems = prepareCartItemsForPayment(items);
+
       dispatch(doPayment(preparedItems));
-    }else{
-      setGuestShowLogin(true)
+    } else {
+      setGuestShowLogin(true);
     }
   };
   const content = {
@@ -46,19 +57,19 @@ const Cart = () => {
   const navigateToPaymentPage = () => {
     window.location.href = payment.paymentLink;
   };
-  
-  function prepareCartItemsForPayment(items){
-    const preparedItems=items.map((el)=>{
-      return {id:el._id,quantity:el.quantity}
-    })
-    console.log(preparedItems)
-    return preparedItems
+
+  function prepareCartItemsForPayment(items) {
+    const preparedItems = items.map((el) => {
+      return { id: el._id, quantity: el.quantity };
+    });
+    // console.log(preparedItems)
+    // console.log(items)
+    return preparedItems;
   }
 
   // useEffect(()=>{
   //   checkoutHandler()
   // },[loginStatus])
-
 
   return (
     <Page title="cart">
@@ -114,7 +125,7 @@ const Cart = () => {
               ""
             )}
             {console.log(payment)}
-            {(payment.error && Object.keys(payment.error).length !== 0 ) && (
+            {payment.error && Object.keys(payment.error).length !== 0 && (
               <p className="text-lg font-medium text-red-500">
                 Error During Checkout! Please try again.
               </p>
@@ -122,6 +133,11 @@ const Cart = () => {
             {guestShowLogin && (
               <p className="text-lg font-medium text-primary">
                 Please Login Before Checkout
+              </p>
+            )}
+            {cartTotalPriceError && (
+              <p className="text-lg font-medium text-primary">
+                Order Total Price Should Exceed 50.00 LE
               </p>
             )}
           </div>
