@@ -11,17 +11,17 @@ import DeliveryProfile from '../../routes/delivery/Profile';
 
 const links = [
   {
-    text: 'dashboard',
+    text: 'available orders',
     icon: <MdDashboard className="" size={20} />,
     to: '/',
   },
   {
-    text: 'live orders',
+    text: 'current orders',
     icon: <GrDeliver className="" size={20} />,
     to: '/live-orders',
   },
   {
-    text: 'history',
+    text: 'completed orders',
     icon: <FaHistory className="" size={20} />,
     to: '/history',
   },

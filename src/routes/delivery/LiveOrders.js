@@ -12,6 +12,7 @@ import {
 } from '../../store/slices/delivery';
 
 const LiveOrders = () => {
+  const [complete, setComplete] = useState(false);
   const data = useSelector(assignedOrdersSelector);
   const count = useSelector(assignedOrdersCountSelector);
   const completedCount = useSelector(completedOrdersCountSelector);
@@ -21,7 +22,7 @@ const LiveOrders = () => {
 
   useEffect(() => {
     dispatch(getAssignedOrders());
-  }, [count, completedCount]);
+  }, [completedCount]);
 
   const handleSetComplete = (id) => {
     dispatch(setOrderComplete(id));
@@ -78,13 +79,13 @@ const LiveOrders = () => {
               <Typography component="subtitle2">{order.totalPrice.toFixed(2)}</Typography>
               <div>
                 <button
-                  className="rounded-lg bg-red-500 p-1 uppercase text-white"
+                  className="mr-1 rounded-lg bg-red-500 p-1 px-2 uppercase text-white hover:bg-red-700"
                   onClick={() => handleDeassign(order._id)}
                 >
                   remove
                 </button>
                 <button
-                  className="rounded-lg bg-green-500 p-1 uppercase text-white"
+                  className="rounded-lg bg-green-500 p-1 px-2 uppercase text-white hover:bg-green-700"
                   onClick={() => handleSetComplete(order._id)}
                 >
                   complete
