@@ -93,6 +93,7 @@ export default function Users() {
               {users &&
                 users.map((user, index) => {
                   return (
+                    user?.userType!=="admin" &&
                     <tr
                       key={index}
                       className={`border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600 ${
@@ -160,6 +161,7 @@ export default function Users() {
                         </div>
                       </td>
                     </tr>
+                          
                   );
                 })}
             </tbody>
