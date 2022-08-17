@@ -29,11 +29,8 @@ const fetchReviewsByRating = async ({ productId, filterObj }) => {
         url = "";
         break;
     }
-    console.log(url);
     return url;
   };
-
-  console.log(filterByRating());
 
   const response = await axios.get(
     `${PRODUCTS_API_URI}/${productId}/reviews${filterByRating()}`
