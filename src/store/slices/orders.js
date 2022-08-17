@@ -32,7 +32,7 @@ export const saveOrder = createAsyncThunk(
     const userToken = cookie.getCookie("token");
     const order = await orders.saveOrder(userToken,cartData);
     // console.log("meky")
-    thunkAPI.dispatch(clearCartData());
+    // thunkAPI.dispatch(clearCartData());
     return order;
   }
 );
