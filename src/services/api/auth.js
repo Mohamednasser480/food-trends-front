@@ -58,8 +58,10 @@ const register = async (newUser) => {
       },
     });
 
+    console.log(res.data)
     return res.data;
   } catch (e) {
+    console.log(e.response.data)
     throw e.response.data;
   }
 };
