@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { MdDashboard } from 'react-icons/md';
+import { FiUsers } from 'react-icons/fi';
+import { GiGrapes } from 'react-icons/gi';
 import { Route, Routes } from 'react-router-dom';
 
 import { DashboardLayout } from "./index";
@@ -9,8 +10,13 @@ import Users from '../../routes/admin/Users';
 const links = [
   {
     text: 'Users',
-    icon: <MdDashboard className="mx-3" />,
+    icon: <FiUsers className="ml-3" />,
     to: '/',
+  },
+  {
+    text: 'Products',
+    icon: <GiGrapes className="ml-3" />,
+    to: '/products',
   },
   
 ];

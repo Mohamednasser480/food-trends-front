@@ -4,7 +4,7 @@ const DashboardSidebar = ({ links, showSidebar }) => {
   return (
     <div
       className={`h-full overflow-y-auto shadow-md ${
-        showSidebar ? 'w-1/4' : 'w-0'
+        showSidebar ? 'w-[300px]' : 'w-0'
       } transition-[width] duration-500`}
     >
       <div className="p-8 uppercase md:p-5">
