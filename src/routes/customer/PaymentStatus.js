@@ -3,8 +3,12 @@ import { BsCheckCircle, BsXCircle } from "react-icons/bs";
 import { useSearchParams } from "react-router-dom";
 import { Button } from "../../components/UI";
 import { useDispatch, useSelector } from "react-redux";
-import {  saveOrder } from "../../store/slices/orders";
-import { selectAllCartItems, selectTotalPrice } from "../../store/slices/cart";
+import { saveOrder } from "../../store/slices/orders";
+import {
+  clearCartData,
+  selectAllCartItems,
+  selectTotalPrice,
+} from "../../store/slices/cart";
 let flag = false;
 export default function PaymentStatus() {
   let [paymentSuccess, setPaymentSuccess] = useState(false);
@@ -27,15 +31,15 @@ export default function PaymentStatus() {
     // console.log(preparedItems);
     return preparedItems;
   }
+
   useEffect(() => {
     paymentSuccessful();
     // Send Order To DB IF Payment Success
 
     if (status == "true" && !flag && cartItems.length > 0) {
       const preparedItems = prepareCartItemsForPayment(cartItems);
-      // console.log(preparedItems)
       dispatch(saveOrder({ items: preparedItems, totalPrice: totalPrice }));
-      
+      dispatch(clearCartData());
       flag = true;
       // Clear Cart Items Here
     }
