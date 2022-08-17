@@ -22,33 +22,18 @@ export default function Filters() {
       text: "Verified",
       value: "true",
     },
-    // {
-    //   text: "Pending",
-    //   value: "pending",
-    // },
+
     {
       text: "Pending",
+      value: "pending",
+    },,
+
+    {
+      text: "Refused",
       value: "false",
     },
   ];
-  const userTypeArray = [
-    {
-      text: "All Users",
-      value: "",
-    },
-    {
-      text: "Customer",
-      value: "customer",
-    },
-    {
-      text: "Vendor",
-      value: "vendor",
-    },
-    {
-      text: "Delivery",
-      value: "delivery",
-    },
-  ];
+  
 
   const onChangeHandler = () => {
     dispatch(
@@ -104,7 +89,7 @@ export default function Filters() {
         <div className="flex gap-9">
           <input
             ref={searchRef}
-            type="text"
+            type="search"
             placeholder="Search by Product Name"
             className="w-full rounded-md border-transparent bg-gray-100 px-8 py-3 text-sm focus:border-gray-500 focus:bg-white focus:ring-0"
           />

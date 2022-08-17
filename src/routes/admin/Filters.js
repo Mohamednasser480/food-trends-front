@@ -106,7 +106,7 @@ export default function Filters() {
         <div className="flex gap-9">
           <input
             ref={searchRef}
-            type="text"
+            type="search"
             placeholder="Search by Username"
             className="w-full rounded-md border-transparent bg-gray-100 px-8 py-3 text-sm focus:border-gray-500 focus:bg-white focus:ring-0"
           />

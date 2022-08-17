@@ -7,6 +7,7 @@ import { Route, Routes } from 'react-router-dom';
 import { DashboardLayout } from "./index";
 import Users from '../../routes/admin/Users';
 import Products from '../../routes/admin/Products';
+import AdminRedirectPage from './AdminRedirectPage';
 
 const links = [
   {
@@ -28,6 +29,7 @@ const AdminLayout = (props) => {
       <Routes>
         <Route path="/" element={<Users />} />
         <Route path="/products" element={<Products />} />
+        <Route path="*" element={<AdminRedirectPage />} />
         {/* <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductEdit />} />
         <Route path="/add-product" element={<AddProduct />} />

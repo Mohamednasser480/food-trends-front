@@ -46,4 +46,54 @@ const paginateProducts = async (Args, filters) => {
   }
 };
 
-export default { getProducts, paginateProducts };
+const approveProduct = async (productId) => {
+  try {
+    const token = cookie.getCookie("token");
+    const data = await axios.put(
+      PRODUCTS_API_URI,
+      {
+        id: productId,
+        available: "true",
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log(error.response.data);
+    throw error.response.data;
+  }
+};
+
+const deactivateProduct = async (productId) => {
+  try {
+    const token = cookie.getCookie("token");
+    const data = await axios.put(
+      PRODUCTS_API_URI,
+      {
+        id: productId,
+        available: "false",
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    console.log(data);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export default {
+  getProducts,
+  paginateProducts,
+  approveProduct,
+  deactivateProduct,
+};

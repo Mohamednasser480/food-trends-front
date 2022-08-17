@@ -6,7 +6,10 @@ import {
   paginateProducts,
 } from "../../store/slices/adminProducts";
 import { getProducts } from "../../store/slices/adminProducts";
-import ProductsFilters from "./ProductsFilters"
+import ApproveButton from "./ProductsButtons/ApproveButton";
+import DeleteButton from "./ProductsButtons/DeleteButton";
+import DeactivateButton from "./ProductsButtons/DeactivateButton";
+import ProductsFilters from "./ProductsFilters";
 export default function Products() {
   const dispatch = useDispatch();
   const products = useSelector(adminProductsSelector).products;
@@ -93,21 +96,37 @@ export default function Products() {
                       </td>
 
                       <td className="py-1 px-5 font-bold capitalize text-black">
-                        {product?.inStock || "-"}
+                        {product?.inStock || "Out of Stock"}
                       </td>
                       <td className="py-1 px-3 capitalize">
-                        {product?.vendor.slice(0, 5)}
+                        {product?.vendor?.name}
                       </td>
                       <td
                         className={`py-1 px-3 font-bold capitalize  ${
-                          product?.available
+                          product?.available == "true"
                             ? "text-green-500"
-                            : "text-orange-400 "
+                            : product?.available == "pending"
+                            ? "text-orange-400 "
+                            : "text-red-500 "
                         }`}
                       >
-                        {product?.available ? "Verified" : "Pending"}
+                        {product?.available == "true"
+                          ? "Verified"
+                          : product?.available == "pending"
+                          ? "Pending"
+                          : "Refused"}
                       </td>
-                      <td className="py-1 px-3 capitalize">Buttons</td>
+                      <td className="py-1 px-3 capitalize">
+                        <div className="flex flex-col items-center  justify-center gap-2 px-3 ">
+                          {product.available == "true" ? (
+                            <DeactivateButton productId={product._id} />
+                          ) : product.available == "pending" ? (
+                            <ApproveButton productId={product._id} />
+                          ) : (
+                            "Refused"
+                          )}
+                        </div>
+                      </td>
                     </tr>
                   );
                 })}
