@@ -32,7 +32,7 @@ const Cart = () => {
   let [cartTotalPriceError, setCartTotalPriceError] = useState(false);
 
   const checkoutHandler = () => {
-    if (cartTotalPrice < 50) {
+    if (cartTotalPrice < 25) {
       setCartTotalPriceError(true);
       return;
     }
@@ -137,9 +137,12 @@ const Cart = () => {
             )}
             {cartTotalPriceError && (
               <p className="text-lg font-medium text-primary">
-                Order Total Price Should Exceed 50.00 LE
+                Order Total Price Should Exceed 25.00 LE
               </p>
             )}
+          </div>
+          <div className="flex justify-end items-center gap-6 mt-3 px-5">
+            <h3 className="text-xl font-bold">Total Price: {cartTotalPrice.toFixed(2)} LE</h3>
           </div>
         </div>
       ) : (
