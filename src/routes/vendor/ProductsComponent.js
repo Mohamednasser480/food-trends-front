@@ -15,6 +15,7 @@ const ProductsComponent = ({
   inStock,
   weight,
   discount,
+  available,
 }) => {
   const [modelState, setModelState] = useState(false);
   const editStatus = useSelector(editSelector);
@@ -26,47 +27,62 @@ const ProductsComponent = ({
   }, [editStatus]);
 
   return (
-    <tbody>
-      <tr>
+    <>
+      <tr className="border-b-[1px]">
         <td>
           <div className="flex items-center space-x-3">
             <div className="avatar">
-              <div className="mask mask-squircle h-12 w-12">
+              <div className="mask mask-squircle h-16 w-16">
                 <img
-                  src={images?images[0]:""}
+                  src={images ? images[0] : ""}
                   alt="Avatar Tailwind CSS Component"
+                  className="h-full w-full object-cover"
                 />
-              </div>
-            </div>
-            <div>
-              <div className="font-bold">{productName}</div>
-              <div className="text-sm opacity-50">
-                {Array.isArray(category) ? category.join(" ") : category}
               </div>
             </div>
           </div>
         </td>
-        <td className="w-12 max-w-lg truncate">
-          <span>{description}</span>
-          <br />
-          <span className="badge badge-sm badge-ghost mr-4">{summary}</span>
+        <td className="text-md w-12 max-w-lg truncate font-medium">
+          <span>{productName}</span>
         </td>
-        <td>${price}</td>
+        <td>${summary}</td>
+        <th>{price} LE</th>
+        <th>{inStock || "Out of Stock"}</th>
+        <th className="capitalize">{category}</th>
+        <th
+          className={`capitalize ${
+            available == "true"
+              ? "text-green-500"
+              : available == "pending"
+              ? "text-orange-500"
+              : "text-red-500"
+          }`}
+        >
+          {available == "true"
+            ? "Available"
+            : available == "pending"
+            ? "Pending"
+            : "Deleted"}
+        </th>
         <th>
-          <button
-            className="btn btn-ghost btn-xs hover:bg-red-500 hover:text-white	"
-            onClick={() => {
-              dispatch(deleteProduct(_id));
-            }}
-          >
-            delete
-          </button>{" "}
-          <button
-            className="btn btn-ghost btn-xs hover:bg-blue-500 hover:text-white"
-            // onClick={() => setModelState(true)}
-          >
-            <Link to={`/products/${_id}`}>Edit</Link>
-          </button>
+          {available !== "false" && (
+            <>
+              <button
+                className="btn  btn-xs border-0	bg-red-400 hover:bg-red-600 hover:text-white"
+                onClick={() => {
+                  dispatch(deleteProduct(_id));
+                }}
+              >
+                delete
+              </button>{" "}
+              <button
+                className="btn  btn-xs border-0	bg-green-400 hover:bg-green-600 hover:text-white"
+                // onClick={() => setModelState(true)}
+              >
+                <Link to={`/products/${_id}`}>Edit</Link>
+              </button>
+            </>
+          )}
         </th>
       </tr>
       {modelState && (
@@ -87,7 +103,7 @@ const ProductsComponent = ({
           }}
         />
       )}
-    </tbody>
+    </>
   );
 };
 

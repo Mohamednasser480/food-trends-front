@@ -24,23 +24,30 @@ const Products = () => {
   return (
     <DashboardPage title="products">
       {" "}
-      <div className=" container overflow-x-auto">
+      <div className=" w-full overflow-x-auto">
         {vendorStatus === "Pending" ? <Loader /> : null}
         {vendorData.length !== 0 ? (
           <table className="table-compact table w-full">
             <thead>
               <tr>
+                <th>Image</th>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Price</th>
+                <th>Instock</th>
+                <th>Category</th>
+                <th>Status</th>
                 <th>Actions</th>
               </tr>
             </thead>
+            <tbody>
             {React.Children.toArray(
               vendorData.map((pro) => {
+                // console.log(pro)
                 return <ProductsComponent {...pro} />;
               })
             )}
+            </tbody>
           </table>
         ) : (
           <div className=" text-center">No Products Added to The List Yet!</div>

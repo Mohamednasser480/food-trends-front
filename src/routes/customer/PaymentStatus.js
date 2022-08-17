@@ -35,6 +35,7 @@ export default function PaymentStatus() {
       const preparedItems = prepareCartItemsForPayment(cartItems);
       // console.log(preparedItems)
       dispatch(saveOrder({ items: preparedItems, totalPrice: totalPrice }));
+      
       flag = true;
       // Clear Cart Items Here
     }
