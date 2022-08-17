@@ -29,7 +29,8 @@ function App() {
   return (
     <div className="App">
       <ToastContainer />
-      {userStatus === "loading" ? <Loader /> : <Layout />}
+      {/* {userStatus === "loading" ? <Loader /> : <Layout />} */}
+      <Layout/>
     </div>
   );
 }

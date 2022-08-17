@@ -118,8 +118,9 @@ const authSlice = createSlice({
       }
       state.token = payload.token;
       state.error = null;
-      state.login.status = "succeeded";
+      state.login.status = "";
       state.login.error = "";
+      state.verify.status=""
     },
     [login.rejected]: (state, { error }) => {
       state.status = "error";
@@ -157,6 +158,8 @@ const authSlice = createSlice({
       state.login.error = "";
       state.register.status = "";
       state.register.error = "";
+      state.verify.status = "";
+      state.verify.error = "";
     },
     [logout.rejected]: (state, { error }) => {
       state.status = "error";
@@ -187,6 +190,8 @@ const authSlice = createSlice({
       state.error = null;
       state.register.status = "succeeded";
       state.register.error = "";
+      state.login.status="";
+      state.login.error="";
     },
     [registerUser.rejected]: (state, { error }) => {
       state.status = "error";
