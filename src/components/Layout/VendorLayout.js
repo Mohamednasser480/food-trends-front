@@ -47,11 +47,11 @@ const links = [
     icon: <FaPlusSquare className="mx-3" />,
     to: '/add-product',
   },
-  {
-    text: 'transactions',
-    icon: <AiOutlineTransaction className="mx-3 " />,
-    to: '/transactions',
-  },
+  // {
+  //   text: 'transactions',
+  //   icon: <AiOutlineTransaction className="mx-3 " />,
+  //   to: '/transactions',
+  // },
 ];
 
 const VendorLayout = (props) => {

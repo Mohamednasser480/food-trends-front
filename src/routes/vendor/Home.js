@@ -1,9 +1,9 @@
-import { Typography, Button } from '../../components/UI';
-import { Input } from '../../components/UI/Form';
-import Form from '../../components/UI/Form';
-import { useForm } from 'react-hook-form';
-import { selectUserData } from '../../store/slices/auth';
-import { useSelector } from 'react-redux';
+import { Typography, Button } from "../../components/UI";
+import { Input } from "../../components/UI/Form";
+import Form from "../../components/UI/Form";
+import { useForm } from "react-hook-form";
+import { selectUserData } from "../../store/slices/auth";
+import { useSelector } from "react-redux";
 
 const Home = () => {
   const { name, email, mobile, storeName, image } = useSelector(selectUserData);
@@ -15,13 +15,13 @@ const Home = () => {
   } = useForm({});
 
   const updatePasswordRegister = {
-    oldPassword: { ...register('oldPassword') },
-    newPassword: { ...register('newPassword') },
+    oldPassword: { ...register("oldPassword") },
+    newPassword: { ...register("newPassword") },
     confirmPassword: {
-      ...register('confirmPassword', {
+      ...register("confirmPassword", {
         validate: (value) => {
-          if (watch('newPassword') !== value) {
-            return 'Your passwords do no match';
+          if (watch("newPassword") !== value) {
+            return "Your passwords do no match";
           }
         },
       }),
@@ -29,12 +29,16 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-y-10 text-center">
-      <div className="flex w-full flex-col gap-y-2 rounded-xl bg-white p-5 shadow-md">
+    <div className="flex h-full flex-col items-center gap-y-10 text-center">
+      <div className="flex h-full w-full flex-col gap-y-2 rounded-xl bg-white p-5 shadow-md">
         <Typography component="h3" className="text-primary">
           account details
         </Typography>
-        <img src={image} alt="Profile" className="h-32 w-32 self-center rounded-full" />
+        <img
+          src={image}
+          alt="Profile"
+          className="h-32 w-32 self-center rounded-full"
+        />
         <Typography component="subtitle2" className="self-center">
           {name}
         </Typography>
@@ -47,7 +51,7 @@ const Home = () => {
           Edit profile
         </Button> */}
       </div>
-      <div className="flex w-full gap-x-5">
+      {/* <div className="flex w-full gap-x-5">
         <div className="flex w-full flex-col rounded-xl bg-white p-5 shadow-md">
           <Typography component="h3" className="p-4 text-primary">
             Stats
@@ -64,42 +68,7 @@ const Home = () => {
             See All Statistics
           </Button>
         </div>
-        {/* <div className="flex w-full flex-col rounded-xl bg-white p-5 shadow-md">
-          <Typography component="h4" className="text-primary">
-            change password
-          </Typography>
-          <Form onSubmit={handleSubmit((d) => console.log(d))}>
-            <Input
-              register={updatePasswordRegister.oldPassword}
-              errors={errors}
-              type="text"
-              placeholder="Type here"
-              label="Old Password"
-              id="oldPassword"
-            />
-            <Input
-              register={updatePasswordRegister.newPassword}
-              errors={errors}
-              type="text"
-              placeholder="Type here"
-              label="New Password"
-              id="newPassword"
-            />
-            <Input
-              register={updatePasswordRegister.confirmPassword}
-              errors={errors}
-              type="text"
-              placeholder="Type here"
-              label="confirm Password"
-              id="confirmPassword"
-            />
-
-            <Button variant="secondary" type="submit" className="mt-3">
-              Submit
-            </Button>
-          </Form>
-        </div> */}
-      </div>
+      </div> */}
     </div>
   );
 };
