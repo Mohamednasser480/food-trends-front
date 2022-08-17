@@ -1,16 +1,25 @@
 import React from "react";
-import { Footer } from "./";
-const Layout = (props) => {
-  return (
-    <div>
-      {/*Navbar*/}
-      <main>
-        <h1>Hello Layout Component!</h1>
-        {props.children}
-      </main>
-      <Footer />
-    </div>
-  );
+import { CustomerLayout, VendorLayout, DeliveryLayout,AdminLayout } from "./";
+import { Error404 } from "../../routes";
+import { Route } from "react-router-dom";
+import { selectUserData } from "../../store/slices/auth";
+import { useSelector } from "react-redux";
+
+const defaultRoutes = (
+  <>
+    <Route path="*" element={<Error404 />} />;
+  </>
+);
+
+const Layout = () => {
+  const userType = useSelector(selectUserData).userType || "customer";
+  const layouts = {
+    customer: <CustomerLayout>{defaultRoutes}</CustomerLayout>,
+    vendor: <VendorLayout>{defaultRoutes}</VendorLayout>,
+    delivery: <DeliveryLayout>{defaultRoutes}</DeliveryLayout>,
+    admin: <AdminLayout />,
+  };
+  return layouts[userType] ? layouts[userType] : layouts.customer;
 };
 
 export default Layout;
