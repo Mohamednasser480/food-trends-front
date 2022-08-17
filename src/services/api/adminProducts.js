@@ -2,7 +2,7 @@ import axios from "axios";
 import cookie from "../cookie";
 const API_URI = process.env.REACT_APP_API_URI;
 const PRODUCTS_API_URI = `${API_URI}/admin/products`;
-const numberToFetchPerPage = 8;
+const numberToFetchPerPage = 10;
 
 const getProducts = async (filters) => {
   const token = cookie.getCookie("token");
