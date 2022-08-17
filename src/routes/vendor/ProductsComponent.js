@@ -44,7 +44,6 @@ const ProductsComponent = ({
         </td>
         <td className="text-md w-12 max-w-lg truncate font-medium">
           <span>{productName}</span>
-
         </td>
         <td>${summary}</td>
         <th>{price} LE</th>
@@ -66,20 +65,24 @@ const ProductsComponent = ({
             : "Deleted"}
         </th>
         <th>
-          <button
-            className="btn  btn-xs border-0	bg-red-400 hover:bg-red-600 hover:text-white"
-            onClick={() => {
-              dispatch(deleteProduct(_id));
-            }}
-          >
-            delete
-          </button>{" "}
-          <button
-            className="btn  btn-xs border-0	bg-green-400 hover:bg-green-600 hover:text-white"
-            // onClick={() => setModelState(true)}
-          >
-            <Link to={`/products/${_id}`}>Edit</Link>
-          </button>
+          {available !== "false" && (
+            <>
+              <button
+                className="btn  btn-xs border-0	bg-red-400 hover:bg-red-600 hover:text-white"
+                onClick={() => {
+                  dispatch(deleteProduct(_id));
+                }}
+              >
+                delete
+              </button>{" "}
+              <button
+                className="btn  btn-xs border-0	bg-green-400 hover:bg-green-600 hover:text-white"
+                // onClick={() => setModelState(true)}
+              >
+                <Link to={`/products/${_id}`}>Edit</Link>
+              </button>
+            </>
+          )}
         </th>
       </tr>
       {modelState && (
