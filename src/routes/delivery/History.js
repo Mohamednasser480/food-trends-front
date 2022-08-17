@@ -1,12 +1,15 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, DashboardPage, Typography } from '../../components/UI';
-import { cookie } from '../../services';
-import { completedOrdersSelector, getCompletedOrders } from '../../store/slices/delivery';
+import { DashboardPage, Loader, Typography } from '../../components/UI';
+import {
+  completedOrdersSelector,
+  getCompletedOrders,
+  statusSelector,
+} from '../../store/slices/delivery';
 
 const History = () => {
   const data = useSelector(completedOrdersSelector);
+  const status = useSelector(statusSelector);
 
   const dispatch = useDispatch();
 
@@ -16,9 +19,11 @@ const History = () => {
 
   return (
     <DashboardPage title="History" className="flex justify-center">
+      {status === 'Pending' ? <Loader /> : null}
+
       <div className="mx-5 mb-10 flex w-full flex-col items-start">
         <div className="flex w-full items-center bg-primary p-2 text-center font-medium text-white [&>*]:w-2/12 [&>*]:text-lg [&>*]:uppercase">
-          <p className="!w-14">Order ID</p>
+          <p className="">Order ID</p>
           <p>Customer Name</p>
           <p>Contact</p>
           <p>Governorate</p>
@@ -30,10 +35,12 @@ const History = () => {
         {data.map((order, index) => {
           return (
             <div
-              className="[&>*]:text-md flex w-full items-center border-b py-1 text-center [&>*]:w-2/12"
+              className={`[&>*]:text-md flex w-full items-center border-b  py-1 text-center [&>*]:w-2/12 ${
+                order.customer === null ? 'bg-red-200' : ''
+              }`}
               key={index}
             >
-              <Typography component="subtitle2" className="font-medium">
+              <Typography component="subtitle2" className="w-1/12 font-medium">
                 {order._id.substring(order._id.length - 6)}
               </Typography>
               {order.customer === null ? (
@@ -48,16 +55,13 @@ const History = () => {
                   <Typography component="subtitle2">{order.customer.name}</Typography>
                   <Typography component="subtitle2">{order.customer.mobile}</Typography>
                   <Typography component="subtitle2">
-                    {order.customer.address.governorate}
+                    {order?.customer?.address?.governorate}
                   </Typography>
-                  <Typography component="subtitle2">{order.customer.address.city}</Typography>
+                  <Typography component="subtitle2">{order?.customer?.address?.city}</Typography>
                 </>
               )}
 
               <Typography component="subtitle2">{order.createdAt.substring(0, 10)}</Typography>
-              <Typography component="subtitle2" className="text-green-500">
-                {order.status}
-              </Typography>
               <Typography component="subtitle2">{order.totalPrice.toFixed(2)}</Typography>
             </div>
           );
