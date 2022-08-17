@@ -8,11 +8,14 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 export default function CustomerReviews({ productId }) {
   // Fetch Reviews Here to send Them to both Write a Review and Reviews ( Use Product ID )
-  let { reviews, isLoading, error } = useSelector(reviewsSelector);
+  let { reviews, isLoading, error, filter } = useSelector(reviewsSelector);
 
+  let filterObj = {
+    ...filter,
+  };
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchReviews(productId));
+    dispatch(fetchReviews({ productId, filterObj }));
   }, []);
 
   function getOverALlRating() {
