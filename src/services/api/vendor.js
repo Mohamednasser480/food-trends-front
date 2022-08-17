@@ -1,10 +1,21 @@
 import axios from "axios";
+import cookie from "../cookie";
 
 const VENDOR_API_URI = `${process.env.REACT_APP_API_URI}/vendor`;
 
 //Get ALL Products of the Vendor
 const getProducts = async (vendorId) => {
   const res = await axios.get(`${VENDOR_API_URI}/${vendorId}`);
+  return res.data;
+};
+
+const getOrders = async (userToken) => {
+  const res = await axios.get(`${VENDOR_API_URI}/orders`, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${userToken}`,
+    },
+  });
   return res.data;
 };
 
@@ -40,9 +51,55 @@ const deleteProduct = async (userToken, id) => {
   return res.data;
 };
 
+const getOrdersFiltered = async (filterQuery) => {
+  const ordersFilter = () => {
+    if (!filterQuery.orderStatus || filterQuery.orderStatus == "all") return "";
+    let ordersQuery;
+
+    switch (filterQuery.orderStatus) {
+      case "pending":
+        ordersQuery = `pending&`;
+        break;
+      case "canceled":
+        ordersQuery = `canceled&`;
+        break;
+      case "completed":
+        ordersQuery = `completed&`;
+        break;
+
+      default:
+        ordersQuery = "";
+        break;
+    }
+    return `status=${ordersQuery}`;
+  };
+
+  const pricesFilter = () => {
+    if (!filterQuery.prices || filterQuery.prices == "all") return "";
+    return filterQuery.prices === "lowest"
+      ? `sortBy=totalPrice`
+      : filterQuery.prices === "highest"
+      ? `sortBy=totalPrice:desc`
+      : "";
+  };
+
+  const URL = `${VENDOR_API_URI}/orders?${ordersFilter()}&${pricesFilter()}`;
+
+  const userToken = cookie.getCookie("token");
+  const res = await axios.get(URL, {
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+    },
+  });
+
+  return res.data;
+};
+
 export default {
   getProducts,
   saveProduct,
   updateProduct,
   deleteProduct,
+  getOrders,
+  getOrdersFiltered,
 };

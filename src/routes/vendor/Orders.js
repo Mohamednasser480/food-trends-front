@@ -1,143 +1,159 @@
-import { useState, useEffect } from "react";
-import { Button, DashboardPage, Typography } from "../../components/UI";
-import { selectUserData } from "../../store/slices/auth";
-
+import React, { useState, useEffect, useRef } from "react";
+import { Button, DashboardPage, Loader, Typography } from "../../components/UI";
 import Radio from "../../components/UI/Form/Radio";
-import axios from "axios";
-import { cookie } from "../../services";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchVendorOrders,
+  filteredOrdersSelector,
+  ordersSelector,
+  vendorStatusSelector,
+} from "../../store/slices/vendor";
 
-const filters = ["all orders", "completed", "pending", "canceled"];
+const filters = ["all", "completed", "pending", "canceled"];
 const Orders = () => {
-  // console.log(vendorOrders);
+  const [selected, setSelected] = useState("");
+  const filtersObj = useSelector(filteredOrdersSelector);
+  const filteredData = useSelector(ordersSelector);
+  const status = useSelector(vendorStatusSelector);
+  const stateOfOrders = useRef("");
+  const [indexBtn, setIndexBtn] = useState(0);
+  const dispatch = useDispatch();
 
-  const [filterBtn, setFilterBtn] = useState("");
-  const [vendorOrders, setVendorOrders] = useState([]);
-
-  //--------- Vendor Filters -----------------//
-  // radio button value change to set the filtered orders as such
-  const [selected, setSelected] = useState(null);
-  const handleChange = (event) => {
-    setSelected(event.target.value);
+  let filter = {
+    ...filtersObj,
   };
+
   // order status filter onchange function
-  const handleOrderStatFilter = (filter) => setFilterBtn(filter);
+  const handleOrderStatFilter = (ordersStatus, index) => {
+    setIndexBtn(index);
+    filter.prices = selected;
+    filter.orderStatus = ordersStatus;
+    stateOfOrders.current = ordersStatus;
+    dispatch(fetchVendorOrders(filter));
+  };
+
+  const badgeColor = (status) => {
+    return status === "pending"
+      ? "badge-warning"
+      : status === "completed"
+      ? "badge-success"
+      : status === "cancelled"
+      ? "badge-error"
+      : "badge-info";
+  };
+
+  const convertData = (d) => {
+    const date = new Date(d);
+    return new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    }).format(date);
+  };
 
   // fetching VENDOR orders by products sorted based on price and status
   useEffect(() => {
-    let url = "https://food-trends-api.herokuapp.com/api/v1/vendor/orders?";
-    url +=
-      selected === "lowest"
-        ? "sortBy=totalPrice&"
-        : selected === "highest"
-        ? "sortBy=totalPrice:desc&"
-        : "";
-    if (filterBtn === "pending") url += "status=pending&";
-    else if (filterBtn === "canceled") url += "status=canceled&";
-    else if (filterBtn === "completed") url += "status=completed&";
+    filter.prices = selected;
+    filter.orderStatus = stateOfOrders.current;
+    dispatch(fetchVendorOrders(filter));
+  }, [dispatch, selected]);
 
-    const token = cookie.getCookie("token");
-    const fetchData = async () => {
-      const response = await axios.get(url, {
-        headers: { Authorization: "Bearer " + token },
-      });
-
-      const json = response.data;
-      setVendorOrders(json.data);
-    };
-
-    fetchData();
-  }, [selected, filterBtn]);
   return (
-    <DashboardPage title="orders">
-      <div className="m-5 flex flex-col justify-between xl:w-[1200px] xl:flex-row">
-        <div>
-          {filters.map((filter, index) => {
-            return (
-              <Button
-                variant="user-account"
-                className="w-32 capitalize hover:bg-primary"
-                key={index}
-                onClick={(e) => handleOrderStatFilter(e.target.value)}
-                value={filter}
-              >
-                {filter}
-              </Button>
-            );
-          })}
-        </div>
-
-        <div className="mx-2 my-5 flex items-center lg:my-0">
-          <Typography component="subtitle2">Price filters:</Typography>
-          <Radio
-            name="price"
-            value="highest"
-            checked={selected}
-            onChange={handleChange}
-          >
-            Highest
-          </Radio>
-          <Radio
-            name="price"
-            checked={selected}
-            onChange={handleChange}
-            value="lowest"
-          >
-            Lowest
-          </Radio>
-        </div>
-      </div>
-      <div className="mx-5 mb-10 flex items-start">
-        <div className="w-full self-center rounded-xl border shadow-lg lg:w-[1200px]">
-          <div className="flex items-center bg-[#f7f7f7] p-2 text-center font-medium text-black">
-            <p className="w-10">Order ID</p>
-            <p className="w-48">Customer</p>
-            <p className="w-48">Order Status</p>
-            <p className="w-32">Order Date</p>
-            <p className="w-32">Delivery Date</p>
-            <p className="w-32">Total Price</p>
-            <p className="w-32">Payment Method</p>
-            <p className="w-32"></p>
+    <>
+      {status === "Pending" ? <Loader /> : null}
+      <DashboardPage title="Orders">
+        <div className=" container m-2 flex flex-row">
+          <div className="my-auto">
+            {filters.map((filter, index) => {
+              return (
+                <Button
+                  variant="user-account"
+                  className={`m-2 w-28 capitalize hover:bg-primary`}
+                  key={index}
+                  onClick={(e) => handleOrderStatFilter(e.target.value, index)}
+                  value={filter}
+                  disabled={indexBtn == index && true}
+                >
+                  {filter}
+                </Button>
+              );
+            })}
           </div>
 
-          {vendorOrders.map((order, index) => {
-            return (
-              <div
-                className="flex w-full items-center border-b p-3 text-center"
-                key={index}
+          <div className=" mx-auto flex flex-wrap items-center justify-center">
+            <Typography component="subtitle2">Price filters:</Typography>
+            <div className="flex flex-col p-2 md:flex-row">
+              <Radio
+                name="price"
+                value="highest"
+                checked={selected}
+                onChange={(e) => {
+                  setSelected(e.target.value);
+                }}
               >
-                <p className="w-10 font-medium">{index + 1}</p>
-                <p className="w- break-words">
-                  test name 3shan nasser mesh tmam
-                </p>
-                {/* <p className="w-32 break-words">{order.customer.name}</p> */}
-                {order.status === "pending" ? (
-                  <p className="w-48 text-lg font-medium capitalize text-yellow-400 ">
-                    {order.status}
-                  </p>
-                ) : order.status === "completed" ? (
-                  <p className="w-48 text-lg font-medium capitalize text-green-400">
-                    {order.status}
-                  </p>
-                ) : (
-                  <p className="w-48 text-lg font-medium capitalize text-red-400">
-                    {order.status}
-                  </p>
-                )}
-                <p className="w-2/12">{order.createdAt.slice(0, 10)}</p>
-                <p className="w-2/12">Not assigned</p>
-                <p className="w-2/12">{order.totalPrice.toFixed(2)} LE</p>
-                <p className="w-2/12">Credit Card</p>
-                <p className="w-2/12">
-                  <Button variant="user-account" className="tracking-tight">
-                    order details
-                  </Button>
-                </p>
-              </div>
-            );
-          })}
+                Highest
+              </Radio>
+              <Radio
+                name="price"
+                checked={selected}
+                onChange={(e) => {
+                  setSelected(e.target.value);
+                }}
+                value="lowest"
+              >
+                Lowest
+              </Radio>
+            </div>
+          </div>
         </div>
-      </div>
-    </DashboardPage>
+      </DashboardPage>
+      {!filteredData.length ? (
+        <div className=" text-center">No Orders Yet</div>
+      ) : (
+        <DashboardPage>
+          <div className="overflow-x-auto">
+            <table className="table w-full">
+              <thead className="bg-lime-700">
+                <tr className="text-center">
+                  <th>Customer</th>
+                  <th>Order Status</th>
+                  <th>Order Date</th>
+                  <th>Delivery Date</th>
+                  <th>Total Price</th>
+                  <th>Payment Method</th>
+                </tr>
+              </thead>
+              <tbody>
+                {React.Children.toArray(
+                  filteredData.map((item) => {
+                    return (
+                      <tr className=" text-center">
+                        <th>{item.customer?.name || "Deleted User"}</th>
+                        <th>
+                          <div
+                            className={`badge p-3 text-white ${badgeColor(
+                              item.status
+                            )}`}
+                          >
+                            {item.status}
+                          </div>
+                        </th>
+                        <th>{convertData(item.createdAt)}</th>
+                        <th></th>
+                        <th>{item.totalPrice.toFixed(2)} EGP</th>
+                        <th></th>
+                      </tr>
+                    );
+                  })
+                )}
+              </tbody>
+            </table>
+          </div>
+        </DashboardPage>
+      )}
+    </>
   );
 };
 

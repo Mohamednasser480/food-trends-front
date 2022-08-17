@@ -5,6 +5,8 @@ import Toast from "../../components/UI/Toast";
 
 const initialState = {
   products: [],
+  orders: [],
+  filters: { orderStatus: "all", prices: "" },
   status: null,
   error: null,
   updated: 0,
@@ -14,8 +16,16 @@ const initialState = {
 //Get ALL Products of the Vendor
 export const fetchVendorProducts = createAsyncThunk(
   "vendor/fetchProducts",
-  async (vendorId) => {
+  async (_, thunkAPI) => {
+    const vendorId = thunkAPI.getState().auth.user._id;
     return await products.getProducts(vendorId);
+  }
+);
+export const fetchVendorOrders = createAsyncThunk(
+  "vendor/fetchFilteredOrders",
+  async (filters) => {
+    const data = await products.getOrdersFiltered({ ...filters });
+    return data;
   }
 );
 
@@ -61,6 +71,18 @@ const vendorSlice = createSlice({
       state.status = "Fulfilled";
     },
     [fetchVendorProducts.rejected]: (state) => {
+      state.status = "Rejected";
+    },
+
+    // FetchOrders
+    [fetchVendorOrders.pending]: (state) => {
+      state.status = "Pending";
+    },
+    [fetchVendorOrders.fulfilled]: (state, { payload }) => {
+      state.orders = [...payload];
+      state.status = "Fulfilled";
+    },
+    [fetchVendorOrders.rejected]: (state) => {
       state.status = "Rejected";
     },
 
@@ -112,7 +134,11 @@ const vendorSlice = createSlice({
 });
 
 export const vendorSelector = (state) => state.vendor.products;
+export const ordersSelector = (state) => state.vendor.orders;
 export const changeSelector = (state) => state.vendor.updated;
 export const vendorStatusSelector = (state) => state.vendor.status;
 export const editSelector = (state) => state.vendor.edited;
+
+export const filteredOrdersSelector = (state) => state.orders.filters;
+
 export default vendorSlice.reducer;

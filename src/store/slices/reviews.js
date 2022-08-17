@@ -1,25 +1,28 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 import { reviewService } from "../../services/api";
 // Initialize State
 const initialState = {
   reviews: [],
+  filter: { rating: "" },
   isLoading: false,
   error: false,
 };
 // Fetch Reviews
 export const fetchReviews = createAsyncThunk(
   "reviews/fetchReviews",
-  async (productId, thunkAPI) => {
-    return await reviewService.fetchReviewsById(productId);
+  async ({ productId, filterObj }) => {
+    return await reviewService.fetchReviewsByRating({
+      productId,
+      filterObj,
+    });
   }
 );
 // Add Review
 export const addReview = createAsyncThunk(
   "reviews/addReview",
   async (args, thunkAPI) => {
-    const token=thunkAPI.getState().auth.token;
-    await reviewService.addReview(args,token);
+    const token = thunkAPI.getState().auth.token;
+    await reviewService.addReview(args, token);
     return thunkAPI.dispatch(fetchReviews(args.product));
   }
 );
@@ -35,7 +38,6 @@ const reviews = createSlice({
     [fetchReviews.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.reviews = action.payload;
-      // console.log(action.payload)
     },
     [fetchReviews.rejected]: (state, action) => {
       state.isLoading = false;
@@ -52,7 +54,8 @@ const reviews = createSlice({
     },
     [addReview.rejected]: (state, action) => {
       state.isLoading = false;
-      state.error = "Sorry, You should buy this product before adding a review!";
+      state.error =
+        "Sorry, You should buy this product before adding a review!";
       state.reviews = [];
     },
   },
