@@ -1,107 +1,101 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import {
-  Search,
-  Loader,
-  ProductRating,
-  DashboardPage,
-} from "../../components/UI";
-import { useSelector } from "react-redux";
-import { selectUserData, selectUserToken } from "../../store/slices/auth";
-let idTogetreview;
-const filterOptions = ["high to low", "low to high"];
+import React, { useEffect, useState } from "react";
+import { Search, Loader, DashboardPage } from "../../components/UI";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchReviews, reviewsSelector } from "../../store/slices/reviews";
+import ReviewDetailsData from "./ReviewDetailsData";
 
-const ReviewDetail = () => {
-  const [status, setStatus] = useState("idle");
+const ReviewDetail = ({ productId }) => {
+  const { reviews, isLoading, filter } = useSelector(reviewsSelector);
+  const [reviewsSearch, setReviewsSearch] = useState([]);
+  const dispatch = useDispatch();
+
   const [ratingValue, setRatingValue] = useState(null);
-  const [productReviews, setProductReviews] = useState([]);
 
-  const token = useSelector(selectUserToken);
-
-  useEffect(() => {
-    let url = `https://food-trends-api.herokuapp.com/api/v1/products/${idTogetreview}/reviews?`;
-
-    if (ratingValue == 1) url += "min_rate=0&max_rate=1";
-    else if (ratingValue == 2) url += "min_rate=1&max_rate=2";
-    else if (ratingValue == 3) url += "min_rate=2&max_rate=3";
-    else if (ratingValue == 4) url += "min_rate=3&max_rate=4";
-    else if (ratingValue == 5) url += "min_rate=4&max_rate=5";
-
-    // console.log(url);
-    const fetchData = async () => {
-      const response = await axios.get(url, {
-        headers: { Authorization: "Bearer " + token },
-      });
-
-      const json = response.data;
-      setProductReviews(json.data);
-    };
-    fetchData();
-  }, [ratingValue]);
+  let filterObj = {
+    ...filter,
+  };
 
   //--------- Filters -------------/
   const handleRatingFilter = (e) => {
     setRatingValue(e.target.value);
+    console.log(e.target.value);
+    filterObj.rating = ratingValue;
   };
 
-  const handleSearch = () => {};
+  useEffect(() => {
+    dispatch(fetchReviews({ productId, filterObj }));
+  }, [ratingValue, dispatch, reviewsSearch]);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const keyword = e.target.value;
+
+    if (keyword !== "") {
+      const result = reviews.filter((item) => {
+        return item.customer?.name
+          ?.toLowerCase()
+          .includes(keyword.toLowerCase());
+      });
+      setReviewsSearch(result);
+    } else setReviewsSearch(reviews);
+  };
 
   return (
-    <DashboardPage title="review 1">
-      <div className="flex w-full items-center gap-x-5 p-3">
-        <Search onClick={handleSearch} />
-        <div className="w-1/5 justify-self-end">
-          <select
-            className="w-full justify-self-end"
-            onChange={handleRatingFilter}
-          >
-            <option defaultChecked>Filter by rating</option>
-            <option value={1}> {">"} 1</option>
-            <option value={2}>1 - 2</option>
-            <option value={3}>2 - 3</option>
-            <option value={4}>3 - 4</option>
-            <option value={5}>4 - 5</option>
-          </select>
-        </div>
-      </div>
-      <div className="flex w-full">
-        <div className="w-full">
-          <div className="flex h-12 items-center bg-primary p-2 text-center font-medium text-white">
-            <p className="w-10"></p>
-            <p className="w-32 break-words">Title</p>
-            <p className="mx-5 w-96">Comment</p>
-            <p className="w-32">Customer</p>
-            <p className="mr-5 w-32">Date</p>
-            <p className="w-32">Rate</p>
+    <DashboardPage>
+      {isLoading ? <Loader /> : null}
+      {!reviews.length ? (
+        <div className=" text-center">No Reviews Yet</div>
+      ) : (
+        <>
+          <div className="flex w-full  gap-x-5 p-3">
+            <Search onChange={handleSearch} />
+            <div className="w-1/5 justify-self-end">
+              <select
+                defaultValue={0}
+                className="select select-bordered w-full max-w-xs"
+                onChange={handleRatingFilter}
+              >
+                <option value={0} disabled>
+                  Filter by rating
+                </option>
+                <option value={1}> {">"} 1</option>
+                <option value={2}>1 - 2</option>
+                <option value={3}>2 - 3</option>
+                <option value={4}>3 - 4</option>
+                <option value={5}>4 - 5</option>
+              </select>
+            </div>
           </div>
+          <table className="table w-full">
+            <thead>
+              <tr className=" text-center">
+                <td>Customer Name</td>
+                <td>Product(s)</td>
+                <td>Rating</td>
+                <td>Comments</td>
+                <td>Contact</td>
+                <td>Created At</td>
+              </tr>
+            </thead>
 
-          {status == "loading" ? (
-            <Loader />
-          ) : status == "succeeded" ? (
-            productReviews.map((rev, index) => {
-              return (
-                <div
-                  className="flex w-full items-center border-b p-2"
-                  key={index}
-                >
-                  <p className="w-10 font-medium">{index + 1}</p>
-                  <p className="w-32 break-words">{rev.title}</p>
-                  <p className="mx-5 w-96">{rev.comment}</p>
-                  {/* <p className="w-32">{rev.customer.name}</p> */}
-                  <p className="mr-5 w-32">{rev.createdAt}</p>
-                  <p className="w-32">
-                    <ProductRating
-                      rating={rev.rating}
-                      editable={false}
-                      className="justify-center"
-                    />
-                  </p>
-                </div>
-              );
-            })
-          ) : null}
-        </div>
-      </div>
+            {
+              <tbody>
+                {reviewsSearch.length
+                  ? reviewsSearch.map((item) => {
+                      return (
+                        <ReviewDetailsData item={item} key={item.createdAt} />
+                      );
+                    })
+                  : reviews.map((item) => {
+                      return (
+                        <ReviewDetailsData item={item} key={item.createdAt} />
+                      );
+                    })}
+              </tbody>
+            }
+          </table>
+        </>
+      )}
     </DashboardPage>
   );
 };
