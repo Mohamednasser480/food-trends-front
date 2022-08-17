@@ -50,6 +50,7 @@ const paginateUsers = async (Args, filters) => {
 };
 
 const deleteUser = async (userId) => {
+  // console.log(userId)
   try {
     const token = cookie.getCookie("token");
     const data = await axios.delete(`${USERS_API_URI}`, {
@@ -63,6 +64,7 @@ const deleteUser = async (userId) => {
     // console.log(data)
     return data;
   } catch (error) {
+    console.log(error.response.data)
     throw error.response.data;
   }
 };

@@ -146,7 +146,7 @@ export default function Users() {
                               <ApproveButton userId={user._id} />
                             )}
 
-                          {user?.verified == "true" &&
+                          {user?.verified == "true" ||user?.verified == "pending" &&
                             user?.userType !== "customer" &&
                             !isUserDeleted(user) && (
                               <DeactivateButton userId={user._id} />
