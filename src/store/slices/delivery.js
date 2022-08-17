@@ -9,6 +9,8 @@ const initialState = {
   allOrders: [],
   completedOrders: [],
   assignedOrders: [],
+  status: 'idle',
+  error: '',
 };
 
 export const getAllOrders = createAsyncThunk('delivery/getAllOrders', async () => {
@@ -27,17 +29,20 @@ export const getCompletedOrders = createAsyncThunk('delivery/getCompletedOrders'
 
 export const assignOrders = createAsyncThunk('delivery/assignOrders', async (id) => {
   const token = cookie.getCookie('token');
-  return await delivery.assignOrders(token, id);
+  const data = await delivery.assignOrders(token, id);
+  return { data, id };
 });
 
 export const deassignOrder = createAsyncThunk('delivery/deassignOrder', async (id) => {
   const token = cookie.getCookie('token');
-  return await delivery.deassignOrder(token, id);
+  const data = await delivery.deassignOrder(token, id);
+  return { data, id };
 });
 
 export const setOrderComplete = createAsyncThunk('delivery/setOrdersComplete', async (id) => {
   const token = cookie.getCookie('token');
-  return await delivery.setOrderComplete(token, id);
+  const data = await delivery.setOrderComplete(token, id);
+  return { data, id };
 });
 
 const deliverySlice = createSlice({
@@ -51,7 +56,6 @@ const deliverySlice = createSlice({
     [getAllOrders.fulfilled]: (state, { payload }) => {
       state.count = payload.count;
       state.allOrders = [...payload.data];
-
       state.status = 'Fulfilled';
     },
     [getAllOrders.rejected]: (state) => {
@@ -89,11 +93,37 @@ const deliverySlice = createSlice({
       state.status = 'Pending';
     },
     [assignOrders.fulfilled]: (state, { payload }) => {
-      state.assignOrdersCount++;
-      state.assignedOrders.push(payload);
       state.status = 'Fulfilled';
+      const ordersAfterAssign = state.allOrders.filter((order) => order._id !== payload.id);
+      state.allOrders = ordersAfterAssign;
     },
     [assignOrders.rejected]: (state) => {
+      state.status = 'Rejected';
+    },
+
+    // set orders complete function
+    [setOrderComplete.pending]: (state) => {
+      state.status = 'Pending';
+    },
+    [setOrderComplete.fulfilled]: (state, { payload }) => {
+      state.status = 'Fulfilled';
+      const ordersAfterComplete = state.assignedOrders.filter((order) => order._id !== payload.id);
+      state.assignedOrders = ordersAfterComplete;
+    },
+    [setOrderComplete.rejected]: (state) => {
+      state.status = 'Rejected';
+    },
+
+    // Deassign orders function
+    [deassignOrder.pending]: (state) => {
+      state.status = 'Pending';
+    },
+    [deassignOrder.fulfilled]: (state, { payload }) => {
+      state.status = 'Fulfilled';
+      const ordersAfterComplete = state.assignedOrders.filter((order) => order._id !== payload.id);
+      state.assignedOrders = ordersAfterComplete;
+    },
+    [deassignOrder.rejected]: (state) => {
       state.status = 'Rejected';
     },
   },
