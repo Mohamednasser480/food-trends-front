@@ -9,6 +9,7 @@ import paymentReducer from "./slices/payment";
 import deliveryReducer from "./slices/delivery";
 import categoryReducer from "./slices/category";
 import usersReducer from "./slices/admin";
+import adminProductsReducer from "./slices/adminProducts";
 const store = configureStore({
   reducer: {
     cart: cartReducer,
@@ -21,6 +22,7 @@ const store = configureStore({
     payment: paymentReducer,
     category: categoryReducer,
     users: usersReducer,
+    adminProducts: adminProductsReducer,
   },
 });
 
