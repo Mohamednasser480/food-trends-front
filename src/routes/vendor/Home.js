@@ -63,7 +63,7 @@ const Home = () => {
           />
           <label
             htmlFor="dropzone-file"
-            className="absolute bottom-2 right-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-lime-700	 bg-error  text-white transition-all"
+            className="absolute bottom-2 right-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-lime-700	 text-white transition-all"
           >
             <BiPlus className="h-8 w-8" />
           </label>

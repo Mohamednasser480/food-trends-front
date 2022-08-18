@@ -23,7 +23,10 @@ export const addReview = createAsyncThunk(
   async (args, thunkAPI) => {
     const token = thunkAPI.getState().auth.token;
     await reviewService.addReview(args, token);
-    return thunkAPI.dispatch(fetchReviews(args.product));
+    // return thunkAPI.dispatch(fetchReviews(args.product));
+    return thunkAPI.dispatch(
+      fetchReviews({ productId: args.product, filterObj: { rating: "" } })
+    );
   }
 );
 
@@ -51,6 +54,7 @@ const reviews = createSlice({
       state.isLoading = false;
       // console.log(action.payload)
       // state.reviews.push({...action.payload,});
+      // state.reviews
     },
     [addReview.rejected]: (state, action) => {
       state.isLoading = false;
