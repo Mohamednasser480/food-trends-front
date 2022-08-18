@@ -2,6 +2,7 @@ import axios from "axios";
 import cookie from "../cookie";
 
 const VENDOR_API_URI = `${process.env.REACT_APP_API_URI}/vendor`;
+const USER_API_URI = `${process.env.REACT_APP_API_URI}/users`;
 
 //Get ALL Products of the Vendor
 const getProducts = async (vendorId) => {
@@ -49,6 +50,16 @@ const deleteProduct = async (userToken, id) => {
     },
   });
   return res.data;
+};
+
+// Update Profile Image
+const updateProfileImage = async (userToken, formData) => {
+  await axios.patch(`${USER_API_URI}`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${userToken}`,
+    },
+  });
 };
 
 const getOrdersFiltered = async (filterQuery) => {
@@ -102,4 +113,5 @@ export default {
   deleteProduct,
   getOrders,
   getOrdersFiltered,
+  updateProfileImage,
 };
