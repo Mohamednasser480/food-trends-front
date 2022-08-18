@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/food-trends-front/static/css/main.59584322.css",
-    "main.js": "/food-trends-front/static/js/main.ed0fa88c.js",
+    "main.css": "/food-trends-front/static/css/main.54c5e95f.css",
+    "main.js": "/food-trends-front/static/js/main.89624877.js",
     "static/media/eid.jpeg": "/food-trends-front/static/media/eid.1c6931e3d2972e17cc50.jpeg",
     "static/media/Payment-Error.jpg": "/food-trends-front/static/media/Payment-Error.e7d5e6e162a1023092e7.jpg",
     "static/media/asset 1.png": "/food-trends-front/static/media/asset 1.e87bc3c1587040117e83.png",
@@ -31,8 +31,8 @@
     "static/media/Delivery.png": "/food-trends-front/static/media/Delivery.5760b12cc39f41f1e450.png",
     "static/media/asset 50.jpeg": "/food-trends-front/static/media/asset 50.2f576979c183a72196fa.jpeg",
     "static/media/asset 58.png": "/food-trends-front/static/media/asset 58.2fd002fda06d091294ad.png",
+    "static/media/offers1.png": "/food-trends-front/static/media/offers1.0514978c44409ad68765.png",
     "static/media/about1_01.jpg": "/food-trends-front/static/media/about1_01.ff98fba8c17d2b80a7fb.jpg",
-    "static/media/offers1.jpeg": "/food-trends-front/static/media/offers1.7e62cf3328dff3c7931c.jpeg",
     "static/media/asset 56.png": "/food-trends-front/static/media/asset 56.70b553b9dfe5633550d9.png",
     "static/media/asset 60.png": "/food-trends-front/static/media/asset 60.2b7521ad38da372369b0.png",
     "static/media/fahiem.jpeg": "/food-trends-front/static/media/fahiem.408b87a70cf534149ba8.jpeg",
@@ -112,11 +112,11 @@
     "static/media/asset 93.svg": "/food-trends-front/static/media/asset 93.ee20ed53a5fe4e7bb6b3.svg",
     "static/media/asset 84.svg": "/food-trends-front/static/media/asset 84.2a2970aa7a6f8eec6636.svg",
     "static/media/asset 100.svg": "/food-trends-front/static/media/asset 100.397a90e566900116fc6c.svg",
-    "main.59584322.css.map": "/food-trends-front/static/css/main.59584322.css.map",
-    "main.ed0fa88c.js.map": "/food-trends-front/static/js/main.ed0fa88c.js.map"
+    "main.54c5e95f.css.map": "/food-trends-front/static/css/main.54c5e95f.css.map",
+    "main.89624877.js.map": "/food-trends-front/static/js/main.89624877.js.map"
   },
   "entrypoints": [
-    "static/css/main.59584322.css",
-    "static/js/main.ed0fa88c.js"
+    "static/css/main.54c5e95f.css",
+    "static/js/main.89624877.js"
   ]
 }
