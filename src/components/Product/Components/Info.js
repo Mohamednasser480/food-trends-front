@@ -4,7 +4,7 @@ import { FaFacebookF, FaTwitter, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 export default function Info({ category ,productId}) {
-  let productUrl = `${window.location.origin }/Foodtrends/#/shop/${productId}`;
+  let productUrl = `${window.location.origin }/food-trends-front/#/shop/${productId}`;
   let shareIcons = [
     {
       icon: <FaFacebookF />,

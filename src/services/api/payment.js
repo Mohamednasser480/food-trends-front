@@ -3,7 +3,7 @@ import axios from "axios";
 const API_URI = process.env.REACT_APP_API_URI;
 const Order_API_URI = `${API_URI}/orders`;
 
-let url = `${window.location.origin}/Foodtrends/#/payment`;
+let url = `${window.location.origin}/food-trends-front/#/payment`;
 //Do Payment
 const doPayment = async (userToken,cartItems) => {
   const data={items:cartItems,url:url}
