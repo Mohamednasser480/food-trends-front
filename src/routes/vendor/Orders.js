@@ -135,7 +135,7 @@ const Orders = () => {
                           {new Date(item?.createdAt).toLocaleDateString()}
                         </th>
                         <th>
-                          {new Date(
+                          {item.status=="pending"?"Not assigned yet":new Date(
                             item?.expectedDeliveryDate
                           ).toLocaleDateString()}
                         </th>
