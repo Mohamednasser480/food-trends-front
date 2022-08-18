@@ -2,6 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import products from "../../services/api/vendor";
 import { cookie } from "../../services";
 import Toast from "../../components/UI/Toast";
+import { toast } from "react-toastify";
+import { getUserData } from "./auth";
 
 const initialState = {
   products: [],
@@ -11,6 +13,7 @@ const initialState = {
   error: null,
   updated: 0,
   edited: "idle",
+  userProfileStatus: null,
 };
 
 //Get ALL Products of the Vendor
@@ -54,6 +57,24 @@ export const updateProduct = createAsyncThunk(
     const { _id, formData } = data;
     const userToken = cookie.getCookie("token");
     return await products.updateProduct(userToken, _id, formData);
+  }
+);
+
+export const updateProfileImage = createAsyncThunk(
+  "vendor/updateProfile",
+  async (formData, thunkAPI) => {
+    const userToken = cookie.getCookie("token");
+    // return await products.updateProfileImage(userToken, formData);
+    const response = await toast.promise(
+      products.updateProfileImage(userToken, formData),
+      {
+        pending: "The Image is being uploading",
+        success: "the Image has been updated!",
+        error: "Something went wrong",
+      }
+    );
+    thunkAPI.dispatch(getUserData(userToken));
+    return response;
   }
 );
 
@@ -130,12 +151,24 @@ const vendorSlice = createSlice({
       state.updated++;
       Toast.errorToast("Something Went Wrong!");
     },
+
+    // Update Profile Image
+    [updateProfileImage.pending]: (state) => {
+      state.userProfileStatus = "Pending";
+    },
+    [updateProfileImage.fulfilled]: (state, { payload }) => {
+      state.userProfileStatus = "Fulfilled";
+    },
+    [updateProfileImage.rejected]: (state) => {
+      state.userProfileStatus = "Rejected";
+    },
   },
 });
 
 export const vendorSelector = (state) => state.vendor.products;
 export const ordersSelector = (state) => state.vendor.orders;
 export const changeSelector = (state) => state.vendor.updated;
+export const imageProfileSelector = (state) => state.vendor.userProfileStatus;
 export const vendorStatusSelector = (state) => state.vendor.status;
 export const editSelector = (state) => state.vendor.edited;
 
