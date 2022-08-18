@@ -73,7 +73,7 @@ const CartSidebar = () => {
             </div>
           </div>
         ) : (
-          <EmptyCart />
+          <EmptyCart hideSidebar={setShowSidebar} />
         )}
       </Sidebar>
     </>
