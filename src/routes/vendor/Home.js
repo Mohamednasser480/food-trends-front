@@ -5,12 +5,16 @@ import { useForm } from "react-hook-form";
 import { selectUserData } from "../../store/slices/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { BiPlus } from "react-icons/bi";
-import { useState } from "react";
-import { updateProfileImage } from "../../store/slices/vendor";
+import { useEffect, useState } from "react";
+import {
+  imageProfileSelector,
+  updateProfileImage,
+} from "../../store/slices/vendor";
 
 const Home = () => {
   const dispatch = useDispatch();
   const { name, email, mobile, storeName, image } = useSelector(selectUserData);
+  const imageProfileStatus = useSelector(imageProfileSelector);
   const [profileImg, setProfileImg] = useState({});
   const {
     register,
@@ -57,7 +61,6 @@ const Home = () => {
               onAddImage(e.target.files[0]);
             }}
           />
-
           <label
             htmlFor="dropzone-file"
             className="absolute bottom-2 right-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-lime-700	 bg-error  text-white transition-all"

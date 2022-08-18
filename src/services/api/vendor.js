@@ -54,8 +54,6 @@ const deleteProduct = async (userToken, id) => {
 
 // Update Profile Image
 const updateProfileImage = async (userToken, formData) => {
-  console.log(formData);
-
   await axios.patch(`${USER_API_URI}`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
