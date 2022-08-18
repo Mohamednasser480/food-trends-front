@@ -124,7 +124,6 @@ const Cart = () => {
             ) : (
               ""
             )}
-            {console.log(payment)}
             {payment.error && Object.keys(payment.error).length !== 0 && (
               <p className="text-lg font-medium text-red-500">
                 Error During Checkout! Please try again.
@@ -141,8 +140,10 @@ const Cart = () => {
               </p>
             )}
           </div>
-          <div className="flex justify-end items-center gap-6 mt-3 px-5">
-            <h3 className="text-xl font-bold">Total Price: {cartTotalPrice.toFixed(2)} LE</h3>
+          <div className="mt-3 flex items-center justify-end gap-6 px-5">
+            <h3 className="text-xl font-bold">
+              Total Price: {cartTotalPrice.toFixed(2)} LE
+            </h3>
           </div>
         </div>
       ) : (

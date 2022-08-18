@@ -97,23 +97,23 @@ export default function Controls() {
       value: "all",
     },
     {
-      text: "$0 - $30",
+      text: "EGP 0 - EGP 30",
       value: [0, 30],
     },
     {
-      text: "$30 - $60",
+      text: "EGP 30 - EGP 60",
       value: [30, 60],
     },
     {
-      text: "$60 - $90",
+      text: "EGP 60 - EGP 90",
       value: [60, 90],
     },
     {
-      text: "$90 - $120",
+      text: "EGP 90 - EGP 120",
       value: [90, 120],
     },
     {
-      text: "$120 +",
+      text: "EGP 120 +",
       value: [120, 99999999],
     },
   ];

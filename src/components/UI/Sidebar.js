@@ -13,7 +13,7 @@ export default function Sidebar(props) {
   let effect;
 
   if (props.right) {
-    direction = "right-2";
+    direction = "right-0";
     effect = "slide-left";
   }
 
