@@ -44,9 +44,9 @@ const CartSidebar = () => {
       <Sidebar show={showSidebar} setShow={setShowSidebar} right={true}>
         {render[cartStatus] ? render[cartStatus] : null}
         {cartProducts.length ? (
-          <div className="flex flex-col gap-y-5 pt-5">
+          <div className="flex h-full flex-col gap-y-5 pt-5">
             <Typography component="h3">shopping cart</Typography>
-            <ul className="border-t border-b p-3 overflow-auto h-[550px]">
+            <ul className="h-[550px] overflow-auto border-t border-b p-3">
               <CartList form="sidebar" />
             </ul>
             <TotalPrice totalPrice={totalPrice} />
