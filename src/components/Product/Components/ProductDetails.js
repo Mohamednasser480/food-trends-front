@@ -66,6 +66,12 @@ export default function ProductDetails({
     }
   }, [productQuantity, quantity]);
 
+  function newDateAfter(days) {
+    return new Date(
+      new Date().setDate(new Date().getDate() + days)
+    ).toDateString();
+  }
+
   return (
     <div className={`flex  w-full flex-col gap-4 p-6 lg:w-1/2 ${className}`}>
       {cartStatus === "loading" ? <Loader /> : null}
@@ -115,9 +121,10 @@ export default function ProductDetails({
         <div className="flex flex-wrap items-center gap-2">
           <AiOutlineCalendar size={22} />
           <span className="font-satoshi font-bold text-base-400">
-            Get it between
+            Get it in between
           </span>
-          <span className="font-satoshi font-bold">Jul 24 - Jul 31,2022</span>
+          {/* <span className="font-satoshi font-bold">3 Days from now.</span> */}
+          <span className="font-satoshi font-bold">{`${newDateAfter(3)} - ${newDateAfter(5)}`}</span>
         </div>
       )}
       {!outOfStock && (

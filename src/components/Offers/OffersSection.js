@@ -9,7 +9,7 @@ import { Autoplay } from "swiper";
 import "swiper/css";
 
 const offers = [
-  { title: "Essential Prices", offer: "Taste of Nature" ,image:`${require("../../assets/offers1.jpeg")}`,navigateTo:"/shop"},
+  { title: "Essential Prices", offer: "Taste of Nature" ,image:`${require("../../assets/offers1.png")}`,navigateTo:"/shop"},
   { title: "Meat And Poultry", offer: "Buy 1 Get 1",image:`${require("../../assets/offers2.jpeg")}` ,navigateTo:"/shop" },
   { title: "Fresh and Organic", offer: "30% Off" ,image:`${require("../../assets/offers3.jpeg")}` ,navigateTo:"/shop"},
 ];

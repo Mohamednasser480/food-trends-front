@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, DashboardPage, Loader, Modal } from "../../components/UI";
+import { Button, DashboardPage, Loader, Modal, ProductRating } from "../../components/UI";
 import { selectUserData } from "../../store/slices/auth";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -8,7 +8,7 @@ import {
   vendorStatusSelector,
 } from "../../store/slices/vendor";
 import ReviewDetail from "./ReviewDetail";
-
+let i = 1;
 const Reviews = () => {
   const { _id } = useSelector(selectUserData);
   const vendorData = useSelector(vendorSelector);
@@ -33,8 +33,8 @@ const Reviews = () => {
         <table className="table w-full">
           <thead className="bg-lime-700">
             <tr className="text-center">
-              <th>#</th>
               <th>Product</th>
+              {/* <th>#</th> */}
               <th>Number of Reviews</th>
               <th>Average Rating</th>
               <th></th>
@@ -43,13 +43,14 @@ const Reviews = () => {
           <tbody>
             {React.Children.toArray(
               vendorData.map((item, index) => {
-                return (
-                  <tr className=" text-center">
-                    <th>{index + 1}</th>
-                    <td>{item.productName}</td>
+                return item.numberOfReviews !== 0 ? (
+                  <tr className="text-center">
+                    <th className="capitalize">{item.productName}</th>
+                    {/* <td>{index}</td> */}
                     <td>{item.numberOfReviews}</td>
-                    <td>
-                      {(item.rate / item.numberOfReviews || 0).toFixed(2)}
+                    <td className="flex justify-center items-center py-8">
+                      {/* {(item.rate / item.numberOfReviews || 0).toFixed(2)} */}
+                      <ProductRating rating={(item.rate / item.numberOfReviews || 0).toFixed(2)} className="text-2xl h-full" />
                     </td>
                     <td>
                       <Button
@@ -62,6 +63,8 @@ const Reviews = () => {
                       </Button>
                     </td>
                   </tr>
+                ) : (
+                  ""
                 );
               })
             )}
