@@ -7,7 +7,7 @@ import {
   searchResultStatusSelector,
 } from "../../store/slices/products";
 
-import { ProductsLoader } from "../../components/UI";
+import { ProductsLoader, Typography } from "../../components/UI";
 import ProductItem from "../../components/FeatureProducts/ProductItem";
 
 export default function SearchPage() {
@@ -20,20 +20,32 @@ export default function SearchPage() {
     dispatch(getSearchResult(searchText));
   }, [searchText]);
   return (
-    <div className="container flex min-h-[35vh] flex-wrap justify-center p-12">
-      {searchIsLoading ? (
-        <ProductsLoader />
-      ) : searchError ? (
-        "Network Error!"
-      ) : searchResult.length == 0 ? (
-        "No Products Found!"
-      ) : (
-        searchResult.map((prod) => {
-          return (
-            <ProductItem key={prod._id} productDetails={prod} relative={true} />
-          );
-        })
-      )}
+    <div className="container flex flex-col justify-center items-center">
+      <Typography
+        component={"h1"}
+        className={"text-6xl tracking-normal text-primary md:text-7xl mt-4"}
+      >
+        Search Results of <span className="!text-secondary">{searchText}</span>
+      </Typography>
+      <div className="container flex min-h-[35vh] flex-wrap justify-center gap-x-6 p-6">
+        {searchIsLoading ? (
+          <ProductsLoader />
+        ) : searchError ? (
+          "Network Error!"
+        ) : searchResult.length == 0 ? (
+          "No Products Found!"
+        ) : (
+          searchResult.map((prod) => {
+            return (
+              <ProductItem
+                key={prod._id}
+                productDetails={prod}
+                relative={true}
+              />
+            );
+          })
+        )}
+      </div>
     </div>
   );
 }

@@ -54,8 +54,8 @@ export default function Users() {
         <Filters />
       </div>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
-          <thead className="bg-primary text-xs uppercase text-white  dark:bg-gray-700 dark:text-gray-400">
+        <table className="w-full text-left text-sm text-gray-500 ">
+          <thead className="bg-primary text-xs uppercase text-white ">
             <tr>
               <th scope="col" className="py-3 px-5">
                 Image
@@ -93,10 +93,10 @@ export default function Users() {
               {users &&
                 users.map((user, index) => {
                   return (
-                    user?.userType!=="admin" &&
+                    user.userType!=="admin"&&
                     <tr
                       key={index}
-                      className={`border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600 ${
+                      className={`border-b bg-white hover:bg-gray-50  ${
                         isUserDeleted(user) ? "bg-red-100 hover:bg-red-200" : ""
                       }`}
                     >
@@ -113,7 +113,7 @@ export default function Users() {
                       </td>
                       <th
                         scope="row"
-                        className="whitespace-nowrap py-3 px-2 font-medium text-gray-900 dark:text-white"
+                        className="whitespace-nowrap py-3 px-2 font-medium text-gray-900 "
                       >
                         {/* {user?.email} */}
                         {isUserDeleted(user)
@@ -161,7 +161,6 @@ export default function Users() {
                         </div>
                       </td>
                     </tr>
-                          
                   );
                 })}
             </tbody>

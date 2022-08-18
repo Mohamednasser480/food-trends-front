@@ -17,7 +17,7 @@ const SpecialOfferSection = () => {
     productName: "FRESH FRUIT BOX",
     images: [`${require("../../assets/SpecialOffer1.png")}`],
     offerImg: `${require("../../assets/SpecialOffer2.png")}`,
-    offerExpier: "2022-08-19T14:11:59.604Z",
+    offerExpier: "2022-08-24T14:11:59.604Z",
     _id: "62f7a8ee638f98104c72294e",
     summary: "FRESH FRUIT BOX",
     description:
