@@ -42,17 +42,6 @@ const Orders = () => {
       : "badge-info";
   };
 
-  const convertData = (d) => {
-    const date = new Date(d);
-    return new Intl.DateTimeFormat("en-US", {
-      year: "numeric",
-      month: "numeric",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-    }).format(date);
-  };
-
   // fetching VENDOR orders by products sorted based on price and status
   useEffect(() => {
     filter.prices = selected;
@@ -70,7 +59,9 @@ const Orders = () => {
               return (
                 <Button
                   variant="user-account"
-                  className={`m-2 w-28 capitalize hover:bg-primary ${indexBtn == index?"!bg-primary !text-white":""}`}
+                  className={`m-2 w-28 capitalize hover:bg-primary ${
+                    indexBtn == index ? "!bg-primary !text-white" : ""
+                  }`}
                   key={index}
                   onClick={(e) => handleOrderStatFilter(e.target.value, index)}
                   value={filter}
@@ -128,7 +119,6 @@ const Orders = () => {
               <tbody>
                 {React.Children.toArray(
                   filteredData.map((item) => {
-                    console.log(item)
                     return (
                       <tr className=" text-center capitalize">
                         <th>{item.customer?.name || "Deleted User"}</th>
@@ -141,8 +131,14 @@ const Orders = () => {
                             {item.status}
                           </div>
                         </th>
-                        <th>{new Date(item?.createdAt).toLocaleDateString()}</th>
-                        <th>{new Date(item?.expectedDeliveryDate).toLocaleDateString()}</th>
+                        <th>
+                          {new Date(item?.createdAt).toLocaleDateString()}
+                        </th>
+                        <th>
+                          {new Date(
+                            item?.expectedDeliveryDate
+                          ).toLocaleDateString()}
+                        </th>
                         <th>{item.totalPrice.toFixed(2)} EGP</th>
                         <th></th>
                       </tr>

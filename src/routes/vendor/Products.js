@@ -23,7 +23,6 @@ const Products = () => {
 
   return (
     <DashboardPage title="products">
-      {" "}
       <div className=" w-full overflow-x-auto">
         {vendorStatus === "Pending" ? <Loader /> : null}
         {vendorData.length !== 0 ? (
@@ -41,12 +40,11 @@ const Products = () => {
               </tr>
             </thead>
             <tbody>
-            {React.Children.toArray(
-              vendorData.map((pro) => {
-                // console.log(pro)
-                return <ProductsComponent {...pro} />;
-              })
-            )}
+              {React.Children.toArray(
+                vendorData.map((pro) => {
+                  return <ProductsComponent {...pro} />;
+                })
+              )}
             </tbody>
           </table>
         ) : (

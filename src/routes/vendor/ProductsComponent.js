@@ -14,7 +14,6 @@ const ProductsComponent = ({
   summary,
   inStock,
   weight,
-  discount,
   available,
 }) => {
   const [modelState, setModelState] = useState(false);
@@ -45,7 +44,9 @@ const ProductsComponent = ({
         <td className="text-md w-12 max-w-lg truncate font-medium">
           <span>{productName}</span>
         </td>
-        <td>${summary}</td>
+        <td className="w-1/2 whitespace-pre-wrap py-1 px-3 capitalize">
+          {description}
+        </td>
         <th>{price} LE</th>
         <th>{inStock || "Out of Stock"}</th>
         <th className="capitalize">{category}</th>
@@ -85,24 +86,6 @@ const ProductsComponent = ({
           )}
         </th>
       </tr>
-      {modelState && (
-        <ActionsModel
-          actionType={"EDIT"}
-          showModel={modelState}
-          setShow={setModelState}
-          {...{
-            _id,
-            productName,
-            price,
-            summary,
-            description,
-            inStock,
-            category,
-            weight,
-            discount,
-          }}
-        />
-      )}
     </>
   );
 };

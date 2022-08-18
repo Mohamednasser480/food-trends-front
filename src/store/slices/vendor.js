@@ -57,6 +57,15 @@ export const updateProduct = createAsyncThunk(
   }
 );
 
+export const updateProfileImage = createAsyncThunk(
+  "vendor/updateProfile",
+  async (formData) => {
+    console.log(formData);
+    const userToken = cookie.getCookie("token");
+    return await products.updateProfileImage(userToken, formData);
+  }
+);
+
 const vendorSlice = createSlice({
   name: "vendor",
   initialState,
