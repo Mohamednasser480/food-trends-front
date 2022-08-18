@@ -59,6 +59,7 @@ const AddProduct = ({
     const images = [];
     for (let index = 0; index < newImages.length; index++) {
       const newImage = newImages[index];
+      console.log(newImage);
       images.push({
         id: v4(),
         imgPrev: URL.createObjectURL(newImage),

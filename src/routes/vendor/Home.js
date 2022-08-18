@@ -3,10 +3,19 @@ import { Input } from "../../components/UI/Form";
 import Form from "../../components/UI/Form";
 import { useForm } from "react-hook-form";
 import { selectUserData } from "../../store/slices/auth";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { BiPlus } from "react-icons/bi";
+import { useEffect, useState } from "react";
+import {
+  imageProfileSelector,
+  updateProfileImage,
+} from "../../store/slices/vendor";
 
 const Home = () => {
+  const dispatch = useDispatch();
   const { name, email, mobile, storeName, image } = useSelector(selectUserData);
+  const imageProfileStatus = useSelector(imageProfileSelector);
+  const [profileImg, setProfileImg] = useState({});
   const {
     register,
     handleSubmit,
@@ -14,18 +23,17 @@ const Home = () => {
     formState: { errors },
   } = useForm({});
 
-  const updatePasswordRegister = {
-    oldPassword: { ...register("oldPassword") },
-    newPassword: { ...register("newPassword") },
-    confirmPassword: {
-      ...register("confirmPassword", {
-        validate: (value) => {
-          if (watch("newPassword") !== value) {
-            return "Your passwords do no match";
-          }
-        },
-      }),
-    },
+  const saveImage = () => {
+    const formData = new FormData();
+    formData.append("image", profileImg.imgFile);
+    dispatch(updateProfileImage(formData));
+  };
+
+  const onAddImage = (imgFile) => {
+    setProfileImg({
+      imgPrev: URL.createObjectURL(imgFile),
+      imgFile: imgFile,
+    });
   };
 
   return (
@@ -34,11 +42,32 @@ const Home = () => {
         <Typography component="h3" className="text-primary">
           account details
         </Typography>
-        <img
-          src={image}
-          alt="Profile"
-          className="h-32 w-32 self-center rounded-full"
-        />
+        <div className="group relative mx-auto max-h-[11rem] max-w-[11rem] p-2">
+          <img
+            src={
+              Object.keys(profileImg).length !== 0 ? profileImg.imgPrev : image
+            }
+            alt="Profile"
+            className="h-32 w-32 self-center rounded-full"
+          />
+
+          <input
+            id="dropzone-file"
+            type="file"
+            name="images"
+            className="hidden"
+            accept="image/*"
+            onChange={(e) => {
+              onAddImage(e.target.files[0]);
+            }}
+          />
+          <label
+            htmlFor="dropzone-file"
+            className="absolute bottom-2 right-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-lime-700	 bg-error  text-white transition-all"
+          >
+            <BiPlus className="h-8 w-8" />
+          </label>
+        </div>
         <Typography component="subtitle2" className="self-center">
           {name}
         </Typography>
@@ -46,29 +75,16 @@ const Home = () => {
         <Typography component="subtitle2">contact info</Typography>
         <Typography component="body2">{mobile}</Typography>
         <Typography component="body2">{email}</Typography>
-        {/* <Typography component="body2">address</Typography> */}
-        {/* <Button variant="secondary" className="my-2 self-center">
-          Edit profile
-        </Button> */}
-      </div>
-      {/* <div className="flex w-full gap-x-5">
-        <div className="flex w-full flex-col rounded-xl bg-white p-5 shadow-md">
-          <Typography component="h3" className="p-4 text-primary">
-            Stats
-          </Typography>
-
-          <Typography component="h6" className="h-16">
-            Total Average rate
-          </Typography>
-          <Typography component="h6" className="h-16">
-            Monthly Transactions
-          </Typography>
-
-          <Button variant="secondary" className="my-3 self-center">
-            See All Statistics
+        {Object.keys(profileImg).length !== 0 ? (
+          <Button
+            variant="secondary"
+            className="my-2 self-center"
+            onClick={saveImage}
+          >
+            Save
           </Button>
-        </div>
-      </div> */}
+        ) : null}
+      </div>
     </div>
   );
 };

@@ -27,7 +27,7 @@ const UserProfile = () => {
       <div className="relative">
         <button onClick={showMenuHandler} className="h-10 w-10 rounded-full">
           <img
-            className="h-full w-full"
+            className="h-full w-full rounded-full"
             src={userData.image}
             alt={userData.name}
           />
