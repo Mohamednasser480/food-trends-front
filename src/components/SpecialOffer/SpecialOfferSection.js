@@ -11,13 +11,22 @@ import {
   selectStatus,
 } from "../../store/slices/cart";
 import { useNavigate } from "react-router-dom";
+function addDays(date, days) {
+  var result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+}
+
+let date=addDays(new Date, 5)
+
 const SpecialOfferSection = () => {
+  
   const item = {
     _id: "SpecialOffer#000000100001",
     productName: "FRESH FRUIT BOX",
     images: [`${require("../../assets/SpecialOffer1.png")}`],
     offerImg: `${require("../../assets/SpecialOffer2.png")}`,
-    offerExpier: "2022-08-24T14:11:59.604Z",
+    offerExpier: date,
     _id: "62f7a8ee638f98104c72294e",
     summary: "FRESH FRUIT BOX",
     description:
